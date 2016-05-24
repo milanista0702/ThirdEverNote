@@ -1,0 +1,228 @@
+//
+//  ReminderViewController.swift
+//  ThirdEverNote
+//
+//  Created by makka misako on 2016/02/23.
+//  Copyright © 2016年 makka misako. All rights reserved.
+//
+
+import UIKit
+
+class ReminderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet var table: UITableView!
+    @IBOutlet var reminderTextField: UITextField!
+    
+    //    let white = UIImage(named: "白丸.png")
+    //    let check = UIImage(named: "check.png")
+    
+    var remindArray = [String]()
+    var remindimageArray = [String]()
+    
+    //userdefaults(倉庫)にアクセス
+    let saveData: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    
+    var addBtn: UIBarButtonItem!
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        
+        self.table.delegate = self
+        self.table.dataSource = self
+        
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "rowButtonAction:")
+        longPressRecognizer.allowableMovement = 15
+        longPressRecognizer.minimumPressDuration = 0.6
+        self.table.addGestureRecognizer(longPressRecognizer)
+        
+        
+        //tableviewのdatasourcemesodはviewcontrollerクラスに書く設定
+        table.dataSource = self
+        
+        //UITableViewが持っているDelegatmesodの処理の委託先をViewController.swiftにする
+        table.delegate = self
+        
+        // Do any additional setup after loading the view.
+        
+        remindArray = ["現国", "数学", "公民", "物理"]
+        
+        let swipeRightGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleSwipeRight:")
+        swipeRightGesture.numberOfTouchesRequired = 1
+        swipeRightGesture.direction = UISwipeGestureRecognizerDirection.Right
+        self.view.userInteractionEnabled = true
+        self.view.addGestureRecognizer(swipeRightGesture)
+        
+        //navigationvar にeditボタンをつける
+        navigationItem.leftBarButtonItem = editButtonItem()
+        
+        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "onClick:")
+        self.navigationItem.rightBarButtonItem = addBtn
+        
+        
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    //editが押された時の処理edi
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        table.editing = editing
+    }
+    
+    //cellの数を設定
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return remindArray.count
+        //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
+    }
+    
+    //ID付きのcellを取得してそれに付属しているlabelとかimageとか
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        cell.textLabel!.text = remindArray[indexPath.row]
+        cell.imageView!.image = UIImage(named: "矢印.png")
+        cell.imageView!.frame.size = CGSize(width: 10,height: 10)
+        //cell.textLabel!.text = "aaaaaaaaa"
+        //cell.imageView!.image = UIImage(named: "白丸  .png")
+        return cell
+    }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)  {
+        NSLog("%@が選択された", remindArray[indexPath.row])
+        
+        table.cellForRowAtIndexPath(indexPath)?.imageView!.image = UIImage(named:"check.png")
+        
+        //var cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        /* cell.imageView!.image = UIImage(named: "check.png")
+         if cell.selected {
+         cell.imageView!.image = UIImage(named: "check.png")
+         NSLog("\(cell.highlighted)")
+         }
+         
+         //cell.highlighted = false
+         cell.backgroundColor = UIColor.whiteColor()*/
+        
+    }
+    
+    //削除可能なcellのindexpath取得(今は全て)
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    //削除された時の実装
+    func tableView(table: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // 先にデータを更新する
+        remindArray.removeAtIndex(indexPath.row)
+        
+        // それからテーブルの更新
+        table.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)],
+                                     withRowAnimation: UITableViewRowAnimation.Fade)
+    }
+    
+    //cellの並べ替え
+    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(table: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        let targetTitle = remindArray[sourceIndexPath.row]
+        if let index = remindArray.indexOf(targetTitle) {
+            remindArray.removeAtIndex(index)
+            remindArray.insert(targetTitle, atIndex: destinationIndexPath.row)
+        }
+    }
+    
+    //編集中以外にcellを左スワイプできない
+    func tableView(table: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if table.editing {
+            return UITableViewCellEditingStyle.Delete
+        } else {
+            return UITableViewCellEditingStyle.None
+        }
+        
+        //編集中にもcellを選択できる
+        table.allowsSelectionDuringEditing = true
+        table.cellForRowAtIndexPath(indexPath)?.textInputMode
+    }
+    
+    func handleSwipeRight(gesture: UIGestureRecognizer) {
+        print("右にスワイプされました")
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func rowButtonAction(sender : UILongPressGestureRecognizer) {
+        
+        let point: CGPoint = sender.locationInView(table)
+        let indexPath = table.indexPathForRowAtPoint(point)
+        
+        print("a")
+        
+        if let indexPath = indexPath {
+            if sender.state == UIGestureRecognizerState.Began {
+                
+                // セルが長押しされたときの処理
+                print("long pressed \(indexPath.row)")
+            }
+        }else{
+            print("long press on table view")
+        }
+    }
+    
+    func onClick(sender: AnyObject) {
+////        remindArray.insert(String(NSDate()), atIndex: 0)
+//        remindArray.append("aaaaaa")//String(NSDate()))
+////        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+////        table.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+//        table.reloadData()
+        tap()
+      }
+    
+    func tap() {
+        
+        var alert = UIAlertController(title: "NEW REMINDER", message: "何をす??", preferredStyle: .Alert)
+        let saveAction = UIAlertAction(title: "Done", style: .Default) { (action:UIAlertAction!) -> Void in
+            
+            // 入力したテキストをコンソールに表示
+            let textField = alert.textFields![0] as UITextField
+//            self.label.text = textField.text
+            self.remindArray.append(textField.text!)
+            self.table.reloadData()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action:UIAlertAction!) -> Void in
+        }
+        
+        // UIAlertControllerにtextFieldを追加
+        alert.addTextFieldWithConfigurationHandler { (textField:UITextField!) -> Void in
+        }
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
+    
+}
