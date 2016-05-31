@@ -13,16 +13,14 @@ import QuartzCore
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
     
-    @IBOutlet var calendarBar: UILabel!
-    
     //下半分のtableview
     @IBOutlet var table: UITableView!
+    @IBOutlet var calendarBar: UILabel!
     
-    var sArray = [String]()
     
     let saveData: NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
-
+    
     //メンバ変数の設定（配列格納用）
     var count: Int!
     var mArray: NSMutableArray!
@@ -63,12 +61,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var calendarSize: Int!
     var calendarFontSize: Int!
     
+    var addBtn: UIBarButtonItem!
+    
+      var sArray = [String]()
+    
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
+        
+        //navigationvar にeditボタンをつける
+        navigationItem.leftBarButtonItem = editButtonItem()
+        
+        
+        //addボタン
+        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "onClick:")
+        self.navigationItem.rightBarButtonItem = addBtn
+
         
         self.table.delegate = self
         self.table.dataSource = self
@@ -77,7 +87,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         longPressRecognizer.allowableMovement = 15
         longPressRecognizer.minimumPressDuration = 0.6
         self.table.addGestureRecognizer(longPressRecognizer)
-
+        
         
         //現在起動中のデバイスを取得（スクリーンの幅・高さ）
         //        let screenWidth  = DeviseSize.screenWidth()
@@ -170,6 +180,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //            self.prevMonthButton.frame = CGRectMake(18, 468, CGFloat(calendarSize), CGFloat(calendarSize));
             //            self.nextMonthButton.frame = CGRectMake(348, 468, CGFloat(calendarSize), CGFloat(calendarSize));
+            
+            
+            
+            
         }
         
         //ボタンを角丸にする
@@ -219,7 +233,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Do any additional setup after loading the view.
         
-        sArray = ["テスト", "打ち上げ", "レポート提出"]
+        sArray = []
         
         let swipeLeftGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleSwipeLeft:")
         swipeLeftGesture.numberOfTouchesRequired = 1
@@ -227,6 +241,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.view.userInteractionEnabled = true
         self.view.addGestureRecognizer(swipeLeftGesture)
     }
+    
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    
+    //editが押された時の処理
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        table.editing = editing
+    }
+    
+    
     
     //曜日ラベルの動的配置関数
     func setupCalendarLabel(array: NSArray) {
@@ -277,6 +306,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.view.addSubview(calendarBaseLabel)
         }
     }
+    
     
     //カレンダーを生成する関数
     func generateCalendar(){
@@ -355,11 +385,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    
     //タイトル表記を設定する関数
     func setupCalendarTitleLabel() {
         self.navigationItem.title = "\(year)年\(month)月"
     }
-    
     
     
     //現在（初期表示時）の年月に該当するデータを取得する関数
@@ -381,6 +411,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let currentDate: NSDate = currentCalendar.dateFromComponents(currentComps)!
         recreateCalendarParameter(currentCalendar, currentDate: currentDate)
     }
+    
     
     //前の年月に該当するデータを取得する関数
     func setupPrevCalendarData() {
@@ -405,6 +436,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         recreateCalendarParameter(prevCalendar, currentDate: prevDate)
     }
     
+    
     //次の年月に該当するデータを取得する関数
     func setupNextCalendarData() {
         
@@ -428,6 +460,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         recreateCalendarParameter(nextCalendar, currentDate: nextDate)
     }
     
+    
     //カレンダーのパラメータを再作成する関数
     func recreateCalendarParameter(currentCalendar: NSCalendar, currentDate: NSDate) {
         
@@ -449,6 +482,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         dayOfWeek = currentDayOfWeek
         maxDay    = currentMax
     }
+    
+    
     
     //表示されているボタンオブジェクトを一旦削除する関数
     func removeCalendarButtonObject() {
@@ -485,10 +520,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         prevCalendarSettings()
     }
     
+    
     //右スワイプで次月を表示
     func swipeNextCalendar(sender: UISwipeGestureRecognizer) {
         nextCalendarSettings()
     }
+    
     
     //前月を表示するメソッド
     func prevCalendarSettings() {
@@ -498,6 +535,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupCalendarTitleLabel()
     }
     
+    
     //次月を表示するメソッド
     func nextCalendarSettings() {
         removeCalendarButtonObject()
@@ -506,11 +544,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupCalendarTitleLabel()
     }
     
+    
     //cellの数を設定
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sArray.count
         //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
     }
+    
     
     //ID付きのcellを取得してそれに付属しているlabelとかimageとか
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -519,6 +559,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)  {
         NSLog("%@が選択された", sArray[indexPath.row])
         
@@ -526,20 +567,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("asdfghj")
         }
         
-            }
+    }
+    
     
     func handleSwipeLeft(gesture: UIGestureRecognizer) {
         self.performSegueWithIdentifier("toReminder", sender: nil)
     }
     
+    
     func handleSwipeUp(gesture: UIGestureRecognizer) {
         self.prevCalendarSettings()
     }
+    
     
     //削除可能なcellのindexpath取得(今は全て)
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    
     
     //削除された時の実装
     func tableView(table: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -552,10 +597,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                                      withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
+    
     //cellの並べ替え
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    
     
     func tableView(table: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         let targetTitle = sArray[sourceIndexPath.row]
@@ -565,20 +612,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    
     //編集中以外にcellを左スワイプできない
     func tableView(table: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         if table.editing {
-            
-            return UITableViewCellEditingStyle.Insert
+            return UITableViewCellEditingStyle.Delete
         } else {
             return UITableViewCellEditingStyle.None
         }
         
         //編集中にもcellを選択できる
-        
         table.allowsSelectionDuringEditing = true
         table.cellForRowAtIndexPath(indexPath)?.textInputMode
     }
+    
     
     func rowButtonAction(sender : UILongPressGestureRecognizer) {
         
@@ -595,9 +642,40 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print("long press on table view")
         }
     }
-        
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    
+    
+    //appボタンが押された時 → onClickが呼ばれる → tapが呼ばれる
+    func onClick(sender: AnyObject) {
+        tap()
     }
+    
+    
+    func tap() {
+        
+        var alert = UIAlertController(title: "NEW SCHEDULE", message: "予定を追加", preferredStyle: .Alert)
+        let saveAction = UIAlertAction(title: "Done", style: .Default) { (action:UIAlertAction!) -> Void in
+            
+            // 入力したテキストをコンソールに表示
+            let textField = alert.textFields![0] as UITextField
+            //            self.label.text = textField.text
+            self.sArray.append(textField.text!)
+            self.table.reloadData()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action:UIAlertAction!) -> Void in
+        }
+        
+        // UIAlertControllerにtextFieldを追加
+        alert.addTextFieldWithConfigurationHandler { (textField:UITextField!) -> Void in
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(saveAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+
+    
+    
     
 }

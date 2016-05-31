@@ -13,22 +13,17 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var table: UITableView!
     @IBOutlet var reminderTextField: UITextField!
     
-    //    let white = UIImage(named: "白丸.png")
-    //    let check = UIImage(named: "check.png")
-    
     var remindArray = [String]()
     var remindimageArray = [String]()
+    var addBtn: UIBarButtonItem!
     
     //userdefaults(倉庫)にアクセス
     let saveData: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-    
-    var addBtn: UIBarButtonItem!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         self.table.delegate = self
         self.table.dataSource = self
@@ -47,8 +42,6 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // Do any additional setup after loading the view.
         
-        remindArray = ["現国", "数学", "公民", "物理"]
-        
         let swipeRightGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleSwipeRight:")
         swipeRightGesture.numberOfTouchesRequired = 1
         swipeRightGesture.direction = UISwipeGestureRecognizerDirection.Right
@@ -58,28 +51,39 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         //navigationvar にeditボタンをつける
         navigationItem.leftBarButtonItem = editButtonItem()
         
+        //addボタン
         addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "onClick:")
         self.navigationItem.rightBarButtonItem = addBtn
         
         
+        self.navigationItem.title = "やることリスト"
+        
+        remindArray = []
+        
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    //editが押された時の処理edi
+    
+    //editが押された時の処理
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         table.editing = editing
     }
+    
+    
     
     //cellの数を設定
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return remindArray.count
         //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
     }
+    
     
     //ID付きのcellを取得してそれに付属しているlabelとかimageとか
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -107,13 +111,14 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
          
          //cell.highlighted = false
          cell.backgroundColor = UIColor.whiteColor()*/
-        
     }
+    
     
     //削除可能なcellのindexpath取得(今は全て)
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    
     
     //削除された時の実装
     func tableView(table: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -126,10 +131,12 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
                                      withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
+    
     //cellの並べ替え
     func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
+    
     
     func tableView(table: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         let targetTitle = remindArray[sourceIndexPath.row]
@@ -138,6 +145,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
             remindArray.insert(targetTitle, atIndex: destinationIndexPath.row)
         }
     }
+    
     
     //編集中以外にcellを左スワイプできない
     func tableView(table: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
@@ -152,10 +160,12 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         table.cellForRowAtIndexPath(indexPath)?.textInputMode
     }
     
+    
     func handleSwipeRight(gesture: UIGestureRecognizer) {
         print("右にスワイプされました")
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
     
     func rowButtonAction(sender : UILongPressGestureRecognizer) {
         
@@ -175,23 +185,21 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    
+    //appボタンが押された時 → onClickが呼ばれる → tapが呼ばれる
     func onClick(sender: AnyObject) {
-////        remindArray.insert(String(NSDate()), atIndex: 0)
-//        remindArray.append("aaaaaa")//String(NSDate()))
-////        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-////        table.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-//        table.reloadData()
-        tap()
-      }
+               tap()
+    }
+    
     
     func tap() {
         
-        var alert = UIAlertController(title: "NEW REMINDER", message: "何をす??", preferredStyle: .Alert)
+        var alert = UIAlertController(title: "NEW REMINDER", message: "やること追加", preferredStyle: .Alert)
         let saveAction = UIAlertAction(title: "Done", style: .Default) { (action:UIAlertAction!) -> Void in
             
             // 入力したテキストをコンソールに表示
             let textField = alert.textFields![0] as UITextField
-//            self.label.text = textField.text
+            //            self.label.text = textField.text
             self.remindArray.append(textField.text!)
             self.table.reloadData()
         }
@@ -203,15 +211,11 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         alert.addTextFieldWithConfigurationHandler { (textField:UITextField!) -> Void in
         }
         
-        alert.addAction(saveAction)
         alert.addAction(cancelAction)
+        alert.addAction(saveAction)
         
         presentViewController(alert, animated: true, completion: nil)
     }
-    
-    
-    
-    
     
     
     /*
