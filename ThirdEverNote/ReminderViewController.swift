@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NCMB
 
 class ReminderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -58,12 +59,17 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.navigationItem.title = "やることリスト"
         
-        remindArray = []
+        
+//        remindArray = saveData.objectForKey("ToDoList")
         
     }
     
     
-    
+    override func viewWillAppear(animated: Bool) {
+        print("a")
+        remindArray = saveData.objectForKey("ToDoList") as! [String]
+
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -91,8 +97,6 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.textLabel!.text = remindArray[indexPath.row]
         cell.imageView!.image = UIImage(named: "矢印.png")
         cell.imageView!.frame.size = CGSize(width: 10,height: 10)
-        //cell.textLabel!.text = "aaaaaaaaa"
-        //cell.imageView!.image = UIImage(named: "白丸  .png")
         return cell
     }
     
@@ -100,17 +104,12 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)  {
         NSLog("%@が選択された", remindArray[indexPath.row])
         
-        table.cellForRowAtIndexPath(indexPath)?.imageView!.image = UIImage(named:"check.png")
-        
-        //var cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        /* cell.imageView!.image = UIImage(named: "check.png")
-         if cell.selected {
-         cell.imageView!.image = UIImage(named: "check.png")
-         NSLog("\(cell.highlighted)")
-         }
-         
-         //cell.highlighted = false
-         cell.backgroundColor = UIColor.whiteColor()*/
+        if table.cellForRowAtIndexPath(indexPath)?.imageView!.image == UIImage(named:"check.png") {
+            table.cellForRowAtIndexPath(indexPath)?.imageView!.image = UIImage(named:"矢印.png")
+            
+        } else {
+            table.cellForRowAtIndexPath(indexPath)?.imageView!.image = UIImage(named:"check.png")
+        }
     }
     
     
@@ -188,7 +187,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //appボタンが押された時 → onClickが呼ばれる → tapが呼ばれる
     func onClick(sender: AnyObject) {
-               tap()
+        tap()
     }
     
     
@@ -202,6 +201,8 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
             //            self.label.text = textField.text
             self.remindArray.append(textField.text!)
             self.table.reloadData()
+            
+            self.saveData.setObject(self.remindArray, forKey: "ToDoList")
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action:UIAlertAction!) -> Void in

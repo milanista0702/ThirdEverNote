@@ -1,0 +1,6 @@
+framework module Pods_ThirdEverNoteTests {
+  umbrella header "Pods-ThirdEverNoteTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
