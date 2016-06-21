@@ -5,8 +5,7 @@
 ## Build generated
 build/
 DerivedData/
-AppDelegate.swift
-
+GlobalVariable.swift
 ## Various settings
 *.pbxuser
 !default.pbxuser
