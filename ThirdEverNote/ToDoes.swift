@@ -11,17 +11,17 @@ import NCMB
 
 class ToDoes: NCMBObject, NCMBSubclassing {
     @NSManaged var todo: String! //内容
-    @NSManaged var who: NCMBUser! //誰のか
+    @NSManaged var user: NCMBUser! //誰のか
     @NSManaged var isPublic: NSNumber!  //共有するかどうか
     @NSManaged var date: NSDate!        //期限
     @NSManaged var done: NSNumber!      //もうやったかどうか
     
     
     
-    init(todo: String, who: NCMBUser, isPublic: NSNumber, date: NSDate) {
+    init(todo: String, user: NCMBUser, isPublic: NSNumber, date: NSDate) {
         super.init()
         self.todo = todo
-        self.who = who
+        self.user = user
         self.isPublic = isPublic
         self.date = date
         self.done = 0
@@ -35,9 +35,9 @@ class ToDoes: NCMBObject, NCMBSubclassing {
         return "ToDoes"
     }
     
-    static func create(titleOfToDoes todo: String, who: NCMBUser, isPublic: NSNumber, date: NSDate) {
-        let todo = ToDoes(todo: todo, who: who, isPublic: isPublic, date: date)
-        todo.saveEventually { (error) in
+    static func create(titleOfToDoes todo: String, user: NCMBUser, isPublic: NSNumber, date: NSDate) {
+        let todos:ToDoes = ToDoes(todo: todo, user: user, isPublic: isPublic, date: date)
+        todos.saveEventually { (error) in
             if error != nil {
                 print("\(error.localizedDescription)")
             }

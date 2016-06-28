@@ -18,6 +18,7 @@
 		3E7A40691D195CB70056BB49 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7A40681D195CB70056BB49 /* SignUpViewController.swift */; };
 		3E7A406B1D195CCD0056BB49 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7A406A1D195CCD0056BB49 /* LoginViewController.swift */; };
 		3E7A406D1D19618A0056BB49 /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */; };
+		3EC5B21E1D228A07002CB0A9 /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC5B21D1D228A07002CB0A9 /* TextFieldDelegate.swift */; };
 		3EC98EAB1C8A590A0082C969 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC98EA91C8A590A0082C969 /* check.png */; };
 		3EC98EAC1C8A590A0082C969 /* 矢印.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC98EAA1C8A590A0082C969 /* 矢印.png */; };
 		3EF80B451D1951C500D829A8 /* ToDoes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF80B441D1951C500D829A8 /* ToDoes.swift */; };
@@ -62,6 +63,7 @@
 		3E7A40681D195CB70056BB49 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3E7A406A1D195CCD0056BB49 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
+		3EC5B21D1D228A07002CB0A9 /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 		3EC98EA91C8A590A0082C969 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check.png; path = ../check.png; sourceTree = "<group>"; };
 		3EC98EAA1C8A590A0082C969 /* 矢印.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "矢印.png"; path = "../矢印.png"; sourceTree = "<group>"; };
 		3EF80B441D1951C500D829A8 /* ToDoes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoes.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */,
 				3E73766F1C7C672D00E43AC2 /* ReminderViewController.swift */,
 				3E73763F1C733B1E00E43AC2 /* Main.storyboard */,
+				3EC5B21D1D228A07002CB0A9 /* TextFieldDelegate.swift */,
 				3E7376421C733B1E00E43AC2 /* Assets.xcassets */,
 				3E7376441C733B1E00E43AC2 /* LaunchScreen.storyboard */,
 				3E7376471C733B1E00E43AC2 /* Info.plist */,
@@ -459,6 +462,7 @@
 				3EF80B451D1951C500D829A8 /* ToDoes.swift in Sources */,
 				3E73763C1C733B1E00E43AC2 /* AppDelegate.swift in Sources */,
 				3E7376701C7C672D00E43AC2 /* ReminderViewController.swift in Sources */,
+				3EC5B21E1D228A07002CB0A9 /* TextFieldDelegate.swift in Sources */,
 				3E7A40691D195CB70056BB49 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -600,10 +604,13 @@
 			baseConfigurationReference = 7DBDCF4F78FEA05501ED4314 /* Pods-ThirdEverNote.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ThirdEverNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.litech.ThirdEverNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -612,10 +619,13 @@
 			baseConfigurationReference = C7ED95A37E14EF520467DAEA /* Pods-ThirdEverNote.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ThirdEverNote/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.litech.ThirdEverNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
