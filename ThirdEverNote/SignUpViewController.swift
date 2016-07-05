@@ -46,44 +46,74 @@ class SignUpViewController: UIViewController {
         guard let password = createpasswordTextField.text else {return }
         guard let confirmpassword = confirmpasswordTextField.text else { return }
         
-        if password == confirmpassword {
-            self.alert ()
-        }
-        else{
-            
-            self.signup(username, email: password, password: email, confirmpassword: confirmpassword)
-            
-            self.transition()
+        if confirmpassword == password {
+            self.signup(username, email: email, password: password)
+        }else {
+            self.presntPassConfirmAlert()
         }
         
-    }
+      }
     
-    func signup ( username: String, email: String, password: String, confirmpassword: String) {
+    
+    func signup ( username: String, email: String, password: String) {
         let user = NCMBUser(className: "user")
         user.password = password
         user.mailAddress = email
         user.userName = username
-        user.signUpInBackgroundWithBlock { (error) in
-            if error != nil {
-                print (error.localizedDescription)
-            }else{
-                NCMBUser.requestAuthenticationMailInBackground(email, block: {(error)in
-                    if error != nil {
-                        print (error.localizedDescription)
-                    }else{
-                        self.transition()
-                    }
-                    
-                })
+        if user.isNew == false {
+            user.signUpInBackgroundWithBlock { (error) in
+                if error != nil {
+                    print(error.localizedDescription)
+                }else {
+                    self.requestAuthentication(email: email)
+                }
             }
             
+        }else {
+            print("usernameが被ってる")
+            self.presentCheckUsernameAlert()
         }
-        
+    }
+    
+    func presntPassConfirmAlert () {
+        let alert = UIAlertController(title: "password does not agree", message: "lease input password once more", preferredStyle: .Alert)
+        let btn = UIAlertAction(title: "OK", style: .Default) { (action) in
+            self.confirmpasswordTextField.text = ""
+            self.confirmpasswordTextField.text = ""
+        }
+        alert.addAction(btn)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    
+    func requestAuthentication (email address: String) {
+        NCMBUser.requestAuthenticationMailInBackground(address, block: { (error) in
+            if error != nil {
+                print(error.localizedDescription)
+            }else{
+                self.transition()
+            }
+        })
+    }
+    
+    
+    func presentCheckUsernameAlert () {
+        let alert = UIAlertController(title: "username errror", message: "The user name which is posted it is already registered. \n Please post username which is different ", preferredStyle: .Alert)
+        let btn = UIAlertAction(title: "OK", style: .Default, handler: { (action) in
+            self.usernameTextField.text = ""
+        })
+        alert.addAction(btn)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     //segueの指定
     func transition() {
         self.performSegueWithIdentifier("toLoginView", sender: nil)
+    }
+    
+    func toView ()  {
+        self.performSegueWithIdentifier("toView", sender: nil)
     }
     
     func alert() {
@@ -95,6 +125,10 @@ class SignUpViewController: UIViewController {
         alert.addAction(defaultAction)
         
         presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func login () {
+        self.transition()
     }
     
     

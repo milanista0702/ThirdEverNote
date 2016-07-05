@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M29-lI-6KV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="KUI-0M-64F">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -53,11 +53,12 @@
                         <outlet property="calendarBar" destination="MF7-9B-TyQ" id="4Jf-vv-8cw"/>
                         <outlet property="table" destination="N5m-Mm-PeQ" id="L0y-iN-ezJ"/>
                         <segue destination="BYZ-38-t0r" kind="push" identifier="toReminder" id="dJp-09-Cig"/>
+                        <segue destination="M29-lI-6KV" kind="modal" identifier="toSignupView" id="Jgz-XA-tmD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiK-o8-6Bq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="409.5" y="4.5"/>
+            <point key="canvasLocation" x="400.5" y="-215.5"/>
         </scene>
         <!--Reminder View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -122,7 +123,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hrJ-Id-z22" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1926.5" y="-261.5"/>
+            <point key="canvasLocation" x="1550.5" y="-141.5"/>
         </scene>
         <!--Sign up -->
         <scene sceneID="RaW-uM-2tb">
@@ -157,12 +158,26 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ij-bx-leO">
-                                <rect key="frame" x="92" y="476" width="178" height="58"/>
+                                <rect key="frame" x="92" y="438" width="178" height="58"/>
                                 <color key="backgroundColor" red="0.62051220269999996" green="1" blue="0.99170995699999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <state key="normal" title="Sign up for ThirdEverNote">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="didSeletSignup" destination="1CO-ds-0IC" eventType="touchUpInside" id="uAs-yf-eXD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5x-lt-fMi">
+                                <rect key="frame" x="92" y="550" width="178" height="58"/>
+                                <color key="backgroundColor" red="0.62051220269999996" green="1" blue="0.99170995699999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <state key="normal" title="Sign in for ThirdEverNote">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="login" destination="1CO-ds-0IC" eventType="touchUpInside" id="UZ8-9S-W16"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -170,7 +185,11 @@
                     <navigationItem key="navigationItem" title="Sign up " id="6aO-nj-6BB"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <segue destination="N45-jK-fKH" kind="push" id="wkZ-oP-Dq5"/>
+                        <outlet property="confirmpasswordTextField" destination="mzq-0U-z5S" id="cBU-dt-bFL"/>
+                        <outlet property="createpasswordTextField" destination="JJ4-1i-rld" id="6iL-7q-Cn8"/>
+                        <outlet property="emailTextField" destination="r1P-dE-dQo" id="J10-hg-qit"/>
+                        <outlet property="usernameTextField" destination="KXk-6K-Z0m" id="ijR-Iw-4a2"/>
+                        <segue destination="N45-jK-fKH" kind="push" identifier="toLoginView" id="wkZ-oP-Dq5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r1j-4r-MZ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -206,12 +225,20 @@
                                 <state key="normal" title="Sign in">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="didSelectLogin" destination="N45-jK-fKH" eventType="touchUpInside" id="omJ-JL-QTY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sign in" id="txz-rr-jkn"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="passwordTextField" destination="uFa-Zf-hQ2" id="6vy-8P-u3V"/>
+                        <outlet property="usernameTextField" destination="gDi-O1-83p" id="fdb-4X-h5E"/>
+                        <segue destination="KUI-0M-64F" kind="modal" identifier="ToViewCon" id="nPg-sH-okR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12e-tX-B0L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -235,7 +262,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gfd-uS-3pe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991.5" y="-261.5"/>
+            <point key="canvasLocation" x="1095.5" y="-127.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lRM-7o-96w">

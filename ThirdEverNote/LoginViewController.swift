@@ -55,12 +55,14 @@ class LoginViewController: UIViewController {
     
     func presentAuthAlert() {
         let alert = UIAlertController(title: "Failure of user authentication", message: "Please do the authentication of mailaddress", preferredStyle: .Alert)
-        let btn = UIAlertAction(title: <#T##String?#>, style: <#T##UIAlertActionStyle#>, handler: <#T##((UIAlertAction) -> Void)?##((UIAlertAction) -> Void)?##(UIAlertAction) -> Void#>)
+        let btn = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alert.addAction(btn)
+        self.presentViewController(alert, animated: true, completion: nil)
         
     }
     
     func transition() {
-        
+        self.performSegueWithIdentifier("ToViewCon" , sender: nil)
     }
     
     /*

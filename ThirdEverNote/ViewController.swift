@@ -249,6 +249,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.didReceiveMemoryWarning()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if NCMBUser.currentUser() == nil {
+            self.performSegueWithIdentifier("toSignupView", sender: nil)
+        }
+    }
+    
     
     //editが押された時の処理
     override func setEditing(editing: Bool, animated: Bool) {
