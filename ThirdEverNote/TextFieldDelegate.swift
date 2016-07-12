@@ -8,12 +8,17 @@
 
 import UIKit
 
-class TextFieldDelegate: NSObject ,UITextFieldDelegate {
-    
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-
-
 }
+

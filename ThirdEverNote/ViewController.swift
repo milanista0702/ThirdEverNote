@@ -17,6 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //下半分のtableview
     @IBOutlet var table: UITableView!
     @IBOutlet var calendarBar: UILabel!
+    @IBOutlet var toolbar: UIToolbar!
     
     
     let saveData: NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -64,7 +65,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var addBtn: UIBarButtonItem!
     
-      var sArray = [String]()
+    var sArray = [String]()
     
     
     
@@ -72,14 +73,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         
         
-        //navigationvar にeditボタンをつける
-        navigationItem.leftBarButtonItem = editButtonItem()
-        
-        
+//        //navigationvar にeditボタンをつける
+//        navigationItem.leftBarButtonItem = editButtonItem()
+//        
+//        
         //addボタン
-        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "onClick:")
-        self.navigationItem.rightBarButtonItem = addBtn
+        let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
+        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(tap))
+     
+        toolbar.setItems([editButtonItem(), fixedSpacer, addBtn], animated: false)
+        
 
+        
         
         self.table.delegate = self
         self.table.dataSource = self
@@ -236,11 +241,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         sArray = []
         
-        let swipeLeftGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleSwipeLeft:")
+        let swipeLeftGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Left))
         swipeLeftGesture.numberOfTouchesRequired = 1
         swipeLeftGesture.direction = UISwipeGestureRecognizerDirection.Left
         self.view.userInteractionEnabled = true
         self.view.addGestureRecognizer(swipeLeftGesture)
+        
+        
+        let swipeRightGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Right))
+        swipeRightGesture.numberOfTouchesRequired = 1
+        swipeRightGesture.direction = UISwipeGestureRecognizerDirection.Right
+        self.view.userInteractionEnabled = true
+        self.view.addGestureRecognizer(swipeRightGesture)
+        
+        
+        let swipeUpGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Up))
+        swipeUpGesture.numberOfTouchesRequired = 1
+        swipeUpGesture.direction = UISwipeGestureRecognizerDirection.Up
+        self.view.userInteractionEnabled = true
+        self.view.addGestureRecognizer(swipeUpGesture)
+        
+        let swipeDownGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Down))
+        swipeDownGesture.numberOfTouchesRequired = 1
+        swipeDownGesture.direction = UISwipeGestureRecognizerDirection.Down
+        self.view.userInteractionEnabled = true
+        self.view.addGestureRecognizer(swipeDownGesture)
+        
+        
     }
     
     
@@ -523,18 +550,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    //左スワイプで前月を表示
-    func swipePrevCalendar(sender: UISwipeGestureRecognizer) {
-        prevCalendarSettings()
-    }
-    
-    
-    //右スワイプで次月を表示
-    func swipeNextCalendar(sender: UISwipeGestureRecognizer) {
-        nextCalendarSettings()
-    }
-    
-    
     //前月を表示するメソッド
     func prevCalendarSettings() {
         removeCalendarButtonObject()
@@ -578,14 +593,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    func handleSwipeLeft(gesture: UIGestureRecognizer) {
+    func Left(gesture: UIGestureRecognizer) {
         self.performSegueWithIdentifier("toReminder", sender: nil)
     }
     
-    
-    func handleSwipeUp(gesture: UIGestureRecognizer) {
-        self.prevCalendarSettings()
+    func Right () {
+        
+        
     }
+    
+    
+    func Up(gesture: UIGestureRecognizer) {
+        self.nextCalendarSettings()
+    }
+    
+    func Down() {
+        self.prevCalendarSettings()
+        
+    }
+    
+    
     
     
     //削除可能なcellのindexpath取得(今は全て)
@@ -653,9 +680,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     //appボタンが押された時 → onClickが呼ばれる → tapが呼ばれる
-    func onClick(sender: AnyObject) {
-        tap()
-    }
     
     
     func tap() {
@@ -682,8 +706,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         presentViewController(alert, animated: true, completion: nil)
     }
-
-    
     
     
 }

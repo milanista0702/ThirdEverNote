@@ -21,8 +21,8 @@ class LoginViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         
-        usernameTextField.delegate = TextFieldDelegate()
-        passwordTextField.delegate = TextFieldDelegate()
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
         
         passwordTextField.secureTextEntry = true
     }
@@ -68,7 +68,7 @@ class LoginViewController: UIViewController {
     /*
      // MARK: - Navigation
      
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     // In a storyboard-based application, you will often want to do a little preparation before navigationß
      override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.

@@ -22,10 +22,10 @@ class SignUpViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         
-        usernameTextField.delegate = TextFieldDelegate()
-        emailTextField.delegate = TextFieldDelegate()
-        createpasswordTextField.delegate = TextFieldDelegate()
-        confirmpasswordTextField.delegate = TextFieldDelegate()
+        usernameTextField.delegate = self
+        emailTextField.delegate = self
+        createpasswordTextField.delegate = self
+        confirmpasswordTextField.delegate = self
         
         // 文字が黒丸になるように
         createpasswordTextField.secureTextEntry = true

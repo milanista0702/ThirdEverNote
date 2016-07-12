@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N5m-Mm-PeQ">
-                                <rect key="frame" x="0.0" y="400" width="375" height="267"/>
+                                <rect key="frame" x="0.0" y="400" width="375" height="223"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="D4m-xq-7fH">
@@ -44,6 +44,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9iN-na-4SH">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem id="ecc-q9-epa"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -52,6 +58,7 @@
                     <connections>
                         <outlet property="calendarBar" destination="MF7-9B-TyQ" id="4Jf-vv-8cw"/>
                         <outlet property="table" destination="N5m-Mm-PeQ" id="L0y-iN-ezJ"/>
+                        <outlet property="toolbar" destination="9iN-na-4SH" id="rMp-vc-3rI"/>
                         <segue destination="BYZ-38-t0r" kind="push" identifier="toReminder" id="dJp-09-Cig"/>
                         <segue destination="M29-lI-6KV" kind="modal" identifier="toSignupView" id="Jgz-XA-tmD"/>
                     </connections>
