@@ -67,11 +67,40 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         toDoes.user = user
         toDoes.isPublic = isPublic
         toDoes.date = date
-        toDoes.done = Int
+        toDoes.done = done
+        return toDoes
+    }
+    
+    static func update(object: ToDoes, todo: String, user: NCMBUser, isPublic: Int, date: NSDate, done: Int) -> ToDoes {
+        if object.user == user {
+            object.todo = todo
+            object.user = user
+            object.isPublic = isPublic
+            object.date = date
+        }
+        return object
+    }
+    
+    static func loadall(callback: (objects: [ToDoes]) -> void) {
+        let query = NCMBQuery(className: "ToDoes")
+        query.includeKey = "user"
+        query.findObjecsInBackgroundWithBlock{ (objects, error) in
+            if error != nil {
+                print(error.localizedDescription)
+            } else {
+                let obj = objects as! [ToDoes]
+                print("userとは...\(obj[0].user)")
+                prin(obj)
+                callback(object: obj)
+            }
+        }
+    }
+    
+    static func ncmbClassName() -> String! {
+        return "ToDoes"
     }
     
 }
-
 //import UIKit
 //import NCMB
 //
