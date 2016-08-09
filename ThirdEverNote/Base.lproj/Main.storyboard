@@ -67,6 +67,72 @@
             </objects>
             <point key="canvasLocation" x="400.5" y="-215.5"/>
         </scene>
+        <!--NEW REMINDER-->
+        <scene sceneID="JqH-2s-xGH">
+            <objects>
+                <viewController id="t7a-KN-VOZ" customClass="AddViewController" customModule="ThirdEverNote" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tc3-V5-ec3"/>
+                        <viewControllerLayoutGuide type="bottom" id="wSs-eq-bPG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zyi-xB-OQk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="やること追加" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txv-R5-XjG">
+                                <rect key="frame" x="56" y="80" width="262" height="75"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x0F-vt-00u">
+                                <rect key="frame" x="35" y="247" width="305" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="やること" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wnz-mV-thL">
+                                <rect key="frame" x="35" y="185" width="118" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="VrB-fs-L9Y">
+                                <rect key="frame" x="52" y="358" width="266" height="134"/>
+                                <date key="date" timeIntervalSinceReferenceDate="492440669.545075">
+                                    <!--2016-08-09 13:04:29 +0000-->
+                                </date>
+                            </datePicker>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G11-TN-arc">
+                                <rect key="frame" x="227" y="553" width="51" height="31"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="期限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZTX-IP-FKB">
+                                <rect key="frame" x="35" y="298" width="133" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="共有" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vsy-ko-yXo">
+                                <rect key="frame" x="35" y="544" width="89" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="NEW REMINDER" id="3y9-qD-HiQ"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="date" destination="VrB-fs-L9Y" id="EBw-RY-Q4j"/>
+                        <outlet property="swich" destination="G11-TN-arc" id="fxG-0u-M7C"/>
+                        <outlet property="text" destination="x0F-vt-00u" id="RsM-pM-tkw"/>
+                        <segue destination="I1H-0l-uuT" kind="push" id="NPd-pw-zmy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NWS-GX-odF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1084.5" y="698.5"/>
+        </scene>
         <!--Reminder View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -106,11 +172,12 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="table" destination="Xcz-RJ-D4m" id="CaB-5R-0Wv"/>
+                        <segue destination="t7a-KN-VOZ" kind="custom" identifier="addsegue" id="oxw-Rc-cgp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1394.5" y="559.5"/>
+            <point key="canvasLocation" x="1926.5" y="559.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0cL-jR-VmT">
@@ -289,8 +356,27 @@
             </objects>
             <point key="canvasLocation" x="373" y="-964"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WQB-L3-mrN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1XI-zo-yFQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yl1-Ff-Tem">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="t7a-KN-VOZ" kind="relationship" relationship="rootViewController" id="oGW-vn-vAZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b1a-x7-jEc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="918" y="683"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="dJp-09-Cig"/>
+        <segue reference="oxw-Rc-cgp"/>
     </inferredMetricsTieBreakers>
 </document>

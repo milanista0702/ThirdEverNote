@@ -60,7 +60,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationItem.title = "やることリスト"
         
         
-//        remindArray = saveData.objectForKey("ToDoList")
+        //        remindArray = saveData.objectForKey("ToDoList")
         
     }
     
@@ -68,7 +68,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(animated: Bool) {
         print("a")
         remindArray = saveData.objectForKey("ToDoList") as! [String]
-
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -187,36 +187,36 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //appボタンが押された時 → onClickが呼ばれる → tapが呼ばれる
     func onClick(sender: AnyObject) {
-        tap()
+        self.performSegueWithIdentifier("addsegue", sender: nil)
     }
     
     
-    func tap() {
-        
-        var alert = UIAlertController(title: "NEW REMINDER", message: "やること追加", preferredStyle: .Alert)
-        let saveAction = UIAlertAction(title: "Done", style: .Default) { (action:UIAlertAction!) -> Void in
-            
-            // 入力したテキストをコンソールに表示
-            let textField = alert.textFields![0] as UITextField
-            //            self.label.text = textField.text
-            self.remindArray.append(textField.text!)
-            self.table.reloadData()
-            
-            self.saveData.setObject(self.remindArray, forKey: "ToDoList")
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action:UIAlertAction!) -> Void in
-        }
-        
-        // UIAlertControllerにtextFieldを追加
-        alert.addTextFieldWithConfigurationHandler { (textField:UITextField!) -> Void in
-        }
-        
-        alert.addAction(cancelAction)
-        alert.addAction(saveAction)
-        
-        presentViewController(alert, animated: true, completion: nil)
-    }
+    //    func tap() {
+    //
+    //        var alert = UIAlertController(title: "NEW REMINDER", message: "やること追加", preferredStyle: .Alert)
+    //        let saveAction = UIAlertAction(title: "Done", style: .Default) { (action:UIAlertAction!) -> Void in
+    //
+    //            // 入力したテキストをコンソールに表示
+    //            let textField = alert.textFields![0] as UITextField
+    //            //            self.label.text = textField.text
+    //            self.remindArray.append(textField.text!)
+    //            self.table.reloadData()
+    //
+    //            self.saveData.setObject(self.remindArray, forKey: "ToDoList")
+    //        }
+    //
+    //        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action:UIAlertAction!) -> Void in
+    //       }
+    
+    // UIAlertControllerにtextFieldを追加
+    //        alert.addTextFieldWithConfigurationHandler { (textField:UITextField!) -> Void in
+    //        }
+    //
+    //        alert.addAction(cancelAction)
+    //        alert.addAction(saveAction)
+    //
+    //        presentViewController(alert, animated: true, completion: nil)
+    //    }
     
     
     /*

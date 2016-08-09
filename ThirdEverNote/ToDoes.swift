@@ -81,17 +81,17 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         return object
     }
     
-    static func loadall(callback: (objects: [ToDoes]) -> void) {
+    static func loadall(callback: (objects: [ToDoes]) -> Void) {
         let query = NCMBQuery(className: "ToDoes")
         query.includeKey = "user"
-        query.findObjecsInBackgroundWithBlock{ (objects, error) in
+        query.findObjectsInBackgroundWithBlock{ (objects, error) in
             if error != nil {
                 print(error.localizedDescription)
             } else {
                 let obj = objects as! [ToDoes]
                 print("userとは...\(obj[0].user)")
-                prin(obj)
-                callback(object: obj)
+                print(obj)
+                callback(objects: obj)
             }
         }
     }
