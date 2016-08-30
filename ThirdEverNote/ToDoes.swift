@@ -29,9 +29,9 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         }
     }
     
-    var isPublic: Int {
+    var isPublic: Bool {
         get {
-            return objectForKey("isPublic") as! Int
+            return objectForKey("isPublic") as! Bool
         }
         set {
             setObject(newValue, forKey: "isPublic")
@@ -61,7 +61,7 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         super.init(className: className)
     }
     
-    static func create(todo: String, user: NCMBUser, isPublic: Int, date: NSDate, done: Int) -> ToDoes{
+    static func create(todo: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Int) -> ToDoes{
         let toDoes = ToDoes(className: "ToDoes")
         toDoes.todo = todo
         toDoes.user = user
@@ -71,7 +71,7 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         return toDoes
     }
     
-    static func update(object: ToDoes, todo: String, user: NCMBUser, isPublic: Int, date: NSDate, done: Int) -> ToDoes {
+    static func update(object: ToDoes, todo: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Int) -> ToDoes {
         if object.user == user {
             object.todo = todo
             object.user = user
@@ -94,6 +94,17 @@ class ToDoes: NCMBObject, NCMBSubclassing{
                 callback(objects: obj)
             }
         }
+    }
+    
+    static func saveWithEvent(todo: ToDoes, callBack: () -> Void) {
+        todo.saveEventually { (error) in
+            if error != nil {
+                print(error.localizedDescription)
+            }else{
+                callBack()
+            }
+        }
+        
     }
     
     static func ncmbClassName() -> String! {

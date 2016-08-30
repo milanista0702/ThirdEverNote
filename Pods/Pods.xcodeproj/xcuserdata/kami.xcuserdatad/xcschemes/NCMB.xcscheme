@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7CF20A96544A5EC3465DED92D50A127A'
+               BlueprintIdentifier = 'ADD68827273E35267923696DECDE8047'
                BlueprintName = 'NCMB'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'NCMB.framework'>

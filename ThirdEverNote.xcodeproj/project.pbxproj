@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */; };
+		3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE691D759146009F5486 /* CustomPresentationController.swift */; };
 		3E678BB11D5A0816002B41F4 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E678BB01D5A0816002B41F4 /* AddViewController.swift */; };
 		3E73763C1C733B1E00E43AC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73763B1C733B1E00E43AC2 /* AppDelegate.swift */; };
 		3E7376411C733B1E00E43AC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E73763F1C733B1E00E43AC2 /* Main.storyboard */; };
@@ -47,6 +49,8 @@
 
 /* Begin PBXFileReference section */
 		3A110665EE0E4EAB5EC7383A /* Pods_ThirdEverNoteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThirdEverNoteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationAnimationController.swift; sourceTree = "<group>"; };
+		3E19FE691D759146009F5486 /* CustomPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
 		3E678BB01D5A0816002B41F4 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		3E7376381C733B1E00E43AC2 /* ThirdEverNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThirdEverNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E73763B1C733B1E00E43AC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +159,8 @@
 				3E678BB01D5A0816002B41F4 /* AddViewController.swift */,
 				3EF80B441D1951C500D829A8 /* ToDoes.swift */,
 				3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */,
+				3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */,
+				3E19FE691D759146009F5486 /* CustomPresentationController.swift */,
 				3E73763F1C733B1E00E43AC2 /* Main.storyboard */,
 				3EC5B21D1D228A07002CB0A9 /* TextFieldDelegate.swift */,
 				3E7376421C733B1E00E43AC2 /* Assets.xcassets */,
@@ -461,7 +467,9 @@
 			files = (
 				3E7A406D1D19618A0056BB49 /* GlobalVariable.swift in Sources */,
 				3E7A406B1D195CCD0056BB49 /* LoginViewController.swift in Sources */,
+				3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */,
 				3E678BB11D5A0816002B41F4 /* AddViewController.swift in Sources */,
+				3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */,
 				3E73766A1C733C9000E43AC2 /* ViewController.swift in Sources */,
 				3EF80B451D1951C500D829A8 /* ToDoes.swift in Sources */,
 				3E73763C1C733B1E00E43AC2 /* AppDelegate.swift in Sources */,

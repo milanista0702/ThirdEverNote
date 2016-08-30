@@ -43,7 +43,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // Do any additional setup after loading the view.
         
-        let swipeRightGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "handleSwipeRight:")
+        let swipeRightGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(ReminderViewController.handleSwipeRight(_:)))
         swipeRightGesture.numberOfTouchesRequired = 1
         swipeRightGesture.direction = UISwipeGestureRecognizerDirection.Right
         self.view.userInteractionEnabled = true
@@ -53,7 +53,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         navigationItem.leftBarButtonItem = editButtonItem()
         
         //addボタン
-        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "onClick:")
+        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ReminderViewController.onClick(_:)))
         self.navigationItem.rightBarButtonItem = addBtn
         
         
@@ -190,6 +190,10 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         self.performSegueWithIdentifier("addsegue", sender: nil)
     }
     
+    @IBAction func dismiss(segue: UIStoryboardSegue) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+
     
     //    func tap() {
     //

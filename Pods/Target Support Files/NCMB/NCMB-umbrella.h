@@ -10,8 +10,6 @@
 #import "NCMBFacebookUtils.h"
 #import "NCMBFile.h"
 #import "NCMBGeoPoint.h"
-#import "NCMBGoogleUtils+Private.h"
-#import "NCMBGoogleUtils.h"
 #import "NCMBInstallation.h"
 #import "NCMBObject+Subclass.h"
 #import "NCMBObject.h"
