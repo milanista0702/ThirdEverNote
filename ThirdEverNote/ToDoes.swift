@@ -83,6 +83,7 @@ class ToDoes: NCMBObject, NCMBSubclassing{
     
     static func loadall(callback: (objects: [ToDoes]) -> Void) {
         let query = NCMBQuery(className: "ToDoes")
+        query.whereKey("user", equalTo: NCMBUser.currentUser())
         query.includeKey = "user"
         query.findObjectsInBackgroundWithBlock{ (objects, error) in
             if error != nil {

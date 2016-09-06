@@ -599,7 +599,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func Right () {
         
-        
     }
     
     

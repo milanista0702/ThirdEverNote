@@ -17,6 +17,8 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     var remindArray = [String]()
     var remindimageArray = [String]()
     var addBtn: UIBarButtonItem!
+    let refreshControl = UIRefreshControl()
+
     
     //userdefaults(倉庫)にアクセス
     let saveData: NSUserDefaults = NSUserDefaults.standardUserDefaults()
@@ -49,6 +51,10 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         self.view.userInteractionEnabled = true
         self.view.addGestureRecognizer(swipeRightGesture)
         
+        refreshControl.attributedTitle = NSAttributedString(string: "引っ張って更新")
+        refreshControl.addTarget(self, action: #selector(ReminderViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        table.addSubview(refreshControl)
+        
         //navigationvar にeditボタンをつける
         navigationItem.leftBarButtonItem = editButtonItem()
         
@@ -67,9 +73,28 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewWillAppear(animated: Bool) {
         print("a")
-        remindArray = saveData.objectForKey("ToDoList") as! [String]
+        loadData()
+            
+    }
+    
+    func loadData() {
+        ToDoes.loadall({objects in
+            self.remindArray.removeAll()
+
+            for object in objects {
+                self.remindArray.append(object.todo)
+            }
+            self.table.reloadData()
+        })
+    }
+    
+    func refresh() {
+
+        loadData()
+        refreshControl.endRefreshing()
         
     }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
