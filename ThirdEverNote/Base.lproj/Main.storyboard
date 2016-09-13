@@ -188,7 +188,7 @@
                         <outlet property="date" destination="VrB-fs-L9Y" id="EBw-RY-Q4j"/>
                         <outlet property="swich" destination="G11-TN-arc" id="fxG-0u-M7C"/>
                         <outlet property="text" destination="x0F-vt-00u" id="RsM-pM-tkw"/>
-                        <segue destination="I1H-0l-uuT" kind="push" id="NPd-pw-zmy"/>
+                        <segue destination="I1H-0l-uuT" kind="modal" identifier="" id="NPd-pw-zmy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWS-GX-odF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -439,7 +439,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="oGW-vn-vAZ"/>
-        <segue reference="Edd-Ba-3yh"/>
+        <segue reference="dJp-09-Cig"/>
+        <segue reference="oxw-Rc-cgp"/>
     </inferredMetricsTieBreakers>
 </document>

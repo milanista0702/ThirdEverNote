@@ -14,15 +14,14 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet var table: UITableView!
     @IBOutlet var reminderTextField: UITextField!
     
-    var remindArray = [String]()
+    var remindArray = [ToDoes]()
     var remindimageArray = [String]()
     var addBtn: UIBarButtonItem!
     let refreshControl = UIRefreshControl()
-
+    
     
     //userdefaults(倉庫)にアクセス
     let saveData: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-    
     
     
     override func viewDidLoad() {
@@ -51,7 +50,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         self.view.userInteractionEnabled = true
         self.view.addGestureRecognizer(swipeRightGesture)
         
-        refreshControl.attributedTitle = NSAttributedString(string: "引っ張って更新")
+        refreshControl.attributedTitle = NSAttributedString(string: "Loading...")
         refreshControl.addTarget(self, action: #selector(ReminderViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         table.addSubview(refreshControl)
         
@@ -59,7 +58,8 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         navigationItem.leftBarButtonItem = editButtonItem()
         
         //addボタン
-        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ReminderViewController.onClick(_:)))
+        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ReminderViewController.handleSwipeRight(_:)))
+        
         self.navigationItem.rightBarButtonItem = addBtn
         
         
@@ -74,22 +74,22 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(animated: Bool) {
         print("a")
         loadData()
-            
+        
     }
     
     func loadData() {
         ToDoes.loadall({objects in
             self.remindArray.removeAll()
-
+            
             for object in objects {
-                self.remindArray.append(object.todo)
+                self.remindArray.append(object)
             }
             self.table.reloadData()
         })
     }
     
     func refresh() {
-
+        
         loadData()
         refreshControl.endRefreshing()
         
@@ -119,7 +119,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     //ID付きのcellを取得してそれに付属しているlabelとかimageとか
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel!.text = remindArray[indexPath.row]
+        cell.textLabel!.text = remindArray[indexPath.row].todo
         cell.imageView!.image = UIImage(named: "矢印.png")
         cell.imageView!.frame.size = CGSize(width: 10,height: 10)
         return cell
@@ -146,6 +146,8 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //削除された時の実装
     func tableView(table: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        self.delegateObjec(indexPath)
         
         // 先にデータを更新する
         remindArray.removeAtIndex(indexPath.row)
@@ -184,6 +186,15 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         table.cellForRowAtIndexPath(indexPath)?.textInputMode
     }
     
+    func delegateObjec(indexPath: NSIndexPath) {
+        let object = remindArray[indexPath.row]
+        object.deleteEventually { (error) in
+            if error != nil {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     
     func handleSwipeRight(gesture: UIGestureRecognizer) {
         print("右にスワイプされました")
@@ -215,48 +226,50 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         self.performSegueWithIdentifier("addsegue", sender: nil)
     }
     
-    @IBAction func dismiss(segue: UIStoryboardSegue) {
+    func dismiss(segue: UIStoryboardSegue) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
-    
-    //    func tap() {
-    //
-    //        var alert = UIAlertController(title: "NEW REMINDER", message: "やること追加", preferredStyle: .Alert)
-    //        let saveAction = UIAlertAction(title: "Done", style: .Default) { (action:UIAlertAction!) -> Void in
-    //
-    //            // 入力したテキストをコンソールに表示
-    //            let textField = alert.textFields![0] as UITextField
-    //            //            self.label.text = textField.text
-    //            self.remindArray.append(textField.text!)
-    //            self.table.reloadData()
-    //
-    //            self.saveData.setObject(self.remindArray, forKey: "ToDoList")
-    //        }
-    //
-    //        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action:UIAlertAction!) -> Void in
-    //       }
-    
-    // UIAlertControllerにtextFieldを追加
-    //        alert.addTextFieldWithConfigurationHandler { (textField:UITextField!) -> Void in
-    //        }
-    //
-    //        alert.addAction(cancelAction)
-    //        alert.addAction(saveAction)
-    //
-    //        presentViewController(alert, animated: true, completion: nil)
-    //    }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
     
 }
+
+
+//    func tap() {
+//
+//        var alert = UIAlertController(title: "NEW REMINDER", message: "やること追加", preferredStyle: .Alert)
+//        let saveAction = UIAlertAction(title: "Done", style: .Default) { (action:UIAlertAction!) -> Void in
+//
+//            // 入力したテキストをコンソールに表示
+//            let textField = alert.textFields![0] as UITextField
+//            //            self.label.text = textField.text
+//            self.remindArray.append(textField.text!)
+//            self.table.reloadData()
+//
+//            self.saveData.setObject(self.remindArray, forKey: "ToDoList")
+//        }
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action:UIAlertAction!) -> Void in
+//       }
+
+// UIAlertControllerにtextFieldを追加
+//        alert.addTextFieldWithConfigurationHandler { (textField:UITextField!) -> Void in
+//        }
+//
+//        alert.addAction(cancelAction)
+//        alert.addAction(saveAction)
+//
+//        presentViewController(alert, animated: true, completion: nil)
+//    }
+
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
+
+
+
