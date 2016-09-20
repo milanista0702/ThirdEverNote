@@ -27,8 +27,9 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.table.delegate = self
-        self.table.dataSource = self
+        
+        table.registerNib(UINib(nibName: "TodoTableCell", bundle: nil), forCellReuseIdentifier: "TodoTableCell")
+        
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "rowButtonAction:")
         longPressRecognizer.allowableMovement = 15
@@ -57,8 +58,9 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         //navigationvar にeditボタンをつける
         navigationItem.leftBarButtonItem = editButtonItem()
         
+        
         //addボタン
-        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ReminderViewController.handleSwipeRight(_:)))
+        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ReminderViewController.onClick(_:)))
         
         self.navigationItem.rightBarButtonItem = addBtn
         
@@ -118,22 +120,36 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //ID付きのcellを取得してそれに付属しているlabelとかimageとか
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel!.text = remindArray[indexPath.row].todo
-        cell.imageView!.image = UIImage(named: "矢印.png")
-        cell.imageView!.frame.size = CGSize(width: 10,height: 10)
+        //let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("TodoTableCell") as! TodoTableCell
+        //        cell.textLabel!.text = remindArray[indexPath.row].todo
+        //        cell.imageView!.image = UIImage(named: "矢印.png")
+        //        cell.imageView!.frame.size = CGSize(width: 10,height: 10)
+        cell.todolabel.text = remindArray[indexPath.row].todo
+        cell.datelabel.text = formatter(remindArray[indexPath.row].date)
+        cell.arrowImageView.image = UIImage(named:  "矢印.png")
+        
         return cell
+    }
+    
+    func formatter (date: NSDate) -> String {
+        let dateFormatter  = NSDateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
+        
+        return dateFormatter.stringFromDate(date)
     }
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)  {
         NSLog("%@が選択された", remindArray[indexPath.row])
         
-        if table.cellForRowAtIndexPath(indexPath)?.imageView!.image == UIImage(named:"check.png") {
-            table.cellForRowAtIndexPath(indexPath)?.imageView!.image = UIImage(named:"矢印.png")
-            
-        } else {
-            table.cellForRowAtIndexPath(indexPath)?.imageView!.image = UIImage(named:"check.png")
+        if let cell: TodoTableCell = table.cellForRowAtIndexPath(indexPath) as! TodoTableCell {
+            if cell.arrowImageView.image == UIImage(named: "check.png") {
+                cell.arrowImageView.image = UIImage(named: "矢印.png")
+            } else {
+                cell.arrowImageView.image = UIImage(named: "check.png")
+            }
         }
     }
     

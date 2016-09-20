@@ -85,15 +85,19 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         let query = NCMBQuery(className: "ToDoes")
         query.whereKey("user", equalTo: NCMBUser.currentUser())
         query.includeKey = "user"
+        query.orderByAscending("date")
         query.findObjectsInBackgroundWithBlock{ (objects, error) in
             if error != nil {
                 print(error.localizedDescription)
             } else {
-                let obj = objects as! [ToDoes]
-                print("userとは...\(obj[0].user)")
-                print(obj)
-                callback(objects: obj)
+                if objects.count > 0 {
+                    let obj = objects as! [ToDoes]
+                    print("userとは...\(obj[0].user)")
+                    print(obj)
+                    callback(objects: obj)
+                }
             }
+            
         }
     }
     
