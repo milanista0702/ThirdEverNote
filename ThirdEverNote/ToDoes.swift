@@ -81,7 +81,7 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         return object
     }
     
-    static func loadall(callback: (objects: [ToDoes]) -> Void) {
+    static func loadall(callback: ( [ToDoes]) -> Void) {
         let query = NCMBQuery(className: "ToDoes")
         query.whereKey("user", equalTo: NCMBUser.currentUser())
         query.includeKey = "user"
@@ -92,9 +92,7 @@ class ToDoes: NCMBObject, NCMBSubclassing{
             } else {
                 if objects.count > 0 {
                     let obj = objects as! [ToDoes]
-                    print("userとは...\(obj[0].user)")
-                    print(obj)
-                    callback(objects: obj)
+                    callback(obj)
                 }
             }
             
@@ -117,57 +115,3 @@ class ToDoes: NCMBObject, NCMBSubclassing{
     }
     
 }
-//import UIKit
-//import NCMB
-//
-//class ToDoes: NCMBObject, NCMBSubclassing {
-//    @NSManaged var todo: String! //内容
-//    @NSManaged var user: NCMBUser! //誰のか
-//    @NSManaged var isPublic: NSNumber!  //共有するかどうか
-//    @NSManaged var date: NSDate!        //期限
-//    @NSManaged var done: NSNumber!      //もうやったかどうか
-//
-//
-//
-//    init(todo: String, user: NCMBUser, isPublic: NSNumber, date: NSDate) {
-//        super.init()
-//        self.todo = todo
-//        self.user = user
-//        self.isPublic = isPublic
-//        self.date = date
-//        self.done = 0
-//    }
-//
-//    override init() {
-//        super.init()
-//    }
-//
-//    static func ncmbClassName() -> String! {
-//        return "ToDoes"
-//    }
-//
-//    static func create(titleOfToDoes todo: String, user: NCMBUser, isPublic: NSNumber, date: NSDate) {
-//        let todos:ToDoes = ToDoes(todo: todo, user: user, isPublic: isPublic, date: date)
-//        todos.saveEventually { (error) in
-//            if error != nil {
-//                print("\(error.localizedDescription)")
-//            }
-//        }
-//    }
-//
-//    static func loadAll() -> [ToDoes] {
-//        var todoes: [ToDoes] = []
-//        let query = NCMBQuery(className: self.ncmbClassName())
-//        query.findObjectsInBackgroundWithBlock { (objects, error) in
-//            if error == nil {
-//                for todo in objects {
-//                    todoes.append(todo as! ToDoes)
-//                }
-//            }else {
-//                print("\(error.localizedDescription)")
-//            }
-//        }
-//        return todoes
-//    }
-//}
-//

@@ -52,14 +52,16 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
                 self.dismissViewControllerAnimated(true, completion: nil)
             })
         }
-        
-        
+    }
+    
+    @IBAction func cancel () {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     
     // ---- UIViewControllerTransitioningDelegate methods
     
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
         
         if presented == self {
             return CustomPresentationController(presentedViewController: presented, presentingViewController: presenting)
@@ -88,5 +90,3 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         }
     }
 }
-
-            

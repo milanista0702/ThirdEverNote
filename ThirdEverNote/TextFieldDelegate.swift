@@ -10,8 +10,8 @@ import UIKit
 
 extension SignUpViewController: UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-    textField.resignFirstResponder()
-    return true
+        textField.resignFirstResponder()
+        return true
     }
 }
 

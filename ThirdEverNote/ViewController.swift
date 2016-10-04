@@ -19,7 +19,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var calendarBar: UILabel!
     @IBOutlet var toolbar: UIToolbar!
     
+    //var SArray = [ToDoes]()
     
+    //倉庫から取り出す
     let saveData: NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     
@@ -41,10 +43,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //メンバ変数の設定（カレンダーの背景色）
     var calendarBackGroundColor: UIColor!
     
-    //プロパティを指定
-    //    @IBOutlet var calendarBar: UILabel!
-    //    @IBOutlet var prevMonthButton: UIButton!
-    //    @IBOutlet var nextMonthButton: UIButton!
     
     //カレンダーの位置決め用メンバ変数
     var calendarLabelIntervalX: Int!
@@ -71,12 +69,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-//        //navigationvar にeditボタンをつける
-//        navigationItem.leftBarButtonItem = editButtonItem()
-//        
-//        
+    
         //addボタン
         let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
         addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(tap))
@@ -183,13 +176,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             calendarY              = 55;
             calendarSize           = 50;
             calendarFontSize       = 21;
-            
-            //            self.prevMonthButton.frame = CGRectMake(18, 468, CGFloat(calendarSize), CGFloat(calendarSize));
-            //            self.nextMonthButton.frame = CGRectMake(348, 468, CGFloat(calendarSize), CGFloat(calendarSize));
-            
-            
-            
-            
         }
         
         //ボタンを角丸にする
@@ -540,13 +526,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupCalendarTitleLabel()
     }
     
+    
     //カレンダーボタンをタップした時のアクション
     func buttonTapped(button: UIButton){
         
-        //@todo:画面遷移等の処理を書くことができます。
+        self.find()
         
         //コンソール表示
         print("\(year)年\(month)月\(button.tag)日が選択されました！")
+    }
+    
+    func find () {
+        let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+
+        let query = NCMBQuery(className: "ToDoes")
+        query.whereKey("user", equalTo: NCMBUser.currentUser())
+        query.whereKey("date", lessThanOrEqualTo : comps)
+        query.whereKey("date", greaterThan : )
+        query.findObjectsInBackgroundWithBlock { (objects, error) in
+            if error != nil {
+                print(error.localizedDescription)
+            } else {
+                print(objects)
+            }
+        }
     }
     
     

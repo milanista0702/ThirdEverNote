@@ -52,7 +52,7 @@ class SignUpViewController: UIViewController {
             self.presntPassConfirmAlert()
         }
         
-      }
+    }
     
     
     func signup ( username: String, email: String, password: String) {
@@ -132,10 +132,7 @@ class SignUpViewController: UIViewController {
     }
     
     
-    
-    
-    
-    /*
+     /*
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation

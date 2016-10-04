@@ -43,7 +43,7 @@ class CustomPresentationAnimationController: NSObject, UIViewControllerAnimatedT
         guard
             let presentedController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey),
             let presentedControllerView = transitionContext.viewForKey(UITransitionContextToViewKey),
-            let containerView = transitionContext.containerView()
+            let containerView: UIView = transitionContext.containerView()
             else {
                 return
         }
@@ -66,7 +66,7 @@ class CustomPresentationAnimationController: NSObject, UIViewControllerAnimatedT
         
         guard
             let presentedControllerView = transitionContext.viewForKey(UITransitionContextFromViewKey),
-            let containerView = transitionContext.containerView()
+            let containerView: UIView = transitionContext.containerView()
             else {
                 return
         }
