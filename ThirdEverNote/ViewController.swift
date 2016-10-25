@@ -526,6 +526,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupCalendarTitleLabel()
     }
     
+    func day ( date : NSDate) -> NSDate {
+        let calendar : NSCalendar = NSCalendar.currentCalendar()
+        let dateComponents = calendar.components([.Year, .Month, .Day], fromDate: date)
+        let today = self.create(dateComponents.year, month: dateComponents.month, day: dateComponents.day)
+        return today
+    }
+    
+    func create(year: Int, month: Int, day: Int) -> NSDate {
+        var components = NSDateComponents()
+        components.year = year
+        components.month = year
+        components.day = day
+        return NSCalendar.currentCalendar().dateFromComponents(components)!
+    }
+
+
     
     //カレンダーボタンをタップした時のアクション
     func buttonTapped(button: UIButton){
@@ -542,7 +558,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let query = NCMBQuery(className: "ToDoes")
         query.whereKey("user", equalTo: NCMBUser.currentUser())
         query.whereKey("date", lessThanOrEqualTo : comps)
-        query.whereKey("date", greaterThan : )
+        query.whereKey("date", greaterThan : comps)
         query.findObjectsInBackgroundWithBlock { (objects, error) in
             if error != nil {
                 print(error.localizedDescription)
