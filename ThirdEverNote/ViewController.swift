@@ -34,11 +34,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var year: Int!
     var month: Int!
     var day: Int!
+    var hour: Int!
+    var minute: Int!
+    var second: Int!
     var maxDay: Int!
     var dayOfWeek: Int!
     
     //メンバ変数の設定（カレンダー関数から取得したものを渡す）
-    var comps: NSDateComponents!
+    var comps: NSDate!
     
     //メンバ変数の設定（カレンダーの背景色）
     var calendarBackGroundColor: UIColor!
@@ -64,6 +67,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var addBtn: UIBarButtonItem!
     
     var sArray = [String]()
+    
+    let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+
     
     
     
@@ -190,12 +196,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let range: NSRange = calendar.rangeOfUnit(NSCalendarUnit.Day, inUnit:NSCalendarUnit.Month, forDate:now)
         
         //最初にメンバ変数に格納するための現在日付の情報を取得する
-        comps = calendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Weekday],fromDate:now)
+        comps = calendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second, NSCalendarUnit.Weekday],fromDate:now)
         
         //年月日と最後の日付と曜日を取得(NSIntegerをintへのキャスト不要)
         let orgYear: NSInteger      = comps.year
         let orgMonth: NSInteger     = comps.month
         let orgDay: NSInteger       = comps.day
+        let orgHour: NSInteger      = comps.hour
+        let orgMinute: NSInteger    = comps.minute
+        let orgSecond: NSInteger   = comps.second
         let orgDayOfWeek: NSInteger = comps.weekday
         let max: NSInteger          = range.length
         
@@ -422,7 +431,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
          * yyyy年mm月1日のデータを作成する。
          * 後述の関数 setupPrevCalendarData, setupNextCalendarData も同様です。
          *************/
-        let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+       // let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let currentComps: NSDateComponents = NSDateComponents()
         
         currentComps.year  = year
@@ -477,7 +486,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         nextComps.month = month
         nextComps.day   = 1
         
-        let nextDate: NSDate = nextCalendar.dateFromComponents(nextComps)!
+        let nextDate : NSDate = nextCalendar.dateFromComponents(nextComps)!
         recreateCalendarParameter(nextCalendar, currentDate: nextDate)
     }
     
@@ -488,7 +497,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //引数で渡されたものをもとに日付の情報を取得する
         let currentRange: NSRange = currentCalendar.rangeOfUnit(NSCalendarUnit.Day, inUnit:NSCalendarUnit.Month, forDate:currentDate)
         
-        comps = currentCalendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Weekday],fromDate:currentDate)
+        comps = currentCalendar.component([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Weekday],fromDate:currentDate)
         
         //年月日と最後の日付と曜日を取得(NSIntegerをintへのキャスト不要)
         let currentYear: NSInteger      = comps.year
@@ -526,6 +535,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         setupCalendarTitleLabel()
     }
     
+    
+    // NSDate出してる
+    //NSDate の　年と月と日を取り出したNSDate
     func day ( date : NSDate) -> NSDate {
         let calendar : NSCalendar = NSCalendar.currentCalendar()
         let dateComponents = calendar.components([.Year, .Month, .Day], fromDate: date)
@@ -533,15 +545,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return today
     }
     
+    //任意の3つの整数入れたら　year　mounth day　でNSDateにする
     func create(year: Int, month: Int, day: Int) -> NSDate {
-        var components = NSDateComponents()
+        var components = NSDate()
         components.year = year
         components.month = year
         components.day = day
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
-
-
+    
+    func eaqul (year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) -> NSDate {
+        var components = NSDate()
+        components.year = year
+        components.month = month
+        components.day = day
+        components.hour = 23
+        components.minute = 59
+        components.second = 59
+        return NSCalendar.currentCalendar().dateFromComponents(components)!
+    }
     
     //カレンダーボタンをタップした時のアクション
     func buttonTapped(button: UIButton){
@@ -550,6 +572,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //コンソール表示
         print("\(year)年\(month)月\(button.tag)日が選択されました！")
+        day = button.tag
+        
     }
     
     func find () {
@@ -558,7 +582,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let query = NCMBQuery(className: "ToDoes")
         query.whereKey("user", equalTo: NCMBUser.currentUser())
         query.whereKey("date", lessThanOrEqualTo : comps)
-        query.whereKey("date", greaterThan : comps)
+        query.whereKey("date", greaterThan: self.day(date:self.create(year: year, month: month, day: day)))
+        query.whereKey("date", greaterThanOrEqualTo: self.eaqul(year: year, month: month, day: day, hour: hour, minute: minute, second: second ))
         query.findObjectsInBackgroundWithBlock { (objects, error) in
             if error != nil {
                 print(error.localizedDescription)
@@ -567,6 +592,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
     }
+    
     
     
     //前月を表示するメソッド
