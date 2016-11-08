@@ -12,7 +12,7 @@ import NCMB
 //CALayerクラスのインポート
 import QuartzCore
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate  {
+class ViewController: UIViewController, UITableViewDelegate  {
     
     //下半分のtableview
     @IBOutlet var table: UITableView!
@@ -493,8 +493,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //引数で渡されたものをもとに日付の情報を取得する
         let currentRange: NSRange = currentCalendar.rangeOfUnit(NSCalendarUnit.Day, inUnit:NSCalendarUnit.Month, forDate:currentDate)
         
-        // comps = currentCalendar.([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Weekday],fromDate:currentDate)
-        
+    
         comps = currentCalendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day,
             NSCalendarUnit.Weekday], fromDate: currentDate)
         
@@ -546,16 +545,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //任意の3つの整数入れたら　year　mounth day　でNSDateにする
     func create(year: Int, month: Int, day: Int) -> NSDate {
+        let calendar : NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        calendar.locale = NSLocale(localeIdentifier: "ja_JP")
+        
         let components = NSDateComponents()
         components.year = year
         components.month = month
         components.day = day
-        components.hour = hour
-        components.minute = 
+        components.hour = 00
+        components.minute = 0
+        components.second = 0
+        NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         
-        print(NSCalendar.currentCalendar().dateFromComponents(components))
         
-        return NSCalendar.currentCalendar().dateFromComponents(components)!
+        print (calendar.dateFromComponents(components))
+        
+        return calendar.dateFromComponents(components)!
     
     }
     
@@ -576,12 +581,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //カレンダーボタンをタップした時のアクション
     func buttonTapped(button: UIButton){
         
+        day = button.tag
+
+        
         self.find()
         
         //コンソール表示
         print("\(year)年\(month)月\(button.tag)日が選択されました！")
-        day = button.tag
-        
     }
     
     func find () {
@@ -603,6 +609,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
+    
+    
     //前月を表示するメソッド
     func prevCalendarSettings() {
         removeCalendarButtonObject()
@@ -621,19 +629,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    //cellの数を設定
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sArray.count
-        //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
-    }
-    
-    
-    //ID付きのcellを取得してそれに付属しているlabelとかimageとか
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        cell.textLabel!.text = sArray[indexPath.row]
-        return cell
-    }
+
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)  {
@@ -761,3 +757,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
 }
+
+
+extension ViewController: UITableViewDataSource {
+    
+    //cellの数を設定
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sArray.count
+        //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
+    }
+    
+    
+    //ID付きのcellを取得してそれに付属しているlabelとかimageとか
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+        cell.textLabel!.text = sArray[indexPath.row]
+        return cell
+    }
+}
+
