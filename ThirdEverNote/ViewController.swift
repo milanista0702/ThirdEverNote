@@ -41,7 +41,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var dayOfWeek: Int!
     
     //メンバ変数の設定（カレンダー関数から取得したものを渡す）
-    var comps: NSDate!
+    var comps: NSDateComponents!
     
     //メンバ変数の設定（カレンダーの背景色）
     var calendarBackGroundColor: UIColor!
@@ -69,20 +69,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var sArray = [String]()
     
     let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-
+    
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         //addボタン
         let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
         addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(tap))
-     
+        
         toolbar.setItems([editButtonItem(), fixedSpacer, addBtn], animated: false)
         
-
+        
         
         
         self.table.delegate = self
@@ -184,10 +184,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             calendarFontSize       = 21;
         }
         
-        //ボタンを角丸にする
-        //        prevMonthButton.layer.cornerRadius = CGFloat(buttonRadius)
-        //        nextMonthButton.layer.cornerRadius = CGFloat(buttonRadius)
-        
         //現在の日付を取得する
         now = NSDate()
         
@@ -197,7 +193,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //最初にメンバ変数に格納するための現在日付の情報を取得する
         comps = calendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second, NSCalendarUnit.Weekday],fromDate:now)
-        
+
         //年月日と最後の日付と曜日を取得(NSIntegerをintへのキャスト不要)
         let orgYear: NSInteger      = comps.year
         let orgMonth: NSInteger     = comps.month
@@ -431,7 +427,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
          * yyyy年mm月1日のデータを作成する。
          * 後述の関数 setupPrevCalendarData, setupNextCalendarData も同様です。
          *************/
-       // let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        // let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let currentComps: NSDateComponents = NSDateComponents()
         
         currentComps.year  = year
@@ -497,7 +493,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //引数で渡されたものをもとに日付の情報を取得する
         let currentRange: NSRange = currentCalendar.rangeOfUnit(NSCalendarUnit.Day, inUnit:NSCalendarUnit.Month, forDate:currentDate)
         
-        comps = currentCalendar.component([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Weekday],fromDate:currentDate)
+        // comps = currentCalendar.([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Weekday],fromDate:currentDate)
+        
+        comps = currentCalendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day,
+            NSCalendarUnit.Weekday], fromDate: currentDate)
         
         //年月日と最後の日付と曜日を取得(NSIntegerをintへのキャスト不要)
         let currentYear: NSInteger      = comps.year
@@ -547,21 +546,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //任意の3つの整数入れたら　year　mounth day　でNSDateにする
     func create(year: Int, month: Int, day: Int) -> NSDate {
-        var components = NSDate()
+        let components = NSDateComponents()
         components.year = year
-        components.month = year
+        components.month = month
         components.day = day
+        components.hour = hour
+        components.minute = 
+        
+        print(NSCalendar.currentCalendar().dateFromComponents(components))
+        
         return NSCalendar.currentCalendar().dateFromComponents(components)!
+    
     }
     
-    func eaqul (year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) -> NSDate {
-        var components = NSDate()
+    func eaqul (year: Int, month: Int, day: Int) -> NSDate {
+        let components = NSDateComponents()
         components.year = year
         components.month = month
         components.day = day
         components.hour = 23
         components.minute = 59
         components.second = 59
+        
+        print(NSCalendar.currentCalendar().dateFromComponents(components))
+        
         return NSCalendar.currentCalendar().dateFromComponents(components)!
     }
     
@@ -578,12 +586,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func find () {
         let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-
+        
         let query = NCMBQuery(className: "ToDoes")
         query.whereKey("user", equalTo: NCMBUser.currentUser())
-        query.whereKey("date", lessThanOrEqualTo : comps)
-        query.whereKey("date", greaterThan: self.day(date:self.create(year: year, month: month, day: day)))
-        query.whereKey("date", greaterThanOrEqualTo: self.eaqul(year: year, month: month, day: day, hour: hour, minute: minute, second: second ))
+        query.whereKey("date", lessThanOrEqualTo : self.eaqul(year, month: month, day: day))
+        query.whereKey("date", greaterThan: self.create(year, month: month, day: day))
+       // query.whereKey("date", greaterThanOrEqualTo: self.eaqul(year, month: month, day: day ))
         query.findObjectsInBackgroundWithBlock { (objects, error) in
             if error != nil {
                 print(error.localizedDescription)
@@ -728,7 +736,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tap() {
         
-        var alert = UIAlertController(title: "NEW SCHEDULE", message: "予定を追加", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "NEW SCHEDULE", message: "予定を追加", preferredStyle: .Alert)
         let saveAction = UIAlertAction(title: "Done", style: .Default) { (action:UIAlertAction!) -> Void in
             
             // 入力したテキストをコンソールに表示
