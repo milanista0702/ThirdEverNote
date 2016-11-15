@@ -193,7 +193,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
         
         //最初にメンバ変数に格納するための現在日付の情報を取得する
         comps = calendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second, NSCalendarUnit.Weekday],fromDate:now)
-
+        
         //年月日と最後の日付と曜日を取得(NSIntegerをintへのキャスト不要)
         let orgYear: NSInteger      = comps.year
         let orgMonth: NSInteger     = comps.month
@@ -259,12 +259,6 @@ class ViewController: UIViewController, UITableViewDelegate  {
         self.view.addGestureRecognizer(swipeDownGesture)
         
         
-    }
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -402,7 +396,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
             button.layer.cornerRadius = CGFloat(buttonRadius)
             
             //配置したボタンに押した際のアクションを設定する
-            button.addTarget(self, action: "buttonTapped:", forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(self.buttonTapped(_:)), forControlEvents: .TouchUpInside)
             
             //ボタンを配置する
             self.view.addSubview(button)
@@ -493,7 +487,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
         //引数で渡されたものをもとに日付の情報を取得する
         let currentRange: NSRange = currentCalendar.rangeOfUnit(NSCalendarUnit.Day, inUnit:NSCalendarUnit.Month, forDate:currentDate)
         
-    
+        
         comps = currentCalendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day,
             NSCalendarUnit.Weekday], fromDate: currentDate)
         
@@ -545,44 +539,31 @@ class ViewController: UIViewController, UITableViewDelegate  {
     
     //任意の3つの整数入れたら　year　mounth day　でNSDateにする
     func create(year: Int, month: Int, day: Int) -> NSDate {
-        let calendar : NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        calendar.locale = NSLocale(localeIdentifier: "ja_JP")
         
-        let components = NSDateComponents()
-        components.year = year
-        components.month = month
-        components.day = day
-        components.hour = 00
-        components.minute = 0
-        components.second = 0
-        NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let string: String = "\(year)/\(month)/\(day) 0:00:00"
+        let formatter: NSDateFormatter = NSDateFormatter()
+
+        print(string)
         
-        
-        print (calendar.dateFromComponents(components))
-        
-        return calendar.dateFromComponents(components)!
-    
+        return formatter.dateFromString(string)!
     }
+    
     
     func eaqul (year: Int, month: Int, day: Int) -> NSDate {
-        let components = NSDateComponents()
-        components.year = year
-        components.month = month
-        components.day = day
-        components.hour = 23
-        components.minute = 59
-        components.second = 59
         
-        print(NSCalendar.currentCalendar().dateFromComponents(components))
+        let string: String = "\(year)/\(month)/\(day) 23:59:59"
+        let formatter: NSDateFormatter = NSDateFormatter()
         
-        return NSCalendar.currentCalendar().dateFromComponents(components)!
-    }
+        print(string)
+        
+        return formatter.dateFromString(string)
+     }
     
     //カレンダーボタンをタップした時のアクション
     func buttonTapped(button: UIButton){
         
         day = button.tag
-
+        
         
         self.find()
         
@@ -597,7 +578,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
         query.whereKey("user", equalTo: NCMBUser.currentUser())
         query.whereKey("date", lessThanOrEqualTo : self.eaqul(year, month: month, day: day))
         query.whereKey("date", greaterThan: self.create(year, month: month, day: day))
-       // query.whereKey("date", greaterThanOrEqualTo: self.eaqul(year, month: month, day: day ))
+        // query.whereKey("date", greaterThanOrEqualTo: self.eaqul(year, month: month, day: day ))
         query.findObjectsInBackgroundWithBlock { (objects, error) in
             if error != nil {
                 print(error.localizedDescription)
@@ -629,7 +610,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
     }
     
     
-
+    
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)  {
