@@ -542,7 +542,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
         
         let string: String = "\(year)/\(month)/\(day) 0:00:00"
         let formatter: NSDateFormatter = NSDateFormatter()
-
+        
         print(string)
         
         return formatter.dateFromString(string)!
@@ -552,12 +552,14 @@ class ViewController: UIViewController, UITableViewDelegate  {
     func eaqul (year: Int, month: Int, day: Int) -> NSDate {
         
         let string: String = "\(year)/\(month)/\(day) 23:59:59"
-        let formatter: NSDateFormatter = NSDateFormatter()
         
-        print(string)
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         
-        return formatter.dateFromString(string)
-     }
+        print (formatter.dateFromString(string))
+        
+        return formatter.dateFromString(string)!
+    }
     
     //カレンダーボタンをタップした時のアクション
     func buttonTapped(button: UIButton){
@@ -578,10 +580,10 @@ class ViewController: UIViewController, UITableViewDelegate  {
         query.whereKey("user", equalTo: NCMBUser.currentUser())
         query.whereKey("date", lessThanOrEqualTo : self.eaqul(year, month: month, day: day))
         query.whereKey("date", greaterThan: self.create(year, month: month, day: day))
-        // query.whereKey("date", greaterThanOrEqualTo: self.eaqul(year, month: month, day: day ))
         query.findObjectsInBackgroundWithBlock { (objects, error) in
             if error != nil {
-                print(error.localizedDescription)
+//                print(error.localizedDescription)
+                print("nil")
             } else {
                 print(objects)
             }
