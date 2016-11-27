@@ -1,3 +1,4 @@
+
 //
 //  AddViewController.swift
 //
@@ -30,14 +31,14 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     }
     
     
-    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: NSBundle!)  {
+    override init(nibName nibNameOrNil: String!, bundle nibBundleOrNil: Bundle!)  {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         
         self.commonInit()
     }
     
     func commonInit() {
-        self.modalPresentationStyle = .Custom
+        self.modalPresentationStyle = .custom
         self.transitioningDelegate = self
     }
     
@@ -47,15 +48,15 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
             
         }else{
             
-            let todo = ToDoes.create(text.text!, user: NCMBUser.currentUser(), isPublic: swich.on, date: date.date, done: 0)
-            ToDoes.saveWithEvent(todo, callBack: {
-                self.dismissViewControllerAnimated(true, completion: nil)
+            let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), isPublic: swich.isOn, date: date.date as NSDate, done: 0)
+            ToDoes.saveWithEvent(todo: todo, callBack: {
+                self.dismiss(animated: true, completion: nil)
             })
         }
     }
     
     @IBAction func cancel () {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -64,7 +65,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
         
         if presented == self {
-            return CustomPresentationController(presentedViewController: presented, presentingViewController: presenting)
+            return CustomPresentationController(presentedViewController: presented, presenting: presenting)
         }
         
         return nil

@@ -541,10 +541,11 @@ class ViewController: UIViewController, UITableViewDelegate  {
     func create(year: Int, month: Int, day: Int) -> NSDate {
         
         let string: String = "\(year)/\(month)/\(day) 0:00:00"
-        let formatter: NSDateFormatter = NSDateFormatter()
         
-        print(string)
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         
+        print(formatter.dateFromString(string))
         return formatter.dateFromString(string)!
     }
     
