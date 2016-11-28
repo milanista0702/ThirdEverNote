@@ -15,7 +15,6 @@ class LoginViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,7 +23,7 @@ class LoginViewController: UIViewController {
         usernameTextField.delegate = self
         passwordTextField.delegate = self
         
-        passwordTextField.secureTextEntry = true
+        passwordTextField.isSecureTextEntry = true
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,15 +63,15 @@ class LoginViewController: UIViewController {
     func transition() {
         self.performSegue(withIdentifier: "ToViewCon" , sender: nil)
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigationß
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigationß
+ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
+    

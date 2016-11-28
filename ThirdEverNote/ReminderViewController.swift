@@ -21,14 +21,14 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     //userdefaults(倉庫)にアクセス
-    let saveData: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    let saveData: UserDefaults = UserDefaults.standard
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        table.registerNib(UINib(nibName: "TodoTableCell", bundle: nil), forCellReuseIdentifier: "TodoTableCell")
+        table.register(UINib(nibName: "TodoTableCell", bundle: nil), forCellReuseIdentifier: "TodoTableCell")
         
         
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "rowButtonAction:")
@@ -47,16 +47,16 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let swipeRightGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(ReminderViewController.handleSwipeRight(_:)))
         swipeRightGesture.numberOfTouchesRequired = 1
-        swipeRightGesture.direction = UISwipeGestureRecognizerDirection.Right
-        self.view.userInteractionEnabled = true
+        swipeRightGesture.direction = UISwipeGestureRecognizerDirection.right
+        self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(swipeRightGesture)
         
         refreshControl.attributedTitle = NSAttributedString(string: "Loading...")
-        refreshControl.addTarget(self, action: #selector(ReminderViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(ReminderViewController.refresh), for: UIControlEvents.valueChanged)
         table.addSubview(refreshControl)
         
         //navigationvar にeditボタンをつける
-        navigationItem.leftBarButtonItem = editButtonItem()
+        navigationItem.leftBarButtonItem = editButtonItem
         
         
         //addボタン
@@ -64,23 +64,19 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.navigationItem.rightBarButtonItem = addBtn
         
-        
         self.navigationItem.title = "やることリスト"
-        
-        
-        //        remindArray = saveData.objectForKey("ToDoList")
         
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         print("a")
         loadData()
         
     }
     
     func loadData() {
-        ToDoes.loadall({objects in
+        ToDoes.loadall(callback: {objects in
             self.remindArray.removeAll()
             
             for object in objects {
@@ -91,10 +87,8 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func refresh() {
-        
         loadData()
         refreshControl.endRefreshing()
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -104,43 +98,43 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     //editが押された時の処理
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        table.editing = editing
+        table.isEditing = editing
     }
     
     
     
     //cellの数を設定
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return remindArray.count
         //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
     }
     
     
     //ID付きのcellを取得してそれに付属しているlabelとかimageとか
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("TodoTableCell") as! TodoTableCell
-         cell.todolabel.text = remindArray[indexPath.row].todo
-        cell.datelabel.text = formatter(remindArray[indexPath.row].date)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableCell") as! TodoTableCell
+        cell.todolabel.text = remindArray[indexPath.row].todo
+        cell.datelabel.text = formatter(date: remindArray[indexPath.row].date)
         cell.arrowImageView.image = UIImage(named:  "矢印.png")
         
         return cell
     }
     
     func formatter (date: NSDate) -> String {
-        let dateFormatter  = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
+        let dateFormatter  = DateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale!
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
         
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.string(from: date as Date)
     }
     
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)  {
         NSLog("%@が選択された", remindArray[indexPath.row])
         
-        if let cell: TodoTableCell = table.cellForRowAtIndexPath(indexPath) as! TodoTableCell {
+        if let cell: TodoTableCell = table.cellForRow(at: indexPath as IndexPath) as! TodoTableCell {
             if cell.arrowImageView.image == UIImage(named: "check.png") {
                 cell.arrowImageView.image = UIImage(named: "矢印.png")
             } else {
@@ -159,10 +153,10 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     //削除された時の実装
     func tableView(table: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        self.delegateObjec(indexPath)
+        self.delegateObjec(indexPath: indexPath)
         
         // 先にデータを更新する
-        remindArray.removeAtIndex(indexPath.row)
+        remindArray.remove(at: indexPath.row)
         
         // それからテーブルの更新
         table.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)],
@@ -178,31 +172,31 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(table: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         let targetTitle = remindArray[sourceIndexPath.row]
-        if let index = remindArray.indexOf(targetTitle) {
-            remindArray.removeAtIndex(index)
-            remindArray.insert(targetTitle, atIndex: destinationIndexPath.row)
+        if let index = remindArray.index(of: targetTitle) {
+            remindArray.remove(at: index)
+            remindArray.insert(targetTitle, at: destinationIndexPath.row)
         }
     }
     
     
     //編集中以外にcellを左スワイプできない
     func tableView(table: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        if table.editing {
-            return UITableViewCellEditingStyle.Delete
+        if table.isEditing {
+            return UITableViewCellEditingStyle.delete
         } else {
-            return UITableViewCellEditingStyle.None
+            return UITableViewCellEditingStyle.none
         }
         
         //編集中にもcellを選択できる
         table.allowsSelectionDuringEditing = true
-        table.cellForRowAtIndexPath(indexPath)?.textInputMode
+        table.cellForRow(at: indexPath as IndexPath)?.textInputMode
     }
     
     func delegateObjec(indexPath: NSIndexPath) {
         let object = remindArray[indexPath.row]
         object.deleteEventually { (error) in
             if error != nil {
-                print(error.localizedDescription)
+                print(error?.localizedDescription)
             }
         }
     }
@@ -210,19 +204,19 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func handleSwipeRight(gesture: UIGestureRecognizer) {
         print("右にスワイプされました")
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     
     func rowButtonAction(sender : UILongPressGestureRecognizer) {
         
-        let point: CGPoint = sender.locationInView(table)
-        let indexPath = table.indexPathForRowAtPoint(point)
+        let point: CGPoint = sender.location(in: table)
+        let indexPath = table.indexPathForRow(at: point)
         
         print("a")
         
         if let indexPath = indexPath {
-            if sender.state == UIGestureRecognizerState.Began {
+            if sender.state == UIGestureRecognizerState.began {
                 
                 // セルが長押しされたときの処理
                 print("long pressed \(indexPath.row)")
@@ -235,11 +229,11 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //appボタンが押された時 → onClickが呼ばれる → tapが呼ばれる
     func onClick(sender: AnyObject) {
-        self.performSegueWithIdentifier("addsegue", sender: nil)
+        self.performSegue(withIdentifier: "addsegue", sender: nil)
     }
     
     func dismiss(segue: UIStoryboardSegue) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

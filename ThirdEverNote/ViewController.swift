@@ -22,7 +22,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
     //var SArray = [ToDoes]()
     
     //倉庫から取り出す
-    let saveData: NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    let saveData: UserDefaults = UserDefaults.standard
     
     
     //メンバ変数の設定（配列格納用）
@@ -68,7 +68,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
     
     var sArray = [String]()
     
-    let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+    let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
     
     
     
@@ -77,10 +77,10 @@ class ViewController: UIViewController, UITableViewDelegate  {
         super.viewDidLoad()
         
         //addボタン
-        let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: self, action: nil)
-        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(tap))
+        let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tap))
         
-        toolbar.setItems([editButtonItem(), fixedSpacer, addBtn], animated: false)
+        toolbar.setItems([editButtonItem, fixedSpacer, addBtn], animated: false)
         
         
         
@@ -97,7 +97,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
         //現在起動中のデバイスを取得（スクリーンの幅・高さ）
         //        let screenWidth  = DeviseSize.screenWidth()
         //        let screenHeight = DeviseSize.screenHeight()
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenSize: CGRect = UIScreen.main.bounds
         
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
@@ -161,9 +161,6 @@ class ViewController: UIViewController, UITableViewDelegate  {
             calendarSize           = 45;
             calendarFontSize       = 19;
             
-            //            self.prevMonthButton.frame = CGRectMake(15, 438, CGFloat(calendarSize), CGFloat(calendarSize));
-            //            self.nextMonthButton.frame = CGRectMake(314, 438, CGFloat(calendarSize), CGFloat(calendarSize));
-            
             //iPhone6 plus
         }else if (screenWidth == 414 && screenHeight == 736){
             
@@ -188,11 +185,11 @@ class ViewController: UIViewController, UITableViewDelegate  {
         now = NSDate()
         
         //inUnit:で指定した単位（月）の中で、rangeOfUnit:で指定した単位（日）が取り得る範囲
-        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let range: NSRange = calendar.rangeOfUnit(NSCalendarUnit.Day, inUnit:NSCalendarUnit.Month, forDate:now)
+        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        let range: NSRange = calendar.range(of: NSCalendar.Unit.day, in:NSCalendar.Unit.month, for:now as Date)
         
         //最初にメンバ変数に格納するための現在日付の情報を取得する
-        comps = calendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day, NSCalendarUnit.Hour, NSCalendarUnit.Minute, NSCalendarUnit.Second, NSCalendarUnit.Weekday],fromDate:now)
+        comps = calendar.components([NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day, NSCalendar.Unit.hour, NSCalendar.Unit.minute, NSCalendar.Unit.second, NSCalendar.Unit.weekday],from:now as Date) as NSDateComponents!
         
         //年月日と最後の日付と曜日を取得(NSIntegerをintへのキャスト不要)
         let orgYear: NSInteger      = comps.year
@@ -217,7 +214,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
         let monthName:[String] = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
         
         //曜日ラベルを動的に配置
-        setupCalendarLabel(monthName)
+        setupCalendarLabel(array: monthName as NSArray)
         
         //初期表示時のカレンダーをセットアップする
         setupCurrentCalendar()
@@ -234,45 +231,45 @@ class ViewController: UIViewController, UITableViewDelegate  {
         
         let swipeLeftGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Left))
         swipeLeftGesture.numberOfTouchesRequired = 1
-        swipeLeftGesture.direction = UISwipeGestureRecognizerDirection.Left
-        self.view.userInteractionEnabled = true
+        swipeLeftGesture.direction = UISwipeGestureRecognizerDirection.left
+        self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(swipeLeftGesture)
         
         
         let swipeRightGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Right))
         swipeRightGesture.numberOfTouchesRequired = 1
-        swipeRightGesture.direction = UISwipeGestureRecognizerDirection.Right
-        self.view.userInteractionEnabled = true
+        swipeRightGesture.direction = UISwipeGestureRecognizerDirection.right
+        self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(swipeRightGesture)
         
         
         let swipeUpGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Up))
         swipeUpGesture.numberOfTouchesRequired = 1
-        swipeUpGesture.direction = UISwipeGestureRecognizerDirection.Up
-        self.view.userInteractionEnabled = true
+        swipeUpGesture.direction = UISwipeGestureRecognizerDirection.up
+        self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(swipeUpGesture)
         
         let swipeDownGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Down))
         swipeDownGesture.numberOfTouchesRequired = 1
-        swipeDownGesture.direction = UISwipeGestureRecognizerDirection.Down
-        self.view.userInteractionEnabled = true
+        swipeDownGesture.direction = UISwipeGestureRecognizerDirection.down
+        self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(swipeDownGesture)
         
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if NCMBUser.currentUser() == nil {
-            self.performSegueWithIdentifier("toSignupView", sender: nil)
+        if NCMBUser.current() == nil {
+            self.performSegue(withIdentifier: "toSignupView", sender: nil)
         }
     }
     
     
     //editが押された時の処理
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        table.editing = editing
+        table.isEditing = editing
     }
     
     
@@ -315,13 +312,13 @@ class ViewController: UIViewController, UITableViewDelegate  {
             }else{
                 
                 //既に用意されている配色パターンの場合
-                calendarBaseLabel.textColor = UIColor.lightGrayColor()
+                calendarBaseLabel.textColor = UIColor.lightGray
                 
             }
             
             //曜日ラベルの配置
             calendarBaseLabel.text = String(array[i] as! NSString)
-            calendarBaseLabel.textAlignment = NSTextAlignment.Center
+            calendarBaseLabel.textAlignment = NSTextAlignment.center
             calendarBaseLabel.font = UIFont(name: "System", size: CGFloat(calendarLableFontSize))
             self.view.addSubview(calendarBaseLabel)
         }
@@ -349,29 +346,29 @@ class ViewController: UIViewController, UITableViewDelegate  {
             button.frame = CGRectMake(
                 CGFloat(positionX),
                 CGFloat(positionY),
-                CGFloat(buttonSizeX),
-                CGFloat(buttonSizeY)
+                CGFloat(buttonSizeX!),
+                CGFloat(buttonSizeY!)
             );
             
             //ボタンの初期設定をする
             if(i < dayOfWeek - 1){
                 
                 //日付の入らない部分はボタンを押せなくする
-                button.setTitle("", forState: .Normal)
-                button.enabled = false
+                button.setTitle("", for: .normal)
+                button.isEnabled = false
                 
             }else if(i == dayOfWeek - 1 || i < dayOfWeek + maxDay - 1){
                 
                 //日付の入る部分はボタンのタグを設定する（日にち）
-                button.setTitle(String(tagNumber), forState: .Normal)
+                button.setTitle(String(tagNumber), for: .normal)
                 button.tag = tagNumber
-                tagNumber++
+                tagNumber += 1
                 
             }else if(i == dayOfWeek + maxDay - 1 || i < total){
                 
                 //日付の入らない部分はボタンを押せなくする
-                button.setTitle("", forState: .Normal)
-                button.enabled = false
+                button.setTitle("", for: .normal)
+                button.isEnabled = false
                 
             }
             
@@ -386,21 +383,21 @@ class ViewController: UIViewController, UITableViewDelegate  {
                     red: CGFloat(0.400), green: CGFloat(0.471), blue: CGFloat(0.980), alpha: CGFloat(1.0)
                 )
             }else{
-                calendarBackGroundColor = UIColor.lightGrayColor()
+                calendarBackGroundColor = UIColor.lightGray
             }
             
             //ボタンのデザインを決定する
             button.backgroundColor = calendarBackGroundColor
-            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            button.setTitleColor(UIColor.white, for: .normal)
             button.titleLabel!.font = UIFont(name: "System", size: CGFloat(calendarFontSize))
             button.layer.cornerRadius = CGFloat(buttonRadius)
             
             //配置したボタンに押した際のアクションを設定する
-            button.addTarget(self, action: #selector(self.buttonTapped(_:)), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .TouchUpInside)
             
             //ボタンを配置する
             self.view.addSubview(button)
-            mArray.addObject(button)
+            mArray.add(button)
         }
         
     }
@@ -428,8 +425,8 @@ class ViewController: UIViewController, UITableViewDelegate  {
         currentComps.month = month
         currentComps.day   = 1
         
-        let currentDate: NSDate = currentCalendar.dateFromComponents(currentComps)!
-        recreateCalendarParameter(currentCalendar, currentDate: currentDate)
+        let currentDate: NSDate = currentCalendar.date(from: currentComps as DateComponents)! as NSDate
+        recreateCalendarParameter(currentCalendar: currentCalendar, currentDate: currentDate)
     }
     
     
@@ -445,15 +442,15 @@ class ViewController: UIViewController, UITableViewDelegate  {
         }
         
         //setupCurrentCalendarData()と同様の処理を行う
-        let prevCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let prevCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
         let prevComps: NSDateComponents = NSDateComponents()
         
         prevComps.year  = year
         prevComps.month = month
         prevComps.day   = 1
         
-        let prevDate: NSDate = prevCalendar.dateFromComponents(prevComps)!
-        recreateCalendarParameter(prevCalendar, currentDate: prevDate)
+        let prevDate: NSDate = prevCalendar.date(from: prevComps as DateComponents)! as NSDate
+        recreateCalendarParameter(currentCalendar: prevCalendar, currentDate: prevDate)
     }
     
     
@@ -469,15 +466,15 @@ class ViewController: UIViewController, UITableViewDelegate  {
         }
         
         //setupCurrentCalendarData()と同様の処理を行う
-        let nextCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let nextCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
         let nextComps: NSDateComponents = NSDateComponents()
         
         nextComps.year  = year
         nextComps.month = month
         nextComps.day   = 1
         
-        let nextDate : NSDate = nextCalendar.dateFromComponents(nextComps)!
-        recreateCalendarParameter(nextCalendar, currentDate: nextDate)
+        let nextDate : NSDate = nextCalendar.date(from: nextComps as DateComponents)! as NSDate
+        recreateCalendarParameter(currentCalendar: nextCalendar, currentDate: nextDate)
     }
     
     
@@ -485,11 +482,11 @@ class ViewController: UIViewController, UITableViewDelegate  {
     func recreateCalendarParameter(currentCalendar: NSCalendar, currentDate: NSDate) {
         
         //引数で渡されたものをもとに日付の情報を取得する
-        let currentRange: NSRange = currentCalendar.rangeOfUnit(NSCalendarUnit.Day, inUnit:NSCalendarUnit.Month, forDate:currentDate)
+        let currentRange: NSRange = currentCalendar.range(of: NSCalendar.Unit.day, in:NSCalendar.Unit.month, for:currentDate as Date)
         
         
-        comps = currentCalendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month, NSCalendarUnit.Day,
-            NSCalendarUnit.Weekday], fromDate: currentDate)
+        comps = currentCalendar.components([NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day,
+                                            NSCalendar.Unit.weekday], from: currentDate as Date) as NSDateComponents!
         
         //年月日と最後の日付と曜日を取得(NSIntegerをintへのキャスト不要)
         let currentYear: NSInteger      = comps.year
@@ -512,7 +509,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
         
         //ビューからボタンオブジェクトを削除する
         for i in 0..<mArray.count {
-            mArray[i].removeFromSuperview()
+            (mArray[i] as AnyObject).removeFromSuperview()
         }
         
         //配列に格納したボタンオブジェクトも削除する
@@ -531,9 +528,9 @@ class ViewController: UIViewController, UITableViewDelegate  {
     // NSDate出してる
     //NSDate の　年と月と日を取り出したNSDate
     func day ( date : NSDate) -> NSDate {
-        let calendar : NSCalendar = NSCalendar.currentCalendar()
-        let dateComponents = calendar.components([.Year, .Month, .Day], fromDate: date)
-        let today = self.create(dateComponents.year, month: dateComponents.month, day: dateComponents.day)
+        let calendar : NSCalendar = NSCalendar.current as NSCalendar
+        let dateComponents = calendar.components([.year, .month, .day], from: date as Date)
+        let today = self.create(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)
         return today
     }
     
@@ -542,11 +539,11 @@ class ViewController: UIViewController, UITableViewDelegate  {
         
         let string: String = "\(year)/\(month)/\(day) 0:00:00"
         
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         
-        print(formatter.dateFromString(string))
-        return formatter.dateFromString(string)!
+        print(formatter.date(from: string))
+        return formatter.date(from: string)! as NSDate
     }
     
     
@@ -554,12 +551,12 @@ class ViewController: UIViewController, UITableViewDelegate  {
         
         let string: String = "\(year)/\(month)/\(day) 23:59:59"
         
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         
-        print (formatter.dateFromString(string))
+        print (formatter.date(from: string))
         
-        return formatter.dateFromString(string)!
+        return formatter.date(from: string)! as NSDate
     }
     
     //カレンダーボタンをタップした時のアクション
@@ -575,15 +572,14 @@ class ViewController: UIViewController, UITableViewDelegate  {
     }
     
     func find () {
-        let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
+        let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
         
         let query = NCMBQuery(className: "ToDoes")
-        query.whereKey("user", equalTo: NCMBUser.currentUser())
-        query.whereKey("date", lessThanOrEqualTo : self.eaqul(year, month: month, day: day))
-        query.whereKey("date", greaterThan: self.create(year, month: month, day: day))
-        query.findObjectsInBackgroundWithBlock { (objects, error) in
+        query?.whereKey("user", equalTo: NCMBUser.current())
+        query?.whereKey("date", lessThanOrEqualTo : self.eaqul(year: year, month: month, day: day))
+        query?.whereKey("date", greaterThan: self.create(year: year, month: month, day: day))
+        query?.findObjectsInBackground { (objects, error) in
             if error != nil {
-//                print(error.localizedDescription)
                 print("nil")
             } else {
                 print(objects)
@@ -616,7 +612,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
     
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)  {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath)  {
         NSLog("%@が選択された", sArray[indexPath.row])
         
         if tableView.allowsSelectionDuringEditing {
@@ -627,7 +623,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
     
     
     func Left(gesture: UIGestureRecognizer) {
-        self.performSegueWithIdentifier("toReminder", sender: nil)
+        self.performSegue(withIdentifier: "toReminder", sender: nil)
     }
     
     func Right () {
@@ -641,14 +637,13 @@ class ViewController: UIViewController, UITableViewDelegate  {
     
     func Down() {
         self.prevCalendarSettings()
-        
     }
     
     
     
     
     //削除可能なcellのindexpath取得(今は全て)
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
         return true
     }
     
@@ -657,7 +652,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
     func tableView(table: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         // 先にデータを更新する
-        sArray.removeAtIndex(indexPath.row)
+        sArray.remove(at: indexPath.row)
         
         // それからテーブルの更新
         table.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)],
@@ -666,41 +661,41 @@ class ViewController: UIViewController, UITableViewDelegate  {
     
     
     //cellの並べ替え
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {
         return true
     }
     
     
     func tableView(table: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
         let targetTitle = sArray[sourceIndexPath.row]
-        if let index = sArray.indexOf(targetTitle) {
-            sArray.removeAtIndex(index)
-            sArray.insert(targetTitle, atIndex: destinationIndexPath.row)
+        if let index = sArray.index(of: targetTitle) {
+            sArray.remove(at: index)
+            sArray.insert(targetTitle, at: destinationIndexPath.row)
         }
     }
     
     
     //編集中以外にcellを左スワイプできない
-    func tableView(table: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        if table.editing {
-            return UITableViewCellEditingStyle.Delete
+    func tableView(table: UITableView, editingStyleForRowAtIndexPath indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        if table.isEditing {
+            return UITableViewCellEditingStyle.delete
         } else {
-            return UITableViewCellEditingStyle.None
+            return UITableViewCellEditingStyle.none
         }
         
         //編集中にもcellを選択できる
         table.allowsSelectionDuringEditing = true
-        table.cellForRowAtIndexPath(indexPath)?.textInputMode
+        table.cellForRow(at: indexPath as IndexPath)?.textInputMode
     }
     
     
     func rowButtonAction(sender : UILongPressGestureRecognizer) {
         
-        let point: CGPoint = sender.locationInView(table)
-        let indexPath = table.indexPathForRowAtPoint(point)
+        let point: CGPoint = sender.location(in: table)
+        let indexPath = table.indexPathForRow(at: point)
         
         if let indexPath = indexPath {
-            if sender.state == UIGestureRecognizerState.Began {
+            if sender.state == UIGestureRecognizerState.began {
                 
                 // セルが長押しされたときの処理
                 print("long pressed \(indexPath.row)")
@@ -712,12 +707,10 @@ class ViewController: UIViewController, UITableViewDelegate  {
     
     
     //appボタンが押された時 → onClickが呼ばれる → tapが呼ばれる
-    
-    
     func tap() {
         
-        let alert = UIAlertController(title: "NEW SCHEDULE", message: "予定を追加", preferredStyle: .Alert)
-        let saveAction = UIAlertAction(title: "Done", style: .Default) { (action:UIAlertAction!) -> Void in
+        let alert = UIAlertController(title: "NEW SCHEDULE", message: "予定を追加", preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Done", style: .default) { (action:UIAlertAction!) -> Void in
             
             // 入力したテキストをコンソールに表示
             let textField = alert.textFields![0] as UITextField
@@ -726,17 +719,17 @@ class ViewController: UIViewController, UITableViewDelegate  {
             self.table.reloadData()
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default) { (action:UIAlertAction!) -> Void in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action:UIAlertAction!) -> Void in
         }
         
         // UIAlertControllerにtextFieldを追加
-        alert.addTextFieldWithConfigurationHandler { (textField:UITextField!) -> Void in
+        alert.addTextField { (textField:UITextField!) -> Void in
         }
         
         alert.addAction(cancelAction)
         alert.addAction(saveAction)
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     
@@ -746,17 +739,16 @@ class ViewController: UIViewController, UITableViewDelegate  {
 extension ViewController: UITableViewDataSource {
     
     //cellの数を設定
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sArray.count
         //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
     }
     
     
     //ID付きのcellを取得してそれに付属しているlabelとかimageとか
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
         cell.textLabel!.text = sArray[indexPath.row]
         return cell
     }
 }
-

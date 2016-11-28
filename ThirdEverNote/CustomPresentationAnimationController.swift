@@ -58,8 +58,8 @@ class CustomPresentationAnimationController: NSObject, UIViewControllerAnimatedT
         // Animate the presented view to it's final position
         UIView.animate(withDuration: self.duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .allowUserInteraction, animations: {
             presentedControllerView.center.y += containerView.bounds.size.height
-            }, completion: {(completed: Bool) -> Void in
-                transitionContext.completeTransition(completed)
+        }, completion: {(completed: Bool) -> Void in
+            transitionContext.completeTransition(completed)
         })
     }
     
@@ -75,8 +75,8 @@ class CustomPresentationAnimationController: NSObject, UIViewControllerAnimatedT
         // Animate the presented view off the bottom of the view
         UIView.animate(withDuration: self.duration, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .allowUserInteraction, animations: {
             presentedControllerView.center.y += containerView.bounds.size.height
-            }, completion: {(completed: Bool) -> Void in
-                transitionContext.completeTransition(completed)
+        }, completion: {(completed: Bool) -> Void in
+            transitionContext.completeTransition(completed)
         })
     }
 }

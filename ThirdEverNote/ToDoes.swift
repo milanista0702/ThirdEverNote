@@ -13,7 +13,7 @@ import NCMB
 class ToDoes: NCMBObject, NCMBSubclassing{
     var todo: String! {
         get {
-            return objectForKey("todo") as! String
+            return object(forKey: "todo") as! String
         }
         set {
             setObject(newValue, forKey: "todo")
@@ -22,7 +22,7 @@ class ToDoes: NCMBObject, NCMBSubclassing{
     
     var user: NCMBUser {
         get  {
-            return objectForKey("user") as!  NCMBUser
+            return object(forKey: "user") as!  NCMBUser
         }
         set {
             setObject(newValue, forKey: "user")
@@ -31,7 +31,7 @@ class ToDoes: NCMBObject, NCMBSubclassing{
     
     var isPublic: Bool {
         get {
-            return objectForKey("isPublic") as! Bool
+            return object(forKey: "isPublic") as! Bool
         }
         set {
             setObject(newValue, forKey: "isPublic")
@@ -40,7 +40,7 @@ class ToDoes: NCMBObject, NCMBSubclassing{
     
     var date: NSDate {
         get {
-            return objectForKey("date") as! NSDate
+            return object(forKey: "date") as! NSDate
         }
         set {
             setObject(newValue, forKey: "date")
@@ -49,7 +49,7 @@ class ToDoes: NCMBObject, NCMBSubclassing{
     
     var done: Int {
         get {
-            return objectForKey("done") as! Int
+            return object(forKey: "done") as! Int
         }
         set {
             setObject(newValue, forKey: "done")
@@ -63,12 +63,12 @@ class ToDoes: NCMBObject, NCMBSubclassing{
     
     static func create(todo: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Int) -> ToDoes{
         let toDoes = ToDoes(className: "ToDoes")
-        toDoes.todo = todo
-        toDoes.user = user
-        toDoes.isPublic = isPublic
-        toDoes.date = date
-        toDoes.done = done
-        return toDoes
+        toDoes?.todo = todo
+        toDoes?.user = user
+        toDoes?.isPublic = isPublic
+        toDoes?.date = date
+        toDoes?.done = done
+        return toDoes!
     }
     
     static func update(object: ToDoes, todo: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Int) -> ToDoes {
@@ -81,16 +81,16 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         return object
     }
     
-    static func loadall(callback: ( [ToDoes]) -> Void) {
+    static func loadall(callback: @escaping ( [ToDoes]) -> Void) {
         let query = NCMBQuery(className: "ToDoes")
-        query.whereKey("user", equalTo: NCMBUser.currentUser())
-        query.includeKey = "user"
-        query.orderByAscending("date")
-        query.findObjectsInBackgroundWithBlock{ (objects, error) in
+        query?.whereKey("user", equalTo: NCMBUser.current())
+        query?.includeKey = "user"
+        query?.order(byAscending: "date")
+        query?.findObjectsInBackground{ (objects, error) in
             if error != nil {
-                print(error.localizedDescription)
+                print(error?.localizedDescription)
             } else {
-                if objects.count > 0 {
+                if (objects?.count)! > 0 {
                     let obj = objects as! [ToDoes]
                     callback(obj)
                 }
@@ -99,10 +99,10 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         }
     }
     
-    static func saveWithEvent(todo: ToDoes, callBack: () -> Void) {
+    static func saveWithEvent(todo: ToDoes, callBack: @escaping () -> Void) {
         todo.saveEventually { (error) in
             if error != nil {
-                print(error.localizedDescription)
+                print(error?.localizedDescription)
             }else{
                 callBack()
             }

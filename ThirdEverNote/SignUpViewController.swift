@@ -28,10 +28,8 @@ class SignUpViewController: UIViewController {
         confirmpasswordTextField.delegate = self
         
         // 文字が黒丸になるように
-        createpasswordTextField.secureTextEntry = true
-        confirmpasswordTextField.secureTextEntry = true
-        
-        
+        createpasswordTextField.isSecureTextEntry = true
+        confirmpasswordTextField.isSecureTextEntry = true
         
     }
     
@@ -47,7 +45,7 @@ class SignUpViewController: UIViewController {
         guard let confirmpassword = confirmpasswordTextField.text else { return }
         
         if confirmpassword == password {
-            self.signup(username, email: email, password: password)
+            self.signup(username: username, email: email, password: password)
         }else {
             self.presntPassConfirmAlert()
         }
@@ -57,13 +55,13 @@ class SignUpViewController: UIViewController {
     
     func signup ( username: String, email: String, password: String) {
         let user = NCMBUser(className: "user")
-        user.password = password
-        user.mailAddress = email
-        user.userName = username
-        if user.isNew == false {
-            user.signUpInBackgroundWithBlock { (error) in
+        user?.password = password
+        user?.mailAddress = email
+        user?.userName = username
+        if user?.isNew == false {
+            user?.signUpInBackground { (error) in
                 if error != nil {
-                    print(error.localizedDescription)
+                    print(error?.localizedDescription)
                 }else {
                     self.requestAuthentication(email: email)
                 }
@@ -76,21 +74,21 @@ class SignUpViewController: UIViewController {
     }
     
     func presntPassConfirmAlert () {
-        let alert = UIAlertController(title: "password does not agree", message: "lease input password once more", preferredStyle: .Alert)
-        let btn = UIAlertAction(title: "OK", style: .Default) { (action) in
+        let alert = UIAlertController(title: "password does not agree", message: "lease input password once more", preferredStyle: .alert)
+        let btn = UIAlertAction(title: "OK", style: .default) { (action) in
             self.confirmpasswordTextField.text = ""
             self.confirmpasswordTextField.text = ""
         }
         alert.addAction(btn)
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     
     
     func requestAuthentication (email address: String) {
-        NCMBUser.requestAuthenticationMailInBackground(address, block: { (error) in
+        NCMBUser.requestAuthenticationMail(inBackground: address, block: { (error) in
             if error != nil {
-                print(error.localizedDescription)
+                print(error?.localizedDescription)
             }else{
                 self.transition()
             }
@@ -99,47 +97,46 @@ class SignUpViewController: UIViewController {
     
     
     func presentCheckUsernameAlert () {
-        let alert = UIAlertController(title: "username errror", message: "The user name which is posted it is already registered. \n Please post username which is different ", preferredStyle: .Alert)
-        let btn = UIAlertAction(title: "OK", style: .Default, handler: { (action) in
+        let alert = UIAlertController(title: "username errror", message: "The user name which is posted it is already registered. \n Please post username which is different ", preferredStyle: .alert)
+        let btn = UIAlertAction(title: "OK", style: .default, handler: { (action) in
             self.usernameTextField.text = ""
         })
         alert.addAction(btn)
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     //segueの指定
     func transition() {
-        self.performSegueWithIdentifier("toLoginView", sender: nil)
+        self.performSegue(withIdentifier: "toLoginView", sender: nil)
     }
     
     func toView ()  {
-        self.performSegueWithIdentifier("toView", sender: nil)
+        self.performSegue(withIdentifier: "toView", sender: nil)
     }
     
     func alert() {
-        let alert: UIAlertController = UIAlertController(title: "pasword does not agree", message:"", preferredStyle:  UIAlertControllerStyle.Alert)
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: {(action: UIAlertAction!) -> Void in
+        let alert: UIAlertController = UIAlertController(title: "pasword does not agree", message:"", preferredStyle:  UIAlertControllerStyle.alert)
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: {(action: UIAlertAction!) -> Void in
             print ("OK")
         })
         
         alert.addAction(defaultAction)
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     @IBAction func login () {
         self.transition()
     }
     
-    
-     /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
+

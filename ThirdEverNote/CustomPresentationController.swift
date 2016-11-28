@@ -35,7 +35,7 @@ class CustomPresentationController: UIPresentationController {
         if let transitionCoordinator = self.presentingViewController.transitionCoordinator {
             transitionCoordinator.animateAlongsideTransition(alongsideTransition: {(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
                 self.dimmingView.alpha = 1.0
-                }, completion:nil)
+            }, completion:nil)
         }
     }
     
@@ -51,7 +51,7 @@ class CustomPresentationController: UIPresentationController {
         if let transitionCoordinator = self.presentingViewController.transitionCoordinator {
             transitionCoordinator.animate(alongsideTransition: {(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
                 self.dimmingView.alpha  = 0.0
-                }, completion:nil)
+            }, completion:nil)
         }
     }
     
@@ -81,7 +81,7 @@ class CustomPresentationController: UIPresentationController {
     // ---- UIContentContainer protocol methods
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator transitionCoordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: transitionCoordinator)
+        super.viewWillTransition(to: size, with: transitionCoordinator)
         
         guard
             let containerView = containerView
@@ -91,6 +91,6 @@ class CustomPresentationController: UIPresentationController {
         
         transitionCoordinator.animate(alongsideTransition: {(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
             self.dimmingView.frame = containerView.bounds
-            }, completion:nil)
+        }, completion:nil)
     }
 }
