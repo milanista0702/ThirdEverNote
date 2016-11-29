@@ -285,12 +285,9 @@ class ViewController: UIViewController, UITableViewDelegate  {
             let calendarBaseLabel: UILabel = UILabel()
             
             //X座標の値をCGFloat型へ変換して設定
-            calendarBaseLabel.frame = CGRectMake(
-                CGFloat(calendarLabelIntervalX + calendarLabelX * (i % calendarLabelCount)),
-                CGFloat(calendarLabelY),
-                CGFloat(calendarLabelWidth),
-                CGFloat(calendarLabelHeight)
-            )
+            
+            calendarBaseLabel.frame = CGRect(x: CGFloat(calendarLabelIntervalX + calendarLabelX * (i % calendarLabelCount)), y: CGFloat(calendarLabelY), width: CGFloat(calendarLabelWidth), height: CGFloat(calendarLabelHeight))
+            
             
             //日曜日の場合は赤色を指定
             if(i == 0){
@@ -343,12 +340,9 @@ class ViewController: UIViewController, UITableViewDelegate  {
             
             //ボタンをつくる
             let button: UIButton = UIButton()
-            button.frame = CGRectMake(
-                CGFloat(positionX),
-                CGFloat(positionY),
-                CGFloat(buttonSizeX!),
-                CGFloat(buttonSizeY!)
-            );
+            button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(positionY), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
+            
+            button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(buttonSizeX!), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
             
             //ボタンの初期設定をする
             if(i < dayOfWeek - 1){
@@ -393,7 +387,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
             button.layer.cornerRadius = CGFloat(buttonRadius)
             
             //配置したボタンに押した際のアクションを設定する
-            button.addTarget(self, action: #selector(self.buttonTapped(_:)), for: .TouchUpInside)
+            button.addTarget(self, action: #selector(self.buttonTapped(button:)), for: .touchUpInside)
             
             //ボタンを配置する
             self.view.addSubview(button)
@@ -655,8 +649,8 @@ class ViewController: UIViewController, UITableViewDelegate  {
         sArray.remove(at: indexPath.row)
         
         // それからテーブルの更新
-        table.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)],
-                                     withRowAnimation: UITableViewRowAnimation.Fade)
+        table.deleteRows(at: [NSIndexPath(row: indexPath.row, section: 0) as IndexPath],
+                         with: UITableViewRowAnimation.fade)
     }
     
     

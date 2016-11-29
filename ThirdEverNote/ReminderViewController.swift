@@ -45,7 +45,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // Do any additional setup after loading the view.
         
-        let swipeRightGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(ReminderViewController.handleSwipeRight(_:)))
+        let swipeRightGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeRight(gesture:)))
         swipeRightGesture.numberOfTouchesRequired = 1
         swipeRightGesture.direction = UISwipeGestureRecognizerDirection.right
         self.view.isUserInteractionEnabled = true
@@ -60,7 +60,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         
         
         //addボタン
-        addBtn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(ReminderViewController.onClick(_:)))
+        addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.onClick(sender:)))
         
         self.navigationItem.rightBarButtonItem = addBtn
         
@@ -159,8 +159,8 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         remindArray.remove(at: indexPath.row)
         
         // それからテーブルの更新
-        table.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexPath.row, inSection: 0)],
-                                     withRowAnimation: UITableViewRowAnimation.Fade)
+        table.deleteRows(at: [NSIndexPath(row: indexPath.row, section: 0) as IndexPath],
+                         with: UITableViewRowAnimation.fade)
     }
     
     

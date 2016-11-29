@@ -33,7 +33,7 @@ class CustomPresentationController: UIPresentationController {
         
         // Fade in the dimming view alongside the transition
         if let transitionCoordinator = self.presentingViewController.transitionCoordinator {
-            transitionCoordinator.animateAlongsideTransition(alongsideTransition: {(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+            transitionCoordinator.animate(alongsideTransition: {(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
                 self.dimmingView.alpha = 1.0
             }, completion:nil)
         }
@@ -62,7 +62,7 @@ class CustomPresentationController: UIPresentationController {
         }
     }
     
-    override func frameOfPresentedViewInContainerView() -> CGRect {
+    override var frameOfPresentedViewInContainerView : CGRect {
         
         guard
             let containerView = containerView
@@ -80,17 +80,17 @@ class CustomPresentationController: UIPresentationController {
     
     // ---- UIContentContainer protocol methods
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator transitionCoordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: transitionCoordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
         guard
             let containerView = containerView
             else {
                 return
         }
-        
-        transitionCoordinator.animate(alongsideTransition: {(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
+        coordinator.animate(alongsideTransition: {(context: UIViewControllerTransitionCoordinatorContext!) -> Void in
             self.dimmingView.frame = containerView.bounds
         }, completion:nil)
     }
+    
 }

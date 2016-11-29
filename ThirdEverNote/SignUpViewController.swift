@@ -24,11 +24,13 @@ class SignUpViewController: UIViewController {
         
         usernameTextField.delegate = self
         emailTextField.delegate = self
-        createpasswordTextField.delegate = self
-        confirmpasswordTextField.delegate = self
+     //   createpasswordTextField.delegate = self
+     //   confirmpasswordTextField.delegate = self
         
         // 文字が黒丸になるように
+        let createpasswordTextField = UITextField()
         createpasswordTextField.isSecureTextEntry = true
+        let confirmpasswordTextField = UITextField()
         confirmpasswordTextField.isSecureTextEntry = true
         
     }
