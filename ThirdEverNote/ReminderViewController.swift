@@ -31,7 +31,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         table.register(UINib(nibName: "TodoTableCell", bundle: nil), forCellReuseIdentifier: "TodoTableCell")
         
         
-        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: "rowButtonAction:")
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: Selector("rowButtonAction:"))
         longPressRecognizer.allowableMovement = 15
         longPressRecognizer.minimumPressDuration = 0.6
         self.table.addGestureRecognizer(longPressRecognizer)
@@ -131,10 +131,10 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)  {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
         NSLog("%@が選択された", remindArray[indexPath.row])
         
-        if let cell: TodoTableCell = table.cellForRow(at: indexPath as IndexPath) as! TodoTableCell {
+        if let cell: TodoTableCell = table.cellForRow(at: indexPath as IndexPath) as? TodoTableCell {
             if cell.arrowImageView.image == UIImage(named: "check.png") {
                 cell.arrowImageView.image = UIImage(named: "矢印.png")
             } else {
@@ -145,7 +145,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     //削除可能なcellのindexpath取得(今は全て)
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
         return true
     }
     

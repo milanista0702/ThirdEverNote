@@ -342,8 +342,8 @@ class ViewController: UIViewController, UITableViewDelegate  {
             let button: UIButton = UIButton()
             button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(positionY), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
             
-            button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(buttonSizeX!), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
-            
+//            button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(buttonSizeX!), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
+//            
             //ボタンの初期設定をする
             if(i < dayOfWeek - 1){
                 
