@@ -12,14 +12,7 @@ import NCMB
 //CALayerクラスのインポート
 import QuartzCore
 
-class ViewController: UIViewController, UITableViewDelegate  {
-    
-    //下半分のtableview
-    @IBOutlet var table: UITableView!
-    @IBOutlet var calendarBar: UILabel!
-    @IBOutlet var toolbar: UIToolbar!
-    
-    //var SArray = [ToDoes]()
+class ViewController: UIViewController  {
     
     //倉庫から取り出す
     let saveData: UserDefaults = UserDefaults.standard
@@ -342,8 +335,8 @@ class ViewController: UIViewController, UITableViewDelegate  {
             let button: UIButton = UIButton()
             button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(positionY), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
             
-//            button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(buttonSizeX!), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
-//            
+            //            button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(buttonSizeX!), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
+            //
             //ボタンの初期設定をする
             if(i < dayOfWeek - 1){
                 
@@ -399,7 +392,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
     
     //タイトル表記を設定する関数
     func setupCalendarTitleLabel() {
-        self.navigationItem.title = "\(year)年\(month)月"
+        self.navigationItem.title = "\(year!)年\(month!)月"
     }
     
     
@@ -533,8 +526,11 @@ class ViewController: UIViewController, UITableViewDelegate  {
         
         let string: String = "\(year)/\(month)/\(day) 0:00:00"
         
-        let formatter = DateFormatter()
+        var formatter = DateFormatter()
+        let jaLocale = Locale(identifier: "ja_JP")
+        formatter.locale = jaLocale
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        
         
         print(formatter.date(from: string))
         return formatter.date(from: string)! as NSDate
@@ -562,7 +558,7 @@ class ViewController: UIViewController, UITableViewDelegate  {
         self.find()
         
         //コンソール表示
-        print("\(year)年\(month)月\(button.tag)日が選択されました！")
+        print("\(year!)年\(month!)月\(button.tag)日が選択されました！")
     }
     
     func find () {
@@ -633,9 +629,40 @@ class ViewController: UIViewController, UITableViewDelegate  {
         self.prevCalendarSettings()
     }
     
+}
+
+// MARK: 画面の下側
+
+extension ViewController {
+    
+    @IBOutlet var table: UITableView!
+    @IBOutlet var calendarBar: UILabel!
+    @IBOutlet var toolbar: UIToolbar!
+    
+    let saveData: UserDefaults = UserDefaults.standard
+
+}
+
+
+extension ViewController: UITableViewDataSource {
+    
+    //cellの数を設定
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sArray.count
+        //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
+    }
     
     
+    //ID付きのcellを取得してそれに付属しているlabelとかimageとか
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
+        cell.textLabel!.text = sArray[indexPath.row]
+        return cell
+    }
     
+}
+
+extension ViewController: UITableViewDelegate {
     //削除可能なcellのindexpath取得(今は全て)
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
         return true
@@ -724,25 +751,5 @@ class ViewController: UIViewController, UITableViewDelegate  {
         alert.addAction(saveAction)
         
         present(alert, animated: true, completion: nil)
-    }
-    
-    
-}
-
-
-extension ViewController: UITableViewDataSource {
-    
-    //cellの数を設定
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sArray.count
-        //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
-    }
-    
-    
-    //ID付きのcellを取得してそれに付属しているlabelとかimageとか
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
-        cell.textLabel!.text = sArray[indexPath.row]
-        return cell
     }
 }
