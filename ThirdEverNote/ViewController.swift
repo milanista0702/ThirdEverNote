@@ -14,7 +14,15 @@ import QuartzCore
 
 class ViewController: UIViewController  {
     
-    //倉庫から取り出す
+    @IBOutlet var table: UITableView!
+    @IBOutlet var calendarBar: UILabel!
+    @IBOutlet var toolbar: UIToolbar!
+    
+    
+    var scheduleArray = [Schedule]()
+    let refreshControl = UIRefreshControl()
+    
+    //倉庫にアクセス
     let saveData: UserDefaults = UserDefaults.standard
     
     
@@ -75,7 +83,7 @@ class ViewController: UIViewController  {
         
         toolbar.setItems([editButtonItem, fixedSpacer, addBtn], animated: false)
         
-        
+        table.register(UINib(nibName: "TodoTableCell", bundle: nil), forCellReuseIdentifier: "TodoTableCell")
         
         
         self.table.delegate = self
@@ -220,8 +228,6 @@ class ViewController: UIViewController  {
         
         // Do any additional setup after loading the view.
         
-        sArray = []
-        
         let swipeLeftGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Left))
         swipeLeftGesture.numberOfTouchesRequired = 1
         swipeLeftGesture.direction = UISwipeGestureRecognizerDirection.left
@@ -257,14 +263,6 @@ class ViewController: UIViewController  {
             self.performSegue(withIdentifier: "toSignupView", sender: nil)
         }
     }
-    
-    
-    //editが押された時の処理
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        table.isEditing = editing
-    }
-    
     
     
     //曜日ラベルの動的配置関数
@@ -575,6 +573,7 @@ class ViewController: UIViewController  {
                 print(objects)
             }
         }
+        
     }
     
     
@@ -629,22 +628,20 @@ class ViewController: UIViewController  {
         self.prevCalendarSettings()
     }
     
+    
 }
+
 
 // MARK: 画面の下側
 
-extension ViewController {
-    
-    @IBOutlet var table: UITableView!
-    @IBOutlet var calendarBar: UILabel!
-    @IBOutlet var toolbar: UIToolbar!
-    
-    let saveData: UserDefaults = UserDefaults.standard
-
-}
-
-
 extension ViewController: UITableViewDataSource {
+    
+    //editが押された時の処理
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        table.isEditing = editing
+    }
+    
     
     //cellの数を設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -655,14 +652,32 @@ extension ViewController: UITableViewDataSource {
     
     //ID付きのcellを取得してそれに付属しているlabelとかimageとか
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath as IndexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTablecell", for: indexPath as IndexPath)
         cell.textLabel!.text = sArray[indexPath.row]
         return cell
+    }
+    
+    
+    func loadData() {
+        Schedule.loadall(callback: {objects in
+            self.scheduleArray.removeAll()
+            
+            for object in objects {
+                self.scheduleArray.append(object)
+            }
+            self.table.reloadData()
+        })
+    }
+    
+    func refresh() {
+        loadData()
+        refreshControl.endRefreshing()
     }
     
 }
 
 extension ViewController: UITableViewDelegate {
+    
     //削除可能なcellのindexpath取得(今は全て)
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
         return true
