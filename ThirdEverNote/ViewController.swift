@@ -225,9 +225,7 @@ class ViewController: UIViewController  {
         
         //UITableViewが持っているDelegatmesodの処理の委託先をViewController.swiftにする
         table.delegate = self
-        
-        // Do any additional setup after loading the view.
-        
+
         let swipeLeftGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Left))
         swipeLeftGesture.numberOfTouchesRequired = 1
         swipeLeftGesture.direction = UISwipeGestureRecognizerDirection.left

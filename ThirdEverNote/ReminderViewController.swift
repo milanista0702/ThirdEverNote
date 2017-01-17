@@ -42,9 +42,6 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         
         //UITableViewが持っているDelegatmesodの処理の委託先をViewController.swiftにする
         table.delegate = self
-        
-        // Do any additional setup after loading the view.
-        
         let swipeRightGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.handleSwipeRight(gesture:)))
         swipeRightGesture.numberOfTouchesRequired = 1
         swipeRightGesture.direction = UISwipeGestureRecognizerDirection.right
@@ -93,7 +90,6 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     
