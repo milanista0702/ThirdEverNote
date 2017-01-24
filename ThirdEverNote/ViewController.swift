@@ -67,7 +67,7 @@ class ViewController: UIViewController  {
     
     var addBtn: UIBarButtonItem!
     
-    var sArray = [String]()
+    var sArray = [ToDoes]()
     
     let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
     
@@ -225,7 +225,7 @@ class ViewController: UIViewController  {
         
         //UITableViewが持っているDelegatmesodの処理の委託先をViewController.swiftにする
         table.delegate = self
-
+        
         let swipeLeftGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Left))
         swipeLeftGesture.numberOfTouchesRequired = 1
         swipeLeftGesture.direction = UISwipeGestureRecognizerDirection.left
@@ -401,7 +401,6 @@ class ViewController: UIViewController  {
          * yyyy年mm月1日のデータを作成する。
          * 後述の関数 setupPrevCalendarData, setupNextCalendarData も同様です。
          *************/
-        // let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let currentComps: NSDateComponents = NSDateComponents()
         
         currentComps.year  = year
@@ -549,9 +548,9 @@ class ViewController: UIViewController  {
     func buttonTapped(button: UIButton){
         
         day = button.tag
-        
-        
         self.find()
+        
+        
         
         //コンソール表示
         print("\(year!)年\(month!)月\(button.tag)日が選択されました！")
@@ -569,13 +568,11 @@ class ViewController: UIViewController  {
                 print("nil")
             } else {
                 print(objects)
+                self.sArray = objects as! [ToDoes]
+                self.table.reloadData()
             }
         }
-        
     }
-    
-    
-    
     
     
     //前月を表示するメソッド
@@ -650,8 +647,8 @@ extension ViewController: UITableViewDataSource {
     
     //ID付きのcellを取得してそれに付属しているlabelとかimageとか
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTablecell", for: indexPath as IndexPath)
-        cell.textLabel!.text = sArray[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableCell", for: indexPath as IndexPath) as! TodoTableCell
+        cell.todolabel.text = sArray[indexPath.row].todo
         return cell
     }
     
@@ -748,8 +745,7 @@ extension ViewController: UITableViewDelegate {
             
             // 入力したテキストをコンソールに表示
             let textField = alert.textFields![0] as UITextField
-            //            self.label.text = textField.text
-            self.sArray.append(textField.text!)
+            //self.sArray.append(textField.text!)
             self.table.reloadData()
         }
         
