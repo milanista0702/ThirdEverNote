@@ -22,64 +22,31 @@ class ViewController: UIViewController  {
     var scheduleArray = [Schedule]()
     let refreshControl = UIRefreshControl()
     
-    //倉庫にアクセス
-    let saveData: UserDefaults = UserDefaults.standard
-    
-    
-    //メンバ変数の設定（配列格納用）
-    var count: Int!
-    var mArray: NSMutableArray!
+    var buttons: [UIButton] = []
     
     //メンバ変数の設定（カレンダー用）
-    var now: NSDate!
+    var now: Date!
     var year: Int!
     var month: Int!
     var day: Int!
-    var hour: Int!
-    var minute: Int!
-    var second: Int!
     var maxDay: Int!
-    var dayOfWeek: Int!
-    
-    //メンバ変数の設定（カレンダー関数から取得したものを渡す）
-    var comps: NSDateComponents!
-    
-    //メンバ変数の設定（カレンダーの背景色）
-    var calendarBackGroundColor: UIColor!
+    var weekday: Int!
     
     
-    //カレンダーの位置決め用メンバ変数
-    var calendarLabelIntervalX: Int!
-    var calendarLabelX: Int!
-    var calendarLabelY: Int!
-    var calendarLabelWidth: Int!
-    var calendarLabelHeight: Int!
-    var calendarLableFontSize: Int!
-    
+    var labelLayout: CalendarLabelLayout!
     var buttonRadius: Float!
+    var calendarLayout: CalendarLayout!
     
-    var calendarIntervalX: Int!
-    var calendarX: Int!
-    var calendarIntervalY: Int!
-    var calendarY: Int!
-    var calendarSize: Int!
-    var calendarFontSize: Int!
+    var todoes = [ToDoes]()
     
-    var addBtn: UIBarButtonItem!
-    
-    var sArray = [ToDoes]()
-    
-    let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-    
-    
-    
+    let currentCalendar: Calendar = Calendar(identifier: .gregorian)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //addボタン
         let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tap))
+        let addBtn: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tap))
         
         toolbar.setItems([editButtonItem, fixedSpacer, addBtn], animated: false)
         
@@ -89,142 +56,73 @@ class ViewController: UIViewController  {
         self.table.delegate = self
         self.table.dataSource = self
         
-        let longPressRecognizer = UILongPressGestureRecognizer(target: nil, action: "rowButtonAction:")
+        let longPressRecognizer = UILongPressGestureRecognizer(target: nil, action: #selector(rowButtonAction(sender:)))
         longPressRecognizer.allowableMovement = 15
         longPressRecognizer.minimumPressDuration = 0.6
         self.table.addGestureRecognizer(longPressRecognizer)
         
         
         //現在起動中のデバイスを取得（スクリーンの幅・高さ）
-        //        let screenWidth  = DeviseSize.screenWidth()
-        //        let screenHeight = DeviseSize.screenHeight()
         let screenSize: CGRect = UIScreen.main.bounds
         
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         
         //iPhone4s
-        if(screenWidth == 320 && screenHeight == 480){
+        if screenWidth == 320 && screenHeight == 480 {
             
-            calendarLabelIntervalX = 5;
-            calendarLabelX         = 45;
-            calendarLabelY         = 93;
-            calendarLabelWidth     = 40;
-            calendarLabelHeight    = 25;
-            calendarLableFontSize  = 14;
+            self.labelLayout = CalendarLabelLayout(intervalX: 5, x: 45, y: 93, width: 40, height: 25, fontSize: 14)
+            self.calendarLayout = CalendarLayout(intervalX: 5, intervalY: 120, x: 45, y: 45, size: 40, fontSize: 17)
             
             buttonRadius           = 20.0;
-            
-            calendarIntervalX      = 5;
-            calendarX              = 45;
-            calendarIntervalY      = 120;
-            calendarY              = 45;
-            calendarSize           = 40;
-            calendarFontSize       = 17;
-            
             //iPhone5またはiPhone5s
-        }else if (screenWidth == 320 && screenHeight == 568){
-            
-            calendarLabelIntervalX = 5;
-            calendarLabelX         = 45;
-            calendarLabelY         = 93;
-            calendarLabelWidth     = 40;
-            calendarLabelHeight    = 25;
-            calendarLableFontSize  = 14;
-            
+        }else if screenWidth == 320 && screenHeight == 568 {
+           
+            self.labelLayout = CalendarLabelLayout(intervalX: 5, x: 45, y: 93, width: 40, height: 25, fontSize: 14)
+            self.calendarLayout = CalendarLayout(intervalX: 15, intervalY: 120, x: 45, y: 45, size: 40, fontSize: 17)
             buttonRadius           = 20.0;
-            
-            calendarIntervalX      = 5;
-            calendarX              = 45;
-            calendarIntervalY      = 120;
-            calendarY              = 45;
-            calendarSize           = 40;
-            calendarFontSize       = 17;
-            
             //iPhone6
         }else if (screenWidth == 375 && screenHeight == 667){
             
             let remake = -35
-            
-            calendarLabelIntervalX = 15;
-            calendarLabelX         = 50;
-            calendarLabelY         = 95 + remake;
-            calendarLabelWidth     = 45;
-            calendarLabelHeight    = 25;
-            calendarLableFontSize  = 16;
-            
+            self.labelLayout = CalendarLabelLayout(intervalX: 15, x: 50, y: 95 + remake, width: 45, height: 25, fontSize: 16)
+            self.calendarLayout = CalendarLayout(intervalX: 15, intervalY: 125 + remake, x: 50, y: 50, size: 45, fontSize: 19)
             buttonRadius           = 22.5;
-            
-            calendarIntervalX      = 15;
-            calendarX              = 50;
-            calendarIntervalY      = 125 + remake ;
-            calendarY              = 50;
-            calendarSize           = 45;
-            calendarFontSize       = 19;
-            
             //iPhone6 plus
-        }else if (screenWidth == 414 && screenHeight == 736){
+        }else if screenWidth == 414 && screenHeight == 736 {
             
-            calendarLabelIntervalX = 15;
-            calendarLabelX         = 55;
-            calendarLabelY         = 95;
-            calendarLabelWidth     = 55;
-            calendarLabelHeight    = 25;
-            calendarLableFontSize  = 18;
-            
+            self.labelLayout = CalendarLabelLayout(intervalX: 15, x: 55, y: 95, width: 55, height: 25, fontSize: 18)
+            self.calendarLayout = CalendarLayout(intervalX: 18, intervalY: 125, x: 55, y: 55, size: 50, fontSize: 21)
             buttonRadius           = 25;
-            
-            calendarIntervalX      = 18;
-            calendarX              = 55;
-            calendarIntervalY      = 125;
-            calendarY              = 55;
-            calendarSize           = 50;
-            calendarFontSize       = 21;
         }
         
         //現在の日付を取得する
-        now = NSDate()
+        now = Date()
         
         //inUnit:で指定した単位（月）の中で、rangeOfUnit:で指定した単位（日）が取り得る範囲
-        let calendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-        let range: NSRange = calendar.range(of: NSCalendar.Unit.day, in:NSCalendar.Unit.month, for:now as Date)
+        let calendar: Calendar = Calendar(identifier: .gregorian)
+        let range = calendar.range(of: .day, in: .month, for: now)!
         
         //最初にメンバ変数に格納するための現在日付の情報を取得する
-        comps = calendar.components([NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day, NSCalendar.Unit.hour, NSCalendar.Unit.minute, NSCalendar.Unit.second, NSCalendar.Unit.weekday],from:now as Date) as NSDateComponents!
+        let comps = calendar.dateComponents([.year, .month, .day, .weekday],from: now)
         
         //年月日と最後の日付と曜日を取得(NSIntegerをintへのキャスト不要)
-        let orgYear: NSInteger      = comps.year
-        let orgMonth: NSInteger     = comps.month
-        let orgDay: NSInteger       = comps.day
-        let orgHour: NSInteger      = comps.hour
-        let orgMinute: NSInteger    = comps.minute
-        let orgSecond: NSInteger   = comps.second
-        let orgDayOfWeek: NSInteger = comps.weekday
-        let max: NSInteger          = range.length
+        let max: Int = range.count
         
-        year      = orgYear
-        month     = orgMonth
-        day       = orgDay
-        dayOfWeek = orgDayOfWeek
+        year      = comps.year
+        month     = comps.month
+        day       = comps.day
+        weekday = comps.weekday
         maxDay    = max
         
-        //空の配列を作成する（カレンダーデータの格納用）
-        mArray = NSMutableArray()
-        
-        //曜日ラベル初期定義
-        let monthName:[String] = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-        
         //曜日ラベルを動的に配置
-        setupCalendarLabel(array: monthName as NSArray)
+        setupCalendarLabel()
         
         //初期表示時のカレンダーをセットアップする
         setupCurrentCalendar()
         
-        //tableviewのdatasourcemesodはviewcontrollerクラスに書く設定
-        table.dataSource = self
-        
-        //UITableViewが持っているDelegatmesodの処理の委託先をViewController.swiftにする
-        table.delegate = self
+        table.dataSource = self //tableviewのdatasourcemesodはviewcontrollerクラスに書く設定
+        table.delegate = self //UITableViewが持っているDelegatmesodの処理の委託先をViewController.swiftにする
         
         let swipeLeftGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(Left))
         swipeLeftGesture.numberOfTouchesRequired = 1
@@ -264,48 +162,37 @@ class ViewController: UIViewController  {
     
     
     //曜日ラベルの動的配置関数
-    func setupCalendarLabel(array: NSArray) {
+    func setupCalendarLabel() {
         
         let calendarLabelCount = 7
         
-        for i in 0...6{
+        for i in 0...6 {
             
             //ラベルを作成
             let calendarBaseLabel: UILabel = UILabel()
             
             //X座標の値をCGFloat型へ変換して設定
+            calendarBaseLabel.frame = CGRect(x: CGFloat(labelLayout.intervalX + labelLayout.x * (i % calendarLabelCount)), y: CGFloat(labelLayout.y), width: CGFloat(labelLayout.width), height: CGFloat(labelLayout.height))
+
             
-            calendarBaseLabel.frame = CGRect(x: CGFloat(calendarLabelIntervalX + calendarLabelX * (i % calendarLabelCount)), y: CGFloat(calendarLabelY), width: CGFloat(calendarLabelWidth), height: CGFloat(calendarLabelHeight))
-            
-            
-            //日曜日の場合は赤色を指定
-            if(i == 0){
+            if i == 0 { //日曜日の場合は赤色を指定
                 
-                //RGBカラーの設定は小数値をCGFloat型にしてあげる
-                calendarBaseLabel.textColor = UIColor(
-                    red: CGFloat(0.831), green: CGFloat(0.349), blue: CGFloat(0.224), alpha: CGFloat(1.0)
-                )
+                calendarBaseLabel.textColor = UIColor(red: 0.831, green: 0.349, blue: 0.224, alpha: 1.0)
                 
-                //土曜日の場合は青色を指定
-            }else if(i == 6){
+            }else if i == 6 { //土曜日の場合は青色を指定
                 
-                //RGBカラーの設定は小数値をCGFloat型にしてあげる
-                calendarBaseLabel.textColor = UIColor(
-                    red: CGFloat(0.400), green: CGFloat(0.471), blue: CGFloat(0.980), alpha: CGFloat(1.0)
-                )
+                calendarBaseLabel.textColor = UIColor(red: 0.400, green: 0.471, blue: 0.980, alpha: 1.0)
                 
-                //平日の場合は灰色を指定
-            }else{
+            }else { //平日の場合は灰色を指定
                 
-                //既に用意されている配色パターンの場合
                 calendarBaseLabel.textColor = UIColor.lightGray
-                
             }
             
             //曜日ラベルの配置
-            calendarBaseLabel.text = String(array[i] as! NSString)
+            let weekNames: [String] = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+            calendarBaseLabel.text = weekNames[i]
             calendarBaseLabel.textAlignment = NSTextAlignment.center
-            calendarBaseLabel.font = UIFont(name: "System", size: CGFloat(calendarLableFontSize))
+            calendarBaseLabel.font = UIFont(name: "System", size: CGFloat(labelLayout.fontSize))
             self.view.addSubview(calendarBaseLabel)
         }
     }
@@ -319,60 +206,51 @@ class ViewController: UIViewController  {
         let total     = 42
         
         //7×6=42個のボタン要素を作る
-        for i in 0...41{
+        for i in 0...41 {
             
             //配置場所の定義
-            let positionX   = calendarIntervalX + calendarX * (i % 7)
-            let positionY   = calendarIntervalY + calendarY * (i / 7)
-            let buttonSizeX = calendarSize;
-            let buttonSizeY = calendarSize;
+            let positionX   = calendarLayout.intervalX + calendarLayout.x * (i % 7)
+            let positionY   = calendarLayout.intervalY + calendarLayout.y * (i / 7)
+            let buttonSizeX = calendarLayout.size
+            let buttonSizeY = calendarLayout.size
             
             //ボタンをつくる
             let button: UIButton = UIButton()
             button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(positionY), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
-            
-            //            button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(buttonSizeX!), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
-            //
             //ボタンの初期設定をする
-            if(i < dayOfWeek - 1){
+            if i < weekday - 1 {
                 
                 //日付の入らない部分はボタンを押せなくする
                 button.setTitle("", for: .normal)
                 button.isEnabled = false
                 
-            }else if(i == dayOfWeek - 1 || i < dayOfWeek + maxDay - 1){
+            }else if i == weekday - 1 || i < weekday + maxDay - 1 {
                 
                 //日付の入る部分はボタンのタグを設定する（日にち）
                 button.setTitle(String(tagNumber), for: .normal)
                 button.tag = tagNumber
                 tagNumber += 1
                 
-            }else if(i == dayOfWeek + maxDay - 1 || i < total){
+            }else if i == weekday + maxDay - 1 || i < total {
                 
                 //日付の入らない部分はボタンを押せなくする
                 button.setTitle("", for: .normal)
                 button.isEnabled = false
-                
             }
             
-            //ボタンの配色の設定
-            //@remark:このサンプルでは正円のボタンを作っていますが、背景画像の設定等も可能です。
-            if(i % 7 == 0){
-                calendarBackGroundColor = UIColor(
-                    red: CGFloat(0.831), green: CGFloat(0.349), blue: CGFloat(0.224), alpha: CGFloat(1.0)
-                )
-            }else if(i % 7 == 6){
-                calendarBackGroundColor = UIColor(
-                    red: CGFloat(0.400), green: CGFloat(0.471), blue: CGFloat(0.980), alpha: CGFloat(1.0)
-                )
-            }else{
-                calendarBackGroundColor = UIColor.lightGray
-            }
+            let calendarBackGroundColor: UIColor = {
+                if i % 7 == 0{
+                    return UIColor(red: 0.831, green: 0.349, blue: 0.224, alpha: 1.0)
+                }else if i % 7 == 6{
+                    return UIColor(red: 0.400, green: 0.471, blue: 0.980, alpha: 1.0)
+                }else{
+                    return UIColor.lightGray
+                }
+            }()
             
-            //ボタンのデザインを決定する
             button.backgroundColor = calendarBackGroundColor
             button.setTitleColor(UIColor.white, for: .normal)
-            button.titleLabel!.font = UIFont(name: "System", size: CGFloat(calendarFontSize))
+            button.titleLabel!.font = UIFont(name: "System", size: CGFloat(calendarLayout.fontSize))
             button.layer.cornerRadius = CGFloat(buttonRadius)
             
             //配置したボタンに押した際のアクションを設定する
@@ -380,7 +258,7 @@ class ViewController: UIViewController  {
             
             //ボタンを配置する
             self.view.addSubview(button)
-            mArray.add(button)
+            buttons.append(button)
         }
         
     }
@@ -395,19 +273,12 @@ class ViewController: UIViewController  {
     //現在（初期表示時）の年月に該当するデータを取得する関数
     func setupCurrentCalendarData() {
         
-        /*************
-         * (重要ポイント)
-         * 現在月の1日のdayOfWeek(曜日の値)を使ってカレンダーの始まる位置を決めるので、
-         * yyyy年mm月1日のデータを作成する。
-         * 後述の関数 setupPrevCalendarData, setupNextCalendarData も同様です。
-         *************/
-        let currentComps: NSDateComponents = NSDateComponents()
-        
+        var currentComps: DateComponents = DateComponents()
         currentComps.year  = year
         currentComps.month = month
         currentComps.day   = 1
         
-        let currentDate: NSDate = currentCalendar.date(from: currentComps as DateComponents)! as NSDate
+        let currentDate = currentCalendar.date(from: currentComps)!
         recreateCalendarParameter(currentCalendar: currentCalendar, currentDate: currentDate)
     }
     
@@ -416,22 +287,24 @@ class ViewController: UIViewController  {
     func setupPrevCalendarData() {
         
         //現在の月に対して-1をする
-        if(month == 0){
-            year = year - 1;
-            month = 12;
-        }else{
-            month = month - 1;
+        if month == 0 {
+            year = year - 1
+            month = 12
+            
+        }else {
+            
+            month = month - 1
         }
         
         //setupCurrentCalendarData()と同様の処理を行う
-        let prevCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-        let prevComps: NSDateComponents = NSDateComponents()
+        let prevCalendar: Calendar = Calendar(identifier: .gregorian)
+        var prevComps: DateComponents = DateComponents()
         
         prevComps.year  = year
         prevComps.month = month
         prevComps.day   = 1
         
-        let prevDate: NSDate = prevCalendar.date(from: prevComps as DateComponents)! as NSDate
+        let prevDate: Date = prevCalendar.date(from: prevComps)!
         recreateCalendarParameter(currentCalendar: prevCalendar, currentDate: prevDate)
     }
     
@@ -440,47 +313,38 @@ class ViewController: UIViewController  {
     func setupNextCalendarData() {
         
         //現在の月に対して+1をする
-        if(month == 12){
-            year = year + 1;
-            month = 1;
-        }else{
-            month = month + 1;
+        if month == 12 {
+            year = year + 1
+            month = 1
+        }else {
+            month = month + 1
         }
         
         //setupCurrentCalendarData()と同様の処理を行う
-        let nextCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
-        let nextComps: NSDateComponents = NSDateComponents()
+        let nextCalendar: Calendar = Calendar(identifier: .gregorian)
+        var nextComps: DateComponents = DateComponents()
         
         nextComps.year  = year
         nextComps.month = month
         nextComps.day   = 1
         
-        let nextDate : NSDate = nextCalendar.date(from: nextComps as DateComponents)! as NSDate
+        let nextDate : Date = nextCalendar.date(from: nextComps)!
         recreateCalendarParameter(currentCalendar: nextCalendar, currentDate: nextDate)
     }
     
     
     //カレンダーのパラメータを再作成する関数
-    func recreateCalendarParameter(currentCalendar: NSCalendar, currentDate: NSDate) {
+    func recreateCalendarParameter(currentCalendar: Calendar, currentDate: Date) {
         
         //引数で渡されたものをもとに日付の情報を取得する
-        let currentRange: NSRange = currentCalendar.range(of: NSCalendar.Unit.day, in:NSCalendar.Unit.month, for:currentDate as Date)
+        let currentRange = currentCalendar.range(of: .day, in: .month, for: currentDate)!
+        let comps = currentCalendar.dateComponents([.year, .month, .day, .weekday], from: currentDate)
+        let currentMax: Int = currentRange.count
         
-        
-        comps = currentCalendar.components([NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day,
-                                            NSCalendar.Unit.weekday], from: currentDate as Date) as NSDateComponents!
-        
-        //年月日と最後の日付と曜日を取得(NSIntegerをintへのキャスト不要)
-        let currentYear: NSInteger      = comps.year
-        let currentMonth: NSInteger     = comps.month
-        let currentDay: NSInteger       = comps.day
-        let currentDayOfWeek: NSInteger = comps.weekday
-        let currentMax: NSInteger       = currentRange.length
-        
-        year      = currentYear
-        month     = currentMonth
-        day       = currentDay
-        dayOfWeek = currentDayOfWeek
+        year      = comps.year
+        month     = comps.month
+        day       = comps.day
+        weekday = comps.weekday
         maxDay    = currentMax
     }
     
@@ -490,12 +354,10 @@ class ViewController: UIViewController  {
     func removeCalendarButtonObject() {
         
         //ビューからボタンオブジェクトを削除する
-        for i in 0..<mArray.count {
-            (mArray[i] as AnyObject).removeFromSuperview()
+        for button in buttons {
+            button.removeFromSuperview()
         }
-        
-        //配列に格納したボタンオブジェクトも削除する
-        mArray.removeAllObjects()
+        buttons.removeAll() //配列に格納したボタンオブジェクトも削除する
     }
     
     //現在のカレンダーをセットアップする関数
@@ -509,7 +371,7 @@ class ViewController: UIViewController  {
     
     // NSDate出してる
     //NSDate の　年と月と日を取り出したNSDate
-    func day ( date : NSDate) -> NSDate {
+    func day(date : NSDate) -> NSDate {
         let calendar : NSCalendar = NSCalendar.current as NSCalendar
         let dateComponents = calendar.components([.year, .month, .day], from: date as Date)
         let today = self.create(year: dateComponents.year!, month: dateComponents.month!, day: dateComponents.day!)
@@ -521,13 +383,10 @@ class ViewController: UIViewController  {
         
         let string: String = "\(year)/\(month)/\(day) 0:00:00"
         
-        var formatter = DateFormatter()
+        let formatter = DateFormatter()
         let jaLocale = Locale(identifier: "ja_JP")
         formatter.locale = jaLocale
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        
-        
-        print(formatter.date(from: string))
         return formatter.date(from: string)! as NSDate
     }
     
@@ -535,12 +394,8 @@ class ViewController: UIViewController  {
     func eaqul (year: Int, month: Int, day: Int) -> NSDate {
         
         let string: String = "\(year)/\(month)/\(day) 23:59:59"
-        
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        
-        print (formatter.date(from: string))
-        
         return formatter.date(from: string)! as NSDate
     }
     
@@ -549,15 +404,9 @@ class ViewController: UIViewController  {
         
         day = button.tag
         self.find()
-        
-        
-        
-        //コンソール表示
-        print("\(year!)年\(month!)月\(button.tag)日が選択されました！")
     }
     
     func find () {
-        let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
         
         let query = NCMBQuery(className: "ToDoes")
         query?.whereKey("user", equalTo: NCMBUser.current())
@@ -567,8 +416,8 @@ class ViewController: UIViewController  {
             if error != nil {
                 print("nil")
             } else {
-                print(objects)
-                self.sArray = objects as! [ToDoes]
+                
+                self.todoes = objects as! [ToDoes]
                 self.table.reloadData()
             }
         }
@@ -591,20 +440,6 @@ class ViewController: UIViewController  {
         generateCalendar()
         setupCalendarTitleLabel()
     }
-    
-    
-    
-    
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath)  {
-        NSLog("%@が選択された", sArray[indexPath.row])
-        
-        if tableView.allowsSelectionDuringEditing {
-            print("asdfghj")
-        }
-        
-    }
-    
     
     func Left(gesture: UIGestureRecognizer) {
         self.performSegue(withIdentifier: "toReminder", sender: nil)
@@ -640,7 +475,7 @@ extension ViewController: UITableViewDataSource {
     
     //cellの数を設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sArray.count
+        return todoes.count
         //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
     }
     
@@ -648,7 +483,7 @@ extension ViewController: UITableViewDataSource {
     //ID付きのcellを取得してそれに付属しているlabelとかimageとか
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableCell", for: indexPath as IndexPath) as! TodoTableCell
-        cell.todolabel.text = sArray[indexPath.row].todo
+        cell.todolabel.text = todoes[indexPath.row].todo
         return cell
     }
     
@@ -673,50 +508,61 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        NSLog("%@が選択された", todoes[indexPath.row])
+        
+        if tableView.allowsSelectionDuringEditing {
+            print("asdfghj")
+        }
+    }
+    
     //削除可能なcellのindexpath取得(今は全て)
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        
         return true
     }
     
     
     //削除された時の実装
-    func tableView(table: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         // 先にデータを更新する
-        sArray.remove(at: indexPath.row)
+        todoes.remove(at: indexPath.row)
         
         // それからテーブルの更新
-        table.deleteRows(at: [NSIndexPath(row: indexPath.row, section: 0) as IndexPath],
-                         with: UITableViewRowAnimation.fade)
+        tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
     }
     
-    
     //cellの並べ替え
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        
         return true
     }
     
-    
-    func tableView(table: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        let targetTitle = sArray[sourceIndexPath.row]
-        if let index = sArray.index(of: targetTitle) {
-            sArray.remove(at: index)
-            sArray.insert(targetTitle, at: destinationIndexPath.row)
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        let targetTitle = todoes[sourceIndexPath.row]
+        if let index = todoes.index(of: targetTitle) {
+            todoes.remove(at: index)
+            todoes.insert(targetTitle, at: destinationIndexPath.row)
         }
+        
     }
     
     
     //編集中以外にcellを左スワイプできない
-    func tableView(table: UITableView, editingStyleForRowAtIndexPath indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        if table.isEditing {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        
+        if tableView.isEditing {
             return UITableViewCellEditingStyle.delete
         } else {
             return UITableViewCellEditingStyle.none
         }
         
         //編集中にもcellを選択できる
-        table.allowsSelectionDuringEditing = true
-        table.cellForRow(at: indexPath as IndexPath)?.textInputMode
+        tableView.allowsSelectionDuringEditing = true
+        tableView.cellForRow(at: indexPath)?.textInputMode
     }
     
     
@@ -749,8 +595,7 @@ extension ViewController: UITableViewDelegate {
             self.table.reloadData()
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action:UIAlertAction!) -> Void in
-        }
+        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         
         // UIAlertControllerにtextFieldを追加
         alert.addTextField { (textField:UITextField!) -> Void in
