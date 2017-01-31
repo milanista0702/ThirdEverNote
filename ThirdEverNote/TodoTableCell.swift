@@ -13,7 +13,7 @@ class TodoTableCell: UITableViewCell {
     @IBOutlet var todolabel : UILabel!
     @IBOutlet var datelabel: UILabel!
     @IBOutlet var arrowImageView: UIImageView!
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
