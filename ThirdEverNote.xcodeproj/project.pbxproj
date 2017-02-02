@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+        39DA702B1E40769A00AD1F71 /* CalenderLabellayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DA702A1E40769A00AD1F71 /* CalenderLabelLayout.swift */; };
+        39DA702D1E407C4E00AD1F71 /* CalenderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DA702D1E407C4E00AD1F71 /* CalenderLayout.swift */; };
 		3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */; };
 		3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE691D759146009F5486 /* CustomPresentationController.swift */; };
 		3E678BB11D5A0816002B41F4 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E678BB01D5A0816002B41F4 /* AddViewController.swift */; };
