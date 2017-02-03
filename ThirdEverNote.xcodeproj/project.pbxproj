@@ -136,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				3E73763A1C733B1E00E43AC2 /* ThirdEverNote */,
+                3E73764F1C733B1E00E43AC2 /* ThirdEverNoteUITests */,
 				3E73765A1C733B1E00E43AC2 /* ThirdEverNoteUITests */,
 				3E7376391C733B1E00E43AC2 /* Products */,
 				014028A0C3F5E6233456B8C5 /* Pods */,
@@ -176,7 +177,8 @@
 				3E7376421C733B1E00E43AC2 /* Assets.xcassets */,
 				3E7376441C733B1E00E43AC2 /* LaunchScreen.storyboard */,
 				3E7376471C733B1E00E43AC2 /* Info.plist */,
-				3E73764F1C733B1E00E43AC2 /* ThirdEverNoteTests */,
+                39DA702A1E40769A00AD1F71 /* CalenderLabelLayout.swift */,
+                39DA702C1E407C4E00AD1F71 /* CalenderLayout.swift */,
 			);
 			path = ThirdEverNote;
 			sourceTree = "<group>";
@@ -478,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E7A406D1D19618A0056BB49 /* GlobalVariable.swift in Sources */,
+                39DA702B1E40769A00AD1F71 /* CalenderLabelLayout.swift in Sources */,
 				3E7A406B1D195CCD0056BB49 /* LoginViewController.swift in Sources */,
 				3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */,
 				3E678BB11D5A0816002B41F4 /* AddViewController.swift in Sources */,
@@ -489,6 +492,7 @@
 				3E7376701C7C672D00E43AC2 /* ReminderViewController.swift in Sources */,
 				3EC5B21E1D228A07002CB0A9 /* TextFieldDelegate.swift in Sources */,
 				3E91BF961E2502FA00864D60 /* Schedule.swift in Sources */,
+                39DA702D1E407C4E00AD1F71 /* CalenderLayout.swift in Sources */,
 				3E7A40691D195CB70056BB49 /* SignUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
