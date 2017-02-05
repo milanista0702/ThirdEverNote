@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-        39DA702B1E40769A00AD1F71 /* CalenderLabellayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DA702A1E40769A00AD1F71 /* CalenderLabelLayout.swift */; };
-        39DA702D1E407C4E00AD1F71 /* CalenderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DA702D1E407C4E00AD1F71 /* CalenderLayout.swift */; };
 		3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */; };
 		3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE691D759146009F5486 /* CustomPresentationController.swift */; };
+		3E4F92CB1E4765F500CB40E2 /* CalendarLabelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F92CA1E4765F500CB40E2 /* CalendarLabelLayout.swift */; };
+		3E4F92CD1E476AA100CB40E2 /* CalenderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F92CC1E476AA100CB40E2 /* CalenderLayout.swift */; };
 		3E678BB11D5A0816002B41F4 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E678BB01D5A0816002B41F4 /* AddViewController.swift */; };
 		3E73763C1C733B1E00E43AC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E73763B1C733B1E00E43AC2 /* AppDelegate.swift */; };
 		3E7376431C733B1E00E43AC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E7376421C733B1E00E43AC2 /* Assets.xcassets */; };
@@ -25,7 +25,6 @@
 		3E872E961DBF6CB90086CEA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E73763F1C733B1E00E43AC2 /* Main.storyboard */; };
 		3E9137CE1D9147C8005AD176 /* TodoTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9137CC1D9147C8005AD176 /* TodoTableCell.swift */; };
 		3E9137CF1D9147C8005AD176 /* TodoTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E9137CD1D9147C8005AD176 /* TodoTableCell.xib */; };
-		3E91BF961E2502FA00864D60 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E91BF951E2502FA00864D60 /* Schedule.swift */; };
 		3EC5B21E1D228A07002CB0A9 /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC5B21D1D228A07002CB0A9 /* TextFieldDelegate.swift */; };
 		3EC98EAB1C8A590A0082C969 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC98EA91C8A590A0082C969 /* check.png */; };
 		3EC98EAC1C8A590A0082C969 /* 矢印.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC98EAA1C8A590A0082C969 /* 矢印.png */; };
@@ -56,6 +55,8 @@
 		3A110665EE0E4EAB5EC7383A /* Pods_ThirdEverNoteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThirdEverNoteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationAnimationController.swift; sourceTree = "<group>"; };
 		3E19FE691D759146009F5486 /* CustomPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
+		3E4F92CA1E4765F500CB40E2 /* CalendarLabelLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarLabelLayout.swift; sourceTree = "<group>"; };
+		3E4F92CC1E476AA100CB40E2 /* CalenderLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderLayout.swift; sourceTree = "<group>"; };
 		3E678BB01D5A0816002B41F4 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		3E7376381C733B1E00E43AC2 /* ThirdEverNote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThirdEverNote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E73763B1C733B1E00E43AC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,7 +77,6 @@
 		3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
 		3E9137CC1D9147C8005AD176 /* TodoTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableCell.swift; sourceTree = "<group>"; };
 		3E9137CD1D9147C8005AD176 /* TodoTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoTableCell.xib; sourceTree = "<group>"; };
-		3E91BF951E2502FA00864D60 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		3EC5B21D1D228A07002CB0A9 /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 		3EC98EA91C8A590A0082C969 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check.png; path = ../check.png; sourceTree = "<group>"; };
 		3EC98EAA1C8A590A0082C969 /* 矢印.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "矢印.png"; path = "../矢印.png"; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				3E73763A1C733B1E00E43AC2 /* ThirdEverNote */,
-                3E73764F1C733B1E00E43AC2 /* ThirdEverNoteUITests */,
+				3E73764F1C733B1E00E43AC2 /* ThirdEverNoteTests */,
 				3E73765A1C733B1E00E43AC2 /* ThirdEverNoteUITests */,
 				3E7376391C733B1E00E43AC2 /* Products */,
 				014028A0C3F5E6233456B8C5 /* Pods */,
@@ -166,9 +166,10 @@
 				3E7A406A1D195CCD0056BB49 /* LoginViewController.swift */,
 				3E678BB01D5A0816002B41F4 /* AddViewController.swift */,
 				3EF80B441D1951C500D829A8 /* ToDoes.swift */,
-				3E91BF951E2502FA00864D60 /* Schedule.swift */,
 				3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */,
 				3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */,
+				3E4F92CA1E4765F500CB40E2 /* CalendarLabelLayout.swift */,
+				3E4F92CC1E476AA100CB40E2 /* CalenderLayout.swift */,
 				3E19FE691D759146009F5486 /* CustomPresentationController.swift */,
 				3E73763F1C733B1E00E43AC2 /* Main.storyboard */,
 				3E9137CC1D9147C8005AD176 /* TodoTableCell.swift */,
@@ -177,8 +178,6 @@
 				3E7376421C733B1E00E43AC2 /* Assets.xcassets */,
 				3E7376441C733B1E00E43AC2 /* LaunchScreen.storyboard */,
 				3E7376471C733B1E00E43AC2 /* Info.plist */,
-                39DA702A1E40769A00AD1F71 /* CalenderLabelLayout.swift */,
-                39DA702C1E407C4E00AD1F71 /* CalenderLayout.swift */,
 			);
 			path = ThirdEverNote;
 			sourceTree = "<group>";
@@ -190,7 +189,7 @@
 				3E7376521C733B1E00E43AC2 /* Info.plist */,
 			);
 			path = ThirdEverNoteTests;
-			sourceTree = SOURCE_ROOT;
+			sourceTree = "<group>";
 		};
 		3E73765A1C733B1E00E43AC2 /* ThirdEverNoteUITests */ = {
 			isa = PBXGroup;
@@ -480,8 +479,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E7A406D1D19618A0056BB49 /* GlobalVariable.swift in Sources */,
-                39DA702B1E40769A00AD1F71 /* CalenderLabelLayout.swift in Sources */,
 				3E7A406B1D195CCD0056BB49 /* LoginViewController.swift in Sources */,
+				3E4F92CB1E4765F500CB40E2 /* CalendarLabelLayout.swift in Sources */,
 				3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */,
 				3E678BB11D5A0816002B41F4 /* AddViewController.swift in Sources */,
 				3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */,
@@ -491,9 +490,8 @@
 				3E9137CE1D9147C8005AD176 /* TodoTableCell.swift in Sources */,
 				3E7376701C7C672D00E43AC2 /* ReminderViewController.swift in Sources */,
 				3EC5B21E1D228A07002CB0A9 /* TextFieldDelegate.swift in Sources */,
-				3E91BF961E2502FA00864D60 /* Schedule.swift in Sources */,
-                39DA702D1E407C4E00AD1F71 /* CalenderLayout.swift in Sources */,
 				3E7A40691D195CB70056BB49 /* SignUpViewController.swift in Sources */,
+				3E4F92CD1E476AA100CB40E2 /* CalenderLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
