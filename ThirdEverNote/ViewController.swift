@@ -707,12 +707,13 @@ extension ViewController: UITableViewDelegate {
     
     
     //編集中以外にcellを左スワイプできない
-    func tableView(table: UITableView, editingStyleForRowAtIndexPath indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         if table.isEditing {
             return UITableViewCellEditingStyle.delete
         } else {
             return UITableViewCellEditingStyle.none
         }
+        
         
         //編集中にもcellを選択できる
         table.allowsSelectionDuringEditing = true

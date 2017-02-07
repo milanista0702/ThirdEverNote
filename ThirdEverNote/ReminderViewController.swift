@@ -141,15 +141,13 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     //削除可能なcellのindexpath取得(今は全て)
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    
-    //削除された時の実装
-    func tableView(table: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
-        self.delegateObjec(indexPath: indexPath)
+        self.delegateObjec(indexPath: indexPath as NSIndexPath)
         
         // 先にデータを更新する
         remindArray.remove(at: indexPath.row)
@@ -161,12 +159,12 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     //cellの並べ替え
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    
-    func tableView(table: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let targetTitle = remindArray[sourceIndexPath.row]
         if let index = remindArray.index(of: targetTitle) {
             remindArray.remove(at: index)
@@ -176,7 +174,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
     
     
     //編集中以外にcellを左スワイプできない
-    func tableView(table: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ table: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
         if table.isEditing {
             return UITableViewCellEditingStyle.delete
         } else {
@@ -185,7 +183,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
         
         //編集中にもcellを選択できる
         table.allowsSelectionDuringEditing = true
-        table.cellForRow(at: indexPath as IndexPath)?.textInputMode
+        table.cellForRow(at: indexPath)?.textInputMode
     }
     
     func delegateObjec(indexPath: NSIndexPath) {
