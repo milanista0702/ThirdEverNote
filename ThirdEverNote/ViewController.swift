@@ -680,7 +680,11 @@ extension ViewController: UITableViewDelegate {
     
     
     //削除された時の実装
-    func tableView(table: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        self.delegateObjec(indexPath: indexPath as NSIndexPath)
+        
         
         // 先にデータを更新する
         sArray.remove(at: indexPath.row)
@@ -689,6 +693,16 @@ extension ViewController: UITableViewDelegate {
         table.deleteRows(at: [NSIndexPath(row: indexPath.row, section: 0) as IndexPath],
                          with: UITableViewRowAnimation.fade)
     }
+    
+    func delegateObjec(indexPath: NSIndexPath) {
+        let object = sArray[indexPath.row]
+        object.deleteEventually { (error) in
+            if error != nil {
+                print(error?.localizedDescription)
+            }
+        }
+    }
+
     
     
     //cellの並べ替え
