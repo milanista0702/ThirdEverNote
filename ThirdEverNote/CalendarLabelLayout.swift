@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalendarLabelLayout: UIViewController {
+class CalendarLabelLayout {
     
     var intervalX: Int!
     var x: Int!

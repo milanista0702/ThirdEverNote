@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalenderLayout: UIViewController {
+class CalenderLayout {
     
     var intervalX: Int!
     var intervalY: Int!
@@ -17,7 +17,7 @@ class CalenderLayout: UIViewController {
     var size: Int!
     var fontSize: Int!
     
-    init(itervalX: Int, intervalY: Int, x: Int, y:Int, size:Int, fontSize: Int) {
+    init(intervalX: Int, intervalY: Int, x: Int, y:Int, size:Int, fontSize: Int) {
         self.intervalX = intervalX
         self.intervalY = intervalY
         self.x = x
