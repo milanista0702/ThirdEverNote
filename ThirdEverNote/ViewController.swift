@@ -71,6 +71,8 @@ class ViewController: UIViewController  {
     
     let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
     
+    var tapnumber: Int!
+    
     
     
     
@@ -331,7 +333,6 @@ class ViewController: UIViewController  {
             let button: UIButton = UIButton()
             button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(positionY), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
             
-            //            button.frame = CGRect(x: CGFloat(positionX), y: CGFloat(buttonSizeX!), width: CGFloat(buttonSizeX!), height: CGFloat(buttonSizeY!))
             //
             //ボタンの初期設定をする
             if(i < dayOfWeek - 1){
@@ -526,7 +527,6 @@ class ViewController: UIViewController  {
         formatter.locale = jaLocale
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         
-        
         print(formatter.date(from: string))
         return formatter.date(from: string)! as NSDate
     }
@@ -547,14 +547,21 @@ class ViewController: UIViewController  {
     //カレンダーボタンをタップした時のアクション
     func buttonTapped(button: UIButton){
         
+        let button : UIButton = UIButton()
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        
+        
         day = button.tag
         self.find()
         
+        tapnumber = button.tag
         
         
         //コンソール表示
         print("\(year!)年\(month!)月\(button.tag)日が選択されました！")
     }
+    
     
     func find () {
         let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
@@ -575,6 +582,7 @@ class ViewController: UIViewController  {
     }
     
     
+    
     //前月を表示するメソッド
     func prevCalendarSettings() {
         removeCalendarButtonObject()
@@ -590,19 +598,6 @@ class ViewController: UIViewController  {
         setupNextCalendarData()
         generateCalendar()
         setupCalendarTitleLabel()
-    }
-    
-    
-    
-    
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath)  {
-        NSLog("%@が選択された", sArray[indexPath.row])
-        
-        if tableView.allowsSelectionDuringEditing {
-            print("asdfghj")
-        }
-        
     }
     
     
@@ -627,6 +622,7 @@ class ViewController: UIViewController  {
 }
 
 
+
 // MARK: 画面の下側
 
 extension ViewController: UITableViewDataSource {
@@ -649,9 +645,27 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableCell", for: indexPath as IndexPath) as! TodoTableCell
         cell.todolabel.text = sArray[indexPath.row].todo
+        cell.arrowImageView.image = UIImage(named:  "矢印.png")
+        
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        NSLog("%@が選択された", sArray[indexPath.row])
+        
+        if let cell: TodoTableCell = table.cellForRow(at: indexPath as IndexPath) as? TodoTableCell {
+            if cell.arrowImageView.image == UIImage(named: "check.png") {
+                cell.arrowImageView.image = UIImage(named: "矢印.png")
+            } else {
+                cell.arrowImageView.image = UIImage(named: "check.png")
+            }
+        }
+        
+        if tableView.allowsSelectionDuringEditing {
+            print("asdfghj")
+        }
+        
+    }
     
     func loadData() {
         Schedule.loadall(callback: {objects in
@@ -674,7 +688,7 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UITableViewDelegate {
     
     //削除可能なcellのindexpath取得(今は全て)
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
@@ -702,16 +716,17 @@ extension ViewController: UITableViewDelegate {
             }
         }
     }
-
+    
     
     
     //cellの並べ替え
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: IndexPath) -> Bool {
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     
-    func tableView(table: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let targetTitle = sArray[sourceIndexPath.row]
         if let index = sArray.index(of: targetTitle) {
             sArray.remove(at: index)
@@ -752,14 +767,14 @@ extension ViewController: UITableViewDelegate {
     }
     
     
-    //appボタンが押された時 → onClickが呼ばれる → tapが呼ばれる
+    //appボタンが押された時 → tapが呼ばれる
     func tap() {
         
         let alert = UIAlertController(title: "NEW SCHEDULE", message: "予定を追加", preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Done", style: .default) { (action:UIAlertAction!) -> Void in
             
             // 入力したテキストをコンソールに表示
-            let textField = alert.textFields![0] as UITextField
+            _ = alert.textFields![0] as UITextField
             //self.sArray.append(textField.text!)
             self.table.reloadData()
         }
