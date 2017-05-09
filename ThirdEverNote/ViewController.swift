@@ -254,6 +254,8 @@ class ViewController: UIViewController  {
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(swipeDownGesture)
         
+        self.transition()
+        
         
     }
     
@@ -458,7 +460,8 @@ class ViewController: UIViewController  {
         
         let nextDate : NSDate = nextCalendar.date(from: nextComps as DateComponents)! as NSDate
         recreateCalendarParameter(currentCalendar: nextCalendar, currentDate: nextDate)
-    }
+        
+}
     
     
     //カレンダーのパラメータを再作成する関数
@@ -517,24 +520,37 @@ class ViewController: UIViewController  {
         return today
     }
     
+    func transition() {
+        self.performSegue(withIdentifier: "toSignupView" , sender: nil)
+    }
+    
     //任意の3つの整数入れたら　year　mounth day　でNSDateにする
     func create(year: Int, month: Int, day: Int) -> NSDate {
         
-        let string: String = "\(year)/\(month)/\(day) 0:00:00"
+        let zeroFilledM = String(format: "%02d", month)
+        let zeroFilledD = String(format: "%02d", day)
+        
+        let dateString: String = "\(year)/\(zeroFilledM)/\(zeroFilledD) 0:00:00"
+
         
         var formatter = DateFormatter()
         let jaLocale = Locale(identifier: "ja_JP")
         formatter.locale = jaLocale
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        
-        print(formatter.date(from: string))
-        return formatter.date(from: string)! as NSDate
+
+
+        print(formatter.date(from: dateString))
+        return formatter.date(from: dateString)! as NSDate
     }
+    
     
     
     func eaqul (year: Int, month: Int, day: Int) -> NSDate {
         
-        let string: String = "\(year)/\(month)/\(day) 23:59:59"
+        let zeroFilledM = String(format: "%02d", month)
+        let zeroFilledD = String(format: "%02d", day)
+        
+        let string: String = "\(year)/\(zeroFilledM)/\(zeroFilledD) 23:59:59"
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
@@ -547,16 +563,14 @@ class ViewController: UIViewController  {
     //カレンダーボタンをタップした時のアクション
     func buttonTapped(button: UIButton){
         
-        let button : UIButton = UIButton()
+
         button.setTitleColor(UIColor.black, for: .normal)
         button.setTitleColor(UIColor.white, for: .normal)
-        
         
         day = button.tag
         self.find()
         
         tapnumber = button.tag
-        
         
         //コンソール表示
         print("\(year!)年\(month!)月\(button.tag)日が選択されました！")
