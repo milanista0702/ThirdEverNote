@@ -45,6 +45,7 @@ class SignUpViewController: UIViewController {
         }else {
             self.presntPassConfirmAlert()
         }
+        self.toView()
         
     }
     

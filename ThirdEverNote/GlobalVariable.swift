@@ -9,6 +9,6 @@
 import UIKit
 
 class GlobalVariable: NSObject {
-    static let appKey = "9bc6823eda79907e608af0313b69173fb7b62735c5331d14746e3c4ceb664bcf"
-    static let clientKey = "6c2a1371d674225a06123a0cf618b56d34a4fd087f235c352658466cc4650dbf"
+    static let appKey = "59c23410a8c9ffe2fa056b6313b9060de679bb74ec4a236dafc88df67c2e5ae9"
+    static let clientKey = "234a45bfeeb91974bb200f632e3601821025b984c5f2a8d6f263f831f3a0dbdf"
 }

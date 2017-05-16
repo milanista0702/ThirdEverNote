@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="KUI-0M-64F">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="KUI-0M-64F">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -88,7 +88,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="やること追加" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txv-R5-XjG">
-                                <rect key="frame" x="52" y="80" width="270" height="75"/>
+                                <rect key="frame" x="52" y="124" width="270" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="iUK-AE-MYv"/>
                                 </constraints>
@@ -105,7 +105,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="やること" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wnz-mV-thL">
-                                <rect key="frame" x="31" y="185" width="126" height="43"/>
+                                <rect key="frame" x="31" y="229" width="126" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="mCV-Tx-fP2"/>
                                 </constraints>
@@ -332,6 +332,7 @@
                                 </state>
                                 <connections>
                                     <action selector="login" destination="1CO-ds-0IC" eventType="touchUpInside" id="UZ8-9S-W16"/>
+                                    <segue destination="KUI-0M-64F" kind="modal" identifier="toView" id="ePX-TQ-pgC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -384,6 +385,7 @@
                                 </state>
                                 <connections>
                                     <action selector="didSelectLogin" destination="N45-jK-fKH" eventType="touchUpInside" id="omJ-JL-QTY"/>
+                                    <segue destination="KUI-0M-64F" kind="modal" identifier="ToViewCon" id="zVW-22-qm5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -393,7 +395,6 @@
                     <connections>
                         <outlet property="passwordTextField" destination="uFa-Zf-hQ2" id="6vy-8P-u3V"/>
                         <outlet property="usernameTextField" destination="gDi-O1-83p" id="fdb-4X-h5E"/>
-                        <segue destination="KUI-0M-64F" kind="modal" identifier="ToViewCon" id="nPg-sH-okR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="12e-tX-B0L" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -417,7 +418,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gfd-uS-3pe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-79" y="-172"/>
+            <point key="canvasLocation" x="-171" y="-201"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="wlJ-zA-J9c">
@@ -481,6 +482,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="oGW-vn-vAZ"/>
-        <segue reference="Edd-Ba-3yh"/>
+        <segue reference="zVW-22-qm5"/>
+        <segue reference="dJp-09-Cig"/>
     </inferredMetricsTieBreakers>
 </document>
