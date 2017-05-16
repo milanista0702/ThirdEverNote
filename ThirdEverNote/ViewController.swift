@@ -254,16 +254,19 @@ class ViewController: UIViewController  {
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(swipeDownGesture)
         
-        self.transition()
         
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if NCMBUser.current() == nil {
-            self.performSegue(withIdentifier: "toSignupView", sender: nil)
-        }
+        print(NCMBUser.current())
+        
+        
+        self.performSegue(withIdentifier: "toSignupView", sender: nil) // 画面遷移のテスト
+//        if NCMBUser.current() == nil {
+//            self.performSegue(withIdentifier: "toSignupView", sender: nil)
+//        }
     }
     
     
