@@ -57,6 +57,6 @@ class LoginViewController: UIViewController {
     }
     
     func transition() {
-        self.performSegue(withIdentifier: "ToViewCon" , sender: nil)
+       self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }

@@ -28,7 +28,7 @@ class ViewController: UIViewController  {
     
     //メンバ変数の設定（配列格納用）
     var count: Int!
-    var mArray: NSMutableArray!
+    var buttonsArray = [UIButton] ()
     
     //メンバ変数の設定（カレンダー用）
     var now: NSDate!
@@ -211,7 +211,7 @@ class ViewController: UIViewController  {
         maxDay    = max
         
         //空の配列を作成する（カレンダーデータの格納用）
-        mArray = NSMutableArray()
+        buttonsArray = [UIButton] ()
         
         //曜日ラベル初期定義
         let monthName:[String] = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
@@ -262,11 +262,9 @@ class ViewController: UIViewController  {
         super.viewWillAppear(animated)
         print(NCMBUser.current())
         
-        
-        self.performSegue(withIdentifier: "toSignupView", sender: nil) // 画面遷移のテスト
-//        if NCMBUser.current() == nil {
-//            self.performSegue(withIdentifier: "toSignupView", sender: nil)
-//        }
+        if NCMBUser.current() == nil {
+            self.performSegue(withIdentifier: "toSignupView", sender: nil)
+        }
     }
     
     
@@ -386,7 +384,7 @@ class ViewController: UIViewController  {
             
             //ボタンを配置する
             self.view.addSubview(button)
-            mArray.add(button)
+            buttonsArray.append(button)
         }
         
     }
@@ -464,7 +462,7 @@ class ViewController: UIViewController  {
         let nextDate : NSDate = nextCalendar.date(from: nextComps as DateComponents)! as NSDate
         recreateCalendarParameter(currentCalendar: nextCalendar, currentDate: nextDate)
         
-}
+    }
     
     
     //カレンダーのパラメータを再作成する関数
@@ -497,12 +495,12 @@ class ViewController: UIViewController  {
     func removeCalendarButtonObject() {
         
         //ビューからボタンオブジェクトを削除する
-        for i in 0..<mArray.count {
-            (mArray[i] as AnyObject).removeFromSuperview()
+        for i in 0..<buttonsArray.count {
+            (buttonsArray[i] as AnyObject).removeFromSuperview()
         }
         
         //配列に格納したボタンオブジェクトも削除する
-        mArray.removeAllObjects()
+        buttonsArray.removeAll()
     }
     
     //現在のカレンダーをセットアップする関数
@@ -534,14 +532,14 @@ class ViewController: UIViewController  {
         let zeroFilledD = String(format: "%02d", day)
         
         let dateString: String = "\(year)/\(zeroFilledM)/\(zeroFilledD) 0:00:00"
-
+        
         
         var formatter = DateFormatter()
         let jaLocale = Locale(identifier: "ja_JP")
         formatter.locale = jaLocale
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-
-
+        
+        
         print(formatter.date(from: dateString))
         return formatter.date(from: dateString)! as NSDate
     }
@@ -566,9 +564,16 @@ class ViewController: UIViewController  {
     //カレンダーボタンをタップした時のアクション
     func buttonTapped(button: UIButton){
         
-
+        
         button.setTitleColor(UIColor.black, for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
+        
+        if tapnumber != nil {
+            for i in buttonsArray {
+                if i.tag == tapnumber {
+                    i.setTitleColor(UIColor.white, for: .normal)
+                }
+            }
+        }
         
         day = button.tag
         self.find()
