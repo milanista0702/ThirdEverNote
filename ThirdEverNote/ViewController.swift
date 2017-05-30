@@ -91,6 +91,9 @@ class ViewController: UIViewController  {
         self.table.delegate = self
         self.table.dataSource = self
         
+        self.table.estimatedRowHeight = 90
+        self.table.rowHeight = UITableViewAutomaticDimension
+
         let longPressRecognizer = UILongPressGestureRecognizer(target: nil, action: "rowButtonAction:")
         longPressRecognizer.allowableMovement = 15
         longPressRecognizer.minimumPressDuration = 0.6
@@ -667,6 +670,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableCell", for: indexPath as IndexPath) as! TodoTableCell
         cell.todolabel.text = sArray[indexPath.row].todo
+        
         cell.arrowImageView.image = UIImage(named:  "矢印.png")
         
         return cell
