@@ -76,8 +76,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    
    func loadData() {
       ToDoes.loadall(callback: {objects in
-         self.remindArray.removeAll()
-         
+         self.remindArray = []
          for object in objects {
             self.remindArray.append(object)
          }

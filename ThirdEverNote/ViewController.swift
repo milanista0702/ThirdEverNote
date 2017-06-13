@@ -93,7 +93,7 @@ class ViewController: UIViewController  {
         
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
-
+        
         let longPressRecognizer = UILongPressGestureRecognizer(target: nil, action: "rowButtonAction:")
         longPressRecognizer.allowableMovement = 15
         longPressRecognizer.minimumPressDuration = 0.6
@@ -614,6 +614,10 @@ class ViewController: UIViewController  {
         setupPrevCalendarData()
         generateCalendar()
         setupCalendarTitleLabel()
+        
+        self.sArray = []
+        self.table.reloadData()
+        
     }
     
     
@@ -623,6 +627,10 @@ class ViewController: UIViewController  {
         setupNextCalendarData()
         generateCalendar()
         setupCalendarTitleLabel()
+        
+        self.sArray = []
+        self.table.reloadData()
+        
     }
     
     
@@ -670,11 +678,20 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableCell", for: indexPath as IndexPath) as! TodoTableCell
         cell.todolabel.text = sArray[indexPath.row].todo
-        
+        cell.datelabel.text = formatter(date: sArray[indexPath.row].date)
         cell.arrowImageView.image = UIImage(named:  "矢印.png")
         
         return cell
     }
+    
+    func formatter (date: NSDate) -> String {
+        let dateFormatter  = DateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale!
+        dateFormatter.dateFormat = "HH:mm"
+        
+        return dateFormatter.string(from: date as Date)
+    }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         NSLog("%@が選択された", sArray[indexPath.row])
