@@ -811,27 +811,11 @@ extension ViewController: UITableViewDelegate {
     
     
     //appボタンが押された時 → tapが呼ばれる
-    func tap() {
-        
-        let alert = UIAlertController(title: "NEW SCHEDULE", message: "予定を追加", preferredStyle: .alert)
-        let saveAction = UIAlertAction(title: "Done", style: .default) { (action:UIAlertAction!) -> Void in
-            
-            // 入力したテキストをコンソールに表示
-            _ = alert.textFields![0] as UITextField
-            //self.sArray.append(textField.text!)
-            self.table.reloadData()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action:UIAlertAction!) -> Void in
-        }
-        
-        // UIAlertControllerにtextFieldを追加
-        alert.addTextField { (textField:UITextField!) -> Void in
-        }
-        
-        alert.addAction(cancelAction)
-        alert.addAction(saveAction)
-        
-        present(alert, animated: true, completion: nil)
+    func tap(sender: AnyObject) {
+        self.performSegue(withIdentifier: "Saddsegue", sender: nil)
+    }
+    
+    func dismiss(segue: UIStoryboardSegue) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

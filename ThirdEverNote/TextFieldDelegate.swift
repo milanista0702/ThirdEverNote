@@ -29,5 +29,13 @@ extension AddViewController: UITextFieldDelegate {
     }
 }
 
+extension ScheduleAddViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+
 
 

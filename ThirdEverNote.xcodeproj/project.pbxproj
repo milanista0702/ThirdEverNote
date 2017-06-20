@@ -24,6 +24,7 @@
 		3E7A406B1D195CCD0056BB49 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7A406A1D195CCD0056BB49 /* LoginViewController.swift */; };
 		3E7A406D1D19618A0056BB49 /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */; };
 		3E872E961DBF6CB90086CEA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E73763F1C733B1E00E43AC2 /* Main.storyboard */; };
+		3E8D6D0E1EF93A700040919B /* ScheduleAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8D6D0D1EF93A700040919B /* ScheduleAddViewController.swift */; };
 		3E9137CE1D9147C8005AD176 /* TodoTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9137CC1D9147C8005AD176 /* TodoTableCell.swift */; };
 		3E9137CF1D9147C8005AD176 /* TodoTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E9137CD1D9147C8005AD176 /* TodoTableCell.xib */; };
 		3EC5B21E1D228A07002CB0A9 /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC5B21D1D228A07002CB0A9 /* TextFieldDelegate.swift */; };
@@ -77,6 +78,7 @@
 		3E7A40681D195CB70056BB49 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3E7A406A1D195CCD0056BB49 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
+		3E8D6D0D1EF93A700040919B /* ScheduleAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleAddViewController.swift; sourceTree = "<group>"; };
 		3E9137CC1D9147C8005AD176 /* TodoTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableCell.swift; sourceTree = "<group>"; };
 		3E9137CD1D9147C8005AD176 /* TodoTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoTableCell.xib; sourceTree = "<group>"; };
 		3EC5B21D1D228A07002CB0A9 /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				3E7A40681D195CB70056BB49 /* SignUpViewController.swift */,
 				3E7A406A1D195CCD0056BB49 /* LoginViewController.swift */,
 				3E678BB01D5A0816002B41F4 /* AddViewController.swift */,
+				3E8D6D0D1EF93A700040919B /* ScheduleAddViewController.swift */,
 				3EF80B441D1951C500D829A8 /* ToDoes.swift */,
 				3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */,
 				3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */,
@@ -496,6 +499,7 @@
 				3EC5B21E1D228A07002CB0A9 /* TextFieldDelegate.swift in Sources */,
 				3E7A40691D195CB70056BB49 /* SignUpViewController.swift in Sources */,
 				3E4F92CD1E476AA100CB40E2 /* CalenderLayout.swift in Sources */,
+				3E8D6D0E1EF93A700040919B /* ScheduleAddViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
