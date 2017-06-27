@@ -15,6 +15,9 @@ class SignUpViewController: UIViewController {
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var createpasswordTextField: UITextField!
     @IBOutlet var confirmpasswordTextField: UITextField!
+    @IBOutlet var signUpButton: UIButton!
+    
+    let color = ColorManager()
     
     
     override func viewDidLoad() {
@@ -23,10 +26,12 @@ class SignUpViewController: UIViewController {
         emailTextField.delegate = self
         
         // 文字が黒丸になるように
-        let createpasswordTextField = UITextField()
+        
         createpasswordTextField.isSecureTextEntry = true
-        let confirmpasswordTextField = UITextField()
         confirmpasswordTextField.isSecureTextEntry = true
+        
+        signUpButton.backgroundColor = color.blue
+        signUpButton.setTitleColor(UIColor.white, for: .normal)
         
     }
     

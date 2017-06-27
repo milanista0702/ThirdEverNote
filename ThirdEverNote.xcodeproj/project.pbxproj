@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */; };
 		3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE691D759146009F5486 /* CustomPresentationController.swift */; };
+		3E20B4C01F0260CF002166C2 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20B4BF1F0260CF002166C2 /* ColorManager.swift */; };
 		3E4F92CB1E4765F500CB40E2 /* CalendarLabelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F92CA1E4765F500CB40E2 /* CalendarLabelLayout.swift */; };
 		3E4F92CD1E476AA100CB40E2 /* CalenderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F92CC1E476AA100CB40E2 /* CalenderLayout.swift */; };
 		3E4F92CF1E49D91E00CB40E2 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F92CE1E49D91E00CB40E2 /* Schedule.swift */; };
@@ -57,6 +58,7 @@
 		3A110665EE0E4EAB5EC7383A /* Pods_ThirdEverNoteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThirdEverNoteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationAnimationController.swift; sourceTree = "<group>"; };
 		3E19FE691D759146009F5486 /* CustomPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
+		3E20B4BF1F0260CF002166C2 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		3E4F92CA1E4765F500CB40E2 /* CalendarLabelLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarLabelLayout.swift; sourceTree = "<group>"; };
 		3E4F92CC1E476AA100CB40E2 /* CalenderLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderLayout.swift; sourceTree = "<group>"; };
 		3E4F92CE1E49D91E00CB40E2 /* Schedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				3E4F92CC1E476AA100CB40E2 /* CalenderLayout.swift */,
 				3E19FE691D759146009F5486 /* CustomPresentationController.swift */,
 				3E73763F1C733B1E00E43AC2 /* Main.storyboard */,
+				3E20B4BF1F0260CF002166C2 /* ColorManager.swift */,
 				3E9137CC1D9147C8005AD176 /* TodoTableCell.swift */,
 				3E9137CD1D9147C8005AD176 /* TodoTableCell.xib */,
 				3EC5B21D1D228A07002CB0A9 /* TextFieldDelegate.swift */,
@@ -492,6 +495,7 @@
 				3E678BB11D5A0816002B41F4 /* AddViewController.swift in Sources */,
 				3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */,
 				3E73766A1C733C9000E43AC2 /* ViewController.swift in Sources */,
+				3E20B4C01F0260CF002166C2 /* ColorManager.swift in Sources */,
 				3EF80B451D1951C500D829A8 /* ToDoes.swift in Sources */,
 				3E73763C1C733B1E00E43AC2 /* AppDelegate.swift in Sources */,
 				3E9137CE1D9147C8005AD176 /* TodoTableCell.swift in Sources */,

@@ -18,6 +18,8 @@ class ViewController: UIViewController  {
     @IBOutlet var calendarBar: UILabel!
     @IBOutlet var toolbar: UIToolbar!
     
+    let color = ColorManager()
+    
     
     var scheduleArray = [Schedule]()
     let refreshControl = UIRefreshControl()
@@ -78,6 +80,14 @@ class ViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.barTintColor = color.blue
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        
+        toolbar.barTintColor = color.blue
+        toolbar.tintColor = UIColor.white
+        
         
         //addボタン
         let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)

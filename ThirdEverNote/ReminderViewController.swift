@@ -13,11 +13,13 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    
    @IBOutlet var table: UITableView!
    @IBOutlet var reminderTextField: UITextField!
+   @IBOutlet var toolbar: UIToolbar!
    
    var remindArray = [ToDoes]()
    var remindimageArray = [String]()
    var addBtn: UIBarButtonItem!
    let refreshControl = UIRefreshControl()
+   let color = ColorManager()
    
    
    //userdefaults(倉庫)にアクセス
@@ -26,6 +28,9 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    
    override func viewDidLoad() {
       super.viewDidLoad()
+      
+      toolbar.barTintColor = color.blue
+      toolbar.tintColor = UIColor.white
       
       self.table.estimatedRowHeight = 90
       self.table.rowHeight = UITableViewAutomaticDimension
@@ -63,7 +68,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       
       self.navigationItem.rightBarButtonItem = addBtn
       
-      self.navigationItem.title = "やることリスト"
+      self.navigationItem.title = "TODO LIST"
       
    }
    

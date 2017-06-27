@@ -16,6 +16,13 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     @IBOutlet var date: UIDatePicker!
     @IBOutlet var swich: UISwitch!
     
+    @IBOutlet var addlabel: UILabel!
+    @IBOutlet var todolabel: UILabel!
+    @IBOutlet var limitlabel: UILabel!
+    @IBOutlet var sharelabel: UILabel!
+    
+    let color = ColorManager()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
@@ -25,6 +32,16 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         text.delegate = self
+        
+        addlabel.backgroundColor = color.green
+        addlabel.textColor = UIColor.white
+        todolabel.backgroundColor = color.green
+        todolabel.textColor = UIColor.white
+        limitlabel.backgroundColor = color.green
+        limitlabel.textColor = UIColor.white
+        sharelabel.backgroundColor = color.green
+        sharelabel.textColor = UIColor.white
+        
     }
     
     
