@@ -112,14 +112,18 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       return remindArray.count
       //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
    }
-
-      
+   
+   
    //ID付きのcellを取得してそれに付属しているlabelとかimageとか
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableCell") as! TodoTableCell
       cell.todolabel.text = remindArray[indexPath.row].todo
       cell.datelabel.text = formatter(date: remindArray[indexPath.row].date)
-      cell.arrowImageView.image = UIImage(named:  "矢印.png")
+      if remindArray[indexPath.row].done == true {
+         cell.arrowImageView.image = UIImage(named: "Check.png")
+      }else{
+         cell.arrowImageView.image = UIImage(named: "矢印.png")
+      }
       
       return cell
    }
@@ -135,13 +139,14 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)  {
       NSLog("%@が選択された", remindArray[indexPath.row])
+      let cell = tableView.cellForRow(at: indexPath) as! TodoTableCell
+      //キャストしてる？
       
-      if let cell: TodoTableCell = table.cellForRow(at: indexPath as IndexPath) as? TodoTableCell {
-         if cell.arrowImageView.image == UIImage(named: "check.png") {
-            cell.arrowImageView.image = UIImage(named: "矢印.png")
-         } else {
-            cell.arrowImageView.image = UIImage(named: "check.png")
-         }
+      remindArray[indexPath.row].done = true
+      if remindArray[indexPath.row].done == true {
+         cell.arrowImageView.image = UIImage(named: "Check.png")
+      }else{
+         cell.arrowImageView.image = UIImage(named: "矢印.png")
       }
    }
    

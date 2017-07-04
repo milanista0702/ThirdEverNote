@@ -24,6 +24,8 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         usernameTextField.delegate = self
         emailTextField.delegate = self
+        confirmpasswordTextField.delegate = self
+        createpasswordTextField.delegate = self
         
         // 文字が黒丸になるように
         
