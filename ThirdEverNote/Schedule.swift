@@ -40,17 +40,17 @@ class Schedule: NCMBObject, NCMBSubclassing{
     }
     
     var date: NSDate {
-        get {
-            return object(forKey: "date") as! NSDate
-        }
-        set {
-            setObject(newValue, forKey: "date")
+                get {
+                    return object(forKey: "date") as! NSDate
+                }
+                set {
+                    setObject(newValue, forKey: "date")
         }
     }
     
-    var done: Int {
+    var done: Bool {
         get {
-            return object(forKey: "done") as! Int
+            return object(forKey: "done") as! Bool
         }
         set {
             setObject(newValue, forKey: "done")
@@ -61,7 +61,7 @@ class Schedule: NCMBObject, NCMBSubclassing{
         super.init(className: className)
     }
     
-    static func create(title: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Int) -> Schedule{
+    static func create(title: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Bool) -> Schedule{
         let schedule = Schedule(className: "Schedule")
         schedule?.title = title
         schedule?.user = user
@@ -71,7 +71,7 @@ class Schedule: NCMBObject, NCMBSubclassing{
         return schedule!
     }
     
-    static func update(object: Schedule, title: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Int) -> Schedule {
+    static func update(object: Schedule, title: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Bool) -> Schedule {
         if object.user == user {
             object.title = title
             object.user = user

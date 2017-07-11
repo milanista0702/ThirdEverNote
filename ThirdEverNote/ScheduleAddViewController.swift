@@ -44,8 +44,8 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
             
         }else{
             
-            let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), isPublic: swich.isOn, date: date.date as NSDate, done: false)
-            ToDoes.saveWithEvent(todo: todo, callBack: {
+            let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), isPublic: swich.isOn, date: date.date as NSDate, done: false)
+            Schedule.saveWithEvent(schedule: schedule, callBack: {
                 self.dismiss(animated: true, completion: nil)
             })
         }

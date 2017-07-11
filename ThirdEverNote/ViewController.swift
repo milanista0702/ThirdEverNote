@@ -20,7 +20,7 @@ class ViewController: UIViewController  {
     
     let color = ColorManager()
     
-    
+    var todoArray = [ToDoes]()
     var scheduleArray = [Schedule]()
     let refreshControl = UIRefreshControl()
     
@@ -68,8 +68,6 @@ class ViewController: UIViewController  {
     var calendarFontSize: Int!
     
     var addBtn: UIBarButtonItem!
-    
-    var sArray = [ToDoes]()
     
     let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
     
@@ -610,12 +608,27 @@ class ViewController: UIViewController  {
                 print("nil")
             } else {
                 print(objects)
-                self.sArray = objects as! [ToDoes]
+                self.todoArray = objects as! [ToDoes]
+                self.table.reloadData()
+            }
+        }
+        
+        let sQuery = NCMBQuery(className: "Schedule")
+        sQuery?.whereKey("user", equalTo: NCMBUser.current())
+        sQuery?.whereKey("date", lessThanOrEqualTo: self.eaqul(year: year, month: month, day: day ))
+        sQuery?.whereKey("date", greaterThan: self.create(year: year, month: month, day: day))
+        sQuery?.findObjectsInBackground { (objects, error) in
+            if error != nil {
+                print("nil")
+            }else{
+                print("objects")
+                print(objects)
+                print("objects")
+                self.scheduleArray = objects as! [Schedule]
                 self.table.reloadData()
             }
         }
     }
-    
     
     
     //前月を表示するメソッド
@@ -625,7 +638,7 @@ class ViewController: UIViewController  {
         generateCalendar()
         setupCalendarTitleLabel()
         
-        self.sArray = []
+        self.todoArray = []
         self.table.reloadData()
         
     }
@@ -638,7 +651,7 @@ class ViewController: UIViewController  {
         generateCalendar()
         setupCalendarTitleLabel()
         
-        self.sArray = []
+        self.todoArray = []
         self.table.reloadData()
         
     }
@@ -679,7 +692,8 @@ extension ViewController: UITableViewDataSource {
     
     //cellの数を設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sArray.count
+        return todoArray.count + scheduleArray.count
+        
         //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
     }
     
@@ -687,10 +701,15 @@ extension ViewController: UITableViewDataSource {
     //ID付きのcellを取得してそれに付属しているlabelとかimageとか
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableCell", for: indexPath as IndexPath) as! TodoTableCell
-        cell.todolabel.text = sArray[indexPath.row].todo
-        cell.datelabel.text = formatter(date: sArray[indexPath.row].date)
-        cell.arrowImageView.image = UIImage(named:  "矢印.png")
-        
+        if indexPath.row <= todoArray.count {
+            cell.todolabel.text = todoArray[indexPath.row].todo
+            cell.datelabel.text = formatter(date: todoArray[indexPath.row].date)
+            cell.arrowImageView.image = UIImage(named:  "矢印.png")
+        }else{
+            cell.todolabel.text = scheduleArray[indexPath.row - todoArray.count].title
+            cell.datelabel.text = formatter(date: scheduleArray[indexPath.row].date)
+            cell.arrowImageView.image = UIImage(named:  "矢印.png")
+        }
         return cell
     }
     
@@ -704,7 +723,11 @@ extension ViewController: UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("%@が選択された", sArray[indexPath.row])
+        if indexPath.row <= todoArray.count{
+            NSLog("%@が選択された", todoArray[indexPath.row])
+        }else{
+            NSLog("%@が選択された", scheduleArray[indexPath.row - todoArray.count])
+        }
         
         if let cell: TodoTableCell = table.cellForRow(at: indexPath as IndexPath) as? TodoTableCell {
             if cell.arrowImageView.image == UIImage(named: "check.png") {
@@ -754,7 +777,8 @@ extension ViewController: UITableViewDelegate {
         
         
         // 先にデータを更新する
-        sArray.remove(at: indexPath.row)
+        todoArray.remove(at: indexPath.row)
+        scheduleArray.remove(at: indexPath.row)
         
         // それからテーブルの更新
         table.deleteRows(at: [NSIndexPath(row: indexPath.row, section: 0) as IndexPath],
@@ -762,8 +786,14 @@ extension ViewController: UITableViewDelegate {
     }
     
     func delegateObjec(indexPath: NSIndexPath) {
-        let object = sArray[indexPath.row]
+        let object = todoArray[indexPath.row]
         object.deleteEventually { (error) in
+            if error != nil {
+                print(error?.localizedDescription)
+            }
+        }
+        let sobject = scheduleArray[indexPath.row]
+        sobject.deleteEventually { (error) in
             if error != nil {
                 print(error?.localizedDescription)
             }
@@ -780,10 +810,15 @@ extension ViewController: UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let targetTitle = sArray[sourceIndexPath.row]
-        if let index = sArray.index(of: targetTitle) {
-            sArray.remove(at: index)
-            sArray.insert(targetTitle, at: destinationIndexPath.row)
+        let targetTitle = todoArray[sourceIndexPath.row]
+        if let index = todoArray.index(of: targetTitle) {
+            todoArray.remove(at: index)
+            todoArray.insert(targetTitle, at: destinationIndexPath.row)
+        }
+        let stargetTitle = scheduleArray[sourceIndexPath.row]
+        if let index = scheduleArray.index(of: stargetTitle) {
+            scheduleArray.remove(at: index)
+            scheduleArray.insert(stargetTitle, at: destinationIndexPath.row)
         }
     }
     
