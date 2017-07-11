@@ -13,8 +13,7 @@ import NCMB
 class Schedule: NCMBObject, NCMBSubclassing{
     var title: String! {
         get{
-            return object(forKey: "title") as!
-            String
+            return object(forKey: "title") as! String
         }
         set {
             setObject(newValue, forKey: "title")
@@ -40,11 +39,11 @@ class Schedule: NCMBObject, NCMBSubclassing{
     }
     
     var date: NSDate {
-                get {
-                    return object(forKey: "date") as! NSDate
-                }
-                set {
-                    setObject(newValue, forKey: "date")
+        get {
+            return object(forKey: "date") as! NSDate
+        }
+        set {
+            setObject(newValue, forKey: "date")
         }
     }
     

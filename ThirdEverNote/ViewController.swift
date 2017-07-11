@@ -607,7 +607,9 @@ class ViewController: UIViewController  {
             if error != nil {
                 print("nil")
             } else {
+                print("objects")
                 print(objects)
+                print("objects")
                 self.todoArray = objects as! [ToDoes]
                 self.table.reloadData()
             }
@@ -624,6 +626,7 @@ class ViewController: UIViewController  {
                 print("objects")
                 print(objects)
                 print("objects")
+                print(self.scheduleArray)
                 self.scheduleArray = objects as! [Schedule]
                 self.table.reloadData()
             }
