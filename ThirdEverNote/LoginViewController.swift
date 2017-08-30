@@ -13,6 +13,9 @@ class LoginViewController: UIViewController {
     
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var signinButton : UIButton!
+    
+    let color = ColorManager()
     
     
     override func viewDidLoad() {
@@ -21,6 +24,8 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
         
         passwordTextField.isSecureTextEntry = true
+        
+        signinButton.setTitleColor(color.orange, for: .normal)
     }
     
     override func didReceiveMemoryWarning() {

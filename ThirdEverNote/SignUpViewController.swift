@@ -16,6 +16,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet var createpasswordTextField: UITextField!
     @IBOutlet var confirmpasswordTextField: UITextField!
     @IBOutlet var signUpButton: UIButton!
+    @IBOutlet var signinButton: UIButton!
     
     let color = ColorManager()
     
@@ -32,8 +33,9 @@ class SignUpViewController: UIViewController {
         createpasswordTextField.isSecureTextEntry = true
         confirmpasswordTextField.isSecureTextEntry = true
         
-        signUpButton.backgroundColor = color.blue
-        signUpButton.setTitleColor(UIColor.white, for: .normal)
+        signUpButton.setTitleColor(color.orange, for: .normal)
+        signinButton.setTitleColor(color.orange, for: .normal)
+        
         
     }
     
