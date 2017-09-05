@@ -18,7 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         ToDoes.registerSubclass()
+        Schedule.registerSubclass()
     
+        
         NCMB.setApplicationKey(GlobalVariable.appKey, clientKey: GlobalVariable.clientKey)
         return true
     }
