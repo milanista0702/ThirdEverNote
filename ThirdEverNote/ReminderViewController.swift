@@ -19,8 +19,6 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    var remindimageArray = [String]()
    var addBtn: UIBarButtonItem!
    let refreshControl = UIRefreshControl()
-   let color = ColorManager()
-   
    
    //userdefaults(倉庫)にアクセス
    let saveData: UserDefaults = UserDefaults.standard
@@ -29,7 +27,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    override func viewDidLoad() {
       super.viewDidLoad()
       
-      toolbar.barTintColor = color.blue
+      toolbar.barTintColor = ColorManager.gray
       toolbar.tintColor = UIColor.white
       
       self.table.estimatedRowHeight = 90

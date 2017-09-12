@@ -131,7 +131,7 @@
                                     <constraint firstAttribute="width" constant="73" id="C8b-EW-rdA"/>
                                     <constraint firstAttribute="height" constant="45" id="yJI-XM-UFq"/>
                                 </constraints>
-                                <state key="normal" title="cancel"/>
+                                <state key="normal" title="Cancel"/>
                                 <connections>
                                     <action selector="cancel" destination="t7a-KN-VOZ" eventType="touchUpInside" id="v6S-xa-YIb"/>
                                     <segue destination="FRk-ll-JJd" kind="unwind" unwindAction="dismiss:" id="6jw-Qz-5Gu"/>
@@ -284,8 +284,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHARE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EmJ-cQ-Zov">
-                                <rect key="frame" x="31" y="544" width="97" height="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SHARE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EmJ-cQ-Zov">
+                                <rect key="frame" x="31" y="535" width="97" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4Ah-jc-zBN"/>
                                 </constraints>
@@ -293,8 +293,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCHEDULE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJb-1d-IxR">
-                                <rect key="frame" x="31" y="185" width="126" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="SCHEDULE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJb-1d-IxR">
+                                <rect key="frame" x="16" y="185" width="126" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="hMK-3K-wFk"/>
                                 </constraints>
@@ -323,9 +323,6 @@
                                     <action selector="okWithSender:" destination="nw7-AX-LUb" eventType="touchUpInside" id="vaY-4p-Q3o"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FkL-96-EDF">
-                                <rect key="frame" x="231" y="554" width="51" height="31"/>
-                            </switch>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="w6T-gC-zev">
                                 <rect key="frame" x="37" y="358" width="300" height="134"/>
                                 <constraints>
@@ -341,14 +338,14 @@
                                     <constraint firstAttribute="height" constant="45" id="H4X-IA-129"/>
                                     <constraint firstAttribute="width" constant="73" id="jMx-wR-K4P"/>
                                 </constraints>
-                                <state key="normal" title="cancel"/>
+                                <state key="normal" title="Cancel"/>
                                 <connections>
                                     <action selector="cancel" destination="EID-fv-X3w" eventType="touchUpInside" id="N2Z-aB-yn2"/>
                                     <action selector="cancel" destination="nw7-AX-LUb" eventType="touchUpInside" id="uJQ-TE-MwM"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DAY AND TIME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUf-zX-bhR">
-                                <rect key="frame" x="31" y="310" width="141" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="DAY AND TIME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUf-zX-bhR">
+                                <rect key="frame" x="16" y="310" width="141" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="vd7-Gk-6GR"/>
                                 </constraints>
@@ -356,6 +353,9 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="FkL-96-EDF">
+                                <rect key="frame" x="231" y="545" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -388,7 +388,11 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addlabel" destination="Do1-xM-0wZ" id="0bo-bj-z4l"/>
                         <outlet property="date" destination="w6T-gC-zev" id="d03-J0-egA"/>
+                        <outlet property="daylabel" destination="UUf-zX-bhR" id="6Wy-fN-Fsn"/>
+                        <outlet property="schedulelabel" destination="eJb-1d-IxR" id="VOt-bH-4Vi"/>
+                        <outlet property="sharelabel" destination="EmJ-cQ-Zov" id="ymK-QC-vdZ"/>
                         <outlet property="swich" destination="FkL-96-EDF" id="Isv-g8-drB"/>
                         <outlet property="text" destination="rht-p3-BDD" id="o2g-yy-v02"/>
                     </connections>
@@ -510,11 +514,24 @@
                                     <action selector="didSelectLogin" destination="N45-jK-fKH" eventType="touchUpInside" id="omJ-JL-QTY"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="peI-PE-LCs">
+                                <rect key="frame" x="103" y="546" width="178" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancel" destination="N45-jK-fKH" eventType="touchUpInside" id="f1U-Dh-uFn"/>
+                                    <action selector="didSelectLogin" destination="N45-jK-fKH" eventType="touchUpInside" id="Lxl-Qk-5Kk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Sign in" id="txz-rr-jkn"/>
                     <connections>
+                        <outlet property="cancelButton" destination="peI-PE-LCs" id="uhb-Js-4qs"/>
                         <outlet property="passwordTextField" destination="uFa-Zf-hQ2" id="6vy-8P-u3V"/>
                         <outlet property="signinButton" destination="0KH-fd-nIW" id="99H-k9-wEQ"/>
                         <outlet property="usernameTextField" destination="gDi-O1-83p" id="fdb-4X-h5E"/>

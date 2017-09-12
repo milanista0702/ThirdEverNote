@@ -18,8 +18,6 @@ class ViewController: UIViewController  {
     @IBOutlet var calendarBar: UILabel!
     @IBOutlet var toolbar: UIToolbar!
     
-    let color = ColorManager()
-    
     var todoArray = [ToDoes]()
     var scheduleArray = [Schedule]()
     let refreshControl = UIRefreshControl()
@@ -79,11 +77,11 @@ class ViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.barTintColor = color.blue
+        self.navigationController?.navigationBar.barTintColor = ColorManager.blue
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         
-        toolbar.barTintColor = color.blue
+        toolbar.barTintColor = ColorManager.gray
         toolbar.tintColor = UIColor.white
         
         

@@ -14,8 +14,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var signinButton : UIButton!
-    
-    let color = ColorManager()
+    @IBOutlet var cancelButton : UIButton!
     
     
     override func viewDidLoad() {
@@ -25,7 +24,7 @@ class LoginViewController: UIViewController {
         
         passwordTextField.isSecureTextEntry = true
         
-        signinButton.setTitleColor(color.orange, for: .normal)
+        signinButton.setTitleColor(ColorManager.navy, for: .normal)
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,5 +62,9 @@ class LoginViewController: UIViewController {
     
     func transition() {
        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func cancel () {
+        self.dismiss(animated: true, completion: nil)
     }
 }

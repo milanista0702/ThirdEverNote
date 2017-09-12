@@ -18,8 +18,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet var signUpButton: UIButton!
     @IBOutlet var signinButton: UIButton!
     
-    let color = ColorManager()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,8 +31,8 @@ class SignUpViewController: UIViewController {
         createpasswordTextField.isSecureTextEntry = true
         confirmpasswordTextField.isSecureTextEntry = true
         
-        signUpButton.setTitleColor(color.orange, for: .normal)
-        signinButton.setTitleColor(color.orange, for: .normal)
+        signUpButton.setTitleColor(ColorManager.navy, for: .normal)
+        signinButton.setTitleColor(ColorManager.navy, for: .normal)
         
         
     }

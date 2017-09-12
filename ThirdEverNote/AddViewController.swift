@@ -21,7 +21,6 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     @IBOutlet var limitlabel: UILabel!
     @IBOutlet var sharelabel: UILabel!
     
-    let color = ColorManager()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -33,13 +32,13 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         super.viewDidLoad()
         text.delegate = self
         
-        addlabel.backgroundColor = color.green
+        addlabel.backgroundColor = ColorManager.green 
         addlabel.textColor = UIColor.white
-        todolabel.backgroundColor = color.green
+        todolabel.backgroundColor = ColorManager.green
         todolabel.textColor = UIColor.white
-        limitlabel.backgroundColor = color.green
+        limitlabel.backgroundColor = ColorManager.green
         limitlabel.textColor = UIColor.white
-        sharelabel.backgroundColor = color.green
+        sharelabel.backgroundColor = ColorManager.green
         sharelabel.textColor = UIColor.white
         
     }

@@ -15,6 +15,11 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     @IBOutlet var date: UIDatePicker!
     @IBOutlet var swich: UISwitch!
     
+    @IBOutlet var addlabel: UILabel!
+    @IBOutlet var schedulelabel: UILabel!
+    @IBOutlet var daylabel: UILabel!
+    @IBOutlet var sharelabel: UILabel!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
@@ -23,6 +28,15 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addlabel.backgroundColor = ColorManager.orange
+        addlabel.textColor = UIColor.white
+        schedulelabel.backgroundColor = ColorManager.orange
+        schedulelabel.textColor = UIColor.white
+        daylabel.backgroundColor = ColorManager.orange
+        daylabel.textColor = UIColor.white
+        sharelabel.backgroundColor = ColorManager.orange
+        sharelabel.textColor = UIColor.white
         text.delegate = self
     }
     
