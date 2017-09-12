@@ -32,7 +32,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         super.viewDidLoad()
         text.delegate = self
         
-        addlabel.backgroundColor = ColorManager.green 
+        addlabel.backgroundColor = ColorManager.green
         addlabel.textColor = UIColor.white
         todolabel.backgroundColor = ColorManager.green
         todolabel.textColor = UIColor.white
@@ -65,8 +65,15 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
             ToDoes.saveWithEvent(todo: todo, callBack: {
                 self.dismiss(animated: true, completion: nil)
             })
+            
+            if todo.isPublic == true {
+                
+            }
         }
+        
+        
     }
+    
     
     @IBAction func cancel () {
         self.dismiss(animated: true, completion: nil)
