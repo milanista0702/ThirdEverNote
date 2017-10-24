@@ -14,12 +14,13 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     
     @IBOutlet var text: UITextField!
     @IBOutlet var date: UIDatePicker!
-    @IBOutlet var swich: UISwitch!
     
     @IBOutlet var addlabel: UILabel!
     @IBOutlet var todolabel: UILabel!
     @IBOutlet var limitlabel: UILabel!
     @IBOutlet var sharelabel: UILabel!
+    
+    let shareswitch: UISwitch = UISwitch()
     
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,6 +42,9 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         sharelabel.backgroundColor = ColorManager.green
         sharelabel.textColor = UIColor.white
         
+        shareswitch.isOn = true
+        shareswitch.addTarget(self, action: "onClick", for: UIControlEvents.valueChanged)
+        
     }
     
     
@@ -55,13 +59,39 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         self.transitioningDelegate = self
     }
     
+    func onClick (sender: UISwitch) {
+        if sender.isOn {
+            self.showalert()
+        }
+    }
+    
+    func showalert() {
+        let alert = UIAlertController(title: "Group", message: "Create a NewGroup\nor\nExisting Group", preferredStyle: .alert)
+        
+        let action1 = UIAlertAction(title: "Create a New Group", style: .default) { _ in
+            self.performSegue(withIdentifier: "todonewsegue", sender: nil)
+        }
+        let action2 = UIAlertAction(title: "Existing Group", style: .default) { _ in
+            self.performSegue(withIdentifier: "todosearch", sender: nil)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(action1)
+        alert.addAction(action2)
+        alert.addAction(cancel)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
     @IBAction func ok(sender: UIButton) {
         if text.text?.isEmpty == true{
             
         }else{
             
-            let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), isPublic: swich.isOn, date: date.date as NSDate, done: false)
+            let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
             ToDoes.saveWithEvent(todo: todo, callBack: {
                 self.dismiss(animated: true, completion: nil)
             })
@@ -78,6 +108,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     @IBAction func cancel () {
         self.dismiss(animated: true, completion: nil)
     }
+    
     
     
     // ---- UIViewControllerTransitioningDelegate methods

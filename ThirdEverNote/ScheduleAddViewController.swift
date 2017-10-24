@@ -20,6 +20,8 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     @IBOutlet var daylabel: UILabel!
     @IBOutlet var sharelabel: UILabel!
     
+    let shareswitch: UISwitch = UISwitch()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
@@ -38,6 +40,10 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         sharelabel.backgroundColor = ColorManager.orange
         sharelabel.textColor = UIColor.white
         text.delegate = self
+        
+        shareswitch.isOn = true
+        shareswitch.addTarget(self, action: "onClick", for: UIControlEvents.valueChanged)
+
     }
     
     
@@ -52,13 +58,41 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         self.transitioningDelegate = self
     }
     
+    func onClick (sender: UISwitch) {
+        if sender.isOn {
+            self.showalert()
+        }
+    }
+    
+    func showalert() {
+        let alert = UIAlertController(title: "Group", message: "Create a NewGroup\nor\nExisting Group", preferredStyle: .alert)
+        
+        let action1 = UIAlertAction(title: "Create a New Group", style: .default) { _ in
+            self.performSegue(withIdentifier: "schenewsegue", sender: nil)
+        }
+        let action2 = UIAlertAction(title: "Existing Group", style: .default) { _ in
+            self.performSegue(withIdentifier: "schesearch", sender: nil)
+        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        alert.addAction(action1)
+        alert.addAction(action2)
+        alert.addAction(cancel)
+        
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+
+    
     
     @IBAction func ok(sender: UIButton) {
         if text.text?.isEmpty == true{
             
         }else{
             
-            let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), isPublic: swich.isOn, date: date.date as NSDate, done: false)
+            let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
             Schedule.saveWithEvent(schedule: schedule, callBack: {
                 self.dismiss(animated: true, completion: nil)
             })

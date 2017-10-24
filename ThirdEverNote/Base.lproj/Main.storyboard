@@ -264,10 +264,10 @@
             </objects>
             <point key="canvasLocation" x="1013" y="697"/>
         </scene>
-        <!--View Controller-->
+        <!--Search Group View Controller-->
         <scene sceneID="26w-Zx-L4h">
             <objects>
-                <viewController id="r98-ck-rfc" sceneMemberID="viewController">
+                <viewController id="r98-ck-rfc" customClass="SearchGroupViewController" customModule="ThirdEverNote" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2hp-p4-P2C"/>
                         <viewControllerLayoutGuide type="bottom" id="V44-sp-jiJ"/>
@@ -280,7 +280,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JB6-4I-aS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="436" y="1529"/>
+            <point key="canvasLocation" x="646" y="1582"/>
         </scene>
         <!--Group Create View Controller-->
         <scene sceneID="JxI-9P-7wG">
@@ -368,7 +368,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pzh-SO-8cd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1013" y="1529"/>
+            <point key="canvasLocation" x="1273" y="1582"/>
         </scene>
         <!--Schedule Add View Controller-->
         <scene sceneID="xdI-Gp-fj5">
@@ -499,8 +499,10 @@
                         <outlet property="daylabel" destination="UUf-zX-bhR" id="6Wy-fN-Fsn"/>
                         <outlet property="schedulelabel" destination="eJb-1d-IxR" id="VOt-bH-4Vi"/>
                         <outlet property="sharelabel" destination="EmJ-cQ-Zov" id="ymK-QC-vdZ"/>
-                        <outlet property="swich" destination="FkL-96-EDF" id="Isv-g8-drB"/>
+                        <outlet property="swich" destination="FkL-96-EDF" id="bpC-EI-e8a"/>
                         <outlet property="text" destination="rht-p3-BDD" id="o2g-yy-v02"/>
+                        <segue destination="Vtj-On-2vr" kind="modal" identifier="schenewsegue" id="3no-Ow-CgN"/>
+                        <segue destination="r98-ck-rfc" kind="modal" identifier="schesearch" id="Czh-FE-5o1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="90T-ZL-NOY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -792,6 +794,8 @@
                         <outlet property="date" destination="iky-Hs-JPB" id="GZJ-0P-x0Z"/>
                         <outlet property="swich" destination="3Uq-wt-Isq" id="V39-zQ-qoJ"/>
                         <outlet property="text" destination="257-7c-CmK" id="4QL-JC-e7W"/>
+                        <segue destination="r98-ck-rfc" kind="modal" identifier="todosearch" id="D0p-6R-jAD"/>
+                        <segue destination="Vtj-On-2vr" kind="modal" identifier="todonewsegue" id="KNi-Xi-PJJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w7N-Vq-U58" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -805,4 +809,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="D0p-6R-jAD"/>
+        <segue reference="KNi-Xi-PJJ"/>
+    </inferredMetricsTieBreakers>
 </document>
