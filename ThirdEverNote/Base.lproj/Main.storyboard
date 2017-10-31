@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="KUI-0M-64F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="KUI-0M-64F">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -46,7 +46,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D4m-xq-7fH" id="wsP-J4-GFQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -206,7 +206,7 @@
                         <outlet property="date" destination="VrB-fs-L9Y" id="EBw-RY-Q4j"/>
                         <outlet property="limitlabel" destination="ZTX-IP-FKB" id="W8O-6E-W5i"/>
                         <outlet property="sharelabel" destination="vsy-ko-yXo" id="axK-Jf-0ZA"/>
-                        <outlet property="swich" destination="G11-TN-arc" id="fxG-0u-M7C"/>
+                        <outlet property="shareswitch" destination="G11-TN-arc" id="7bO-6t-8WL"/>
                         <outlet property="text" destination="x0F-vt-00u" id="RsM-pM-tkw"/>
                         <outlet property="todolabel" destination="Wnz-mV-thL" id="aGd-oi-CxE"/>
                     </connections>
@@ -237,7 +237,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="68"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Sw-lH-Ztu" id="aPn-ui-yGf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -331,7 +331,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9Oc-6g-hdB" id="Eug-1G-S9O">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -499,7 +499,7 @@
                         <outlet property="daylabel" destination="UUf-zX-bhR" id="6Wy-fN-Fsn"/>
                         <outlet property="schedulelabel" destination="eJb-1d-IxR" id="VOt-bH-4Vi"/>
                         <outlet property="sharelabel" destination="EmJ-cQ-Zov" id="ymK-QC-vdZ"/>
-                        <outlet property="swich" destination="FkL-96-EDF" id="bpC-EI-e8a"/>
+                        <outlet property="swich" destination="FkL-96-EDF" id="VSO-TR-yPG"/>
                         <outlet property="text" destination="rht-p3-BDD" id="o2g-yy-v02"/>
                         <segue destination="Vtj-On-2vr" kind="modal" identifier="schenewsegue" id="3no-Ow-CgN"/>
                         <segue destination="r98-ck-rfc" kind="modal" identifier="schesearch" id="Czh-FE-5o1"/>
@@ -656,7 +656,7 @@
                     <toolbarItems/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pCC-EX-q35">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -791,9 +791,13 @@
                     </view>
                     <navigationItem key="navigationItem" title="NEW REMINDER" id="1fw-qd-7oU"/>
                     <connections>
+                        <outlet property="addlabel" destination="9yj-oi-Sdb" id="7Xj-9s-500"/>
                         <outlet property="date" destination="iky-Hs-JPB" id="GZJ-0P-x0Z"/>
-                        <outlet property="swich" destination="3Uq-wt-Isq" id="V39-zQ-qoJ"/>
+                        <outlet property="limitlabel" destination="3AH-l8-dbs" id="mE9-88-Axu"/>
+                        <outlet property="sharelabel" destination="9ND-Qq-d0E" id="Zn9-G9-GYG"/>
+                        <outlet property="shareswitch" destination="3Uq-wt-Isq" id="o9I-oU-shu"/>
                         <outlet property="text" destination="257-7c-CmK" id="4QL-JC-e7W"/>
+                        <outlet property="todolabel" destination="mvF-yI-QmY" id="eqb-vu-N4u"/>
                         <segue destination="r98-ck-rfc" kind="modal" identifier="todosearch" id="D0p-6R-jAD"/>
                         <segue destination="Vtj-On-2vr" kind="modal" identifier="todonewsegue" id="KNi-Xi-PJJ"/>
                     </connections>
@@ -804,13 +808,8 @@
             <point key="canvasLocation" x="1548" y="697"/>
         </scene>
     </scenes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="D0p-6R-jAD"/>
-        <segue reference="KNi-Xi-PJJ"/>
+        <segue reference="3no-Ow-CgN"/>
+        <segue reference="Czh-FE-5o1"/>
     </inferredMetricsTieBreakers>
 </document>

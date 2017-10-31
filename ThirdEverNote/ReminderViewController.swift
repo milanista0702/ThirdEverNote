@@ -230,7 +230,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    }
    
    
-   //appボタンが押された時 → onClickが呼ばれる → tapが呼ばれる
+   //appボタンが押された時 → onClickが呼ばれる
    func onClick(sender: AnyObject) {
       self.performSegue(withIdentifier: "addsegue", sender: nil)
    }

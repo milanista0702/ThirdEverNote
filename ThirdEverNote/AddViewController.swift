@@ -14,19 +14,15 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     
     @IBOutlet var text: UITextField!
     @IBOutlet var date: UIDatePicker!
-    
+    @IBOutlet var shareswitch:UISwitch!
     @IBOutlet var addlabel: UILabel!
     @IBOutlet var todolabel: UILabel!
     @IBOutlet var limitlabel: UILabel!
     @IBOutlet var sharelabel: UILabel!
     
-    let shareswitch: UISwitch = UISwitch()
-    
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
-        
     }
     
     override func viewDidLoad() {
@@ -42,9 +38,8 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         sharelabel.backgroundColor = ColorManager.green
         sharelabel.textColor = UIColor.white
         
-        shareswitch.isOn = true
-        shareswitch.addTarget(self, action: "onClick", for: UIControlEvents.valueChanged)
-        
+        shareswitch.isOn = false
+        shareswitch.addTarget(self, action: #selector(AddViewController.onClick(sender:)), for: .valueChanged)
     }
     
     
@@ -60,8 +55,9 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     }
     
     func onClick (sender: UISwitch) {
-        if sender.isOn {
+        if sender.isOn{
             self.showalert()
+        }else{
         }
     }
     
@@ -74,9 +70,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         let action2 = UIAlertAction(title: "Existing Group", style: .default) { _ in
             self.performSegue(withIdentifier: "todosearch", sender: nil)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            self.dismiss(animated: true, completion: nil)
-        }
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         
         alert.addAction(action1)
         alert.addAction(action2)
