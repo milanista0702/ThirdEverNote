@@ -1,4 +1,3 @@
-
 //
 //  AddViewController.swift
 //
@@ -14,7 +13,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     
     @IBOutlet var text: UITextField!
     @IBOutlet var date: UIDatePicker!
-    @IBOutlet var shareswitch:UISwitch!
+    @IBOutlet var shareswitch: UISwitch!
     @IBOutlet var addlabel: UILabel!
     @IBOutlet var todolabel: UILabel!
     @IBOutlet var limitlabel: UILabel!
@@ -70,7 +69,8 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         let action2 = UIAlertAction(title: "Existing Group", style: .default) { _ in
             self.performSegue(withIdentifier: "todosearch", sender: nil)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel){ _ in self.dismiss(animated: true, completion: nil)
+        }
         
         alert.addAction(action1)
         alert.addAction(action2)

@@ -13,14 +13,11 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     
     @IBOutlet var text: UITextField!
     @IBOutlet var date: UIDatePicker!
-    @IBOutlet var swich: UISwitch!
-    
+    @IBOutlet var shareswitch: UISwitch!
     @IBOutlet var addlabel: UILabel!
     @IBOutlet var schedulelabel: UILabel!
     @IBOutlet var daylabel: UILabel!
     @IBOutlet var sharelabel: UILabel!
-    
-    let shareswitch: UISwitch = UISwitch()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -30,6 +27,7 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        text.delegate = self
         
         addlabel.backgroundColor = ColorManager.orange
         addlabel.textColor = UIColor.white
@@ -39,11 +37,10 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         daylabel.textColor = UIColor.white
         sharelabel.backgroundColor = ColorManager.orange
         sharelabel.textColor = UIColor.white
-        text.delegate = self
         
-        shareswitch.isOn = true
-        shareswitch.addTarget(self, action: "onClick", for: UIControlEvents.valueChanged)
-
+        shareswitch.isOn = false
+        shareswitch.addTarget(self, action: #selector(ScheduleAddViewController.onClick(sender:)), for: .valueChanged)
+        
     }
     
     
@@ -61,6 +58,7 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     func onClick (sender: UISwitch) {
         if sender.isOn {
             self.showalert()
+        }else{
         }
     }
     
@@ -84,7 +82,7 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         self.present(alert, animated: true, completion: nil)
         
     }
-
+    
     
     
     @IBAction func ok(sender: UIButton) {

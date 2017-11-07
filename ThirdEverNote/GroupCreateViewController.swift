@@ -21,7 +21,15 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        text.delegate = self
+        
+        createlabel.backgroundColor = ColorManager.navy
+        createlabel.textColor = UIColor.white
+        namelabel.backgroundColor = ColorManager.navy
+        namelabel.textColor = UIColor.white
+        memberlabel.backgroundColor = ColorManager.navy
+        memberlabel.textColor = UIColor.white
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,7 +37,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     }
     
     @IBAction func ok() {
-        
+
     }
     
     @IBAction func cancel() {
