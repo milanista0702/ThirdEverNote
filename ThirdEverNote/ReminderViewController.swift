@@ -12,7 +12,6 @@ import NCMB
 class ReminderViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
    @IBOutlet var table: UITableView!
-   @IBOutlet var reminderTextField: UITextField!
    @IBOutlet var toolbar: UIToolbar!
    
    var remindArray = [ToDoes]()
