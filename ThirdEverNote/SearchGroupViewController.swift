@@ -15,7 +15,9 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     var searchBar = UISearchBar()
     var searchContrller = UISearchController()
     
-    var numberArray = [0, 1, 2, 3]
+    var numberArray = ["0", "1", "2", "3"]
+    
+    let saveData: UserDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +25,8 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
         
-        table.register(UINib(nibName: "GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableCell")
+        table.register(UINib(nibName: "GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,9 +38,16 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         return numberArray.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableCell") as! GroupTableCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableviewCell", for: indexPath) as! GroupTableViewCell
         cell.searchlabel.text = numberArray[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView:UITableView, didSelecRowAt indexPath: IndexPath) {
+        NSLog("%@が選択された", numberArray[indexPath.row])
+        _ = tableView.cellForRow(at: indexPath) as! GroupTableViewCell
     }
     
     @IBAction func ok() {

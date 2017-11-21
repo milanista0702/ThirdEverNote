@@ -35,7 +35,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       table.register(UINib(nibName: "TodoTableCell", bundle: nil), forCellReuseIdentifier: "TodoTableCell")
       
       
-      let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: Selector("rowButtonAction:"))
+      let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: Selector(("rowButtonAction:")))
       longPressRecognizer.allowableMovement = 15
       longPressRecognizer.minimumPressDuration = 0.6
       self.table.addGestureRecognizer(longPressRecognizer)
@@ -66,7 +66,6 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       self.navigationItem.rightBarButtonItem = addBtn
       
       self.navigationItem.title = "TODO LIST"
-      
    }
    
    
@@ -109,7 +108,6 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       return remindArray.count
       //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
    }
-   
    
    //ID付きのcellを取得してそれに付属しているlabelとかimageとか
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -105,10 +105,6 @@ class ViewController: UIViewController  {
         longPressRecognizer.minimumPressDuration = 0.6
         self.table.addGestureRecognizer(longPressRecognizer)
         
-        
-        //現在起動中のデバイスを取得（スクリーンの幅・高さ）
-        //        let screenWidth  = DeviseSize.screenWidth()
-        //        let screenHeight = DeviseSize.screenHeight()
         let screenSize: CGRect = UIScreen.main.bounds
         
         let screenWidth = screenSize.width
