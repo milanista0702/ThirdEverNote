@@ -9,7 +9,7 @@
 import UIKit
 import NCMB
 
-class SearchGroupViewController: UIViewController, UIViewControllerTransitioningDelegate {
+class SearchGroupViewController: UIViewController, UIViewControllerTransitioningDelegate, UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet var table: UITableView!
     var searchBar = UISearchBar()
@@ -19,8 +19,12 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     
     let saveData: UserDefaults = UserDefaults.standard
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        table.delegate = self
+        table.dataSource = self
         
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
@@ -34,12 +38,13 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         
     }
     
+    // cellの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return numberArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableviewCell", for: indexPath) as! GroupTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as!GroupTableViewCell
         cell.searchlabel.text = numberArray[indexPath.row]
         
         return cell
@@ -47,7 +52,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     
     func tableView(_ tableView:UITableView, didSelecRowAt indexPath: IndexPath) {
         NSLog("%@が選択された", numberArray[indexPath.row])
-        _ = tableView.cellForRow(at: indexPath) as! GroupTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! GroupTableViewCell
     }
     
     @IBAction func ok() {
