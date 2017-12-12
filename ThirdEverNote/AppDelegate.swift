@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ToDoes.registerSubclass()
         Schedule.registerSubclass()
         MiddleSchedule.registerSubclass()
+        User.registerSubclass()
     
         
         NCMB.setApplicationKey(GlobalVariable.appKey, clientKey: GlobalVariable.clientKey)

@@ -15,7 +15,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     @IBOutlet var table: UITableView!
     var searchController = UISearchController()
     
-    var numberArray = ["0", "1", "2", "3"]
+    var userArray = [User]()
     var searchResults : [String] = []
     
     @IBOutlet var createlabel: UILabel!
@@ -60,7 +60,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         if searchController.isActive {
             return searchResults.count
         }else{
-            return numberArray.count
+            return userArray.count
         }
     }
     
@@ -69,7 +69,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         if searchController.isActive{
             cell.searchlabel.text = searchResults[indexPath.row]
         }else{
-            cell.searchlabel.text = numberArray[indexPath.row]
+            cell.searchlabel.text = userArray[indexPath.row].user.userName
         }
         
         return cell
@@ -80,12 +80,13 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("%dが選択された", numberArray[indexPath.row])
+        NSLog("%dが選択された", userArray[indexPath.row])
         let cell = tableView.cellForRow(at: indexPath) as! GroupTableViewCell
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        self.searchResults = numberArray.filter{
+        
+        self.searchResults = userArray.map({ $0.user}).filter{
             $0.lowercased().contains(searchController.searchBar.text!.lowercased())
         }
         self.table.reloadData()
