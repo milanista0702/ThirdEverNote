@@ -19,6 +19,8 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     
     let saveData: UserDefaults = UserDefaults.standard
     
+    var userArray: [NCMBUser] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,9 +79,9 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        self.searchResults = numberArray.filter{
-            $0.lowercased().contains(searchController.searchBar.text!.lowercased())
-        }
+        self.searchResults = userArray.filter{
+            $0.userName.lowercased().contains(searchController.searchBar.text!.lowercased())
+        }.map({ $0.userName })
         self.table.reloadData()
     }
     

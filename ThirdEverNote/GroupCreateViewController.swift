@@ -15,7 +15,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     @IBOutlet var table: UITableView!
     var searchController = UISearchController()
     
-    var userArray = [User]()
+    var userArray = [NCMBUser]()
     var searchResults : [String] = []
     
     @IBOutlet var createlabel: UILabel!
@@ -69,7 +69,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         if searchController.isActive{
             cell.searchlabel.text = searchResults[indexPath.row]
         }else{
-            cell.searchlabel.text = userArray[indexPath.row].user.userName
+            cell.searchlabel.text = userArray[indexPath.row].userName
         }
         
         return cell
@@ -85,10 +85,9 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        
-        self.searchResults = userArray.map({ $0.user}).filter{
-            $0.lowercased().contains(searchController.searchBar.text!.lowercased())
-        }
+        self.searchResults = userArray.filter {
+            $0.userName.lowercased().contains(searchController.searchBar.text!.lowercased())
+        }.map({$0.userName})
         self.table.reloadData()
     }
     
