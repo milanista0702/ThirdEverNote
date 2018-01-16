@@ -10,7 +10,6 @@
 		3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */; };
 		3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE691D759146009F5486 /* CustomPresentationController.swift */; };
 		3E20B4C01F0260CF002166C2 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20B4BF1F0260CF002166C2 /* ColorManager.swift */; };
-		3E21B8BA1F67F8C900451BCF /* MiddleSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E21B8B91F67F8C900451BCF /* MiddleSchedule.swift */; };
 		3E28073B1F9F4FE30076F095 /* SearchGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E28073A1F9F4FE30076F095 /* SearchGroupViewController.swift */; };
 		3E4F92CB1E4765F500CB40E2 /* CalendarLabelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F92CA1E4765F500CB40E2 /* CalendarLabelLayout.swift */; };
 		3E4F92CD1E476AA100CB40E2 /* CalenderLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F92CC1E476AA100CB40E2 /* CalenderLayout.swift */; };
@@ -27,12 +26,14 @@
 		3E7A406B1D195CCD0056BB49 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7A406A1D195CCD0056BB49 /* LoginViewController.swift */; };
 		3E7A406D1D19618A0056BB49 /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */; };
 		3E7A419F1F961659006B711E /* GroupCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7A419E1F961659006B711E /* GroupCreateViewController.swift */; };
+		3E8204B9200E0D7200D210D7 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8204B8200E0D7200D210D7 /* Group.swift */; };
 		3E872E961DBF6CB90086CEA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E73763F1C733B1E00E43AC2 /* Main.storyboard */; };
 		3E8D6D0E1EF93A700040919B /* ScheduleAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8D6D0D1EF93A700040919B /* ScheduleAddViewController.swift */; };
 		3E9137CE1D9147C8005AD176 /* TodoTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9137CC1D9147C8005AD176 /* TodoTableCell.swift */; };
 		3E9137CF1D9147C8005AD176 /* TodoTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E9137CD1D9147C8005AD176 /* TodoTableCell.xib */; };
 		3EB513381FBAEE1400454C50 /* GroupTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EB513371FBAEE1400454C50 /* GroupTableCell.xib */; };
 		3EB513481FBAF07300454C50 /* GroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB513471FBAF07300454C50 /* GroupTableViewCell.swift */; };
+		3EBCE3EB200E15E500540073 /* MiddleGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBCE3EA200E15E500540073 /* MiddleGroup.swift */; };
 		3EC5B21E1D228A07002CB0A9 /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EC5B21D1D228A07002CB0A9 /* TextFieldDelegate.swift */; };
 		3EC98EAB1C8A590A0082C969 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC98EA91C8A590A0082C969 /* check.png */; };
 		3EC98EAC1C8A590A0082C969 /* 矢印.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EC98EAA1C8A590A0082C969 /* 矢印.png */; };
@@ -64,7 +65,6 @@
 		3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationAnimationController.swift; sourceTree = "<group>"; };
 		3E19FE691D759146009F5486 /* CustomPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
 		3E20B4BF1F0260CF002166C2 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
-		3E21B8B91F67F8C900451BCF /* MiddleSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddleSchedule.swift; sourceTree = "<group>"; };
 		3E28073A1F9F4FE30076F095 /* SearchGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchGroupViewController.swift; sourceTree = "<group>"; };
 		3E4F92CA1E4765F500CB40E2 /* CalendarLabelLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarLabelLayout.swift; sourceTree = "<group>"; };
 		3E4F92CC1E476AA100CB40E2 /* CalenderLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderLayout.swift; sourceTree = "<group>"; };
@@ -88,11 +88,13 @@
 		3E7A406A1D195CCD0056BB49 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
 		3E7A419E1F961659006B711E /* GroupCreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupCreateViewController.swift; sourceTree = "<group>"; };
+		3E8204B8200E0D7200D210D7 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		3E8D6D0D1EF93A700040919B /* ScheduleAddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleAddViewController.swift; sourceTree = "<group>"; };
 		3E9137CC1D9147C8005AD176 /* TodoTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableCell.swift; sourceTree = "<group>"; };
 		3E9137CD1D9147C8005AD176 /* TodoTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoTableCell.xib; sourceTree = "<group>"; };
 		3EB513371FBAEE1400454C50 /* GroupTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupTableCell.xib; sourceTree = "<group>"; };
 		3EB513471FBAF07300454C50 /* GroupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTableViewCell.swift; sourceTree = "<group>"; };
+		3EBCE3EA200E15E500540073 /* MiddleGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleGroup.swift; sourceTree = "<group>"; };
 		3EC5B21D1D228A07002CB0A9 /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
 		3EC98EA91C8A590A0082C969 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check.png; path = ../check.png; sourceTree = "<group>"; };
 		3EC98EAA1C8A590A0082C969 /* 矢印.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "矢印.png"; path = "../矢印.png"; sourceTree = "<group>"; };
@@ -182,8 +184,9 @@
 				3E7A406A1D195CCD0056BB49 /* LoginViewController.swift */,
 				3E8D6D0D1EF93A700040919B /* ScheduleAddViewController.swift */,
 				3EF80B441D1951C500D829A8 /* ToDoes.swift */,
+				3E8204B8200E0D7200D210D7 /* Group.swift */,
+				3EBCE3EA200E15E500540073 /* MiddleGroup.swift */,
 				3E4F92CE1E49D91E00CB40E2 /* Schedule.swift */,
-				3E21B8B91F67F8C900451BCF /* MiddleSchedule.swift */,
 				3E7A406C1D19618A0056BB49 /* GlobalVariable.swift */,
 				3E678BB01D5A0816002B41F4 /* AddViewController.swift */,
 				3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */,
@@ -511,15 +514,16 @@
 				3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */,
 				3E678BB11D5A0816002B41F4 /* AddViewController.swift in Sources */,
 				3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */,
+				3EBCE3EB200E15E500540073 /* MiddleGroup.swift in Sources */,
 				3E73766A1C733C9000E43AC2 /* ViewController.swift in Sources */,
 				3E20B4C01F0260CF002166C2 /* ColorManager.swift in Sources */,
 				3EF80B451D1951C500D829A8 /* ToDoes.swift in Sources */,
+				3E8204B9200E0D7200D210D7 /* Group.swift in Sources */,
 				3E7A419F1F961659006B711E /* GroupCreateViewController.swift in Sources */,
 				3E73763C1C733B1E00E43AC2 /* AppDelegate.swift in Sources */,
 				3E9137CE1D9147C8005AD176 /* TodoTableCell.swift in Sources */,
 				3E7376701C7C672D00E43AC2 /* ReminderViewController.swift in Sources */,
 				3EB513481FBAF07300454C50 /* GroupTableViewCell.swift in Sources */,
-				3E21B8BA1F67F8C900451BCF /* MiddleSchedule.swift in Sources */,
 				3EC5B21E1D228A07002CB0A9 /* TextFieldDelegate.swift in Sources */,
 				3E7A40691D195CB70056BB49 /* SignUpViewController.swift in Sources */,
 				3E4F92CD1E476AA100CB40E2 /* CalenderLayout.swift in Sources */,

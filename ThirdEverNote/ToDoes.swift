@@ -95,7 +95,6 @@ class ToDoes: NCMBObject, NCMBSubclassing{
                     callback(obj)
                 }
             }
-            
         }
     }
     

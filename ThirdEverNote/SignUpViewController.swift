@@ -62,6 +62,9 @@ class SignUpViewController: UIViewController {
         user?.password = password
         user?.mailAddress = email
         user?.userName = username
+        let acl = NCMBACL()
+        acl.setPublicReadAccess(true)
+        user?.acl = NCMBACL()
         if user?.isNew == false {
             user?.signUpInBackground { (error) in
                 if error != nil {

@@ -49,7 +49,6 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         namelabel.textColor = UIColor.white
         memberlabel.backgroundColor = ColorManager.navy
         memberlabel.textColor = UIColor.white
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,11 +61,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as!GroupTableViewCell
-        if searchController.isActive{
-            cell.searchlabel.text = "\(userArray[indexPath.row])"
-        }else{
-        }
-        
+        cell.searchlabel.text = String(userArray[indexPath.row].userName)
         return cell
     }
     
@@ -76,7 +71,9 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         query?.whereKey("userName", equalTo: searchController.searchBar.text!)
         query?.findObjectsInBackground({(objects, error) in
             if (error != nil) {
+                print(error)
             }else{
+                print("objects ... \(objects)")
                 self.userArray =  objects as! [NCMBUser]
                 self.table.reloadData()
             }

@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         ToDoes.registerSubclass()
         Schedule.registerSubclass()
-        MiddleSchedule.registerSubclass()
+        Group.registerSubclass()
+        MiddleGroup.registerSubclass()
+        
     
         
         NCMB.setApplicationKey(GlobalVariable.appKey, clientKey: GlobalVariable.clientKey)
