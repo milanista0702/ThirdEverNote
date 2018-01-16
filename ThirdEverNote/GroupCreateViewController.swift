@@ -16,7 +16,6 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     var searchController = UISearchController()
     
     var userArray = [NCMBUser]()
-    var searchResults : [String] = []
     
     @IBOutlet var createlabel: UILabel!
     @IBOutlet var namelabel: UILabel!
@@ -29,6 +28,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         text.delegate = self
         table.delegate = self
         table.dataSource = self
+        searchController.delegate = self
         
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
@@ -57,39 +57,32 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.isActive {
-            return searchResults.count
-        }else{
             return userArray.count
-        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as!GroupTableViewCell
         if searchController.isActive{
-            cell.searchlabel.text = searchResults[indexPath.row]
+            cell.searchlabel.text = "\(userArray[indexPath.row])"
         }else{
-            cell.searchlabel.text = userArray[indexPath.row].userName
         }
         
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NSLog("%dが選択された", userArray[indexPath.row])
-        let cell = tableView.cellForRow(at: indexPath) as! GroupTableViewCell
-    }
-    
     func updateSearchResults(for searchController: UISearchController) {
-        self.searchResults = userArray.filter {
-            $0.userName.lowercased().contains(searchController.searchBar.text!.lowercased())
-        }.map({$0.userName})
-        self.table.reloadData()
+        let query = NCMBUser.query()
+        // TODO: .text!の!を安全にアンラップ
+        query?.whereKey("userName", equalTo: searchController.searchBar.text!)
+        query?.findObjectsInBackground({(objects, error) in
+            if (error != nil) {
+            }else{
+                self.userArray =  objects as! [NCMBUser]
+                self.table.reloadData()
+            }
+        })
     }
+    
     
     @IBAction func ok() {
         
@@ -97,5 +90,11 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     
     @IBAction func cancel() {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension GroupCreateViewController : UISearchControllerDelegate {
+    func presentSearchController(_ searchController: UISearchController) {
+        searchController.searchBar.becomeFirstResponder()
     }
 }
