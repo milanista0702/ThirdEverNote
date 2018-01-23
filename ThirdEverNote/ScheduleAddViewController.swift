@@ -50,6 +50,11 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         self.commonInit()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender:Any?) {
+        var GroupVerificationViewController = segue.destination as! GroupVerificationViewController
+        GroupVerificationViewController.schedule = self.text.text
+        }
+    
     func commonInit() {
         self.modalPresentationStyle = .custom
         self.transitioningDelegate = self

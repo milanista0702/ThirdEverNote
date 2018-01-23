@@ -55,6 +55,11 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         super.didReceiveMemoryWarning()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender:Any?){
+        var GroupVerificationViewController = segue.destination as! GroupVerificationViewController
+        GroupVerificationViewController.text = self.text.text
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return userArray.count
     }
@@ -82,7 +87,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     
     
     @IBAction func ok() {
-        
+        self.performSegue(withIdentifier: "ToVerificationsegue", sender: nil)
     }
     
     @IBAction func cancel() {

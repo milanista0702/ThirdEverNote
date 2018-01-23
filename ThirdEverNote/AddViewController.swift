@@ -48,6 +48,11 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         self.commonInit()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender:Any?) {
+        var GroupVerificationViewController = segue.destination as! GroupVerificationViewController
+        GroupVerificationViewController.todo = self.text.text
+    }
+    
     func commonInit() {
         self.modalPresentationStyle = .custom
         self.transitioningDelegate = self
