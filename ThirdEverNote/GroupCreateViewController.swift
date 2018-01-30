@@ -15,7 +15,12 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     @IBOutlet var table: UITableView!
     var searchController = UISearchController()
     
-    var userArray = [NCMBUser]()
+    var membersArray = [NCMBUser]()
+    var usersArray = [NCMBUser](){
+        didSet{
+            membersArray = usersArray
+        }
+    }
     
     @IBOutlet var createlabel: UILabel!
     @IBOutlet var namelabel: UILabel!
@@ -25,6 +30,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         text.delegate = self
         table.delegate = self
         table.dataSource = self
@@ -42,6 +48,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         searchController.hidesNavigationBarDuringPresentation = false
         
         table.tableHeaderView = searchController.searchBar
+        table.allowsMultipleSelection = true
         
         createlabel.backgroundColor = ColorManager.navy
         createlabel.textColor = UIColor.white
@@ -60,15 +67,28 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         GroupVerificationViewController.text = self.text.text
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .checkmark
+        membersArray.append(usersArray[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .none
+        membersArray.remove(at: indexPath.row)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return userArray.count
+            return usersArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as!GroupTableViewCell
-        cell.searchlabel.text = String(userArray[indexPath.row].userName)
+        cell.searchlabel.text = String(usersArray[indexPath.row].userName)
         return cell
     }
+    
     
     func updateSearchResults(for searchController: UISearchController) {
         let query = NCMBUser.query()
@@ -79,14 +99,14 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
                 print(error)
             }else{
                 print("objects ... \(objects)")
-                self.userArray =  objects as! [NCMBUser]
+                self.usersArray =  objects as! [NCMBUser]
                 self.table.reloadData()
             }
         })
     }
     
     
-    @IBAction func ok() {
+    @IBAction func ok(sender: UIButton) {
         self.performSegue(withIdentifier: "ToVerificationsegue", sender: nil)
     }
     

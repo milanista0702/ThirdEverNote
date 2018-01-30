@@ -11,7 +11,7 @@ import NCMB
 
 @objc(MiddleGroup)
 class MiddleGroup: NCMBObject, NCMBSubclassing {
-    var group: Group! {
+    var group: Group {
         get {
             return object(forKey: "group") as! Group
         }

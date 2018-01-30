@@ -18,6 +18,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     var schedule: String?
     var todo: String?
     var memberArray = [MiddleGroup]()
+    var usersArray = [NCMBUser]()
     
     
     override func viewDidLoad() {
@@ -39,10 +40,18 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         mtable.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         utable.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToVerificationsegue" {
+            let members: GroupCreateViewController = segue.destination as! GroupCreateViewController
+            members.membersArray = usersArray
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -70,15 +79,11 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     
     @IBAction func ok() {
         guard let groupname = label.text else {return}
-        guard let member = mtable.cell.searchlabel else {return}
-        guard let object = utable.cell.searchlabel else{return}
         
+        
+        self.performSegue(withIdentifier: "view", sender: nil)
     }
     
-    func makegroup (groupname: String, member: String, object: String){
-        let group = group(className: "Group")
-        
-    }
     
     @IBAction func back()  {
         self.dismiss(animated: true, completion: nil)
