@@ -49,8 +49,8 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender:Any?) {
-        var GroupVerificationViewController = segue.destination as! GroupVerificationViewController
-        GroupVerificationViewController.todo = self.text.text
+        let VRT = segue.destination as! GroupCreateViewController
+        VRT.todotext = self.text.text
     }
     
     func commonInit() {

@@ -141,7 +141,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="OK"/>
                                 <connections>
-                                    <action selector="ok" destination="Vtj-On-2vr" eventType="touchUpInside" id="iG7-iH-kk9"/>
                                     <action selector="ok" destination="r98-ck-rfc" eventType="touchUpInside" id="x4c-1S-rMd"/>
                                 </connections>
                             </button>
@@ -150,7 +149,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cancel"/>
                                 <connections>
-                                    <action selector="cancel" destination="Vtj-On-2vr" eventType="touchUpInside" id="JEr-S7-9CU"/>
                                     <action selector="cancel" destination="r98-ck-rfc" eventType="touchUpInside" id="jlG-8r-jzl"/>
                                 </connections>
                             </button>
@@ -218,16 +216,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="OK"/>
                                 <connections>
-                                    <action selector="ok" destination="Vtj-On-2vr" eventType="touchUpInside" id="Inz-TH-zps"/>
+                                    <action selector="okWithSender:" destination="Vtj-On-2vr" eventType="touchUpInside" id="nej-eS-ROe"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iqh-jk-h01">
                                 <rect key="frame" x="69" y="602" width="73" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cancel"/>
-                                <connections>
-                                    <action selector="cancel" destination="Vtj-On-2vr" eventType="touchUpInside" id="zhf-kL-Afu"/>
-                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Member" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dcc-Bj-wLG">
                                 <rect key="frame" x="35" y="257" width="80" height="40"/>
@@ -316,7 +311,6 @@
                                 <state key="normal" title="OK"/>
                                 <connections>
                                     <action selector="ok" destination="ZpG-ZR-ehb" eventType="touchUpInside" id="b7D-YK-b5x"/>
-                                    <action selector="ok" destination="Vtj-On-2vr" eventType="touchUpInside" id="sIF-Xg-sDM"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Member" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sP-Ey-vHH">
@@ -798,7 +792,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="eF6-p4-0pp"/>
-        <segue reference="KNi-Xi-PJJ"/>
+        <segue reference="3no-Ow-CgN"/>
         <segue reference="D0p-6R-jAD"/>
         <segue reference="F8a-oa-A7E"/>
     </inferredMetricsTieBreakers>

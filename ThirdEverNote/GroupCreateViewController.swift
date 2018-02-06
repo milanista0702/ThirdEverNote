@@ -15,6 +15,8 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     @IBOutlet var table: UITableView!
     var searchController = UISearchController()
     
+    var todotext: String?
+    var scheduletext: String?
     var membersArray = [NCMBUser]()
     var usersArray = [NCMBUser](){
         didSet{
@@ -63,8 +65,11 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender:Any?){
-        var GroupVerificationViewController = segue.destination as! GroupVerificationViewController
-        GroupVerificationViewController.text = self.text.text
+        let GVC = segue.destination as! GroupVerificationViewController
+        GVC.text = text.text
+        GVC.stext = scheduletext
+        GVC.ttext = todotext
+        GVC.memberArray = membersArray
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -98,7 +103,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
             if (error != nil) {
                 print(error)
             }else{
-                print("objects ... \(objects)")
+                print("objects ... \(String(describing: objects))")
                 self.usersArray =  objects as! [NCMBUser]
                 self.table.reloadData()
             }

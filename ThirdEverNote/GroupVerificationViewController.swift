@@ -15,10 +15,11 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     @IBOutlet var utable: UITableView!
     @IBOutlet var label: UILabel!
     var text: String?
+    var ttext: String?
+    var stext: String?
     var schedule: String?
     var todo: String?
-    var memberArray = [MiddleGroup]()
-    var usersArray = [NCMBUser]()
+    var memberArray = [NCMBUser]()
     
     
     override func viewDidLoad() {
@@ -47,13 +48,6 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         super.didReceiveMemoryWarning()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ToVerificationsegue" {
-            let members: GroupCreateViewController = segue.destination as! GroupCreateViewController
-            members.membersArray = usersArray
-        }
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if tableView == mtable {
             return memberArray.count
@@ -65,22 +59,20 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as!GroupTableViewCell
         if tableView == mtable {
-            cell.searchlabel.text = memberArray[indexPath.row].user.userName
+            cell.searchlabel.text = memberArray[indexPath.row].userName
         }else{
-            if schedule == nil {
-                cell.searchlabel.text = todo
+            if stext == nil {
+                cell.searchlabel.text = ttext
             }else{
-                cell.searchlabel.text = schedule
+                cell.searchlabel.text = stext
             }
+            
         }
         return cell
     }
     
     
     @IBAction func ok() {
-        guard let groupname = label.text else {return}
-        
-        
         self.performSegue(withIdentifier: "view", sender: nil)
     }
     
