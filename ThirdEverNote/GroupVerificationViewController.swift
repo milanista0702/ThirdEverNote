@@ -20,6 +20,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     var schedule: String?
     var todo: String?
     var memberArray = [NCMBUser]()
+    let groupcreate: Group? = nil
     
     
     override func viewDidLoad() {
@@ -40,7 +41,6 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         
         mtable.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         utable.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
-        
         
     }
     
@@ -73,7 +73,12 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     
     
     @IBAction func ok() {
-        self.performSegue(withIdentifier: "view", sender: nil)
+        let middlegroup = MiddleGroup.create(group: groupcreate!, user: memberArray[0])
+        MiddleGroup.saveWithEvent(group: middlegroup, callBack: {
+            self.performSegue(withIdentifier: "view", sender: nil)
+            })
+        
+        let group = Group.create(name: label.text!, user: NCMBUser.current())
     }
     
     

@@ -18,11 +18,8 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     var todotext: String?
     var scheduletext: String?
     var membersArray = [NCMBUser]()
-    var usersArray = [NCMBUser](){
-        didSet{
-            membersArray = usersArray
-        }
-    }
+    var usersArray = [NCMBUser]()
+    let groups: Group? = nil
     
     @IBOutlet var createlabel: UILabel!
     @IBOutlet var namelabel: UILabel!
@@ -70,30 +67,8 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         GVC.stext = scheduletext
         GVC.ttext = todotext
         GVC.memberArray = membersArray
+        GVC.groupcreate = groups
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.accessoryType = .checkmark
-        membersArray.append(usersArray[indexPath.row])
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.accessoryType = .none
-        membersArray.remove(at: indexPath.row)
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return usersArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as!GroupTableViewCell
-        cell.searchlabel.text = String(usersArray[indexPath.row].userName)
-        return cell
-    }
-    
     
     func updateSearchResults(for searchController: UISearchController) {
         let query = NCMBUser.query()
@@ -110,9 +85,36 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         })
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as!GroupTableViewCell
+        cell.searchlabel.text = String(usersArray[indexPath.row].userName)
+        cell.accessoryType = .none
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return usersArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .checkmark
+        membersArray.append(usersArray[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .none
+        membersArray.remove(at: indexPath.row)
+    }
     
     @IBAction func ok(sender: UIButton) {
-        self.performSegue(withIdentifier: "ToVerificationsegue", sender: nil)
+        let groups = Group.create(name:text.text!, user: NCMBUser.current())
+        Group.saveWithEvent(name: groups, callBack: {
+            self.searchController.isActive = false
+            self.performSegue(withIdentifier: "ToVerification", sender: nil)
+            print(self.membersArray)
+            })
     }
     
     @IBAction func cancel() {

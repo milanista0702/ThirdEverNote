@@ -255,7 +255,7 @@
                         <outlet property="namelabel" destination="Xxr-r7-zKd" id="hHe-sU-bi8"/>
                         <outlet property="table" destination="H60-OO-2a2" id="5hV-e8-B2M"/>
                         <outlet property="text" destination="ywY-Oq-ic7" id="UZu-2o-kGU"/>
-                        <segue destination="ZpG-ZR-ehb" kind="modal" identifier="ToVerificationsegue" id="eF6-p4-0pp"/>
+                        <segue destination="ZpG-ZR-ehb" kind="modal" identifier="ToVerification" id="eF6-p4-0pp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pzh-SO-8cd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -290,7 +290,7 @@
                                 </prototypes>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wg9-Lp-dPQ">
-                                <rect key="frame" x="54" y="61" width="267" height="60"/>
+                                <rect key="frame" x="52" y="56" width="270" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -310,18 +310,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="OK"/>
                                 <connections>
-                                    <action selector="ok" destination="ZpG-ZR-ehb" eventType="touchUpInside" id="b7D-YK-b5x"/>
+                                    <action selector="ok" destination="ZpG-ZR-ehb" eventType="touchUpInside" id="JYB-h5-e7r"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Member" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sP-Ey-vHH">
-                                <rect key="frame" x="16" y="242" width="131" height="43"/>
+                                <rect key="frame" x="16" y="242" width="80" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9WW-yd-Cwg">
-                                <rect key="frame" x="0.0" y="139" width="375" height="73"/>
+                                <rect key="frame" x="0.0" y="149" width="375" height="73"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -482,7 +482,6 @@
                         <outlet property="text" destination="rht-p3-BDD" id="o2g-yy-v02"/>
                         <segue destination="Vtj-On-2vr" kind="modal" identifier="schenewsegue" id="3no-Ow-CgN"/>
                         <segue destination="r98-ck-rfc" kind="modal" identifier="schesearch" id="Czh-FE-5o1"/>
-                        <segue destination="ZpG-ZR-ehb" kind="modal" id="Aib-6J-xFt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="90T-ZL-NOY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -781,7 +780,6 @@
                         <outlet property="todolabel" destination="mvF-yI-QmY" id="eqb-vu-N4u"/>
                         <segue destination="r98-ck-rfc" kind="modal" identifier="todosearch" id="D0p-6R-jAD"/>
                         <segue destination="Vtj-On-2vr" kind="modal" identifier="todonewsegue" id="KNi-Xi-PJJ"/>
-                        <segue destination="ZpG-ZR-ehb" kind="modal" id="FlR-Jx-JfZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w7N-Vq-U58" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -791,9 +789,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="eF6-p4-0pp"/>
-        <segue reference="3no-Ow-CgN"/>
-        <segue reference="D0p-6R-jAD"/>
+        <segue reference="KNi-Xi-PJJ"/>
+        <segue reference="Czh-FE-5o1"/>
         <segue reference="F8a-oa-A7E"/>
     </inferredMetricsTieBreakers>
 </document>
