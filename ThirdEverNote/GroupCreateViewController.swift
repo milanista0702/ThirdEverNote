@@ -19,7 +19,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     var scheduletext: String?
     var membersArray = [NCMBUser]()
     var usersArray = [NCMBUser]()
-    let groups: Group? = nil
+    var groups: Group?
     
     @IBOutlet var createlabel: UILabel!
     @IBOutlet var namelabel: UILabel!
@@ -109,8 +109,8 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     }
     
     @IBAction func ok(sender: UIButton) {
-        let groups = Group.create(name:text.text!, user: NCMBUser.current())
-        Group.saveWithEvent(name: groups, callBack: {
+        groups = Group.create(name:text.text!, user: NCMBUser.current())
+        Group.saveWithEvent(name: groups!, callBack: {
             self.searchController.isActive = false
             self.performSegue(withIdentifier: "ToVerification", sender: nil)
             print(self.membersArray)

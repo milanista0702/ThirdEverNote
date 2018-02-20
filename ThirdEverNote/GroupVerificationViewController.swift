@@ -20,7 +20,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     var schedule: String?
     var todo: String?
     var memberArray = [NCMBUser]()
-    let groupcreate: Group? = nil
+    var groupcreate: Group?
     
     
     override func viewDidLoad() {

@@ -342,7 +342,7 @@
                         <outlet property="label" destination="wg9-Lp-dPQ" id="UXI-bI-b6I"/>
                         <outlet property="mtable" destination="4Vl-AP-Dsm" id="YV7-Tr-Hcp"/>
                         <outlet property="utable" destination="9WW-yd-Cwg" id="kjQ-wH-qWA"/>
-                        <segue destination="Fxb-1j-Z7b" kind="push" identifier="view" id="F8a-oa-A7E"/>
+                        <segue destination="KUI-0M-64F" kind="modal" identifier="view" id="gzU-U3-ouG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aXR-kt-FYw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -634,6 +634,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KUI-0M-64F" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="zim-c1-CbD"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pCC-EX-q35">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -791,6 +792,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="KNi-Xi-PJJ"/>
         <segue reference="Czh-FE-5o1"/>
-        <segue reference="F8a-oa-A7E"/>
+        <segue reference="CYS-mB-rpn"/>
     </inferredMetricsTieBreakers>
 </document>
