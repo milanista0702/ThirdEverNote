@@ -114,11 +114,11 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
             self.searchController.isActive = false
             self.performSegue(withIdentifier: "ToVerification", sender: nil)
             print(self.membersArray)
-            })
+        })
     }
     
     @IBAction func cancel() {
-        self.dismiss(animated: true, completion: nil)
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
 

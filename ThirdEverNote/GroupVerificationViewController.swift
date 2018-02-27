@@ -14,6 +14,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     @IBOutlet var mtable: UITableView!
     @IBOutlet var utable: UITableView!
     @IBOutlet var label: UILabel!
+    @IBOutlet var memberlabel: UILabel!
     var text: String?
     var ttext: String?
     var stext: String?
@@ -26,8 +27,12 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        label.text = text
+        label.backgroundColor = UIColor.black
+        label.textColor = UIColor.white
+        memberlabel.backgroundColor = UIColor.black
+        memberlabel.textColor = UIColor.white
         
+        label.text = text
         mtable.delegate = self
         mtable.dataSource = self
         
@@ -73,12 +78,13 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     
     
     @IBAction func ok() {
-        let middlegroup = MiddleGroup.create(group: groupcreate!, user: memberArray[0])
-        MiddleGroup.saveWithEvent(group: middlegroup, callBack: {
-            self.performSegue(withIdentifier: "view", sender: nil)
+        for element in memberArray {
+            let middlegroup = MiddleGroup.create(group: groupcreate!, user: element)
+            MiddleGroup.saveWithEvent(group: middlegroup, callBack: {
+                self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
             })
-        
-        let group = Group.create(name: label.text!, user: NCMBUser.current())
+            let group = Group.create(name: label.text!, user: NCMBUser.current())
+        }
     }
     
     
