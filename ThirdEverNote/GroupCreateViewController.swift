@@ -76,7 +76,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         query?.whereKey("userName", equalTo: searchController.searchBar.text!)
         query?.findObjectsInBackground({(objects, error) in
             if (error != nil) {
-                print(error)
+                print(error as Any)
             }else{
                 print("objects ... \(String(describing: objects))")
                 self.usersArray =  objects as! [NCMBUser]

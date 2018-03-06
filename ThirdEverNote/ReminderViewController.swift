@@ -114,12 +114,12 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableCell") as! TodoTableCell
       cell.todolabel.text = remindArray[indexPath.row].todo
       cell.datelabel.text = formatter(date: remindArray[indexPath.row].date)
+      cell.colorlabel.backgroundColor = ColorManager.green
       if remindArray[indexPath.row].done == true {
          cell.arrowImageView.image = UIImage(named: "Check.png")
       }else{
          cell.arrowImageView.image = UIImage(named: "矢印.png")
       }
-      
       return cell
    }
    
@@ -138,11 +138,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       //キャストしてる？
       
       remindArray[indexPath.row].done = true
-      if remindArray[indexPath.row].done == true {
-         cell.arrowImageView.image = UIImage(named: "Check.png")
-      }else{
-         cell.arrowImageView.image = UIImage(named: "矢印.png")
-      }
+      cell.arrowImageView.image = UIImage(named: "check.png")
    }
    
    
@@ -196,7 +192,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       let object = remindArray[indexPath.row]
       object.deleteEventually { (error) in
          if error != nil {
-            print(error?.localizedDescription)
+            print(error?.localizedDescription as Any)
          }
       }
    }
@@ -217,7 +213,6 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       
       if let indexPath = indexPath {
          if sender.state == UIGestureRecognizerState.began {
-            
             // セルが長押しされたときの処理
             print("long pressed \(indexPath.row)")
          }
@@ -226,11 +221,11 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       }
    }
    
-   
    //appボタンが押された時 → onClickが呼ばれる
    func onClick(sender: AnyObject) {
       self.performSegue(withIdentifier: "addsegue", sender: nil)
    }
+   
    
    func dismiss(segue: UIStoryboardSegue) {
       self.dismiss(animated: true, completion: nil)

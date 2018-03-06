@@ -703,11 +703,13 @@ extension ViewController: UITableViewDataSource {
             cell.todolabel.text = sortedscheduleArray[indexPath.row].title
             cell.datelabel.text = formatter(date: sortedscheduleArray[indexPath.row].date)
             cell.arrowImageView.image = UIImage(named:  "矢印.png")
+            cell.colorlabel.backgroundColor = ColorManager.orange
         }else{
             let sortedtodoArray = todoArray.sorted{( $0.date as Date) < ($1.date as Date)}
             cell.todolabel.text = sortedtodoArray[indexPath.row - scheduleArray.count].todo
             cell.datelabel.text = formatter(date: sortedtodoArray[indexPath.row - scheduleArray.count].date)
             cell.arrowImageView.image = UIImage(named:  "矢印.png")
+            cell.colorlabel.backgroundColor = ColorManager.green
         }
         return cell
     }
