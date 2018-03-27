@@ -48,7 +48,11 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let GVC = segue.destination as! AddViewController
+        GVC.groupsArray = addgroupArray
     }
     
     func updateSearchResults(for searchContrller: UISearchController) {
@@ -90,12 +94,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     }
     
     @IBAction func ok(sender: UIButton) {
-//        let middlegroup = MiddleGroup.create(group: groups!, user: element)
-//        MiddleGroup.saveWithEvent(group: middlegroup, callBack: {
-//            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-//        })
-//        addgroupArray.addgroupArray.append(at: IndexPath.row)
-//        addgroupArray.remove(at: IndexPath.)
+        
     }
     
     @IBAction func cancel() {

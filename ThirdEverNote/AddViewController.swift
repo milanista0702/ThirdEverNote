@@ -19,6 +19,8 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     @IBOutlet var limitlabel: UILabel!
     @IBOutlet var sharelabel: UILabel!
     
+    var groupsArray = [Group] ()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
@@ -89,63 +91,53 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         if text.text?.isEmpty == true{
             
         }else{
-            let query = MiddleGroup.query()
-            query?.whereKey("user", equalTo: NCMBUser.current())
-            query?.findObjectsInBackground({(objects, error) in
-                if(error != nil) {
-                    print(error as Any)
-                }else{
-                    print("objects... \(String(describing: objects))")
-                }
-                let object = objects as! [MiddleGroup]
-                let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), group: object, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-                
-                ToDoes.saveWithEvent(todo: todo, callBack: {
-                    self.dismiss(animated: true, completion: nil)
-                })
-                
-                if todo.isPublic == true {
-                    
-                }
+            let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), group: object, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+            
+            ToDoes.saveWithEvent(todo: todo, callBack: {
+                self.dismiss(animated: true, completion: nil)
             })
-        }
+            
+            if todo.isPublic == true {
+                
+            }
+        })
+    }
+
+
+@IBAction func cancel () {
+    self.dismiss(animated: true, completion: nil)
+}
+
+
+
+// ---- UIViewControllerTransitioningDelegate methods
+
+func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
+    
+    if presented == self {
+        return CustomPresentationController(presentedViewController: presented, presenting: presenting)
     }
     
+    return nil
+}
+
+func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     
-    @IBAction func cancel () {
-        self.dismiss(animated: true, completion: nil)
+    if presented == self {
+        return CustomPresentationAnimationController(isPresenting: true)
     }
-    
-    
-    
-    // ---- UIViewControllerTransitioningDelegate methods
-    
-    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
-        
-        if presented == self {
-            return CustomPresentationController(presentedViewController: presented, presenting: presenting)
-        }
-        
+    else {
         return nil
     }
+}
+
+func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        if presented == self {
-            return CustomPresentationAnimationController(isPresenting: true)
-        }
-        else {
-            return nil
-        }
+    if dismissed == self {
+        return CustomPresentationAnimationController(isPresenting: false)
     }
-    
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        if dismissed == self {
-            return CustomPresentationAnimationController(isPresenting: false)
-        }
-        else {
-            return nil
-        }
+    else {
+        return nil
     }
+}
 }

@@ -137,7 +137,7 @@
                     <connections>
                         <outlet property="table" destination="83z-mX-9aC" id="xsX-gV-qSn"/>
                         <segue destination="Fxb-1j-Z7b" kind="modal" id="HUF-vL-I0R"/>
-                        <segue destination="nw7-AX-LUb" kind="modal" id="aso-qC-OZL"/>
+                        <segue destination="nw7-AX-LUb" kind="modal" identifier="SearchToAdd" id="aso-qC-OZL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JB6-4I-aS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -767,7 +767,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="pRb-xC-cx4"/>
-        <segue reference="aso-qC-OZL"/>
+        <segue reference="xl9-zd-3Z1"/>
         <segue reference="3no-Ow-CgN"/>
         <segue reference="Czh-FE-5o1"/>
         <segue reference="HUF-vL-I0R"/>

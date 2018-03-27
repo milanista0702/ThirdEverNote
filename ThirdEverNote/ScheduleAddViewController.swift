@@ -53,7 +53,7 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     override func prepare(for segue: UIStoryboardSegue, sender:Any?) {
         let VRS = segue.destination as! GroupCreateViewController
         VRS.scheduletext = self.text.text
-        }
+    }
     
     func commonInit() {
         self.modalPresentationStyle = .custom
@@ -101,14 +101,15 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
                     print("objects... \(String(describing: objects))")
                 }
                 let object = objects as! [MiddleGroup]
-                let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), group: object, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-                Schedule.saveWithEvent(schedule: schedule, callBack: {
-                    self.dismiss(animated: true, completion: nil)
-                })
+                //let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), group: object, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+                //Schedule.saveWithEvent(schedule: schedule, callBack:
+                //                {
+                //                    self.dismiss(animated: true, completion: nil)
+                //                })
                 
-                if schedule.isPublic == true {
-                    
-                }
+                //if schedule.isPublic == true {
+                
+                //                }
             })
         }
     }
