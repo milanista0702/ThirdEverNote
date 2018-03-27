@@ -33,9 +33,9 @@
 @interface NCMB_Twitter()<UIWebViewDelegate, UIActionSheetDelegate>
 @property(nonatomic,strong) NCMBOAToken* requestToken;
 @property(nonatomic,strong) NSMutableData* responseData;
-@property (nonatomic,copy) void (^succeedBlock)();
+@property (nonatomic,copy) void (^succeedBlock)(void);
 @property (nonatomic,copy) void (^failedBlock)(NSError* error);
-@property (nonatomic,copy) void (^cancelBlock)();
+@property (nonatomic,copy) void (^cancelBlock)(void);
 @property (nonatomic,strong) NCMBTwitterLoginView* webView;
 @property (nonatomic) BOOL isLocked;
 

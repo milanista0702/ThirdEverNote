@@ -58,7 +58,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         self.transitioningDelegate = self
     }
     
-    func onClick (sender: UISwitch) {
+    @objc func onClick (sender: UISwitch) {
         if sender.isOn{
             self.showalert()
         }else{
@@ -89,18 +89,26 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         if text.text?.isEmpty == true{
             
         }else{
-            
-            let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-            ToDoes.saveWithEvent(todo: todo, callBack: {
-                self.dismiss(animated: true, completion: nil)
-            })
-            
-            if todo.isPublic == true {
+            let query = MiddleGroup.query()
+            query?.whereKey("user", equalTo: NCMBUser.current())
+            query?.findObjectsInBackground({(objects, error) in
+                if(error != nil) {
+                    print(error as Any)
+                }else{
+                    print("objects... \(String(describing: objects))")
+                }
+                let object = objects as! [MiddleGroup]
+                let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), group: object, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
                 
-            }
+                ToDoes.saveWithEvent(todo: todo, callBack: {
+                    self.dismiss(animated: true, completion: nil)
+                })
+                
+                if todo.isPublic == true {
+                    
+                }
+            })
         }
-        
-        
     }
     
     

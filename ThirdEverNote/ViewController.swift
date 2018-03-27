@@ -77,9 +77,15 @@ class ViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+        bg.image = UIImage(named:"アートボード 8.png")
+        bg.layer.zPosition = -1
+        self.view.addSubview(bg)
+        
+        
         self.navigationController?.navigationBar.barTintColor = ColorManager.blue
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
         
         toolbar.barTintColor = ColorManager.gray
         toolbar.tintColor = UIColor.white
@@ -100,7 +106,7 @@ class ViewController: UIViewController  {
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
         
-        let longPressRecognizer = UILongPressGestureRecognizer(target: nil, action: "rowButtonAction:")
+        let longPressRecognizer = UILongPressGestureRecognizer(target: nil, action: Selector(("rowButtonAction:")))
         longPressRecognizer.allowableMovement = 15
         longPressRecognizer.minimumPressDuration = 0.6
         self.table.addGestureRecognizer(longPressRecognizer)
@@ -203,9 +209,9 @@ class ViewController: UIViewController  {
         let orgYear: NSInteger      = comps.year
         let orgMonth: NSInteger     = comps.month
         let orgDay: NSInteger       = comps.day
-        let orgHour: NSInteger      = comps.hour
-        let orgMinute: NSInteger    = comps.minute
-        let orgSecond: NSInteger   = comps.second
+        let _: NSInteger      = comps.hour
+        let _: NSInteger    = comps.minute
+        let _: NSInteger   = comps.second
         let orgDayOfWeek: NSInteger = comps.weekday
         let max: NSInteger          = range.length
         
@@ -539,13 +545,13 @@ class ViewController: UIViewController  {
         let dateString: String = "\(year)/\(zeroFilledM)/\(zeroFilledD) 0:00:00"
         
         
-        var formatter = DateFormatter()
+        let formatter = DateFormatter()
         let jaLocale = Locale(identifier: "ja_JP")
         formatter.locale = jaLocale
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         
         
-        print(formatter.date(from: dateString))
+        print(formatter.date(from: dateString) as Any)
         return formatter.date(from: dateString)! as NSDate
     }
     
@@ -561,13 +567,13 @@ class ViewController: UIViewController  {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         
-        print (formatter.date(from: string))
+        print (formatter.date(from: string) as Any)
         
         return formatter.date(from: string)! as NSDate
     }
     
     //カレンダーボタンをタップした時のアクション
-    func buttonTapped(button: UIButton){
+    @objc func buttonTapped(button: UIButton){
         
         
         button.setTitleColor(UIColor.black, for: .normal)
@@ -591,7 +597,7 @@ class ViewController: UIViewController  {
     
     
     func find () {
-        let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
+        let _: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
         
         let query = NCMBQuery(className: "ToDoes")
         query?.whereKey("user", equalTo: NCMBUser.current())
@@ -602,7 +608,7 @@ class ViewController: UIViewController  {
                 print("nil")
             } else {
                 print("objects")
-                print(objects)
+                print(objects as Any as Any)
                 print("objects")
                 self.todoArray = objects as! [ToDoes]
                 self.table.reloadData()
@@ -618,7 +624,7 @@ class ViewController: UIViewController  {
                 print("nil")
             }else{
                 print("objects")
-                print(objects)
+                print(objects as Any)
                 print("objects")
                 print(self.scheduleArray)
                 self.scheduleArray = objects as! [Schedule]
@@ -654,20 +660,20 @@ class ViewController: UIViewController  {
     }
     
     
-    func Left(gesture: UIGestureRecognizer) {
+    @objc func Left(gesture: UIGestureRecognizer) {
         self.performSegue(withIdentifier: "toReminder", sender: nil)
     }
     
-    func Right () {
+    @objc func Right () {
         
     }
     
     
-    func Up(gesture: UIGestureRecognizer) {
+    @objc func Up(gesture: UIGestureRecognizer) {
         self.nextCalendarSettings()
     }
     
-    func Down() {
+    @objc func Down() {
         self.prevCalendarSettings()
     }
     
@@ -790,13 +796,13 @@ extension ViewController: UITableViewDelegate {
         let object = todoArray[indexPath.row]
         object.deleteEventually { (error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             }
         }
         let sobject = scheduleArray[indexPath.row]
         sobject.deleteEventually { (error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             }
         }
     }
@@ -835,7 +841,6 @@ extension ViewController: UITableViewDelegate {
         
         //編集中にもcellを選択できる
         table.allowsSelectionDuringEditing = true
-        table.cellForRow(at: indexPath as IndexPath)?.textInputMode
     }
     
     
@@ -857,7 +862,7 @@ extension ViewController: UITableViewDelegate {
     
     
     //appボタンが押された時 → tapが呼ばれる
-    func tap(sender: AnyObject) {
+    @objc func tap(sender: AnyObject) {
         self.performSegue(withIdentifier: "Saddsegue", sender: nil)
     }
     

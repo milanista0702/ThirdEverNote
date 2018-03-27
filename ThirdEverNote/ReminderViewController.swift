@@ -85,7 +85,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       })
    }
    
-   func refresh() {
+   @objc func refresh() {
       loadData()
       refreshControl.endRefreshing()
    }
@@ -185,7 +185,6 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       
       //編集中にもcellを選択できる
       table.allowsSelectionDuringEditing = true
-      table.cellForRow(at: indexPath)?.textInputMode
    }
    
    func delegateObjec(indexPath: NSIndexPath) {
@@ -198,7 +197,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    }
    
    
-   func handleSwipeRight(gesture: UIGestureRecognizer) {
+   @objc func handleSwipeRight(gesture: UIGestureRecognizer) {
       print("右にスワイプされました")
       self.navigationController?.popViewController(animated: true)
    }
@@ -222,7 +221,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    }
    
    //appボタンが押された時 → onClickが呼ばれる
-   func onClick(sender: AnyObject) {
+   @objc func onClick(sender: AnyObject) {
       self.performSegue(withIdentifier: "addsegue", sender: nil)
    }
    

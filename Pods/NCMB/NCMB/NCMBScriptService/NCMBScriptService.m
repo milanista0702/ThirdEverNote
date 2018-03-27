@@ -116,7 +116,7 @@ NSString *const NCMBScriptServicePath = @"script";
                    header:(NSDictionary *)header
                      body:(NSDictionary *)body
                     query:(NSDictionary *)query
-                    error:(NSError **)error {
+                    error:(NSError *  __autoreleasing *)error {
     _request = [self createRequest:[self createUrlFromScriptName:name query:query]
                             method:method
                             header:header

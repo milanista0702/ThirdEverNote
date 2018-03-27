@@ -10,16 +10,16 @@ import UIKit
 import NCMB
 
 class SearchGroupViewController: UIViewController, UIViewControllerTransitioningDelegate, UITableViewDelegate,UITableViewDataSource, UISearchResultsUpdating {
-
+    
     @IBOutlet var table: UITableView!
     var searchController = UISearchController()
+    var groupArray = [Group]()
+    var addgroupArray = [Group]()
+    var groups: Group?
     
-    var numberArray = ["0", "1", "2", "3"]
-    var searchResults : [String] = []
+    @IBOutlet var groupsearchlabel: UILabel!
     
     let saveData: UserDefaults = UserDefaults.standard
-    
-    var userArray: [NCMBUser] = []
     
     
     override func viewDidLoad() {
@@ -27,6 +27,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         
         table.delegate = self
         table.dataSource = self
+        searchController.delegate = (self as! UISearchControllerDelegate)
         
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
@@ -41,6 +42,8 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         
         table.tableHeaderView = searchController.searchBar
         
+        groupsearchlabel.backgroundColor = UIColor.black
+        groupsearchlabel.textColor = UIColor.white
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,48 +51,54 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         
     }
     
+    func updateSearchResults(for searchContrller: UISearchController) {
+        let query = Group.query()
+        query?.whereKey("name", equalTo: searchController.searchBar.text!)
+        query?.findObjectsInBackground({(objects, error) in
+            if (error != nil) {
+                print(error as Any)
+            }else{
+                print("objects ... \(String(describing: objects))")
+                self.groupArray = objects as! [Group]
+                self.table.reloadData()
+            }
+        })
+    }
+    
     // cellの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        if searchController.isActive {
-            return searchResults.count
-        }else{
-            return numberArray.count
-        }
+        return groupArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as!GroupTableViewCell
-        if searchController.isActive{
-            cell.searchlabel.text = searchResults[indexPath.row]
-        }else{
-            cell.searchlabel.text = numberArray[indexPath.row]
-        }
-        
+        cell.searchlabel.text = String(groupArray[indexPath.row].name)
+        cell.accessoryType = .none
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
+    @nonobjc func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .checkmark
+        addgroupArray.append(groupArray[indexPath.row])
     }
     
-    
-    func tableView(_ tableView:UITableView, didSelecRowAt indexPath: IndexPath) {
-        NSLog("%@が選択された", numberArray[indexPath.row])
-        let cell = tableView.cellForRow(at: indexPath) as! GroupTableViewCell
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .none
+        addgroupArray.remove(at: indexPath.row)
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
-        self.searchResults = userArray.filter{
-            $0.userName.lowercased().contains(searchController.searchBar.text!.lowercased())
-        }.map({ $0.userName })
-        self.table.reloadData()
-    }
-    
-    @IBAction func ok() {
-        
+    @IBAction func ok(sender: UIButton) {
+//        let middlegroup = MiddleGroup.create(group: groups!, user: element)
+//        MiddleGroup.saveWithEvent(group: middlegroup, callBack: {
+//            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+//        })
+//        addgroupArray.addgroupArray.append(at: IndexPath.row)
+//        addgroupArray.remove(at: IndexPath.)
     }
     
     @IBAction func cancel() {
-        self.dismiss(animated: true, completion: nil)
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }

@@ -60,7 +60,7 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         self.transitioningDelegate = self
     }
     
-    func onClick (sender: UISwitch) {
+    @objc func onClick (sender: UISwitch) {
         if sender.isOn {
             self.showalert()
         }else{
@@ -88,16 +88,27 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         
     }
     
-    
-    
     @IBAction func ok(sender: UIButton) {
         if text.text?.isEmpty == true{
             
         }else{
-            
-            let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-            Schedule.saveWithEvent(schedule: schedule, callBack: {
-                self.dismiss(animated: true, completion: nil)
+            let query = MiddleGroup.query()
+            query?.whereKey("user", equalTo: NCMBUser.current())
+            query?.findObjectsInBackground({(objects, error) in
+                if(error != nil) {
+                    print(error as Any)
+                }else{
+                    print("objects... \(String(describing: objects))")
+                }
+                let object = objects as! [MiddleGroup]
+                let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), group: object, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+                Schedule.saveWithEvent(schedule: schedule, callBack: {
+                    self.dismiss(animated: true, completion: nil)
+                })
+                
+                if schedule.isPublic == true {
+                    
+                }
             })
         }
     }

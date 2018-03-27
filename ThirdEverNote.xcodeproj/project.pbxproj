@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */; };
 		3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE691D759146009F5486 /* CustomPresentationController.swift */; };
+		3E1E4C8A2069E81C00EB4188 /* アートボード 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E4C892069E81B00EB4188 /* アートボード 8.png */; };
 		3E20B4C01F0260CF002166C2 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20B4BF1F0260CF002166C2 /* ColorManager.swift */; };
 		3E28073B1F9F4FE30076F095 /* SearchGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E28073A1F9F4FE30076F095 /* SearchGroupViewController.swift */; };
 		3E4F92CB1E4765F500CB40E2 /* CalendarLabelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F92CA1E4765F500CB40E2 /* CalendarLabelLayout.swift */; };
@@ -65,6 +66,7 @@
 		3A110665EE0E4EAB5EC7383A /* Pods_ThirdEverNoteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThirdEverNoteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationAnimationController.swift; sourceTree = "<group>"; };
 		3E19FE691D759146009F5486 /* CustomPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
+		3E1E4C892069E81B00EB4188 /* アートボード 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "アートボード 8.png"; sourceTree = "<group>"; };
 		3E20B4BF1F0260CF002166C2 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		3E28073A1F9F4FE30076F095 /* SearchGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchGroupViewController.swift; sourceTree = "<group>"; };
 		3E4F92CA1E4765F500CB40E2 /* CalendarLabelLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarLabelLayout.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			children = (
 				3EC98EAA1C8A590A0082C969 /* 矢印.png */,
 				3EC98EA91C8A590A0082C969 /* check.png */,
+				3E1E4C892069E81B00EB4188 /* アートボード 8.png */,
 				3E73763B1C733B1E00E43AC2 /* AppDelegate.swift */,
 				3E73763D1C733B1E00E43AC2 /* ViewController.swift */,
 				3E73766F1C7C672D00E43AC2 /* ReminderViewController.swift */,
@@ -311,21 +314,24 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "makka misako";
 				TargetAttributes = {
 					3E7376371C733B1E00E43AC2 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 94F47UQTB6;
+						LastSwiftMigration = 0920;
 					};
 					3E73764B1C733B1E00E43AC2 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 94F47UQTB6;
+						LastSwiftMigration = 0920;
 						TestTargetID = 3E7376371C733B1E00E43AC2;
 					};
 					3E7376561C733B1E00E43AC2 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 94F47UQTB6;
+						LastSwiftMigration = 0920;
 						TestTargetID = 3E7376371C733B1E00E43AC2;
 					};
 				};
@@ -356,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3EB513381FBAEE1400454C50 /* GroupTableCell.xib in Resources */,
+				3E1E4C8A2069E81C00EB4188 /* アートボード 8.png in Resources */,
 				3E872E961DBF6CB90086CEA3 /* Main.storyboard in Resources */,
 				3EC98EAC1C8A590A0082C969 /* 矢印.png in Resources */,
 				3E7376461C733B1E00E43AC2 /* LaunchScreen.storyboard in Resources */,
@@ -594,14 +601,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -641,14 +654,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -688,7 +707,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.litech.ThirdEverNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -707,7 +727,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.litech.ThirdEverNote;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 3.0.1;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -721,6 +742,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.litech.ThirdEverNoteTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ThirdEverNote.app/ThirdEverNote";
 			};
 			name = Debug;
@@ -734,6 +757,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.litech.ThirdEverNoteTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ThirdEverNote.app/ThirdEverNote";
 			};
 			name = Release;
@@ -746,6 +771,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.litech.ThirdEverNoteUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = ThirdEverNote;
 				USES_XCTRUNNER = YES;
 			};
@@ -759,6 +786,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.litech.ThirdEverNoteUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = ThirdEverNote;
 				USES_XCTRUNNER = YES;
 			};

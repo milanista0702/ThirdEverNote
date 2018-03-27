@@ -42,7 +42,7 @@ class MiddleGroup: NCMBObject, NCMBSubclassing {
     
     static func update(object: MiddleGroup, group: Group, user: NCMBUser) -> MiddleGroup {
         if object.user == user {
-            object.group == group
+            object.group = group
         }
         return object
     }
@@ -53,7 +53,7 @@ class MiddleGroup: NCMBObject, NCMBSubclassing {
         query?.includeKey = "user"
         query?.findObjectsInBackground{ (objects, error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             }else{
                 if(objects?.count)! > 0 {
                     let obj = objects as! [MiddleGroup]
@@ -67,7 +67,7 @@ class MiddleGroup: NCMBObject, NCMBSubclassing {
                               callBack: @escaping () -> Void) {
         group.saveEventually{(error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             }else{
                 callBack()
             }

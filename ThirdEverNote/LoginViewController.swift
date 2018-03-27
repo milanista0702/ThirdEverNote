@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
     func login (username: String, password:  String){
         NCMBUser.logInWithUsername(inBackground: username, password: password) { (user, error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             }else{
                 if (user?.isAuthenticated())! {
                     self.transition()

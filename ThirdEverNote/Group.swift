@@ -31,7 +31,7 @@ class Group: NCMBObject, NCMBSubclassing {
     }
     
     static func update(object: Group, name: String) -> Group {
-            object.name == name
+            object.name = name
         return object
     }
     
@@ -41,7 +41,7 @@ class Group: NCMBObject, NCMBSubclassing {
         query?.includeKey = "user"
         query?.findObjectsInBackground{ (objects, error) in
             if error != nil{
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             }else{
                 if (objects?.count)! > 0 {
                     let obj = objects as! [Group]
@@ -54,7 +54,7 @@ class Group: NCMBObject, NCMBSubclassing {
     static func saveWithEvent(name: Group, callBack: @escaping () -> Void) {
         name.saveEventually { (error) in
             if error != nil {
-            print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             }else{
                 callBack()
             }

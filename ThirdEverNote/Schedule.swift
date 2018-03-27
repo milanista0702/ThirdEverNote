@@ -29,6 +29,15 @@ class Schedule: NCMBObject, NCMBSubclassing{
         }
     }
     
+    var group: Group {
+        get {
+            return object(forKey: "group") as! Group
+        }
+        set {
+            setObject(newValue, forKey: "group")
+        }
+    }
+    
     var isPublic: Bool {
         get {
             return object(forKey: "isPublic") as! Bool
@@ -60,20 +69,22 @@ class Schedule: NCMBObject, NCMBSubclassing{
         super.init(className: className)
     }
     
-    static func create(title: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Bool) -> Schedule{
+    static func create(title: String, user: NCMBUser, group: Group, isPublic: Bool, date: NSDate, done: Bool) -> Schedule{
         let schedule = Schedule(className: "Schedule")
         schedule?.title = title
         schedule?.user = user
+        schedule?.group = group
         schedule?.isPublic = isPublic
         schedule?.date = date
         schedule?.done = done
         return schedule!
     }
     
-    static func update(object: Schedule, title: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Bool) -> Schedule {
+    static func update(object: Schedule, title: String, user: NCMBUser, group: Group, isPublic: Bool, date: NSDate, done: Bool) -> Schedule {
         if object.user == user {
             object.title = title
             object.user = user
+            object.group = group
             object.isPublic = isPublic
             object.date = date
         }
@@ -87,7 +98,7 @@ class Schedule: NCMBObject, NCMBSubclassing{
         query?.order(byAscending: "date")
         query?.findObjectsInBackground{ (objects, error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             } else {
                 if (objects?.count)! > 0 {
                     let obj = objects as! [Schedule]
@@ -101,7 +112,7 @@ class Schedule: NCMBObject, NCMBSubclassing{
     static func saveWithEvent(schedule: Schedule, callBack: @escaping () -> Void) {
         schedule.saveEventually{ (error) in
             if error != nil {
-                print(error?.localizedDescription)
+                print(error?.localizedDescription as Any)
             }else{
                 callBack()
             }
