@@ -11,27 +11,27 @@ import NCMB
 
 @objc(MiddleGTU)
 class MiddleGTU: NCMBObject, NCMBSubclassing {
-    var Todo: ToDoes {
+    var Todo: ToDoes? {
         get {
-            return object(forKey: "Todo") as! ToDoes
+            return object(forKey: "Todo") as? ToDoes
         }
         set {
             setObject(newValue, forKey: "Todo")
         }
     }
     
-    var Schedule: Schedule {
+    var Schedule: Schedule? {
         get {
-            return object(forKey: "Schedule") as! Schedule
+            return object(forKey: "Schedule") as? Schedule
         }
         set {
             setObject(newValue, forKey: "Schedule")
         }
     }
     
-    var group: Group {
+    var group: Group? {
         get {
-            return object(forKey: "group") as! Group
+            return object(forKey: "group") as? Group
         }
         set {
             setObject(newValue, forKey: "group")
@@ -51,7 +51,7 @@ class MiddleGTU: NCMBObject, NCMBSubclassing {
         super.init(className: className)
     }
     
-    static func create(Todo: ToDoes, Schedule: Schedule, group: Group, user: NCMBUser) -> MiddleGTU{
+    static func create(Todo: ToDoes, Schedule: Schedule?, group: Group, user: NCMBUser) -> MiddleGTU{
         let middleGTU = MiddleGTU(className: "MiddleGTU")
         middleGTU?.Todo = Todo
         middleGTU?.Schedule = Schedule
@@ -60,7 +60,7 @@ class MiddleGTU: NCMBObject, NCMBSubclassing {
         return middleGTU!
     }
     
-    static func update(object: MiddleGTU, Todo: ToDoes, Schedule: Schedule, group: Group, user: NCMBUser) -> MiddleGTU {
+    static func update(object: MiddleGTU, Todo: ToDoes, Schedule: Schedule?, group: Group, user: NCMBUser) -> MiddleGTU {
         if object.user == user {
             object.group = group
             object.Todo = Todo

@@ -14,10 +14,9 @@ import QuartzCore
 
 class ViewController: UIViewController  {
     
-    @IBOutlet var table: UITableView!
-    @IBOutlet var calendarBar: UILabel!
-    @IBOutlet var toolbar: UIToolbar!
-    
+    var table: UITableView!
+    var calendarBar: UILabel!
+    var toolbar = UIToolbar()
     var todoArray = [ToDoes]()
     var scheduleArray = [Schedule]()
     let refreshControl = UIRefreshControl()
@@ -97,7 +96,9 @@ class ViewController: UIViewController  {
         
         toolbar.setItems([editButtonItem, fixedSpacer, addBtn], animated: false)
         
+    
         table.register(UINib(nibName: "TodoTableCell", bundle: nil), forCellReuseIdentifier: "TodoTableCell")
+        
         
         
         self.table.delegate = self

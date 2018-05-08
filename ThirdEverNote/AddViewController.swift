@@ -91,53 +91,60 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         if text.text?.isEmpty == true{
             
         }else{
-            let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), group: object, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
             
+            let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(),isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
             ToDoes.saveWithEvent(todo: todo, callBack: {
                 self.dismiss(animated: true, completion: nil)
             })
             
+            if groupsArray == nil {
+                for element in groupsArray {
+                    let middleGTU = MiddleGTU.create(Todo: todo, Schedule: nil, group: element, user:NCMBUser.current() )
+                    //middleGTU.saveWithEvent(
+                }
+            }
             if todo.isPublic == true {
                 
             }
-        })
-    }
-
-
-@IBAction func cancel () {
-    self.dismiss(animated: true, completion: nil)
-}
-
-
-
-// ---- UIViewControllerTransitioningDelegate methods
-
-func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
-    
-    if presented == self {
-        return CustomPresentationController(presentedViewController: presented, presenting: presenting)
+        }
+        
     }
     
-    return nil
-}
-
-func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     
-    if presented == self {
-        return CustomPresentationAnimationController(isPresenting: true)
+    @IBAction func cancel () {
+        self.dismiss(animated: true, completion: nil)
     }
-    else {
+    
+    
+    
+    // ---- UIViewControllerTransitioningDelegate methods
+    
+    func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
+        
+        if presented == self {
+            return CustomPresentationController(presentedViewController: presented, presenting: presenting)
+        }
+        
         return nil
     }
-}
-
-func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
     
-    if dismissed == self {
-        return CustomPresentationAnimationController(isPresenting: false)
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if presented == self {
+            return CustomPresentationAnimationController(isPresenting: true)
+        }
+        else {
+            return nil
+        }
     }
-    else {
-        return nil
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if dismissed == self {
+            return CustomPresentationAnimationController(isPresenting: false)
+        }
+        else {
+            return nil
+        }
     }
-}
 }

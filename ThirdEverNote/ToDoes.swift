@@ -29,15 +29,6 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         }
     }
     
-    var group: Group? {
-        get {
-            return object(forKey: "group") as? Group
-        }
-        set {
-            setObject(newValue, forKey: "group")
-        }
-    }
-    
     var isPublic: Bool {
         get {
             return object(forKey: "isPublic") as! Bool
@@ -70,22 +61,20 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         super.init(className: className)
     }
     
-    static func create(todo: String, user: NCMBUser, group: Group, isPublic: Bool, date: NSDate, done: Bool) -> ToDoes{
+    static func create(todo: String, user: NCMBUser,  isPublic: Bool, date: NSDate, done: Bool) -> ToDoes{
         let toDoes = ToDoes(className: "ToDoes")
         toDoes?.todo = todo
         toDoes?.user = user
-        toDoes?.group = group
         toDoes?.isPublic = isPublic
         toDoes?.date = date
         toDoes?.done = done
         return toDoes!
     }
     
-    static func update(object: ToDoes, todo: String, user: NCMBUser, group: Group, isPublic: Bool, date: NSDate, done: Bool) -> ToDoes {
+    static func update(object: ToDoes, todo: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Bool) -> ToDoes {
         if object.user == user {
             object.todo = todo
             object.user = user
-            object.group = group
             object.isPublic = isPublic
             object.date = date
         }
