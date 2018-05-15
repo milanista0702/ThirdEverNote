@@ -91,7 +91,6 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         if text.text?.isEmpty == true{
             
         }else{
-            
             let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(),isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
             ToDoes.saveWithEvent(todo: todo, callBack: {
                 self.dismiss(animated: true, completion: nil)
@@ -99,7 +98,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
             
             if groupsArray == nil {
                 for element in groupsArray {
-                    let middleGTU = MiddleGTU.create(Todo: todo, Schedule: nil, group: element, user:NCMBUser.current() )
+                    _ = MiddleGTU.create(Todo: todo, Schedule: nil, group: element, user:NCMBUser.current() )
                     //middleGTU.saveWithEvent(
                 }
             }

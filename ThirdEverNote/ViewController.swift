@@ -14,12 +14,13 @@ import QuartzCore
 
 class ViewController: UIViewController  {
     
-    var table: UITableView!
+    @IBOutlet var table: UITableView!
+    
     var calendarBar: UILabel!
     var toolbar = UIToolbar()
     var todoArray = [ToDoes]()
     var scheduleArray = [Schedule]()
-    let refreshControl = UIRefreshControl()
+    var refreshControl : UIRefreshControl!
     
     //倉庫にアクセス
     let saveData: UserDefaults = UserDefaults.standard
@@ -64,8 +65,6 @@ class ViewController: UIViewController  {
     var calendarSize: Int!
     var calendarFontSize: Int!
     
-    var addBtn: UIBarButtonItem!
-    
     let currentCalendar: NSCalendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)!
     
     var tapnumber: Int!
@@ -76,11 +75,19 @@ class ViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        var addBtn: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(tap))
+        self.navigationItem.setRightBarButton(addBtn, animated: true)
+        navigationItem.leftBarButtonItem = editButtonItem
+        
         let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         bg.image = UIImage(named:"アートボード 8.png")
         bg.layer.zPosition = -1
         self.view.addSubview(bg)
         
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Loading...")
+        self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        self.table.addSubview(refreshControl)
         
         self.navigationController?.navigationBar.barTintColor = ColorManager.blue
         self.navigationController?.navigationBar.tintColor = UIColor.white
@@ -93,9 +100,7 @@ class ViewController: UIViewController  {
         //addボタン
         let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
         addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tap))
-        
         toolbar.setItems([editButtonItem, fixedSpacer, addBtn], animated: false)
-        
     
         table.register(UINib(nibName: "TodoTableCell", bundle: nil), forCellReuseIdentifier: "TodoTableCell")
         
@@ -279,6 +284,10 @@ class ViewController: UIViewController  {
         }
     }
     
+    //appボタンが押された時 → tapが呼ばれる
+    @objc internal func tap(sender: UIButton) {
+        self.performSegue(withIdentifier: "Saddsegue", sender: nil)
+    }
     
     //曜日ラベルの動的配置関数
     func setupCalendarLabel(array: NSArray) {
@@ -677,8 +686,6 @@ class ViewController: UIViewController  {
     @objc func Down() {
         self.prevCalendarSettings()
     }
-    
-    
 }
 
 
@@ -697,7 +704,6 @@ extension ViewController: UITableViewDataSource {
     //cellの数を設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todoArray.count + scheduleArray.count
-        
         //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
     }
     
@@ -760,11 +766,6 @@ extension ViewController: UITableViewDataSource {
             }
             self.table.reloadData()
         })
-    }
-    
-    func refresh() {
-        loadData()
-        refreshControl.endRefreshing()
     }
     
 }
@@ -844,6 +845,11 @@ extension ViewController: UITableViewDelegate {
         table.allowsSelectionDuringEditing = true
     }
     
+    @objc func refresh() {
+        loadData()
+        refreshControl.endRefreshing()
+    }
+    
     
     func rowButtonAction(sender : UILongPressGestureRecognizer) {
         
@@ -859,12 +865,6 @@ extension ViewController: UITableViewDelegate {
         }else{
             print("long press on table view")
         }
-    }
-    
-    
-    //appボタンが押された時 → tapが呼ばれる
-    @objc func tap(sender: AnyObject) {
-        self.performSegue(withIdentifier: "Saddsegue", sender: nil)
     }
     
     func dismiss(segue: UIStoryboardSegue) {

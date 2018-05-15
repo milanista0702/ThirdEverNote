@@ -21,10 +21,28 @@
                     <view key="view" contentMode="scaleToFill" id="lJk-hg-v3I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6R7-mW-JOV">
+                                <rect key="frame" x="0.0" y="388" width="375" height="279"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="2DY-RX-zcL">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2DY-RX-zcL" id="uwU-Ja-gYX">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="7gD-VH-ByZ"/>
                     <connections>
+                        <outlet property="table" destination="6R7-mW-JOV" id="sxW-ni-DmL"/>
                         <segue destination="BYZ-38-t0r" kind="push" identifier="toReminder" id="dJp-09-Cig"/>
                         <segue destination="1CO-ds-0IC" kind="modal" identifier="toSignupView" id="iCN-En-s1l"/>
                         <segue destination="nw7-AX-LUb" kind="modal" identifier="Saddsegue" id="xl9-zd-3Z1"/>
@@ -32,7 +50,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MiK-o8-6Bq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="436" y="-175"/>
+            <point key="canvasLocation" x="435.5" y="-175.5"/>
         </scene>
         <!--Reminder View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -55,7 +73,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="68"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Sw-lH-Ztu" id="aPn-ui-yGf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -387,6 +405,7 @@
                                 <rect key="frame" x="52" y="80" width="270" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="J0L-TA-bly"/>
+                                    <constraint firstAttribute="width" constant="270" id="guC-Eq-mIZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -458,7 +477,6 @@
                             <constraint firstItem="SGx-Vq-khF" firstAttribute="top" secondItem="EmJ-cQ-Zov" secondAttribute="bottom" constant="13" id="eGk-Jy-sNR"/>
                             <constraint firstItem="65Z-j3-MD4" firstAttribute="top" secondItem="FkL-96-EDF" secondAttribute="bottom" constant="91" id="fSk-xZ-6Yp"/>
                             <constraint firstItem="SGx-Vq-khF" firstAttribute="leading" secondItem="EYu-t9-jbV" secondAttribute="leadingMargin" constant="45" id="gEC-fA-5fJ"/>
-                            <constraint firstItem="65Z-j3-MD4" firstAttribute="top" secondItem="Xjw-XU-sFe" secondAttribute="bottom" constant="14" id="gzX-hM-dTg"/>
                             <constraint firstItem="eJb-1d-IxR" firstAttribute="bottom" secondItem="rht-p3-BDD" secondAttribute="top" constant="-19" id="htl-0d-m0L"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rht-p3-BDD" secondAttribute="trailing" constant="15" id="leB-dP-iU2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Xjw-XU-sFe" secondAttribute="trailing" constant="67" id="mrb-Kr-mKz"/>
@@ -478,6 +496,7 @@
                         <outlet property="text" destination="rht-p3-BDD" id="o2g-yy-v02"/>
                         <segue destination="Vtj-On-2vr" kind="modal" identifier="schenewsegue" id="3no-Ow-CgN"/>
                         <segue destination="r98-ck-rfc" kind="modal" identifier="schesearch" id="Czh-FE-5o1"/>
+                        <segue destination="BYZ-38-t0r" kind="modal" identifier="toRiminder" id="C1f-TB-bEm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="90T-ZL-NOY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -797,6 +816,7 @@
         <segue reference="xl9-zd-3Z1"/>
         <segue reference="3no-Ow-CgN"/>
         <segue reference="Czh-FE-5o1"/>
+        <segue reference="dJp-09-Cig"/>
         <segue reference="HUF-vL-I0R"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -40,7 +40,6 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         
         shareswitch.isOn = false
         shareswitch.addTarget(self, action: #selector(ScheduleAddViewController.onClick(sender:)), for: .valueChanged)
-        
     }
     
     
@@ -92,25 +91,30 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         if text.text?.isEmpty == true{
             
         }else{
-            let query = MiddleGroup.query()
-            query?.whereKey("user", equalTo: NCMBUser.current())
-            query?.findObjectsInBackground({(objects, error) in
-                if(error != nil) {
-                    print(error as Any)
-                }else{
-                    print("objects... \(String(describing: objects))")
-                }
-                let object = objects as! [MiddleGroup]
-                //let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), group: object, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-                //Schedule.saveWithEvent(schedule: schedule, callBack:
-                //                {
-                //                    self.dismiss(animated: true, completion: nil)
-                //                })
-                
-                //if schedule.isPublic == true {
-                
-                //                }
-            })
+            let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), group: Group.create(name: text.text!, user: NCMBUser.current()), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+            Schedule.saveWithEvent(schedule: schedule, callBack: {self.dismiss(animated: true, completion: nil)})
+            
+            
+            
+            //            let query = MiddleGroup.query()
+            //            query?.whereKey("user", equalTo: NCMBUser.current())
+            //            query?.findObjectsInBackground({(objects, error) in
+            //                if(error != nil) {
+            //                    print(error as Any)
+            //                }else{
+            //                    print("objects... \(String(describing: objects))")
+            //                }
+            //                _ = objects as! [MiddleGroup]
+            //let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), group: object, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+            //Schedule.saveWithEvent(schedule: schedule, callBack:
+            //                {
+            //                    self.dismiss(animated: true, completion: nil)
+            //                })
+            
+            //if schedule.isPublic == true {
+            
+            //                }
+            //)
         }
     }
     
