@@ -73,7 +73,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="68"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Sw-lH-Ztu" id="aPn-ui-yGf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -162,6 +162,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="groupsearchlabel" destination="12h-bI-A25" id="ueH-Md-wmp"/>
                         <outlet property="table" destination="83z-mX-9aC" id="xsX-gV-qSn"/>
                         <segue destination="Fxb-1j-Z7b" kind="modal" id="HUF-vL-I0R"/>
                         <segue destination="nw7-AX-LUb" kind="modal" identifier="SearchToAdd" id="aso-qC-OZL"/>
@@ -216,6 +217,9 @@
                                 <rect key="frame" x="69" y="602" width="73" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancel" destination="Vtj-On-2vr" eventType="touchUpInside" id="WC3-TX-sV3"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Member" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dcc-Bj-wLG">
                                 <rect key="frame" x="35" y="257" width="80" height="40"/>
@@ -295,7 +299,6 @@
                                 <state key="normal" title="Cancel"/>
                                 <connections>
                                     <action selector="back" destination="ZpG-ZR-ehb" eventType="touchUpInside" id="2gh-gq-0mo"/>
-                                    <action selector="cancel" destination="Vtj-On-2vr" eventType="touchUpInside" id="Oxu-V9-tIC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XdP-uD-MX0">
@@ -344,24 +347,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aXR-kt-FYw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1579" y="1647"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="YJE-hQ-JD3">
-            <objects>
-                <viewController id="P5i-Md-g2p" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="7JM-0F-tNw"/>
-                        <viewControllerLayoutGuide type="bottom" id="TCf-lW-E8S"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="DqV-vV-WsZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qhQ-Vh-Twy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-332" y="637"/>
         </scene>
         <!--Schedule Add View Controller-->
         <scene sceneID="xdI-Gp-fj5">
@@ -453,7 +438,7 @@
                                 <state key="normal" title="OK"/>
                                 <connections>
                                     <action selector="okWithSender:" destination="EID-fv-X3w" eventType="touchUpInside" id="E5b-6z-c8d"/>
-                                    <action selector="okWithSender:" destination="nw7-AX-LUb" eventType="touchUpInside" id="vaY-4p-Q3o"/>
+                                    <action selector="okWithSender:" destination="nw7-AX-LUb" eventType="touchUpInside" id="gzZ-fJ-QIW"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -812,11 +797,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="pRb-xC-cx4"/>
-        <segue reference="xl9-zd-3Z1"/>
+        <segue reference="qPf-e6-cSq"/>
+        <segue reference="aso-qC-OZL"/>
         <segue reference="3no-Ow-CgN"/>
         <segue reference="Czh-FE-5o1"/>
-        <segue reference="dJp-09-Cig"/>
+        <segue reference="C1f-TB-bEm"/>
         <segue reference="HUF-vL-I0R"/>
     </inferredMetricsTieBreakers>
 </document>

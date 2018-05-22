@@ -33,7 +33,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         text.delegate = self
         table.delegate = self
         table.dataSource = self
-        searchController.delegate = self
+        searchController.delegate = self as! UISearchControllerDelegate
         
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
@@ -121,6 +121,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
+
 
 extension GroupCreateViewController : UISearchControllerDelegate {
     func presentSearchController(_ searchController: UISearchController) {

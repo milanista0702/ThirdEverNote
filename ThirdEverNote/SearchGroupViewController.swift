@@ -27,7 +27,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         
         table.delegate = self
         table.dataSource = self
-        searchController.delegate = (self as! UISearchControllerDelegate)
+        searchController.delegate = self as? UISearchControllerDelegate
         
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
@@ -57,13 +57,15 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     
     func updateSearchResults(for searchContrller: UISearchController) {
         let query = Group.query()
-        query?.whereKey("name", equalTo: searchController.searchBar.text!)
         query?.findObjectsInBackground({(objects, error) in
-            if (error != nil) {
-                print(error as Any)
+            if self.searchController.searchBar.text == nil {
+                
             }else{
                 print("objects ... \(String(describing: objects))")
                 self.groupArray = objects as! [Group]
+                self.groupArray = self.groupArray.filter({ group in
+                    group.name.contains(self.searchController.searchBar.text!)
+                })
                 self.table.reloadData()
             }
         })
@@ -81,7 +83,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         return cell
     }
     
-    @nonobjc func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.accessoryType = .checkmark
         addgroupArray.append(groupArray[indexPath.row])
@@ -95,6 +97,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     
     @IBAction func ok(sender: UIButton) {
         
+        self.performSegue(withIdentifier: "SearchToAdd", sender: nil)
     }
     
     @IBAction func cancel() {

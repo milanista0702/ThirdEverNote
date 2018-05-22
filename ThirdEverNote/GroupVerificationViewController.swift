@@ -89,7 +89,6 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     
     
     @IBAction func back()  {
-        self.dismiss(animated: true, completion: nil)
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
-    
 }

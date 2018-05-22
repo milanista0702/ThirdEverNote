@@ -75,6 +75,9 @@ class ViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.table.delegate = self
+        self.table.dataSource = self
+        
         var addBtn: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(tap))
         self.navigationItem.setRightBarButton(addBtn, animated: true)
         navigationItem.leftBarButtonItem = editButtonItem
@@ -103,11 +106,6 @@ class ViewController: UIViewController  {
         toolbar.setItems([editButtonItem, fixedSpacer, addBtn], animated: false)
     
         table.register(UINib(nibName: "TodoTableCell", bundle: nil), forCellReuseIdentifier: "TodoTableCell")
-        
-        
-        
-        self.table.delegate = self
-        self.table.dataSource = self
         
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
@@ -693,20 +691,11 @@ class ViewController: UIViewController  {
 // MARK: 画面の下側
 
 extension ViewController: UITableViewDataSource {
-    
-    //editが押された時の処理
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        table.isEditing = editing
-    }
-    
-    
     //cellの数を設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todoArray.count + scheduleArray.count
         //これからReminderArrayを作ったら　ReminderArray.count か　それ+1
     }
-    
     
     //ID付きのcellを取得してそれに付属しているlabelとかimageとか
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -772,11 +761,16 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     
+    //editが押された時の処理
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        table.isEditing = editing
+    }
+    
     //削除可能なcellのindexpath取得(今は全て)
     func tableView(_ tableView: UITableView, canFocusRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
     
     //削除された時の実装
     
