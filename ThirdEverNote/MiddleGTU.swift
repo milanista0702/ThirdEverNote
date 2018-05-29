@@ -51,7 +51,7 @@ class MiddleGTU: NCMBObject, NCMBSubclassing {
         super.init(className: className)
     }
     
-    static func create(Todo: ToDoes, Schedule: Schedule?, group: Group, user: NCMBUser) -> MiddleGTU{
+    static func create(Todo: ToDoes?, Schedule: Schedule?, group: Group, user: NCMBUser) -> MiddleGTU{
         let middleGTU = MiddleGTU(className: "MiddleGTU")
         middleGTU?.Todo = Todo
         middleGTU?.Schedule = Schedule
@@ -60,7 +60,7 @@ class MiddleGTU: NCMBObject, NCMBSubclassing {
         return middleGTU!
     }
     
-    static func update(object: MiddleGTU, Todo: ToDoes, Schedule: Schedule?, group: Group, user: NCMBUser) -> MiddleGTU {
+    static func update(object: MiddleGTU, Todo: ToDoes?, Schedule: Schedule?, group: Group, user: NCMBUser) -> MiddleGTU {
         if object.user == user {
             object.group = group
             object.Todo = Todo

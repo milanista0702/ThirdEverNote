@@ -51,6 +51,11 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         self.commonInit()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender:Any?) {
+        let VRT = segue.destination as! GroupCreateViewController
+        VRT.scheduletext = self.text.text
+    }
+    
     func commonInit() {
         self.modalPresentationStyle = .custom
         self.transitioningDelegate = self
@@ -88,36 +93,30 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         if text.text?.isEmpty == true{
             
         }else{
-            let query = MiddleGroup.query()
-            query?.whereKey("user", equalTo: NCMBUser.current())
-            query?.findObjectsInBackground({(objects, error) in
-                if(error != nil) {
-                    print(error as Any)
-                }else{
-                    print("objects... \(String(describing: objects))")
-                }
-                
-                _ = objects as! [MiddleGroup]
-                
-//                let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), group: objects, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-//                Schedule.saveWithEvent(schedule: schedule, callBack: {self.dismiss(animated: true, completion: nil)})
-                
-                })
+            let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+            Schedule.saveWithEvent(schedule: schedule, callBack: {})
             
-            //let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), group: object, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-            //Schedule.saveWithEvent(schedule: schedule, callBack:
-            //                {
-            //                    self.dismiss(animated: true, completion: nil)
-            //                })
+            for element in groupsArray {
+                let GTU = MiddleGTU.create(Todo: nil, Schedule: schedule, group: element, user:NCMBUser.current() )
+                MiddleGTU.saveWithEvent(group: GTU, callBack: {print("MiddleGTU")})
+            }
             
-            //if schedule.isPublic == true {
-            
+            if schedule.isPublic == true{
+                
+            }
+            //            let query = MiddleGroup.query()
+            //            query?.whereKey("user", equalTo: NCMBUser.current())
+            //            query?.findObjectsInBackground({(objects, error) in
+            //                if(error != nil) {
+            //                    print(error as Any)
+            //                }else{
+            //                    print("objects... \(String(describing: objects))")
             //                }
-            //)
+            //
+            //                _ = objects as! [MiddleGroup]
         }
-        
     }
-
+    
     @IBAction func cancel () {
         self.dismiss(animated: true, completion: nil)
     }

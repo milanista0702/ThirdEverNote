@@ -29,14 +29,14 @@ class Schedule: NCMBObject, NCMBSubclassing{
         }
     }
     
-    var group: Group {
-        get {
-            return object(forKey: "group") as! Group
-        }
-        set {
-            setObject(newValue, forKey: "group")
-        }
-    }
+//    var group: Group {
+//        get {
+//            return object(forKey: "group") as! Group
+//        }
+//        set {
+//            setObject(newValue, forKey: "group")
+//        }
+//    }
     
     var isPublic: Bool {
         get {
@@ -69,22 +69,22 @@ class Schedule: NCMBObject, NCMBSubclassing{
         super.init(className: className)
     }
     
-    static func create(title: String, user: NCMBUser, group: Group, isPublic: Bool, date: NSDate, done: Bool) -> Schedule{
+    static func create(title: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Bool) -> Schedule{
         let schedule = Schedule(className: "Schedule")
         schedule?.title = title
         schedule?.user = user
-        schedule?.group = group
+//        schedule?.group = group
         schedule?.isPublic = isPublic
         schedule?.date = date
         schedule?.done = done
         return schedule!
     }
     
-    static func update(object: Schedule, title: String, user: NCMBUser, group: Group, isPublic: Bool, date: NSDate, done: Bool) -> Schedule {
+    static func update(object: Schedule, title: String, user: NCMBUser, isPublic: Bool, date: NSDate, done: Bool) -> Schedule {
         if object.user == user {
             object.title = title
             object.user = user
-            object.group = group
+//            object.group = group
             object.isPublic = isPublic
             object.date = date
         }

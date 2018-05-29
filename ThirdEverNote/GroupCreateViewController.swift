@@ -33,8 +33,6 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         text.delegate = self
         table.delegate = self
         table.dataSource = self
-        searchController.delegate = self as! UISearchControllerDelegate
-        
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
         table.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
@@ -110,11 +108,9 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     
     @IBAction func ok(sender: UIButton) {
         groups = Group.create(name:text.text!, user: NCMBUser.current())
-        Group.saveWithEvent(name: groups!, callBack: {
             self.searchController.isActive = false
             self.performSegue(withIdentifier: "ToVerification", sender: nil)
             print(self.membersArray)
-        })
     }
     
     @IBAction func cancel() {

@@ -83,7 +83,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
             MiddleGroup.saveWithEvent(group: middlegroup, callBack: {
                 self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
             })
-            _ = Group.create(name: label.text!, user: NCMBUser.current())
+            Group.saveWithEvent(name: groupcreate!, callBack: {})
         }
     }
     

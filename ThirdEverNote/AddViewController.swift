@@ -92,18 +92,15 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
             
         }else{
             let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(),isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-            ToDoes.saveWithEvent(todo: todo, callBack: {
-                self.dismiss(animated: true, completion: nil)
-            })
+            ToDoes.saveWithEvent(todo: todo, callBack: {})
             
-            if groupsArray == nil {
+            
                 for element in groupsArray {
-                    _ = MiddleGTU.create(Todo: todo, Schedule: nil, group: element, user:NCMBUser.current() )
-                    //middleGTU.saveWithEvent(
+                    let GTU = MiddleGTU.create(Todo: todo, Schedule: nil, group: element, user:NCMBUser.current() )
+                    MiddleGTU.saveWithEvent(group: GTU, callBack: {})
                 }
-            }
+            
             if todo.isPublic == true {
-                
             }
         }
         

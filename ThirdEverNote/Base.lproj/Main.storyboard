@@ -166,6 +166,7 @@
                         <outlet property="table" destination="83z-mX-9aC" id="xsX-gV-qSn"/>
                         <segue destination="Fxb-1j-Z7b" kind="modal" id="HUF-vL-I0R"/>
                         <segue destination="nw7-AX-LUb" kind="modal" identifier="SearchToAdd" id="aso-qC-OZL"/>
+                        <segue destination="EID-fv-X3w" kind="modal" identifier="SearchToDo" id="MJV-Pu-U4o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JB6-4I-aS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -336,8 +337,7 @@
                     </view>
                     <connections>
                         <outlet property="label" destination="wg9-Lp-dPQ" id="UXI-bI-b6I"/>
-                        <outlet property="memberlabl" destination="7sP-Ey-vHH" id="dH3-Fq-iMn"/>
-                        <outlet property="memberlable" destination="7sP-Ey-vHH" id="1Qq-6Y-GCW"/>
+                        <outlet property="memberlabel" destination="7sP-Ey-vHH" id="Uc2-RK-uGq"/>
                         <outlet property="mtable" destination="4Vl-AP-Dsm" id="YV7-Tr-Hcp"/>
                         <outlet property="utable" destination="9WW-yd-Cwg" id="kjQ-wH-qWA"/>
                         <segue destination="nw7-AX-LUb" kind="modal" identifier="toschedule" id="cfX-St-lud"/>
@@ -798,9 +798,9 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="qPf-e6-cSq"/>
-        <segue reference="aso-qC-OZL"/>
-        <segue reference="3no-Ow-CgN"/>
-        <segue reference="Czh-FE-5o1"/>
+        <segue reference="cfX-St-lud"/>
+        <segue reference="KNi-Xi-PJJ"/>
+        <segue reference="D0p-6R-jAD"/>
         <segue reference="C1f-TB-bEm"/>
         <segue reference="HUF-vL-I0R"/>
     </inferredMetricsTieBreakers>

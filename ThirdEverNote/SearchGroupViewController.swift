@@ -9,7 +9,7 @@
 import UIKit
 import NCMB
 
-class SearchGroupViewController: UIViewController, UIViewControllerTransitioningDelegate, UITableViewDelegate,UITableViewDataSource, UISearchResultsUpdating {
+class SearchGroupViewController: UIViewController, UIViewControllerTransitioningDelegate, UITableViewDelegate,UITableViewDataSource, UISearchResultsUpdating, UISearchControllerDelegate {
     
     @IBOutlet var table: UITableView!
     var searchController = UISearchController()
@@ -27,7 +27,6 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         
         table.delegate = self
         table.dataSource = self
-        searchController.delegate = self as? UISearchControllerDelegate
         
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
@@ -59,7 +58,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         let query = Group.query()
         query?.findObjectsInBackground({(objects, error) in
             if self.searchController.searchBar.text == nil {
-                
+                self.groupArray = objects as! [Group]
             }else{
                 print("objects ... \(String(describing: objects))")
                 self.groupArray = objects as! [Group]
