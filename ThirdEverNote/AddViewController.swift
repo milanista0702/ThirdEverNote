@@ -19,7 +19,8 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     @IBOutlet var limitlabel: UILabel!
     @IBOutlet var sharelabel: UILabel!
     
-    var groupsArray = [Group] ()
+    var exgroupArray = [Group]()
+    var groupcreates: Group?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -94,11 +95,10 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
             let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(),isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
             ToDoes.saveWithEvent(todo: todo, callBack: {})
             
+            let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
+            MiddleGTS.saveWithEvent(group: GTS, callBack:{})
             
-                for element in groupsArray {
-                    let GTU = MiddleGTU.create(Todo: todo, Schedule: nil, group: element, user:NCMBUser.current() )
-                    MiddleGTU.saveWithEvent(group: GTU, callBack: {})
-                }
+            self.performSegue(withIdentifier: "addtview", sender: nil)
             
             if todo.isPublic == true {
             }

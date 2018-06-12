@@ -51,7 +51,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let GVC = segue.destination as! AddViewController
-        GVC.groupsArray = addgroupArray
+        GVC.exgroupArray = addgroupArray
     }
     
     func updateSearchResults(for searchContrller: UISearchController) {

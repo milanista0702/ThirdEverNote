@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Schedule.registerSubclass()
         Group.registerSubclass()
         MiddleGroup.registerSubclass()
+        MiddleGTS.registerSubclass()
         
     
         

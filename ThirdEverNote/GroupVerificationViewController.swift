@@ -53,6 +53,16 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         super.didReceiveMemoryWarning()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "addtodo" {
+            let VT = segue.destination as! AddViewController
+            VT.groupcreates = groupcreate
+        }else{
+            let VS = segue.destination as! ScheduleAddViewController
+            VS.groupcreates = groupcreate
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if tableView == mtable {
             return memberArray.count
@@ -81,10 +91,10 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         for element in memberArray {
             let middlegroup = MiddleGroup.create(group: groupcreate!, user: element)
             MiddleGroup.saveWithEvent(group: middlegroup, callBack: {
-                self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
             })
             Group.saveWithEvent(name: groupcreate!, callBack: {})
         }
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     

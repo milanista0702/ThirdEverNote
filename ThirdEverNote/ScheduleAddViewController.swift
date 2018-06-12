@@ -19,7 +19,7 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     @IBOutlet var daylabel: UILabel!
     @IBOutlet var sharelabel: UILabel!
     
-    var groupsArray = [Group] ()
+    var groupcreates : Group?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -96,10 +96,10 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
             let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
             Schedule.saveWithEvent(schedule: schedule, callBack: {})
             
-            for element in groupsArray {
-                let GTU = MiddleGTU.create(Todo: nil, Schedule: schedule, group: element, user:NCMBUser.current() )
-                MiddleGTU.saveWithEvent(group: GTU, callBack: {print("MiddleGTU")})
-            }
+            let GTS = MiddleGTS.create(Todo: nil, Schedule: schedule, group: groupcreates!)
+            MiddleGTS.saveWithEvent(group: GTS, callBack: {})
+            
+            self.performSegue(withIdentifier: "addsview", sender: nil)
             
             if schedule.isPublic == true{
                 

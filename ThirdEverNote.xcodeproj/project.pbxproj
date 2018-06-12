@@ -10,7 +10,7 @@
 		3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */; };
 		3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E19FE691D759146009F5486 /* CustomPresentationController.swift */; };
 		3E1E4C8A2069E81C00EB4188 /* アートボード 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E1E4C892069E81B00EB4188 /* アートボード 8.png */; };
-		3E1E4C8C206A2F9500EB4188 /* MiddleGTU.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1E4C8B206A2F9500EB4188 /* MiddleGTU.swift */; };
+		3E1E4C8C206A2F9500EB4188 /* MiddleGTS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1E4C8B206A2F9500EB4188 /* MiddleGTS.swift */; };
 		3E20B4C01F0260CF002166C2 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E20B4BF1F0260CF002166C2 /* ColorManager.swift */; };
 		3E28073B1F9F4FE30076F095 /* SearchGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E28073A1F9F4FE30076F095 /* SearchGroupViewController.swift */; };
 		3E4F92CB1E4765F500CB40E2 /* CalendarLabelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4F92CA1E4765F500CB40E2 /* CalendarLabelLayout.swift */; };
@@ -68,7 +68,7 @@
 		3E19FE671D7590F8009F5486 /* CustomPresentationAnimationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationAnimationController.swift; sourceTree = "<group>"; };
 		3E19FE691D759146009F5486 /* CustomPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPresentationController.swift; sourceTree = "<group>"; };
 		3E1E4C892069E81B00EB4188 /* アートボード 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "アートボード 8.png"; sourceTree = "<group>"; };
-		3E1E4C8B206A2F9500EB4188 /* MiddleGTU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleGTU.swift; sourceTree = "<group>"; };
+		3E1E4C8B206A2F9500EB4188 /* MiddleGTS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddleGTS.swift; sourceTree = "<group>"; };
 		3E20B4BF1F0260CF002166C2 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		3E28073A1F9F4FE30076F095 /* SearchGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchGroupViewController.swift; sourceTree = "<group>"; };
 		3E4F92CA1E4765F500CB40E2 /* CalendarLabelLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarLabelLayout.swift; sourceTree = "<group>"; };
@@ -190,7 +190,7 @@
 				3E7A40681D195CB70056BB49 /* SignUpViewController.swift */,
 				3E7A406A1D195CCD0056BB49 /* LoginViewController.swift */,
 				3EF80B441D1951C500D829A8 /* ToDoes.swift */,
-				3E1E4C8B206A2F9500EB4188 /* MiddleGTU.swift */,
+				3E1E4C8B206A2F9500EB4188 /* MiddleGTS.swift */,
 				3E8204B8200E0D7200D210D7 /* Group.swift */,
 				3EBCE3EA200E15E500540073 /* MiddleGroup.swift */,
 				3E4F92CE1E49D91E00CB40E2 /* Schedule.swift */,
@@ -520,7 +520,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3E28073B1F9F4FE30076F095 /* SearchGroupViewController.swift in Sources */,
-				3E1E4C8C206A2F9500EB4188 /* MiddleGTU.swift in Sources */,
+				3E1E4C8C206A2F9500EB4188 /* MiddleGTS.swift in Sources */,
 				3E7A406D1D19618A0056BB49 /* GlobalVariable.swift in Sources */,
 				3E7A406B1D195CCD0056BB49 /* LoginViewController.swift in Sources */,
 				3E4F92CB1E4765F500CB40E2 /* CalendarLabelLayout.swift in Sources */,
