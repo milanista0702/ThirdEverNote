@@ -22,6 +22,8 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     var todo: String?
     var memberArray = [NCMBUser]()
     var groupcreate: Group?
+    var completion: ((Group) -> Void)!
+    var completions : ((Group) -> Void)!
     
     
     override func viewDidLoad() {
@@ -81,7 +83,6 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
             }else{
                 cell.searchlabel.text = stext
             }
-            
         }
         return cell
     }
@@ -92,9 +93,18 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
             let middlegroup = MiddleGroup.create(group: groupcreate!, user: element)
             MiddleGroup.saveWithEvent(group: middlegroup, callBack: {
             })
-            Group.saveWithEvent(name: groupcreate!, callBack: {})
         }
-        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        Group.saveWithEvent(name: groupcreate!, callBack: {})
+        print("ok button \(self.groupcreate as Any)")
+        if stext == nil {
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
+                self.completion(self.groupcreate!)
+            })
+        }else{
+            self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
+                self.completions(self.groupcreate!)
+            })
+        }
     }
     
     

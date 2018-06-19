@@ -340,7 +340,6 @@
                         <outlet property="mtable" destination="4Vl-AP-Dsm" id="YV7-Tr-Hcp"/>
                         <outlet property="utable" destination="9WW-yd-Cwg" id="kjQ-wH-qWA"/>
                         <segue destination="nw7-AX-LUb" kind="modal" identifier="toschedule" id="cfX-St-lud"/>
-                        <segue destination="EID-fv-X3w" kind="modal" identifier="addtodo" id="qPf-e6-cSq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aXR-kt-FYw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -798,11 +797,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qPf-e6-cSq"/>
-        <segue reference="aso-qC-OZL"/>
-        <segue reference="3no-Ow-CgN"/>
-        <segue reference="Czh-FE-5o1"/>
-        <segue reference="C1f-TB-bEm"/>
-        <segue reference="vSl-H7-Q77"/>
+        <segue reference="pRb-xC-cx4"/>
+        <segue reference="xl9-zd-3Z1"/>
+        <segue reference="KNi-Xi-PJJ"/>
+        <segue reference="D0p-6R-jAD"/>
+        <segue reference="dJp-09-Cig"/>
+        <segue reference="snR-7H-Cii"/>
     </inferredMetricsTieBreakers>
 </document>

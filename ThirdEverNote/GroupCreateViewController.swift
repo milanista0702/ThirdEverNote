@@ -20,6 +20,8 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     var membersArray = [NCMBUser]()
     var usersArray = [NCMBUser]()
     var groups: Group?
+    var completion: ((Group) -> Void)!
+    var completions : ((Group) -> Void)!
     
     @IBOutlet var createlabel: UILabel!
     @IBOutlet var namelabel: UILabel!
@@ -66,6 +68,8 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         GVC.ttext = todotext
         GVC.memberArray = membersArray
         GVC.groupcreate = groups
+        GVC.completion = completion
+        GVC.completions = completions
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -107,10 +111,11 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     }
     
     @IBAction func ok(sender: UIButton) {
-        groups = Group.create(name:text.text!, user: NCMBUser.current())
-            self.searchController.isActive = false
-            self.performSegue(withIdentifier: "ToVerification", sender: nil)
-            print(self.membersArray)
+        groups = Group.create(name: text.text!)
+        self.searchController.isActive = false
+        print(self.membersArray)
+        print("ok button \(self.groups as Any)")
+        self.performSegue(withIdentifier: "ToVerification", sender: nil)
     }
     
     @IBAction func cancel() {

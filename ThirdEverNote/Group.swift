@@ -24,7 +24,7 @@ class Group: NCMBObject, NCMBSubclassing {
         super.init(className: className)
     }
         
-    static func create(name: String, user: NCMBUser) -> Group{
+    static func create(name: String) -> Group{
         let group = Group(className: "Group")
         group?.name = name
         return group!

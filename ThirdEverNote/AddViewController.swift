@@ -21,6 +21,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     
     var exgroupArray = [Group]()
     var groupcreates: Group?
+    var completion: ((Group) -> Void)!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -52,8 +53,13 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender:Any?) {
-        let VRT = segue.destination as! GroupCreateViewController
-        VRT.todotext = self.text.text
+        if segue.identifier == "todonewsegue"{
+            let VRT = segue.destination as! GroupCreateViewController
+            VRT.todotext = self.text.text
+            VRT.completion = { group in
+                self.groupcreates = group
+            }
+        }
     }
     
     func commonInit() {

@@ -20,6 +20,7 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     @IBOutlet var sharelabel: UILabel!
     
     var groupcreates : Group?
+    var completions : ((Group) -> Void)!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -52,8 +53,13 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender:Any?) {
-        let VRT = segue.destination as! GroupCreateViewController
-        VRT.scheduletext = self.text.text
+        if segue.identifier == "schenewsegue"{
+            let VRT = segue.destination as! GroupCreateViewController
+            VRT.scheduletext = self.text.text
+            VRT.completions = { group in
+                self.groupcreates = group
+            }
+        }
     }
     
     func commonInit() {
