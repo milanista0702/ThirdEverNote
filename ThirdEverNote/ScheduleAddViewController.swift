@@ -83,9 +83,7 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         let action2 = UIAlertAction(title: "Existing Group", style: .default) { _ in
             self.performSegue(withIdentifier: "schesearch", sender: nil)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            self.dismiss(animated: true, completion: nil)
-        }
+        let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
         
         alert.addAction(action1)
         alert.addAction(action2)
@@ -105,21 +103,11 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
             let GTS = MiddleGTS.create(Todo: nil, Schedule: schedule, group: groupcreates!)
             MiddleGTS.saveWithEvent(group: GTS, callBack: {})
             
-            self.performSegue(withIdentifier: "addsview", sender: nil)
+            self.dismiss(animated: true, completion: nil)
             
             if schedule.isPublic == true{
                 
             }
-            //            let query = MiddleGroup.query()
-            //            query?.whereKey("user", equalTo: NCMBUser.current())
-            //            query?.findObjectsInBackground({(objects, error) in
-            //                if(error != nil) {
-            //                    print(error as Any)
-            //                }else{
-            //                    print("objects... \(String(describing: objects))")
-            //                }
-            //
-            //                _ = objects as! [MiddleGroup]
         }
     }
     

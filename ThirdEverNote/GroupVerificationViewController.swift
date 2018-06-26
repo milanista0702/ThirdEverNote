@@ -49,6 +49,8 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         mtable.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         utable.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         
+        print("GroupVerlificationController...\(completion)")
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -89,13 +91,14 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
     
     
     @IBAction func ok() {
-        for element in memberArray {
-            let middlegroup = MiddleGroup.create(group: groupcreate!, user: element)
-            MiddleGroup.saveWithEvent(group: middlegroup, callBack: {
-            })
-        }
-        Group.saveWithEvent(name: groupcreate!, callBack: {})
-        print("ok button \(self.groupcreate as Any)")
+        print(memberArray)
+        Group.saveWithEvent(name: groupcreate!, callBack: {
+            for element in self.memberArray {
+                let middlegroup = MiddleGroup.create(group: self.groupcreate!, user: element)
+                MiddleGroup.saveWithEvent(group: middlegroup, callBack: {
+                })
+            }
+        })
         if stext == nil {
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
                 self.completion(self.groupcreate!)

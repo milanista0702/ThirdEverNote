@@ -480,7 +480,6 @@
                         <segue destination="Vtj-On-2vr" kind="modal" identifier="schenewsegue" id="3no-Ow-CgN"/>
                         <segue destination="r98-ck-rfc" kind="modal" identifier="schesearch" id="Czh-FE-5o1"/>
                         <segue destination="BYZ-38-t0r" kind="modal" identifier="toRiminder" id="C1f-TB-bEm"/>
-                        <segue destination="Fxb-1j-Z7b" kind="modal" identifier="addsview" id="vSl-H7-Q77"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="90T-ZL-NOY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -787,7 +786,6 @@
                         <outlet property="todolabel" destination="mvF-yI-QmY" id="eqb-vu-N4u"/>
                         <segue destination="r98-ck-rfc" kind="modal" identifier="todosearch" id="D0p-6R-jAD"/>
                         <segue destination="Vtj-On-2vr" kind="modal" identifier="todonewsegue" id="KNi-Xi-PJJ"/>
-                        <segue destination="Fxb-1j-Z7b" kind="modal" identifier="addtview" id="snR-7H-Cii"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w7N-Vq-U58" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -797,11 +795,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="iCN-En-s1l"/>
         <segue reference="pRb-xC-cx4"/>
         <segue reference="xl9-zd-3Z1"/>
         <segue reference="KNi-Xi-PJJ"/>
         <segue reference="D0p-6R-jAD"/>
         <segue reference="dJp-09-Cig"/>
-        <segue reference="snR-7H-Cii"/>
+        <segue reference="CYS-mB-rpn"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -57,6 +57,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
             let VRT = segue.destination as! GroupCreateViewController
             VRT.todotext = self.text.text
             VRT.completion = { group in
+                print(group)
                 self.groupcreates = group
             }
         }
@@ -83,8 +84,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         let action2 = UIAlertAction(title: "Existing Group", style: .default) { _ in
             self.performSegue(withIdentifier: "todosearch", sender: nil)
         }
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel){ _ in self.dismiss(animated: true, completion: nil)
-        }
+        let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
         
         alert.addAction(action1)
         alert.addAction(action2)
@@ -104,7 +104,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
             let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
             MiddleGTS.saveWithEvent(group: GTS, callBack:{})
             
-            self.performSegue(withIdentifier: "addtview", sender: nil)
+            self.dismiss(animated: true, completion: nil)
             
             if todo.isPublic == true {
             }

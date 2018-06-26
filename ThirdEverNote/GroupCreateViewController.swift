@@ -55,6 +55,8 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         namelabel.textColor = UIColor.white
         memberlabel.backgroundColor = ColorManager.navy
         memberlabel.textColor = UIColor.white
+        
+        print("GroupCreateController...\(completion)")
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,7 +82,6 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
             if (error != nil) {
                 print(error as Any)
             }else{
-                print("objects ... \(String(describing: objects))")
                 self.usersArray =  objects as! [NCMBUser]
                 self.table.reloadData()
             }
@@ -113,7 +114,6 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     @IBAction func ok(sender: UIButton) {
         groups = Group.create(name: text.text!)
         self.searchController.isActive = false
-        print(self.membersArray)
         print("ok button \(self.groups as Any)")
         self.performSegue(withIdentifier: "ToVerification", sender: nil)
     }

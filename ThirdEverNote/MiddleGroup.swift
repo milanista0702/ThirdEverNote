@@ -65,6 +65,7 @@ class MiddleGroup: NCMBObject, NCMBSubclassing {
     
     static func saveWithEvent(group: MiddleGroup,
                               callBack: @escaping () -> Void) {
+//        print("MiddleGroupsave...\(group)")
         group.saveEventually{(error) in
             if error != nil {
                 print(error?.localizedDescription as Any)

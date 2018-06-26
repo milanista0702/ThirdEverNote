@@ -52,6 +52,7 @@ class Group: NCMBObject, NCMBSubclassing {
     }
     
     static func saveWithEvent(name: Group, callBack: @escaping () -> Void) {
+        print("Groupsave.\(name)")
         name.saveEventually { (error) in
             if error != nil {
                 print(error?.localizedDescription as Any)
