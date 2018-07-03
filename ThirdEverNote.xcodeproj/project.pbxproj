@@ -43,6 +43,8 @@
 		3EF80B451D1951C500D829A8 /* ToDoes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF80B441D1951C500D829A8 /* ToDoes.swift */; };
 		964ED434C003B66F91613324 /* Pods_ThirdEverNote.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D153242234F072660202964F /* Pods_ThirdEverNote.framework */; };
 		A719B2F4EA32B6CD5C41C735 /* Pods_ThirdEverNoteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A110665EE0E4EAB5EC7383A /* Pods_ThirdEverNoteUITests.framework */; };
+		B1347D2920EB9197002634DB /* bouninngenn.png in Resources */ = {isa = PBXBuildFile; fileRef = B1347D2820EB9197002634DB /* bouninngenn.png */; };
+		B1347D2B20EB92A6002634DB /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1347D2A20EB92A6002634DB /* MyAccountViewController.swift */; };
 		C347B231BA5C0D834495D8BD /* Pods_ThirdEverNoteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D5B7E53C9CEF73EE7262F9A /* Pods_ThirdEverNoteTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +111,8 @@
 		5C114E1BE9BA6BBE72FD785F /* Pods-ThirdEverNoteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThirdEverNoteTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThirdEverNoteTests/Pods-ThirdEverNoteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		7DBDCF4F78FEA05501ED4314 /* Pods-ThirdEverNote.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThirdEverNote.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThirdEverNote/Pods-ThirdEverNote.debug.xcconfig"; sourceTree = "<group>"; };
 		9D5B7E53C9CEF73EE7262F9A /* Pods_ThirdEverNoteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThirdEverNoteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1347D2820EB9197002634DB /* bouninngenn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bouninngenn.png; sourceTree = "<group>"; };
+		B1347D2A20EB92A6002634DB /* MyAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		C1FD1CB46919BBCCB30485D7 /* Pods-ThirdEverNoteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThirdEverNoteUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThirdEverNoteUITests/Pods-ThirdEverNoteUITests.release.xcconfig"; sourceTree = "<group>"; };
 		C7ED95A37E14EF520467DAEA /* Pods-ThirdEverNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThirdEverNote.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThirdEverNote/Pods-ThirdEverNote.release.xcconfig"; sourceTree = "<group>"; };
 		D153242234F072660202964F /* Pods_ThirdEverNote.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThirdEverNote.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +185,7 @@
 		3E73763A1C733B1E00E43AC2 /* ThirdEverNote */ = {
 			isa = PBXGroup;
 			children = (
+				B1347D2820EB9197002634DB /* bouninngenn.png */,
 				3EC98EAA1C8A590A0082C969 /* 矢印.png */,
 				3EC98EA91C8A590A0082C969 /* check.png */,
 				3E1E4C892069E81B00EB4188 /* アートボード 8.png */,
@@ -204,6 +209,7 @@
 				3E7A419E1F961659006B711E /* GroupCreateViewController.swift */,
 				3EBCE3EC2017386F00540073 /* GroupVerificationViewController.swift */,
 				3E28073A1F9F4FE30076F095 /* SearchGroupViewController.swift */,
+				B1347D2A20EB92A6002634DB /* MyAccountViewController.swift */,
 				3E73763F1C733B1E00E43AC2 /* Main.storyboard */,
 				3E20B4BF1F0260CF002166C2 /* ColorManager.swift */,
 				3E9137CC1D9147C8005AD176 /* TodoTableCell.swift */,
@@ -367,6 +373,7 @@
 				3EB513381FBAEE1400454C50 /* GroupTableCell.xib in Resources */,
 				3E1E4C8A2069E81C00EB4188 /* アートボード 8.png in Resources */,
 				3E872E961DBF6CB90086CEA3 /* Main.storyboard in Resources */,
+				B1347D2920EB9197002634DB /* bouninngenn.png in Resources */,
 				3EC98EAC1C8A590A0082C969 /* 矢印.png in Resources */,
 				3E7376461C733B1E00E43AC2 /* LaunchScreen.storyboard in Resources */,
 				3E9137CF1D9147C8005AD176 /* TodoTableCell.xib in Resources */,
@@ -526,6 +533,7 @@
 				3E4F92CB1E4765F500CB40E2 /* CalendarLabelLayout.swift in Sources */,
 				3E4F92CF1E49D91E00CB40E2 /* Schedule.swift in Sources */,
 				3EBCE3ED2017386F00540073 /* GroupVerificationViewController.swift in Sources */,
+				B1347D2B20EB92A6002634DB /* MyAccountViewController.swift in Sources */,
 				3E19FE6A1D759146009F5486 /* CustomPresentationController.swift in Sources */,
 				3E678BB11D5A0816002B41F4 /* AddViewController.swift in Sources */,
 				3E19FE681D7590F8009F5486 /* CustomPresentationAnimationController.swift in Sources */,

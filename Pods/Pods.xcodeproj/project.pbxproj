@@ -128,6 +128,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B1347D1E20EA61CA002634DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1347D1820EA61CA002634DB /* ThirdEverNote.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7376381C733B1E00E43AC2;
+			remoteInfo = ThirdEverNote;
+		};
+		B1347D2020EA61CA002634DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1347D1820EA61CA002634DB /* ThirdEverNote.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E73764C1C733B1E00E43AC2;
+			remoteInfo = ThirdEverNoteTests;
+		};
+		B1347D2220EA61CA002634DB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1347D1820EA61CA002634DB /* ThirdEverNote.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3E7376571C733B1E00E43AC2;
+			remoteInfo = ThirdEverNoteUITests;
+		};
 		DAABD2A9B74D1F68290EDD88FC54E44E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -233,6 +254,7 @@
 		AA19D6F345FFC3A2D11ED7EFEE60C8B2 /* NCMBIncrementOperation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NCMBIncrementOperation.m; path = NCMB/Operations/NCMBIncrementOperation.m; sourceTree = "<group>"; };
 		AB739A6A4C648F47E8032F8E2C268768 /* Pods-ThirdEverNote.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ThirdEverNote.release.xcconfig"; sourceTree = "<group>"; };
 		B06E4E3C04B2423A63D80C69E2E23A11 /* NCMBRichPushView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NCMBRichPushView.h; path = NCMB/NCMBRichPush/NCMBRichPushView.h; sourceTree = "<group>"; };
+		B1347D1820EA61CA002634DB /* ThirdEverNote.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ThirdEverNote.xcodeproj; path = ../../../.Trash/ThirdEverNote.xcodeproj; sourceTree = "<group>"; };
 		B2A2EF063CB7E0371523F9A01C463722 /* NSDataBase64Encode.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NSDataBase64Encode.h; path = NCMB/NSDataBase64Encode/NSDataBase64Encode.h; sourceTree = "<group>"; };
 		B471E85E21D083BC62233012386F63CB /* NSMutableURLRequestParameters.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NSMutableURLRequestParameters.h; path = NCMB/NCMBTwitter/NCMBOAConsumer/Categories/NSMutableURLRequestParameters.h; sourceTree = "<group>"; };
 		B760FED0AB5FE2B3053C06BB752C8561 /* Base64Transcoder.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = Base64Transcoder.c; path = NCMB/NCMBTwitter/NCMBOAConsumer/Crypto/Base64Transcoder.c; sourceTree = "<group>"; };
@@ -331,6 +353,7 @@
 		180B721A70D580719FCE0537B20B7B66 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
+				B1347D1820EA61CA002634DB /* ThirdEverNote.xcodeproj */,
 				B642837136DC41D89F13611367FD17A9 /* Pods-ThirdEverNote */,
 				AF6CAFB0B091B2670AF9475DE4741449 /* Pods-ThirdEverNoteTests */,
 				DE4D6A8B49A26B33EDD3F779395F3470 /* Pods-ThirdEverNoteUITests */,
@@ -528,6 +551,16 @@
 			);
 			name = "Pods-ThirdEverNoteTests";
 			path = "Target Support Files/Pods-ThirdEverNoteTests";
+			sourceTree = "<group>";
+		};
+		B1347D1920EA61CA002634DB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B1347D1F20EA61CA002634DB /* ThirdEverNote.app */,
+				B1347D2120EA61CA002634DB /* ThirdEverNoteTests.xctest */,
+				B1347D2320EA61CA002634DB /* ThirdEverNoteUITests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B642837136DC41D89F13611367FD17A9 /* Pods-ThirdEverNote */ = {
@@ -747,6 +780,12 @@
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
 			productRefGroup = 9B6F86D06027D6A5FCB7F42D353730A9 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B1347D1920EA61CA002634DB /* Products */;
+					ProjectRef = B1347D1820EA61CA002634DB /* ThirdEverNote.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				ADD68827273E35267923696DECDE8047 /* NCMB */,
@@ -756,6 +795,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B1347D1F20EA61CA002634DB /* ThirdEverNote.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = ThirdEverNote.app;
+			remoteRef = B1347D1E20EA61CA002634DB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B1347D2120EA61CA002634DB /* ThirdEverNoteTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ThirdEverNoteTests.xctest;
+			remoteRef = B1347D2020EA61CA002634DB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B1347D2320EA61CA002634DB /* ThirdEverNoteUITests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ThirdEverNoteUITests.xctest;
+			remoteRef = B1347D2220EA61CA002634DB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		219A809776A5B23F325C09D679F13091 /* Sources */ = {

@@ -125,7 +125,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    
    func formatter (date: NSDate) -> String {
       let dateFormatter  = DateFormatter()
-      dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale!
+      dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP") as Locale?
       dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
       
       return dateFormatter.string(from: date as Date)

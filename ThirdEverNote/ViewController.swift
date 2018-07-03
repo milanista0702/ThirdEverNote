@@ -15,9 +15,13 @@ import QuartzCore
 class ViewController: UIViewController  {
     
     @IBOutlet var table: UITableView!
+    @IBOutlet var undertoolbar: UIToolbar!
     
     var calendarBar: UILabel!
     var toolbar = UIToolbar()
+    var addBtn: UIBarButtonItem!
+    var editBtn: UIBarButtonItem!
+    var accountBtn: UIBarButtonItem!
     var todoArray = [ToDoes]()
     var scheduleArray = [Schedule]()
     var refreshControl : UIRefreshControl!
@@ -78,10 +82,6 @@ class ViewController: UIViewController  {
         self.table.delegate = self
         self.table.dataSource = self
         
-        var addBtn: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(tap))
-        self.navigationItem.setRightBarButton(addBtn, animated: true)
-        navigationItem.leftBarButtonItem = editButtonItem
-        
         let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
         bg.image = UIImage(named:"アートボード 8.png")
         bg.layer.zPosition = -1
@@ -99,12 +99,18 @@ class ViewController: UIViewController  {
         toolbar.barTintColor = ColorManager.gray
         toolbar.tintColor = UIColor.white
         
+        undertoolbar.barTintColor = ColorManager.gray
+        undertoolbar.tintColor = UIColor.white
         
-        //addボタン
-        let fixedSpacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
-        addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tap))
-        toolbar.setItems([editButtonItem, fixedSpacer, addBtn], animated: false)
-    
+        //NavigationToolBar
+        accountBtn = UIBarButtonItem(image:(UIImage (named: "bouninngenn.png")), style: .plain, target: self, action: (self.goaccount(sender:)))
+        
+        //underBarButton
+        addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.onClick(sender:)))
+        editBtn = UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(self.setEditing(_:animated:)))
+        let flexiblespace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        undertoolbar.items = [editBtn, flexiblespace, addBtn]
+        
         table.register(UINib(nibName: "TodoTableCell", bundle: nil), forCellReuseIdentifier: "TodoTableCell")
         
         self.table.estimatedRowHeight = 90
@@ -207,7 +213,7 @@ class ViewController: UIViewController  {
         let range: NSRange = calendar.range(of: NSCalendar.Unit.day, in:NSCalendar.Unit.month, for:now as Date)
         
         //最初にメンバ変数に格納するための現在日付の情報を取得する
-        comps = calendar.components([NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day, NSCalendar.Unit.hour, NSCalendar.Unit.minute, NSCalendar.Unit.second, NSCalendar.Unit.weekday],from:now as Date) as NSDateComponents!
+        comps = calendar.components([NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day, NSCalendar.Unit.hour, NSCalendar.Unit.minute, NSCalendar.Unit.second, NSCalendar.Unit.weekday],from:now as Date) as NSDateComponents?
         
         //年月日と最後の日付と曜日を取得(NSIntegerをintへのキャスト不要)
         let orgYear: NSInteger      = comps.year
@@ -280,11 +286,6 @@ class ViewController: UIViewController  {
         if NCMBUser.current() == nil {
             self.performSegue(withIdentifier: "toSignupView", sender: nil)
         }
-    }
-    
-    //appボタンが押された時 → tapが呼ばれる
-    @objc internal func tap(sender: UIButton) {
-        self.performSegue(withIdentifier: "Saddsegue", sender: nil)
     }
     
     //曜日ラベルの動的配置関数
@@ -492,7 +493,7 @@ class ViewController: UIViewController  {
         
         
         comps = currentCalendar.components([NSCalendar.Unit.year, NSCalendar.Unit.month, NSCalendar.Unit.day,
-                                            NSCalendar.Unit.weekday], from: currentDate as Date) as NSDateComponents!
+                                            NSCalendar.Unit.weekday], from: currentDate as Date) as NSDateComponents?
         
         //年月日と最後の日付と曜日を取得(NSIntegerをintへのキャスト不要)
         let currentYear: NSInteger      = comps.year
@@ -684,6 +685,10 @@ class ViewController: UIViewController  {
     @objc func Down() {
         self.prevCalendarSettings()
     }
+    
+    @objc internal func goaccount(sender:UIBarButtonItem) {
+        self.performSegue(withIdentifier: "goaccount", sender: nil)
+    }
 }
 
 
@@ -760,6 +765,10 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: UITableViewDelegate {
+    // add
+    @objc internal func onClick(sender: UIButton) {
+        self.performSegue(withIdentifier: "Saddsegue", sender: nil)
+    }
     
     //editが押された時の処理
     override func setEditing(_ editing: Bool, animated: Bool) {
