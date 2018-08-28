@@ -103,8 +103,8 @@ class ViewController: UIViewController  {
         undertoolbar.tintColor = UIColor.white
         
         //NavigationToolBar
-        accountBtn = UIBarButtonItem(image:(UIImage (named: "bouninngenn.png")), style: .plain, target: self, action: (self.goaccount(sender:)))
-        
+//        accountBtn = UIBarButtonItem(image:(UIImage (named: "bouninngenn.png")), style: .plain, target: self, action: (self.goaccount(sender:)))
+//        
         //underBarButton
         addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.onClick(sender:)))
         editBtn = UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(self.setEditing(_:animated:)))
