@@ -63,6 +63,23 @@ class MiddleGroup: NCMBObject, NCMBSubclassing {
         }
     }
     
+    static func loadall2(mygroup: Group, callback: @escaping([MiddleGroup]) -> Void) {
+        let query = NCMBQuery(className: "MiddleGroup")
+        query?.whereKey("group", equalTo: mygroup )
+        query?.includeKey = "group"
+        query?.findObjectsInBackground{ (objects, error) in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            }else{
+                if(objects?.count)! > 0 {
+                    let obj = objects as! [MiddleGroup]
+                    callback(obj)
+                }
+            }
+            
+        }
+    }
+    
     static func saveWithEvent(group: MiddleGroup,
                               callBack: @escaping () -> Void) {
 //        print("MiddleGroupsave...\(group)")

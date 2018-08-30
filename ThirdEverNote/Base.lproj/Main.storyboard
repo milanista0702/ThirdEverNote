@@ -426,7 +426,7 @@
                         <outlet property="namelabel" destination="Xan-DM-J0G" id="SRa-qw-Wme"/>
                         <outlet property="table" destination="hKc-Od-kMe" id="RNu-g9-UCa"/>
                         <outlet property="userlabel" destination="e5a-eB-Ju5" id="iW0-lg-FmK"/>
-                        <segue destination="Jjl-1H-py5" kind="modal" id="Gog-3X-jc8"/>
+                        <segue destination="Jjl-1H-py5" kind="modal" identifier="mygroupsegue" id="Gog-3X-jc8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zh1-VE-SGP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -480,6 +480,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
+                    <connections>
+                        <outlet property="grouplabel" destination="rlA-4d-R6h" id="w7G-6d-hea"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qNg-Vn-nwY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
