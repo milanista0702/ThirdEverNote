@@ -17,6 +17,7 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
     @IBOutlet var groupslabel: UILabel!
     @IBOutlet var table: UITableView!
     var groupsArray = [MiddleGroup]()
+    var mygroup : String?
     
     let saveData: UserDefaults = UserDefaults.standard
     
@@ -44,6 +45,13 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
         
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mygroupsegue"{
+            let VRT = segue.destination as! GroupViewController
+             VRT.groupname = mygroup
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return groupsArray.count
     }
@@ -55,7 +63,9 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
+        _ = tableView.cellForRow(at: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as!GroupTableViewCell
+        mygroup = cell.searchlabel.text
         //        ここ！！！！！！！！！　次の画面に進むやで！！！
     }
     
