@@ -11,10 +11,9 @@ import NCMB
 
 class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet var grouplabel: UILabel!
     var userArray = [MiddleGroup]()
     var todoArray = [MiddleGTS]()
-    var groupname: String?
+    var groupname: Group?
     
     let titleArray : Array = ["User", "Todo & Schedule"]
     
@@ -31,11 +30,12 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         self.view.addSubview(table)
         
-        MiddleGroup.loadall2(mygroup: "groupname", callback: {objects in
+        MiddleGroup.loadall2(mygroup: groupname!, callback: {objects in
             self.userArray.removeAll()
             for object in objects {
                 self.userArray.append(object)
             }
+            table.reloadData()
         })
     }
     

@@ -83,6 +83,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
          }
          self.table.reloadData()
       })
+      self.table.reloadData()
    }
    
    @objc func refresh() {

@@ -26,6 +26,8 @@ class ViewController: UIViewController  {
     var scheduleArray = [Schedule]()
     var refreshControl : UIRefreshControl!
     
+    
+    
     //倉庫にアクセス
     let saveData: UserDefaults = UserDefaults.standard
     
@@ -103,8 +105,9 @@ class ViewController: UIViewController  {
         undertoolbar.tintColor = UIColor.white
         
         //NavigationToolBar
-//        accountBtn = UIBarButtonItem(image:(UIImage (named: "bouninngenn.png")), style: .plain, target: self, action: (self.goaccount(sender:)))
-//        
+        accountBtn = UIBarButtonItem(image: UIImage(named: "bouninngenn.png"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(tapaccountbtn(sender:)))
+        self.navigationItem.rightBarButtonItem = accountBtn
+        
         //underBarButton
         addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.onClick(sender:)))
         editBtn = UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(self.setEditing(_:animated:)))
@@ -765,6 +768,11 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: UITableViewDelegate {
+    //myaccount
+    @objc internal func tapaccountbtn(sender: UIButton) {
+        self.performSegue(withIdentifier: "goaacount", sender: nil)
+    }
+    
     // add
     @objc internal func onClick(sender: UIButton) {
         self.performSegue(withIdentifier: "Saddsegue", sender: nil)

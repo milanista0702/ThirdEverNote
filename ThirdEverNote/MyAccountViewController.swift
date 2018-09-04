@@ -17,7 +17,8 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
     @IBOutlet var groupslabel: UILabel!
     @IBOutlet var table: UITableView!
     var groupsArray = [MiddleGroup]()
-    var mygroup : String?
+    var mygroup : Group?
+    
     
     let saveData: UserDefaults = UserDefaults.standard
     
@@ -28,15 +29,18 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
         table.delegate = self
         table.dataSource = self
         
+        namelabel.text = NCMBUser.current().userName
+        
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
-        table.register(UINib(nibName: "GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTabelCell")
+        table.register(UINib(nibName: "GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         
         MiddleGroup.loadall(callback: {objects in
             self.groupsArray.removeAll()
             for object in objects {
                 self.groupsArray.append(object)
             }
+            self.table.reloadData()
         })
     }
     
@@ -57,16 +61,16 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as!GroupTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as! GroupTableViewCell
         cell.searchlabel.text = String(groupsArray[indexPath.row].group.name)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         _ = tableView.cellForRow(at: indexPath)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as!GroupTableViewCell
-        mygroup = cell.searchlabel.text
-        //        ここ！！！！！！！！！　次の画面に進むやで！！！
+        _ = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as! GroupTableViewCell
+        mygroup = groupsArray[indexPath.row].group
+        performSegue(withIdentifier: "mygroupsegue", sender: nil)
     }
     
     @IBAction func signoutbutton() {

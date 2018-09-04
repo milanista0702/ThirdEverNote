@@ -379,7 +379,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xan-DM-J0G">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xan-DM-J0G">
                                 <rect key="frame" x="154" y="138" width="205" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -937,11 +937,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="iCN-En-s1l"/>
         <segue reference="MJV-Pu-U4o"/>
-        <segue reference="aso-qC-OZL"/>
+        <segue reference="xl9-zd-3Z1"/>
         <segue reference="3no-Ow-CgN"/>
         <segue reference="Czh-FE-5o1"/>
-        <segue reference="C1f-TB-bEm"/>
+        <segue reference="dJp-09-Cig"/>
         <segue reference="CYS-mB-rpn"/>
     </inferredMetricsTieBreakers>
 </document>
