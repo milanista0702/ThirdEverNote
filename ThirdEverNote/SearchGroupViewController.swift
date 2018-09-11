@@ -63,7 +63,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
                 print("objects ... \(String(describing: objects))")
                 self.groupArray = objects as! [Group]
                 self.groupArray = self.groupArray.filter({ group in
-                    group.name.contains(self.searchController.searchBar.text!)
+                    group.name!.contains(self.searchController.searchBar.text!)
                 })
                 self.table.reloadData()
             }
@@ -77,7 +77,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as!GroupTableViewCell
-        cell.searchlabel.text = String(groupArray[indexPath.row].name)
+//        cell.searchlabel.text = String(groupArray[indexPath.row].name)
         cell.accessoryType = .none
         return cell
     }

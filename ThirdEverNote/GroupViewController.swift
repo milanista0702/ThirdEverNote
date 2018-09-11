@@ -11,6 +11,8 @@ import NCMB
 
 class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet var table: UITableView!
+    @IBOutlet var grouplabel: UILabel!
     var userArray = [MiddleGroup]()
     var todoArray = [MiddleGTS]()
     var groupname: Group?
@@ -19,23 +21,26 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        table.register(UINib(nibName: "GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         
-        let barHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
+        table.dataSource = self
+        table.delegate = self
         
-        let displayWidth: CGFloat = self.view.frame.width
-        let displayHeight: CGFloat = self.view.frame.height
-        
-        let table: UITableView = UITableView(frame: CGRect(x: 0, y: barHeight, width: displayWidth, height: displayHeight - barHeight))
-        table.register(UINib(nibName: "GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableCell")
-        
-        self.view.addSubview(table)
+        //self.view.addSubview(table)
         
         MiddleGroup.loadall2(mygroup: groupname!, callback: {objects in
             self.userArray.removeAll()
             for object in objects {
                 self.userArray.append(object)
             }
-            table.reloadData()
+            self.table.reloadData()
+        })
+        
+        Group.getName(id: (groupname?.objectId)!, callback: {objects in 
+            DispatchQueue.main.async {
+                self.grouplabel.text = objects[0].name
+            }
         })
     }
     
@@ -48,7 +53,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return titleArray[section] as String
+        return titleArray[section] as? String
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,11 +67,11 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as! GroupTableViewCell
         if indexPath.section == 0 {
-            cell.textLabel?.text = "\(userArray[indexPath.row])"
+            cell.searchlabel.text = userArray[indexPath.row].user.userName
         } else if indexPath.section == 1 {
-            cell.textLabel?.text = "\(todoArray[indexPath.row])"
+            cell.searchlabel.text = todoArray[indexPath.row].Todo?.todo
         }
         return cell
     }

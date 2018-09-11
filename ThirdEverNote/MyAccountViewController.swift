@@ -18,6 +18,7 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
     @IBOutlet var table: UITableView!
     var groupsArray = [MiddleGroup]()
     var mygroup : Group?
+    var groupid: String?
     
     
     let saveData: UserDefaults = UserDefaults.standard
@@ -62,7 +63,13 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as! GroupTableViewCell
-        cell.searchlabel.text = String(groupsArray[indexPath.row].group.name)
+        print(groupsArray[indexPath.row].group.object(forKey: "objectId") as! String)
+        groupid = groupsArray[indexPath.row].group.objectId
+        Group.getName(id: groupid!, callback:{ objects in
+            DispatchQueue.main.async {
+                cell.searchlabel.text = objects[0].name
+            }
+        })
         return cell
     }
     

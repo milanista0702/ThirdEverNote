@@ -481,7 +481,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <connections>
-                        <outlet property="grouplabel" destination="rlA-4d-R6h" id="w7G-6d-hea"/>
+                        <outlet property="grouplabel" destination="rlA-4d-R6h" id="vrt-qa-19I"/>
+                        <outlet property="table" destination="AxC-Td-aeF" id="Q5A-xL-A8n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qNg-Vn-nwY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -937,7 +938,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iCN-En-s1l"/>
         <segue reference="MJV-Pu-U4o"/>
         <segue reference="xl9-zd-3Z1"/>
         <segue reference="3no-Ow-CgN"/>

@@ -11,12 +11,29 @@ import NCMB
 
 @objc(Group)
 class Group: NCMBObject, NCMBSubclassing {
-    var name: String! {
+    var name: String? {
         get{
-            return object(forKey: "name") as! String
+            return object(forKey: "name") as? String
         }
         set{
             setObject(newValue, forKey: "name")
+        }
+    }
+    
+    static func getName(id: String, callback: @escaping([Group]) -> Void) {
+        let query = NCMBQuery(className: "Group")
+        query?.whereKey("objectId", equalTo: id)
+        query?.includeKey = "objectId"
+        query?.findObjectsInBackground{ (objects, error) in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            }else{
+                if(objects?.count)! > 0 {
+                    let obj = objects as! [Group]
+                    callback(obj)
+                }
+                print("getname")
+            }
         }
     }
     

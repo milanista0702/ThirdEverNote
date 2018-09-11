@@ -11,16 +11,14 @@ import NCMB
 
 @objc(MiddleGroup)
 class MiddleGroup: NCMBObject, NCMBSubclassing {
-    var _group: Group? {
+    var group: Group {
         get {
-            return self.group
+            return object(forKey: "group") as! Group
         }
         set {
             setObject(newValue, forKey: "group")
         }
     }
-    
-    var group: Group?
     
     var user: NCMBUser {
         get {
@@ -37,14 +35,14 @@ class MiddleGroup: NCMBObject, NCMBSubclassing {
     
     static func create(group: Group, user: NCMBUser) -> MiddleGroup{
         let middlegroup = MiddleGroup(className: "MiddleGroup")
-        middlegroup?._group = group
+        middlegroup?.group = group
         middlegroup?.user = user
         return middlegroup!
     }
     
     static func update(object: MiddleGroup, group: Group, user: NCMBUser) -> MiddleGroup {
         if object.user == user {
-            object._group = group
+            object.group = group
         }
         return object
     }
@@ -59,13 +57,6 @@ class MiddleGroup: NCMBObject, NCMBSubclassing {
             }else{
                 if(objects?.count)! > 0 {
                     let obj = objects as! [MiddleGroup]
-                    for i in 0 ..< obj.count {
-                        var grp = obj[i].object(forKey: "group") as! NCMBObject
-                        grp.fetchInBackground { _ in
-                            let name = grp.object(forKey: "name") as! String
-                            obj[i].group = 
-                        }
-                    }
                     callback(obj)
                 }
             }
@@ -91,7 +82,6 @@ class MiddleGroup: NCMBObject, NCMBSubclassing {
     
     static func saveWithEvent(group: MiddleGroup,
                               callBack: @escaping () -> Void) {
-//        print("MiddleGroupsave...\(group)")
         group.saveEventually{(error) in
             if error != nil {
                 print(error?.localizedDescription as Any)
