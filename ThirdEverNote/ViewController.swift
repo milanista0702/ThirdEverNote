@@ -620,7 +620,7 @@ class ViewController: UIViewController  {
                 print("nil")
             } else {
                 print("objects")
-                print(objects as Any as Any)
+                print(objects as Any as Any as Any)
                 print("objects")
                 self.todoArray = objects as! [ToDoes]
                 self.table.reloadData()

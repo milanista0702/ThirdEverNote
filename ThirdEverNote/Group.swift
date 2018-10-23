@@ -84,3 +84,21 @@ class Group: NCMBObject, NCMBSubclassing {
     }
 }
 
+extension NCMBUser {
+    static func getName(id: String, callback: @escaping([NCMBUser]) -> Void) {
+        let query = NCMBQuery(className: "NCMBUser")
+        query?.whereKey("objectId", equalTo: id)
+        query?.includeKey = "objectId"
+        query?.findObjectsInBackground{ (objects, error) in
+            if error != nil {
+                print(error?.localizedDescription as Any)
+            }else{
+                if(objects?.count)! > 0 {
+                    let obj = objects as! [NCMBUser]
+                    callback(obj)
+                }
+                print("getname \(String(describing: objects?.count))")
+            }
+        }
+    }
+}

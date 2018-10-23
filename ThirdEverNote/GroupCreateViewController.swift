@@ -56,7 +56,7 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         memberlabel.backgroundColor = ColorManager.navy
         memberlabel.textColor = UIColor.white
         
-        print("GroupCreateController...\(completion)")
+        print("GroupCreateController...\(String(describing: completion))")
     }
     
     override func didReceiveMemoryWarning() {

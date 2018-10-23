@@ -13,7 +13,7 @@ import NCMB
 class Schedule: NCMBObject, NCMBSubclassing{
     var title: String! {
         get{
-            return object(forKey: "title") as! String
+            return object(forKey: "title") as? String
         }
         set {
             setObject(newValue, forKey: "title")

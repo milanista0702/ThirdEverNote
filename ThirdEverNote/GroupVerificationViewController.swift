@@ -49,7 +49,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         mtable.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         utable.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         
-        print("GroupVerlificationController...\(completion)")
+        print("GroupVerlificationController...\(String(describing: completion))")
         
     }
     
@@ -61,6 +61,8 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         if segue.identifier == "addtodo" {
             let VT = segue.destination as! AddViewController
             VT.groupcreates = groupcreate
+            VT.membersArray = memberArray
+            /////////////////////y呼ばれない
         }else{
             let VS = segue.destination as! ScheduleAddViewController
             VS.groupcreates = groupcreate
@@ -106,6 +108,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         }else{
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
                 self.completions(self.groupcreate!)
+                self.completion(self.memberArray)
             })
         }
     }

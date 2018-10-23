@@ -13,7 +13,7 @@ import NCMB
 class ToDoes: NCMBObject, NCMBSubclassing{
     var todo: String! {
         get {
-            return object(forKey: "todo") as! String
+            return object(forKey: "todo") as? String
         }
         set {
             setObject(newValue, forKey: "todo")

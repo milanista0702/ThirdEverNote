@@ -150,7 +150,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    
    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
       
-      self.delegateObjec(indexPath: indexPath as NSIndexPath)
+   self.delegateObjec(indexPath: indexPath as NSIndexPath)
       
       // 先にデータを更新する
       remindArray.remove(at: indexPath.row)
@@ -183,7 +183,6 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       } else {
          return UITableViewCellEditingStyle.none
       }
-      
       //編集中にもcellを選択できる
       table.allowsSelectionDuringEditing = true
    }

@@ -20,15 +20,17 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     @IBOutlet var sharelabel: UILabel!
     
     var exgroupArray = [Group]()
-    var groupcreates: Group?
+    var groupcreates: Group!
     var completion: ((Group) -> Void)!
+    
+    var membersArray = [NCMBUser]()
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit()
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad() {FF
         super.viewDidLoad()
         text.delegate = self
         
@@ -52,16 +54,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         self.commonInit()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender:Any?) {
-        if segue.identifier == "todonewsegue"{
-            let VRT = segue.destination as! GroupCreateViewController
-            VRT.todotext = self.text.text
-            VRT.completion = { group in
-                print(group)
-                self.groupcreates = group
-            }
-        }
-    }
+    F
     
     func commonInit() {
         self.modalPresentationStyle = .custom
@@ -96,20 +89,23 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     
     @IBAction func ok(sender: UIButton) {
         if text.text?.isEmpty == true{
-            
         }else{
-            let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(),isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-            ToDoes.saveWithEvent(todo: todo, callBack: {})
-            
-            let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
-            MiddleGTS.saveWithEvent(group: GTS, callBack:{})
-            
-            self.dismiss(animated: true, completion: nil)
-            
-            if todo.isPublic == true {
+            print("##################################")
+            print(self.membersArray)
+            for element in self.membersArray{
+                let todo = ToDoes.create(todo: text.text!, user: element,isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+                ToDoes.saveWithEvent(todo: todo, callBack: {})
+                print("##################################")
+                
+                let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
+                MiddleGTS.saveWithEvent(group: GTS, callBack:{})
+                
+                self.dismiss(animated: true, completion: nil)
+                
+                if todo.isPublic == true {
+                }
             }
         }
-        
     }
     
     

@@ -16,6 +16,8 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var userArray = [MiddleGroup]()
     var todoArray = [MiddleGTS]()
     var groupname: Group?
+    var user: NCMBUser?
+    var userName: String = ""
     
     let titleArray : Array = ["User", "Todo & Schedule"]
     
@@ -37,9 +39,15 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.table.reloadData()
         })
         
-        Group.getName(id: (groupname?.objectId)!, callback: {objects in 
+        Group.getName(id: (groupname?.objectId)!, callback: {objects in
             DispatchQueue.main.async {
                 self.grouplabel.text = objects[0].name
+            }
+        })
+        NCMBUser.getName(id: (user?.objectId)! , callback: {objets in
+            DispatchQueue.main.async {
+                self.userName = objets[0].userName
+                self.table.reloadData()
             }
         })
     }
@@ -58,7 +66,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return userArray.count
+            return 1
         } else if section == 1 {
             return todoArray.count
         } else {
@@ -69,7 +77,8 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as! GroupTableViewCell
         if indexPath.section == 0 {
-            cell.searchlabel.text = userArray[indexPath.row].user.userName
+            cell.searchlabel.text = userName
+            
         } else if indexPath.section == 1 {
             cell.searchlabel.text = todoArray[indexPath.row].Todo?.todo
         }

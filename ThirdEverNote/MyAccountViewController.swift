@@ -19,6 +19,7 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
     var groupsArray = [MiddleGroup]()
     var mygroup : Group?
     var groupid: String?
+    var myuser: NCMBUser?
     
     
     let saveData: UserDefaults = UserDefaults.standard
@@ -40,6 +41,7 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
             self.groupsArray.removeAll()
             for object in objects {
                 self.groupsArray.append(object)
+                print(object.user.objectId)
             }
             self.table.reloadData()
         })
@@ -53,7 +55,8 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "mygroupsegue"{
             let VRT = segue.destination as! GroupViewController
-             VRT.groupname = mygroup
+            VRT.user = myuser
+            VRT.groupname = mygroup
         }
     }
     
@@ -77,6 +80,7 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
         _ = tableView.cellForRow(at: indexPath)
         _ = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as! GroupTableViewCell
         mygroup = groupsArray[indexPath.row].group
+        myuser = groupsArray[indexPath.row].user
         performSegue(withIdentifier: "mygroupsegue", sender: nil)
     }
     
