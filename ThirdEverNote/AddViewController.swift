@@ -30,7 +30,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         self.commonInit()
     }
     
-    override func viewDidLoad() {FF
+    override func viewDidLoad() {
         super.viewDidLoad()
         text.delegate = self
         
@@ -54,8 +54,6 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         self.commonInit()
     }
     
-    F
-    
     func commonInit() {
         self.modalPresentationStyle = .custom
         self.transitioningDelegate = self
@@ -71,8 +69,10 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     func showalert() {
         let alert = UIAlertController(title: "Group", message: "Create a NewGroup\nor\nExisting Group", preferredStyle: .alert)
         
+        
         let action1 = UIAlertAction(title: "Create a New Group", style: .default) { _ in
-            self.performSegue(withIdentifier: "todonewsegue", sender: nil)
+            self.performSegue(withIdentifier: "todonewsegue", sender: self.text.text)
+            
         }
         let action2 = UIAlertAction(title: "Existing Group", style: .default) { _ in
             self.performSegue(withIdentifier: "todosearch", sender: nil)
@@ -84,18 +84,14 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         alert.addAction(cancel)
         
         self.present(alert, animated: true, completion: nil)
-        
     }
     
     @IBAction func ok(sender: UIButton) {
         if text.text?.isEmpty == true{
         }else{
-            print("##################################")
-            print(self.membersArray)
             for element in self.membersArray{
                 let todo = ToDoes.create(todo: text.text!, user: element,isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
                 ToDoes.saveWithEvent(todo: todo, callBack: {})
-                print("##################################")
                 
                 let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
                 MiddleGTS.saveWithEvent(group: GTS, callBack:{})
@@ -111,6 +107,13 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     
     @IBAction func cancel () {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if segue.identifier == "todonewsegue" {
+            let GroupCreateViewControllerTwo = segue.destination as! GroupCreateViewController
+            GroupCreateViewControllerTwo.todotext = sender as? String
+        }
     }
     
     

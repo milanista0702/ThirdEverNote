@@ -38,6 +38,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         mtable.delegate = self
         mtable.dataSource = self
         
+        
         utable.delegate = self
         utable.dataSource = self
         
@@ -50,7 +51,6 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         utable.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         
         print("GroupVerlificationController...\(String(describing: completion))")
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,7 +61,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         if segue.identifier == "addtodo" {
             let VT = segue.destination as! AddViewController
             VT.groupcreates = groupcreate
-            VT.membersArray = memberArray
+//            VT.membersArray = memberArray
             /////////////////////y呼ばれない
         }else{
             let VS = segue.destination as! ScheduleAddViewController
@@ -101,6 +101,11 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
                 })
             }
         })
+        
+        //2個前のAddViewControllernへのSegueがわり
+        let prepareVC = presentingViewController?.presentingViewController as? AddViewController
+        prepareVC?.membersArray = self.memberArray
+        
         if stext == nil {
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
                 self.completion(self.groupcreate!)
@@ -108,7 +113,6 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         }else{
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
                 self.completions(self.groupcreate!)
-                self.completion(self.memberArray)
             })
         }
     }
