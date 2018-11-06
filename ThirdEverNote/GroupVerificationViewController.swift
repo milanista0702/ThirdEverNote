@@ -105,7 +105,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         //2個前のAddViewControllernへのSegueがわり
         let prepareVC = presentingViewController?.presentingViewController as? AddViewController
         prepareVC?.membersArray = self.memberArray
-        
+
         if stext == nil {
             self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
                 self.completion(self.groupcreate!)
