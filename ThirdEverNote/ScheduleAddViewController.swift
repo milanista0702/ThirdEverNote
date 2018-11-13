@@ -20,7 +20,6 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     @IBOutlet var sharelabel: UILabel!
     
     var groupcreates : Group?
-    var completions : ((Group) -> Void)!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

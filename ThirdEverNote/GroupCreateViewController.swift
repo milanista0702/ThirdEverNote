@@ -20,8 +20,6 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
     var membersArray = [NCMBUser]()
     var usersArray = [NCMBUser]()
     var groups: Group?
-    var completion: ((Group) -> Void)!
-    var completions : ((Group) -> Void)!
     
     @IBOutlet var createlabel: UILabel!
     @IBOutlet var namelabel: UILabel!
@@ -55,8 +53,6 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         namelabel.textColor = UIColor.white
         memberlabel.backgroundColor = ColorManager.navy
         memberlabel.textColor = UIColor.white
-        
-        print("GroupCreateController...\(String(describing: completion))")
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,8 +66,6 @@ class GroupCreateViewController: UIViewController, UIViewControllerTransitioning
         GVC.ttext = todotext
         GVC.memberArray = membersArray
         GVC.groupcreate = groups
-        GVC.completion = completion
-        GVC.completions = completions
     }
     
     func updateSearchResults(for searchController: UISearchController) {

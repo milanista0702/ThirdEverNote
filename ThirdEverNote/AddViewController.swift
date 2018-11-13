@@ -19,11 +19,14 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     @IBOutlet var limitlabel: UILabel!
     @IBOutlet var sharelabel: UILabel!
     
+    var screenback: Bool!
+    
     var exgroupArray = [Group]()
     var groupcreates: Group!
-    var completion: ((Group) -> Void)!
     
     var membersArray = [NCMBUser]()
+    
+    let userDefaults = UserDefaults.standard
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -32,6 +35,11 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //判定
+        screenback = true
+        userDefaults.set(screenback, forKey:"addtrue")
+        
+        
         text.delegate = self
         
         addlabel.backgroundColor = ColorManager.green
