@@ -56,9 +56,9 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         if segue.identifier == "schenewsegue"{
             let VRT = segue.destination as! GroupCreateViewController
             VRT.scheduletext = self.text.text
-            VRT.completions = { group in
-                self.groupcreates = group
-            }
+//            VRT.completions = { group in
+//                self.groupcreates = group
+//            }
         }
     }
     

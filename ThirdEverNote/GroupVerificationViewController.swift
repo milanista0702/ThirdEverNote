@@ -50,7 +50,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         mtable.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         utable.register(UINib(nibName:"GroupTableCell", bundle: nil), forCellReuseIdentifier: "GroupTableViewCell")
         
-        print("GroupVerlificationController...\(String(describing: completion))")
+//        print("GroupVerlificationController...\(String(describing: completion))")
     }
     
     override func didReceiveMemoryWarning() {
