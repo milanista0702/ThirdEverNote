@@ -13,9 +13,10 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     
     @IBOutlet var table: UITableView!
     var searchController = UISearchController()
-    var groupArray = [Group]()
+    var groupArray = [MiddleGroup]()
     var addgroupArray = [Group]()
     var groups: Group?
+    var groupid: String?
     
     @IBOutlet var groupsearchlabel: UILabel!
     
@@ -43,6 +44,14 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         
         groupsearchlabel.backgroundColor = UIColor.black
         groupsearchlabel.textColor = UIColor.white
+        
+        MiddleGroup.loadall(callback: {objects in
+            self.groupArray.removeAll()
+            for object in objects {
+                self.groupArray.append(object)
+            }
+            self.table.reloadData()
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,21 +63,21 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         GVC.exgroupArray = addgroupArray
     }
     
-    func updateSearchResults(for searchContrller: UISearchController) {
-        let query = Group.query()
-        query?.findObjectsInBackground({(objects, error) in
-            if self.searchController.searchBar.text == nil {
-                self.groupArray = objects as! [Group]
-            }else{
-                print("objects ... \(String(describing: objects))")
-                self.groupArray = objects as! [Group]
-                self.groupArray = self.groupArray.filter({ group in
-                    group.name!.contains(self.searchController.searchBar.text!)
-                })
-                self.table.reloadData()
-            }
-        })
-    }
+        func updateSearchResults(for searchContrller: UISearchController) {
+            let query = Group.query()
+            query?.findObjectsInBackground({(objects, error) in
+                if self.searchController.searchBar.text == nil {
+                    self.groupArray = objects as! [MiddleGroup]
+                }else{
+                    print("objects ... \(String(describing: objects))")
+                    self.groupArray = objects as! [MiddleGroup]
+                    self.groupArray = self.groupArray.filter({ group in
+                        group.name!.contains(self.searchController.searchBar.text!)
+                    })
+                    self.table.reloadData()
+                }
+            })
+        }
     
     // cellの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -76,16 +85,25 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell", for: indexPath) as!GroupTableViewCell
-//        cell.searchlabel.text = String(groupArray[indexPath.row].name)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as!GroupTableViewCell
+        groupid = groupArray[indexPath.row].group.objectId
+        Group.getName(id: groupid!, callback: { objects in DispatchQueue.main.async {
+            cell.searchlabel.text = objects[0].name
+            }
+        })
         cell.accessoryType = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.accessoryType = .checkmark
-        addgroupArray.append(groupArray[indexPath.row])
+        let cell = tableView.cellForRow(at: indexPath) as! GroupTableViewCell
+        cell.accessoryType = .checkmark
+        Group.search(name: cell.searchlabel.text!, callback: {objects in
+           self.addgroupArray.removeAll()
+            for object in objects {
+                self.addgroupArray.append(object)
+            }
+        })
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

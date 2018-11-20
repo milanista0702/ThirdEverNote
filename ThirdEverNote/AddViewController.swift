@@ -21,7 +21,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     
     var screenback: Bool!
     
-    var exgroupArray = [Group]()
+    var exgroupArray = [Group]() //検索で選択されたGroup
     var groupcreates: Group!
     
     var membersArray = [NCMBUser]()
@@ -96,18 +96,23 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     
     @IBAction func ok(sender: UIButton) {
         if text.text?.isEmpty == true{
+            //Alert
         }else{
-            for element in self.membersArray{
-                let todo = ToDoes.create(todo: text.text!, user: element,isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+            if shareswitch.isOn == true{
+                for element in self.membersArray{
+                    let todo = ToDoes.create(todo: text.text!, user: element,isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+                    ToDoes.saveWithEvent(todo: todo, callBack: {})
+                    
+                    let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
+                    MiddleGTS.saveWithEvent(group: GTS, callBack:{})
+                    
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }else{
+                let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), isPublic: nil, date: date.date as NSDate, done: false)
                 ToDoes.saveWithEvent(todo: todo, callBack: {})
                 
-                let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
-                MiddleGTS.saveWithEvent(group: GTS, callBack:{})
-                
                 self.dismiss(animated: true, completion: nil)
-                
-                if todo.isPublic == true {
-                }
             }
         }
     }

@@ -96,18 +96,20 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
             }
         })
         
-        //2個前のAddViewControllernへのSegueがわり
-        let prepareVC = presentingViewController?.presentingViewController as? AddViewController
-        prepareVC?.membersArray = self.memberArray
-        
         let def = UserDefaults.standard
-
         let screenback: Bool = def.bool(forKey: "addtrue")
         if screenback == true {
-            performSegue(withIdentifier: "totodo", sender: nil)
+            let performVA = presentingViewController?.presentingViewController as? AddViewController
+            performVA?.groupcreates = groupcreate
+            performVA?.membersArray = memberArray
+            
         }else{
-            performSegue(withIdentifier: "toschedule", sender: nil)
+            let performVS = presentingViewController?.presentingViewController as? ScheduleAddViewController
+            
+            
         }
+        
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
         
     }
     
