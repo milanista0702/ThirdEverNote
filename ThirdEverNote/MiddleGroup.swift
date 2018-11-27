@@ -47,6 +47,8 @@ class MiddleGroup: NCMBObject, NCMBSubclassing {
         return object
     }
     
+    
+    
     static func loadall(callback: @escaping([MiddleGroup]) -> Void) {
         let query = NCMBQuery(className: "MiddleGroup")
         query?.whereKey("user", equalTo: NCMBUser.current())

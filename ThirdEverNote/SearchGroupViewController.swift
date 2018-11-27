@@ -63,21 +63,30 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         GVC.exgroupArray = addgroupArray
     }
     
-        func updateSearchResults(for searchContrller: UISearchController) {
-            let query = Group.query()
-            query?.findObjectsInBackground({(objects, error) in
-                if self.searchController.searchBar.text == nil {
-                    self.groupArray = objects as! [MiddleGroup]
-                }else{
-                    print("objects ... \(String(describing: objects))")
-                    self.groupArray = objects as! [MiddleGroup]
-                    self.groupArray = self.groupArray.filter({ group in
-                        group.name!.contains(self.searchController.searchBar.text!)
+    func updateSearchResults(for searchContrller: UISearchController) {
+        let query = Group.query()
+        query?.findObjectsInBackground({(objects, error) in
+            if self.searchController.searchBar.text == nil {
+                self.groupArray = objects as! [MiddleGroup]
+            }else{
+                print("objects ... \(String(describing: objects))")
+                self.groupArray = objects as! [MiddleGroup]
+                self.groupArray = self.groupArray.filter{ middleGroup in
+                    let group_id = middleGroup.group.objectId
+                    var group = NCMBObject(className: "Group")
+                    group?.objectId = group_id
+                    group?.fetchInBackground({ (error) in
+                        if error != nil{
+                            print("変換失敗")
+                        }
                     })
-                    self.table.reloadData()
+                    let GROUP = group as! Group
+                    return (GROUP.name?.lowercased().contains(self.searchController.searchBar.text!.lowercased()))!
                 }
-            })
-        }
+                self.table.reloadData()
+            }
+        })
+    }
     
     // cellの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -99,7 +108,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         let cell = tableView.cellForRow(at: indexPath) as! GroupTableViewCell
         cell.accessoryType = .checkmark
         Group.search(name: cell.searchlabel.text!, callback: {objects in
-           self.addgroupArray.removeAll()
+            self.addgroupArray.removeAll()
             for object in objects {
                 self.addgroupArray.append(object)
             }
