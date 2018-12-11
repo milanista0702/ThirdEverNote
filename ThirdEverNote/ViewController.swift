@@ -128,23 +128,24 @@ class ViewController: UIViewController  {
         
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
-
-            //iPhone5またはiPhone5s
+        
+        //iPhone5またはiPhone5s
+        //iPhoneSE
         if (screenWidth == 320 && screenHeight == 568){
             
-            calendarLabelIntervalX = 5;
-            calendarLabelX         = 45;
-            calendarLabelY         = 93;
-            calendarLabelWidth     = 40;
-            calendarLabelHeight    = 25;
+            calendarLabelIntervalX = 5;   //曜日左右
+            calendarLabelX         = 45;  //横開き具合
+            calendarLabelY         = 93;  //縦開き具合
+            calendarLabelWidth     = 40;  //横左右？
+            calendarLabelHeight    = 25;  //縦上下
             calendarLableFontSize  = 14;
             
-            buttonRadius           = 20.0;
+            buttonRadius           = 20.0;  //形
             
-            calendarIntervalX      = 5;
-            calendarX              = 45;
-            calendarIntervalY      = 120;
-            calendarY              = 45;
+            calendarIntervalX      = 5;   //カレンダー左右
+            calendarX              = 45;  //縦開き具合
+            calendarIntervalY      = 120; //カレンダー上下
+            calendarY              = 45;  //縦開き具合
             calendarSize           = 40;
             calendarFontSize       = 17;
             
@@ -193,18 +194,18 @@ class ViewController: UIViewController  {
             // iPhoneX
         }else if (screenWidth == 375 && screenHeight == 812){
             
-            calendarLabelIntervalX = 15;
-            calendarLabelX         = 55;
-            calendarLabelY         = 95;
+            calendarLabelIntervalX = 3;
+            calendarLabelX         = 53;
+            calendarLabelY         = 105;
             calendarLabelWidth     = 55;
             calendarLabelHeight    = 25;
             calendarLableFontSize  = 18;
             
             buttonRadius           = 25;
             
-            calendarIntervalX      = 18;
-            calendarX              = 55;
-            calendarIntervalY      = 125;
+            calendarIntervalX      = 3;
+            calendarX              = 53;
+            calendarIntervalY      = 140;
             calendarY              = 55;
             calendarSize           = 50;
             calendarFontSize       = 21;
@@ -231,19 +232,19 @@ class ViewController: UIViewController  {
             //iPhoneXR
             //iPhoneXS M
         }else if (screenWidth == 414 && screenHeight == 896) {
-            calendarLabelIntervalX = 15;
-            calendarLabelX         = 55;
+            calendarLabelIntervalX = 8;
+            calendarLabelX         = 57;
             calendarLabelY         = 95;
             calendarLabelWidth     = 55;
-            calendarLabelHeight    = 25;
+            calendarLabelHeight    = 90;
             calendarLableFontSize  = 18;
             
             buttonRadius           = 25;
             
-            calendarIntervalX      = 18;
-            calendarX              = 55;
-            calendarIntervalY      = 125;
-            calendarY              = 55;
+            calendarIntervalX      = 10;
+            calendarX              = 57;
+            calendarIntervalY      = 180;
+            calendarY              = 60;
             calendarSize           = 50;
             calendarFontSize       = 21;
             
