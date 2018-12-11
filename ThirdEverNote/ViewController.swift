@@ -110,7 +110,7 @@ class ViewController: UIViewController  {
         
         //underBarButton
         addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.onClick(sender:)))
-        editBtn = UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(self.setEditing(_:animated:)))
+        editBtn = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(self.setEditing(_:animated:)))
         let flexiblespace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         undertoolbar.items = [editBtn, flexiblespace, addBtn]
         
@@ -128,28 +128,9 @@ class ViewController: UIViewController  {
         
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
-        
-        //iPhone4s
-        if(screenWidth == 320 && screenHeight == 480){
-            
-            calendarLabelIntervalX = 5;
-            calendarLabelX         = 45;
-            calendarLabelY         = 93;
-            calendarLabelWidth     = 40;
-            calendarLabelHeight    = 25;
-            calendarLableFontSize  = 14;
-            
-            buttonRadius           = 20.0;
-            
-            calendarIntervalX      = 5;
-            calendarX              = 45;
-            calendarIntervalY      = 120;
-            calendarY              = 45;
-            calendarSize           = 40;
-            calendarFontSize       = 17;
-            
+
             //iPhone5またはiPhone5s
-        }else if (screenWidth == 320 && screenHeight == 568){
+        if (screenWidth == 320 && screenHeight == 568){
             
             calendarLabelIntervalX = 5;
             calendarLabelX         = 45;
@@ -174,7 +155,7 @@ class ViewController: UIViewController  {
             
             calendarLabelIntervalX = 15;
             calendarLabelX         = 50;
-            calendarLabelY         = 95 + remake;
+            calendarLabelY         = 100 + remake;
             calendarLabelWidth     = 45;
             calendarLabelHeight    = 25;
             calendarLableFontSize  = 16;
@@ -188,8 +169,29 @@ class ViewController: UIViewController  {
             calendarSize           = 45;
             calendarFontSize       = 19;
             
-            //iPhone6 plus
+            //iPhone6 P
+            //iPhone7 P
+            //iPhone8 P
         }else if (screenWidth == 414 && screenHeight == 736){
+            
+            calendarLabelIntervalX = 15;
+            calendarLabelX         = 55;
+            calendarLabelY         = 70;
+            calendarLabelWidth     = 55;
+            calendarLabelHeight    = 25;
+            calendarLableFontSize  = 18;
+            
+            buttonRadius           = 25;
+            
+            calendarIntervalX      = 18;
+            calendarX              = 55;
+            calendarIntervalY      = 110;
+            calendarY              = 55;
+            calendarSize           = 50;
+            calendarFontSize       = 21;
+            
+            // iPhoneX
+        }else if (screenWidth == 375 && screenHeight == 812){
             
             calendarLabelIntervalX = 15;
             calendarLabelX         = 55;
@@ -206,8 +208,128 @@ class ViewController: UIViewController  {
             calendarY              = 55;
             calendarSize           = 50;
             calendarFontSize       = 21;
+            
+            //iPhoneXS
+        }else if (screenWidth == 375 && screenHeight == 667) {
+            
+            calendarLabelIntervalX = 15;
+            calendarLabelX         = 55;
+            calendarLabelY         = 95;
+            calendarLabelWidth     = 55;
+            calendarLabelHeight    = 25;
+            calendarLableFontSize  = 18;
+            
+            buttonRadius           = 25;
+            
+            calendarIntervalX      = 18;
+            calendarX              = 55;
+            calendarIntervalY      = 125;
+            calendarY              = 55;
+            calendarSize           = 50;
+            calendarFontSize       = 21;
+            
+            //iPhoneXR
+            //iPhoneXS M
+        }else if (screenWidth == 414 && screenHeight == 896) {
+            calendarLabelIntervalX = 15;
+            calendarLabelX         = 55;
+            calendarLabelY         = 95;
+            calendarLabelWidth     = 55;
+            calendarLabelHeight    = 25;
+            calendarLableFontSize  = 18;
+            
+            buttonRadius           = 25;
+            
+            calendarIntervalX      = 18;
+            calendarX              = 55;
+            calendarIntervalY      = 125;
+            calendarY              = 55;
+            calendarSize           = 50;
+            calendarFontSize       = 21;
+            
+            //iPad
+            //iPad 2
+            //iPad 3
+            //iPad 4
+            //iPad Air
+            //iPad Air 2
+            //iPad Pro 9.7
+        }else if (screenWidth == 768 && screenHeight == 1024) {
+            
+            calendarLabelIntervalX = 15;
+            calendarLabelX         = 55;
+            calendarLabelY         = 95;
+            calendarLabelWidth     = 55;
+            calendarLabelHeight    = 25;
+            calendarLableFontSize  = 18;
+            
+            buttonRadius           = 25;
+            
+            calendarIntervalX      = 18;
+            calendarX              = 55;
+            calendarIntervalY      = 125;
+            calendarY              = 55;
+            calendarSize           = 50;
+            calendarFontSize       = 21;
+            
+            //iPad 10.5
+        }else if (screenWidth == 834 && screenHeight == 1112){
+            
+            calendarLabelIntervalX = 15;
+            calendarLabelX         = 55;
+            calendarLabelY         = 95;
+            calendarLabelWidth     = 55;
+            calendarLabelHeight    = 25;
+            calendarLableFontSize  = 18;
+            
+            buttonRadius           = 25;
+            
+            calendarIntervalX      = 18;
+            calendarX              = 55;
+            calendarIntervalY      = 125;
+            calendarY              = 55;
+            calendarSize           = 50;
+            calendarFontSize       = 21;
+            
+            // iPad Pro 11
+        }else if (screenWidth == 834 && screenHeight == 1194) {
+            
+            calendarLabelIntervalX = 15;
+            calendarLabelX         = 55;
+            calendarLabelY         = 95;
+            calendarLabelWidth     = 55;
+            calendarLabelHeight    = 25;
+            calendarLableFontSize  = 18;
+            
+            buttonRadius           = 25;
+            
+            calendarIntervalX      = 18;
+            calendarX              = 55;
+            calendarIntervalY      = 125;
+            calendarY              = 55;
+            calendarSize           = 50;
+            calendarFontSize       = 21;
+            
+            // iPad Pro 12.9
+        }else if (screenWidth == 1024 && screenHeight == 1366) {
+            
+            calendarLabelIntervalX = 15;
+            calendarLabelX         = 55;
+            calendarLabelY         = 95;
+            calendarLabelWidth     = 55;
+            calendarLabelHeight    = 25;
+            calendarLableFontSize  = 18;
+            
+            buttonRadius           = 25;
+            
+            calendarIntervalX      = 18;
+            calendarX              = 55;
+            calendarIntervalY      = 125;
+            calendarY              = 55;
+            calendarSize           = 50;
+            calendarFontSize       = 21;
+            
         }
-        
         //現在の日付を取得する
         now = NSDate()
         
