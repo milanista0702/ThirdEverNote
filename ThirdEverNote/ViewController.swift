@@ -295,21 +295,21 @@ class ViewController: UIViewController  {
             // iPad Pro 11
         }else if (screenWidth == 834 && screenHeight == 1194) {
             
-            calendarLabelIntervalX = 15;
-            calendarLabelX         = 55;
+            calendarLabelIntervalX = 63;
+            calendarLabelX         = 110;
             calendarLabelY         = 95;
             calendarLabelWidth     = 55;
             calendarLabelHeight    = 25;
-            calendarLableFontSize  = 18;
+            calendarLableFontSize  = 25;
             
-            buttonRadius           = 25;
+            buttonRadius           = 50;
             
-            calendarIntervalX      = 18;
-            calendarX              = 55;
-            calendarIntervalY      = 125;
-            calendarY              = 55;
-            calendarSize           = 50;
-            calendarFontSize       = 21;
+            calendarIntervalX      = 40;
+            calendarX              = 110;
+            calendarIntervalY      = 135;
+            calendarY              = 120;
+            calendarSize           = 100;
+            calendarFontSize       = 1000;
             
             // iPad Pro 12.9
         }else if (screenWidth == 1024 && screenHeight == 1366) {
@@ -523,6 +523,7 @@ class ViewController: UIViewController  {
             button.backgroundColor = calendarBackGroundColor
             button.setTitleColor(UIColor.white, for: .normal)
             button.titleLabel!.font = UIFont(name: "System", size: CGFloat(calendarFontSize))
+            button.titleLabel?.sizeToFit()
             button.layer.cornerRadius = CGFloat(buttonRadius)
             
             //配置したボタンに押した際のアクションを設定する
