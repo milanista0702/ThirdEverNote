@@ -257,39 +257,39 @@ class ViewController: UIViewController  {
             //iPad Pro 9.7
         }else if (screenWidth == 768 && screenHeight == 1024) {
             
-            calendarLabelIntervalX = 15;
-            calendarLabelX         = 55;
+            calendarLabelIntervalX = 50;
+            calendarLabelX         = 100;
             calendarLabelY         = 95;
             calendarLabelWidth     = 55;
             calendarLabelHeight    = 25;
             calendarLableFontSize  = 18;
             
-            buttonRadius           = 25;
+            buttonRadius           = 40;
             
-            calendarIntervalX      = 18;
-            calendarX              = 55;
-            calendarIntervalY      = 125;
-            calendarY              = 55;
-            calendarSize           = 50;
+            calendarIntervalX      = 40;
+            calendarX              = 100;
+            calendarIntervalY      = 135;
+            calendarY              = 95;
+            calendarSize           = 80;
             calendarFontSize       = 21;
             
             //iPad 10.5
         }else if (screenWidth == 834 && screenHeight == 1112){
             
-            calendarLabelIntervalX = 15;
-            calendarLabelX         = 55;
+            calendarLabelIntervalX = 60;
+            calendarLabelX         = 112;
             calendarLabelY         = 95;
             calendarLabelWidth     = 55;
             calendarLabelHeight    = 25;
             calendarLableFontSize  = 18;
             
-            buttonRadius           = 25;
+            buttonRadius           = 50;
             
-            calendarIntervalX      = 18;
-            calendarX              = 55;
-            calendarIntervalY      = 125;
-            calendarY              = 55;
-            calendarSize           = 50;
+            calendarIntervalX      = 43;
+            calendarX              = 110;
+            calendarIntervalY      = 135;
+            calendarY              = 110;
+            calendarSize           = 100;
             calendarFontSize       = 21;
             
             // iPad Pro 11
@@ -309,25 +309,25 @@ class ViewController: UIViewController  {
             calendarIntervalY      = 135;
             calendarY              = 120;
             calendarSize           = 100;
-            calendarFontSize       = 1000;
+            calendarFontSize       = 21;
             
             // iPad Pro 12.9
         }else if (screenWidth == 1024 && screenHeight == 1366) {
             
-            calendarLabelIntervalX = 15;
-            calendarLabelX         = 55;
+            calendarLabelIntervalX = 79;
+            calendarLabelX         = 136;
             calendarLabelY         = 95;
             calendarLabelWidth     = 55;
             calendarLabelHeight    = 25;
-            calendarLableFontSize  = 18;
+            calendarLableFontSize  = 25;
             
-            buttonRadius           = 25;
+            buttonRadius           = 55;
             
-            calendarIntervalX      = 18;
-            calendarX              = 55;
-            calendarIntervalY      = 125;
-            calendarY              = 55;
-            calendarSize           = 50;
+            calendarIntervalX      = 60;
+            calendarX              = 135;
+            calendarIntervalY      = 155;
+            calendarY              = 145;
+            calendarSize           = 110;
             calendarFontSize       = 21;
             
         }
