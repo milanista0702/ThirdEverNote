@@ -325,7 +325,7 @@ class ViewController: UIViewController  {
             
             calendarIntervalX      = 60;
             calendarX              = 135;
-            calendarIntervalY      = 155;
+            calendarIntervalY      = 160;
             calendarY              = 145;
             calendarSize           = 110;
             calendarFontSize       = 21;
@@ -539,7 +539,33 @@ class ViewController: UIViewController  {
     
     //タイトル表記を設定する関数
     func setupCalendarTitleLabel() {
-        self.navigationItem.title = "\(year!)年\(month!)月"
+         var monthE: String!
+        if month == 1 {
+            monthE = "Jan."
+        }else if month == 2 {
+            monthE = "Feb."
+        }else if month == 3 {
+            monthE = "Mar."
+        }else if month == 4 {
+            monthE = "Apr."
+        }else if month == 5 {
+            monthE = "May"
+        }else if month == 6 {
+            monthE = "Jun."
+        }else if month == 7 {
+            monthE = "Jul."
+        }else if month == 8 {
+            monthE = "Aug."
+        }else if month == 9 {
+            monthE = "Sep."
+        }else if month == 10 {
+            monthE = "Oct."
+        }else if month == 11 {
+            monthE = "Nov."
+        }else{
+            monthE = "Dec."
+        }
+        self.navigationItem.title = "\(monthE!) \(year!)"
     }
     
     

@@ -85,4 +85,12 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
+    @IBAction func back(sender: UIButton) {
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func tocalender(sender: UIButton) {
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
 }

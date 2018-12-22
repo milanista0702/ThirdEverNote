@@ -96,12 +96,14 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     
     @IBAction func ok(sender: UIButton) {
         if text.text?.isEmpty == true{
-            //Alert
+            let alert = UIAlertController(title: "Inadequate", message: "write TODO", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
         }else{
             if shareswitch.isOn == true{
                 for element in self.membersArray{
                     let todo = ToDoes.create(todo: text.text!, user: element,isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-//                    ToDoes.saveWithEvent(todo: todo, callBack: {})
                     
                     let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
                     MiddleGTS.saveWithEvent(group: GTS, callBack:{})

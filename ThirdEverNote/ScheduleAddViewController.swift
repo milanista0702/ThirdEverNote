@@ -94,7 +94,10 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     
     @IBAction func ok(sender: UIButton) {
         if text.text?.isEmpty == true{
-            
+                let alert = UIAlertController(title: "Inadequate", message: "write Schedule", preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alert.addAction(action)
+                self.present(alert, animated: true, completion: nil)
         }else{
             let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
             Schedule.saveWithEvent(schedule: schedule, callBack: {})
