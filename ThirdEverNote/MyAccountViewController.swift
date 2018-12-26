@@ -85,7 +85,15 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
     }
     
     @IBAction func signoutbutton() {
+        let alert = UIAlertController(title: "SignOut", message: "Would you like to Signout?", preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "0K", style: .default){ _ in
+            NCMBUser.logOut()
+        }
+        let action2 = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(action1)
+        alert.addAction(action2)
         
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func back(sender: UIButton) {
