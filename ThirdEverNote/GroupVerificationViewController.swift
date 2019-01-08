@@ -105,8 +105,6 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
             
         }else{
             let performVS = presentingViewController?.presentingViewController as? ScheduleAddViewController
-            
-            
         }
         
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)

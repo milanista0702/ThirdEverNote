@@ -80,7 +80,7 @@ class MyAccountViewController: UIViewController, UIViewControllerTransitioningDe
         _ = tableView.cellForRow(at: indexPath)
         _ = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as! GroupTableViewCell
         mygroup = groupsArray[indexPath.row].group
-        myuser = groupsArray[indexPath.row].user
+        myuser = groupsArray[indexPath.row].user 
         performSegue(withIdentifier: "mygroupsegue", sender: nil)
     }
     

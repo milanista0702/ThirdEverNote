@@ -104,10 +104,13 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
             if shareswitch.isOn == true{
                 for element in self.membersArray{
                     let todo = ToDoes.create(todo: text.text!, user: element,isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-                    
-                    let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
-                    MiddleGTS.saveWithEvent(group: GTS, callBack:{})
-                    
+                    if exgroupArray == nil {
+                        let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
+                        MiddleGTS.saveWithEvent(group: GTS, callBack:{})
+                    }else{
+                        let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: exgroupArray[0])
+                        MiddleGTS.saveWithEvent(group: GTS, callBack: {})
+                    }
                     self.dismiss(animated: true, completion: nil)
                 }
             }else{

@@ -62,28 +62,31 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         let GVC = segue.destination as! AddViewController
         GVC.exgroupArray = addgroupArray
     }
-    
-    func updateSearchResults(for searchContrller: UISearchController) {
-        let query = Group.query()
-        query?.findObjectsInBackground({(objects, error) in
-            if self.searchController.searchBar.text == nil {
-                self.groupArray = objects as! [MiddleGroup]
+    func updateSearchResults(for searchController: UISearchController) {
+        groupArray = []
+        let searchBarText = searchController.searchBar.text!.lowercased()
+        let query = MiddleGroup.query()
+        query?.findObjectsInBackground({objects, error in
+            if error != nil {
+                print("Group取得失敗")
             }else{
-                print("objects ... \(String(describing: objects))")
-                self.groupArray = objects as! [MiddleGroup]
-                self.groupArray = self.groupArray.filter{ middleGroup in
-                    let group_id = middleGroup.group.objectId
-                    var group = NCMBObject(className: "Group")
-                    group?.objectId = group_id
-                    group?.fetchInBackground({ (error) in
-                        if error != nil{
-                            print("変換失敗")
+                let middleGroups = objects as! [MiddleGroup]
+                for i in 0..<middleGroups.count {
+                    let middleGroup = middleGroups[i]
+                    let groupNCMBObject = middleGroup.object(forKey: "group") as! NCMBObject
+                    Group.getName(id: groupNCMBObject.object(forKey: "objectId") as! String, callback: { objects in DispatchQueue.main.async {
+                        var groupName = objects[0].name as! String
+                        groupName = groupName.lowercased()
+                        if groupName.contains(searchBarText) {
+                            print("一致した")
+                            self.groupArray.append(middleGroup)
+                            self.table.reloadData()
+                        }else{
+                            print("不一致")
                         }
-                    })
-                    let GROUP = group as! Group
-                    return (GROUP.name?.lowercased().contains(self.searchController.searchBar.text!.lowercased()))!
+                        }}
+                    )
                 }
-                self.table.reloadData()
             }
         })
     }
@@ -108,25 +111,25 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         let cell = tableView.cellForRow(at: indexPath) as! GroupTableViewCell
         cell.accessoryType = .checkmark
         Group.search(name: cell.searchlabel.text!, callback: {objects in
-            self.addgroupArray.removeAll()
             for object in objects {
                 self.addgroupArray.append(object)
             }
         })
+        
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.accessoryType = .none
-        addgroupArray.remove(at: indexPath.row)
+        groupArray.remove(at: indexPath.row)
     }
     
     @IBAction func ok(sender: UIButton) {
-        
-        self.performSegue(withIdentifier: "SearchToAdd", sender: nil)
+       self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancel() {
+        self.groupArray.removeAll()
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
