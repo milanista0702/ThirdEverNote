@@ -20,12 +20,12 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     @IBOutlet var sharelabel: UILabel!
     
     var screenback: Bool!
+    var screenbacks: Bool!
     
-    var exgroupArray = [Group]() //検索で選択されたGroup
+    var membersArray = [NCMBUser]() //createの方から
+    var exgroupArray = [NCMBUser]() //Searchの方から
     var groupcreates: Group!
-    
-    var membersArray = [NCMBUser]()
-    
+
     let userDefaults = UserDefaults.standard
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,6 +38,9 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         //判定
         screenback = true
         userDefaults.set(screenback, forKey:"addtrue")
+        
+        screenbacks = true
+        userDefaults.set(screenbacks, forKey: "addsearch")
         
         
         text.delegate = self
@@ -102,17 +105,30 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
             self.present(alert, animated: true, completion: nil)
         }else{
             if shareswitch.isOn == true{
-                for element in self.membersArray{
-                    let todo = ToDoes.create(todo: text.text!, user: element,isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-                    if exgroupArray == nil {
-                        let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
-                        MiddleGTS.saveWithEvent(group: GTS, callBack:{})
-                    }else{
-                        let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: exgroupArray[0])
-                        MiddleGTS.saveWithEvent(group: GTS, callBack: {})
+                
+                //Createから
+                if {
+                    for element in self.membersArray{
+                        let todo = ToDoes.create(todo: text.text!, user: element,isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+                        ToDoes.saveWithEvent(todo: todo, callBack: {})
+                        
+                        if exgroupArray == nil {
+                            let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
+                            MiddleGTS.saveWithEvent(group: GTS, callBack:{})
+                        }else{
+                            let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: exgroupArray[0])
+                            MiddleGTS.saveWithEvent(group: GTS, callBack: {})
+                        }
                     }
-                    self.dismiss(animated: true, completion: nil)
+                    //EXistingから
+                }else{
+                    
                 }
+                
+               
+                
+                
+                self.dismiss(animated: true, completion: nil)
             }else{
                 let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), isPublic: nil, date: date.date as NSDate, done: false)
                 ToDoes.saveWithEvent(todo: todo, callBack: {})

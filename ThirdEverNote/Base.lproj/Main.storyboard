@@ -212,8 +212,6 @@
                     <connections>
                         <outlet property="groupsearchlabel" destination="12h-bI-A25" id="ueH-Md-wmp"/>
                         <outlet property="table" destination="83z-mX-9aC" id="xsX-gV-qSn"/>
-                        <segue destination="nw7-AX-LUb" kind="modal" identifier="SearchToSchedule" id="aso-qC-OZL"/>
-                        <segue destination="EID-fv-X3w" kind="modal" identifier="SearchToDo" id="MJV-Pu-U4o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JB6-4I-aS8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1141,8 +1139,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="MJV-Pu-U4o"/>
-        <segue reference="aso-qC-OZL"/>
         <segue reference="KNi-Xi-PJJ"/>
         <segue reference="D0p-6R-jAD"/>
         <segue reference="C1f-TB-bEm"/>

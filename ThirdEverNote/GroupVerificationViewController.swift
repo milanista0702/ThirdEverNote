@@ -108,7 +108,7 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         }
         
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-        
+
     }
     
     

@@ -14,7 +14,8 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     @IBOutlet var table: UITableView!
     var searchController = UISearchController()
     var groupArray = [MiddleGroup]()
-    var addgroupArray = [Group]()
+    var selectGroup: MiddleGroup?
+    var senduser: NCMBUser?
     var groups: Group?
     var groupid: String?
     
@@ -52,43 +53,51 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
             }
             self.table.reloadData()
         })
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let GVC = segue.destination as! AddViewController
-        GVC.exgroupArray = addgroupArray
-    }
+    
     func updateSearchResults(for searchController: UISearchController) {
         groupArray = []
         let searchBarText = searchController.searchBar.text!.lowercased()
         let query = MiddleGroup.query()
-        query?.findObjectsInBackground({objects, error in
-            if error != nil {
-                print("Group取得失敗")
-            }else{
-                let middleGroups = objects as! [MiddleGroup]
-                for i in 0..<middleGroups.count {
-                    let middleGroup = middleGroups[i]
-                    let groupNCMBObject = middleGroup.object(forKey: "group") as! NCMBObject
-                    Group.getName(id: groupNCMBObject.object(forKey: "objectId") as! String, callback: { objects in DispatchQueue.main.async {
-                        var groupName = objects[0].name as! String
-                        groupName = groupName.lowercased()
-                        if groupName.contains(searchBarText) {
-                            print("一致した")
-                            self.groupArray.append(middleGroup)
-                            self.table.reloadData()
-                        }else{
-                            print("不一致")
-                        }
-                        }}
-                    )
-                }
+        
+        MiddleGroup.loadall(callback: {objects in
+            self.groupArray.removeAll()
+            for object in objects {
+                self.groupArray.append(object)
+                
             }
+            self.table.reloadData()
         })
+
+//        query?.findObjectsInBackground({objects, error in
+//            if error != nil {
+//                print("Group取得失敗")
+//            }else{
+//                let middleGroups = objects as! [MiddleGroup]
+//                for i in 0..<middleGroups.count {
+//                    let middleGroup = middleGroups[i]
+//                    let groupNCMBObject = middleGroup.object(forKey: "group") as! NCMBObject
+//                    Group.getName(id: groupNCMBObject.object(forKey: "objectId") as! String, callback: { objects in DispatchQueue.main.async {
+//                        var groupName = objects[0].name as! String
+//                        groupName = groupName.lowercased()
+//                        if groupName.contains(searchBarText) {
+//                            print("一致した")
+//                            self.groupArray.append(middleGroup)
+//                            self.table.reloadData()
+//                        }else{
+//                            print("不一致")
+//                        }
+//                        }}
+//                    )
+//                }
+//            }
+//        })
     }
     
     // cellの数
@@ -110,12 +119,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! GroupTableViewCell
         cell.accessoryType = .checkmark
-        Group.search(name: cell.searchlabel.text!, callback: {objects in
-            for object in objects {
-                self.addgroupArray.append(object)
-            }
-        })
-        
+        selectGroup = groupArray[indexPath.row]
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
@@ -125,7 +129,18 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     }
     
     @IBAction func ok(sender: UIButton) {
-       self.presentingViewController?.dismiss(animated: true, completion: nil)
+        let def = UserDefaults.standard
+        let screenbacks: Bool = def.bool(forKey: "addsearch")
+        if screenbacks == true {
+            
+            let performVA = presentingViewControlFler as? AddViewController
+            
+            performVA?.exgroupArray = addgroupArray
+        }else{
+            let performVS = presentingViewController as? ScheduleAddViewController
+        }
+        
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancel() {

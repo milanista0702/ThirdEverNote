@@ -68,23 +68,6 @@ class Group: NCMBObject, NCMBSubclassing {
         object.name = name
         return object
     }
-    
-    //    static func loadall(callback: @escaping ([Group]) -> Void) {
-    //        let query = NCMBQuery(className: "Group")
-    //        query?.whereKey("user", equalTo: NCMBUser.current())
-    //        query?.includeKey = "user"
-    //        query?.findObjectsInBackground{ (objects, error) in
-    //            if error != nil{
-    //                print(error?.localizedDescription as Any)
-    //            }else{
-    //                if (objects?.count)! > 0 {
-    //                    let obj = objects as! [Group]
-    //                    callback(obj)
-    //                }
-    //            }
-    //        }
-    //    }
-    
     static func saveWithEvent(name: Group, callBack: @escaping () -> Void) {
         print("Groupsave.\(name)")
         name.saveEventually { (error) in
