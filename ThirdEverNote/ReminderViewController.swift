@@ -72,7 +72,6 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    override func viewWillAppear(_ animated: Bool) {
       print("a")
       loadData()
-      
    }
    
    func loadData() {
@@ -85,7 +84,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       })
       self.table.reloadData()
    }
-   
+
    @objc func refresh() {
       loadData()
       refreshControl.endRefreshing()
@@ -93,6 +92,30 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    
    override func didReceiveMemoryWarning() {
       super.didReceiveMemoryWarning()
+   }
+   
+   
+   func makecell() {
+      remindArray = []
+      let query = ToDoes.query()
+      query?.findObjectsInBackground({objects, error in
+         if error != nil {
+            print("取得失敗")
+         }else{
+            let todoes = objects as! [ToDoes]
+//            var todonameArray:[String] = []
+            
+            for i in 0..<todoes.count {
+               
+               print(todoes[i].user)
+               print(NCMBUser.current())
+               if todoes[i].user == NCMBUser.current() {
+                  self.remindArray.append(todoes[i])
+               }else{
+               }
+            }
+         }
+      })
    }
    
    
@@ -112,6 +135,24 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
    
    //ID付きのcellを取得してそれに付属しているlabelとかimageとか
    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+      
+//      remindArray = []
+//      let query = ToDoes.query()
+//      query?.findObjectsInBackground({objects, error in
+//         if error != nil {
+//            print("取得失敗")
+//         }else{
+//            let todoes = objects as! [ToDoes]
+//            var todonameArray:[String] = []
+//            for i in 0..<todoes.count {
+//               if todoes[0].user == NCMBUser.current() {
+//                  self.remindArray.append(todoes[0])
+//               }else{
+//               }
+//            }
+//         }
+//      })
+      
       let cell = tableView.dequeueReusableCell(withIdentifier: "TodoTableCell") as! TodoTableCell
       cell.todolabel.text = remindArray[indexPath.row].todo
       cell.datelabel.text = formatter(date: remindArray[indexPath.row].date)

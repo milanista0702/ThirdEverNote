@@ -46,13 +46,13 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         groupsearchlabel.backgroundColor = UIColor.black
         groupsearchlabel.textColor = UIColor.white
         
-        MiddleGroup.loadall(callback: {objects in
-            self.groupArray.removeAll()
-            for object in objects {
-                self.groupArray.append(object)
-            }
-            self.table.reloadData()
-        })
+        //        MiddleGroup.loadall(callback: {objects in
+        //            self.groupArray.removeAll()
+        //            for object in objects {
+        //                self.groupArray.append(object)
+        //            }
+        //            self.table.reloadData()
+        //        })
         
     }
     
@@ -60,45 +60,39 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         super.didReceiveMemoryWarning()
     }
     
-    
     func updateSearchResults(for searchController: UISearchController) {
         groupArray = []
         let searchBarText = searchController.searchBar.text!.lowercased()
         let query = MiddleGroup.query()
-        
-        MiddleGroup.loadall(callback: {objects in
-            self.groupArray.removeAll()
-            for object in objects {
-                self.groupArray.append(object)
-                
+        query?.findObjectsInBackground({objects, error in
+            if error != nil {
+                print("Group取得失敗")
+            }else{
+                let middleGroups = objects as! [MiddleGroup]
+                var searchedArray:[String] = []
+                for i in 0..<middleGroups.count {
+                    let middleGroup = middleGroups[i]
+                    let groupNCMBObject = middleGroup.object(forKey: "Group") as! NCMBObject
+                    Group.getName(id: groupNCMBObject.object(forKey: "objectId") as! String, callback: { objects in DispatchQueue.main.async {
+                        var groupName = objects[0].name as! String
+                        groupName = groupName.lowercased()
+                        if groupName.contains(searchBarText) {
+                            print("一致")
+                            if searchedArray.index(of: groupName) == nil{
+                                searchedArray.append(groupName)
+                                self.groupArray.append(middleGroup)
+                                self.table.reloadData()
+                            }
+                        }else{
+                            print("不一致")
+                        }
+                        }}
+                    )
+                }
             }
-            self.table.reloadData()
         })
-
-//        query?.findObjectsInBackground({objects, error in
-//            if error != nil {
-//                print("Group取得失敗")
-//            }else{
-//                let middleGroups = objects as! [MiddleGroup]
-//                for i in 0..<middleGroups.count {
-//                    let middleGroup = middleGroups[i]
-//                    let groupNCMBObject = middleGroup.object(forKey: "group") as! NCMBObject
-//                    Group.getName(id: groupNCMBObject.object(forKey: "objectId") as! String, callback: { objects in DispatchQueue.main.async {
-//                        var groupName = objects[0].name as! String
-//                        groupName = groupName.lowercased()
-//                        if groupName.contains(searchBarText) {
-//                            print("一致した")
-//                            self.groupArray.append(middleGroup)
-//                            self.table.reloadData()
-//                        }else{
-//                            print("不一致")
-//                        }
-//                        }}
-//                    )
-//                }
-//            }
-//        })
     }
+    
     
     // cellの数
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -132,14 +126,30 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
         let def = UserDefaults.standard
         let screenbacks: Bool = def.bool(forKey: "addsearch")
         if screenbacks == true {
+            let performVA = presentingViewController as? AddViewController
+            performVA?.fromcreate = false
             
-            let performVA = presentingViewControlFler as? AddViewController
-            
-            performVA?.exgroupArray = addgroupArray
+            let query = MiddleGroup.query()
+            query?.findObjectsInBackground({objects, error in
+                if error != nil{
+                    print("Group取得失敗")
+                }else{
+                     let middleGroup = objects as! [MiddleGroup]
+                    for i in 0..<middleGroup.count {
+                        let selectedGroup:NCMBObject = self.selectGroup?.object(forKey: "group") as! NCMBObject
+                        print(selectedGroup.objectId)
+                        let Groups:NCMBObject = middleGroup[i].object(forKey: "Group") as! NCMBObject
+                        print(Groups.objectId)
+                        if selectedGroup.objectId == Groups.objectId{
+                            print(middleGroup[i])
+                            performVA?.membersArray.append(middleGroup[i].user)
+                        }
+                    }
+                }
+            })
         }else{
             let performVS = presentingViewController as? ScheduleAddViewController
         }
-        
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
     

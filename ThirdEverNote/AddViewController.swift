@@ -22,10 +22,12 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     var screenback: Bool!
     var screenbacks: Bool!
     
+    var fromcreate: Bool!
+    
     var membersArray = [NCMBUser]() //createの方から
     var exgroupArray = [NCMBUser]() //Searchの方から
     var groupcreates: Group!
-
+    
     let userDefaults = UserDefaults.standard
     
     required init?(coder aDecoder: NSCoder) {
@@ -104,35 +106,35 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
             alert.addAction(action)
             self.present(alert, animated: true, completion: nil)
         }else{
-            if shareswitch.isOn == true{
+            if shareswitch.isOn == true {
                 
-                //Createから
-                if {
-                    for element in self.membersArray{
-                        let todo = ToDoes.create(todo: text.text!, user: element,isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+                //from create
+                if fromcreate {
+                    for element in self.membersArray {
+                        let todo = ToDoes.create(todo: text.text!, user: element, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
                         ToDoes.saveWithEvent(todo: todo, callBack: {})
                         
                         if exgroupArray == nil {
                             let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
-                            MiddleGTS.saveWithEvent(group: GTS, callBack:{})
-                        }else{
-                            let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: exgroupArray[0])
                             MiddleGTS.saveWithEvent(group: GTS, callBack: {})
+                        }else{
+                            
                         }
                     }
-                    //EXistingから
-                }else{
                     
+                    //from existing
+                }else{
+                    for element in self.membersArray {
+                        let todo = ToDoes.create(todo: text.text!, user: element, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+                        ToDoes.saveWithEvent(todo: todo, callBack: {})
+                    }
                 }
                 
-               
-                
-                
+                fromcreate = true
                 self.dismiss(animated: true, completion: nil)
             }else{
-                let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), isPublic: nil, date: date.date as NSDate, done: false)
+                let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
                 ToDoes.saveWithEvent(todo: todo, callBack: {})
-                
                 self.dismiss(animated: true, completion: nil)
             }
         }
