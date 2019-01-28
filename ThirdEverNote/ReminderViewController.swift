@@ -59,6 +59,7 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       //navigationvar にeditボタンをつける
       navigationItem.leftBarButtonItem = editButtonItem
       
+      makecell()
       
       //addボタン
       addBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.onClick(sender:)))
@@ -103,14 +104,10 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
             print("取得失敗")
          }else{
             let todoes = objects as! [ToDoes]
-//            var todonameArray:[String] = []
-            
             for i in 0..<todoes.count {
-               
-               print(todoes[i].user)
-               print(NCMBUser.current())
                if todoes[i].user == NCMBUser.current() {
                   self.remindArray.append(todoes[i])
+                  self.table.reloadData()
                }else{
                }
             }
