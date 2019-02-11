@@ -109,7 +109,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
             if shareswitch.isOn == true {
                 
                 //from create
-                if fromcreate {
+                if fromcreate == true {
                     for element in self.membersArray {
                         let todo = ToDoes.create(todo: text.text!, user: element, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
                         ToDoes.saveWithEvent(todo: todo, callBack: {})
