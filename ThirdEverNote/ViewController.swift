@@ -849,6 +849,41 @@ class ViewController: UIViewController  {
 // MARK: 画面の下側
 
 extension ViewController: UITableViewDataSource {
+    
+    func makecell() {
+        todoArray = []
+        let query = ToDoes.query()
+        query?.findObjectsInBackground({objects, error in
+            if error != nil {
+                print("TODO取得失敗")
+            }else{
+            let todoes = objects as! [ToDoes]
+                for i in 0..<todoes.count {
+                    if todoes[i].user == NCMBUser.current() {
+                        self.todoArray.append(todoes[i])
+                        self.table.reloadData()
+                    }
+                }
+            }
+        })
+        
+        scheduleArray = []
+        let querys = Schedule.query()
+        querys?.findObjectsInBackground({objects, error in
+            if error != nil {
+                print("予定取得失敗")
+            }else{
+                let schedules = objects as! [Schedule]
+                for i in 0..<schedules.count {
+                    if schedules[i].user == NCMBUser.current() {
+                        self.scheduleArray.append(schedules[i])
+                        self.table.reloadData()
+                    }
+                }
+            }
+        })
+    }
+    
     //cellの数を設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todoArray.count + scheduleArray.count
