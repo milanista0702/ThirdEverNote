@@ -72,7 +72,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
                 var searchedArray:[String] = []
                 for i in 0..<middleGroups.count {
                     let middleGroup = middleGroups[i]
-                    let groupNCMBObject = middleGroup.object(forKey: "Group") as! NCMBObject
+                    let groupNCMBObject = middleGroup.object(forKey: "group") as! NCMBObject
                     Group.getName(id: groupNCMBObject.object(forKey: "objectId") as! String, callback: { objects in DispatchQueue.main.async {
                         var groupName = objects[0].name as! String
                         groupName = groupName.lowercased()
@@ -138,7 +138,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
                     for i in 0..<middleGroup.count {
                         let selectedGroup:NCMBObject = self.selectGroup?.object(forKey: "group") as! NCMBObject
                         print(selectedGroup.objectId)
-                        let Groups:NCMBObject = middleGroup[i].object(forKey: "Group") as! NCMBObject
+                        let Groups:NCMBObject = middleGroup[i].object(forKey: "group") as! NCMBObject
                         print(Groups.objectId)
                         if selectedGroup.objectId == Groups.objectId{
                             print(middleGroup[i])

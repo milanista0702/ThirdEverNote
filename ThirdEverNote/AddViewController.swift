@@ -27,6 +27,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     var membersArray = [NCMBUser]() //createの方から
     var exgroupArray = [NCMBUser]() //Searchの方から
     var groupcreates: Group!
+    var todo: ToDoes!
     
     let userDefaults = UserDefaults.standard
     
@@ -111,15 +112,8 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
                 //from create
                 if fromcreate == true {
                     for element in self.membersArray {
-                        let todo = ToDoes.create(todo: text.text!, user: element, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-                        ToDoes.saveWithEvent(todo: todo, callBack: {})
-                        
-                        if exgroupArray == nil {
-                            let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
-                            MiddleGTS.saveWithEvent(group: GTS, callBack: {})
-                        }else{
-                            
-                        }
+                        todo = ToDoes.create(todo: text.text!, user: element, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+                        ToDoes.saveWithEvent(todo: todo, callBack: saveGTS)
                     }
                     
                     //from existing
@@ -140,6 +134,10 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         }
     }
     
+    func saveGTS() {
+        let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
+        MiddleGTS.saveWithEvent(group: GTS, callBack: {})
+    }
     
     @IBAction func cancel () {
         self.dismiss(animated: true, completion: nil)
