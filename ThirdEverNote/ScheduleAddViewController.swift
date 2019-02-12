@@ -19,7 +19,13 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     @IBOutlet var daylabel: UILabel!
     @IBOutlet var sharelabel: UILabel!
     
+    var schedule: Schedule!
+    
+    var membersArray = [NCMBUser]() //from cratenewgroup
+    
     var groupcreates : Group?
+    
+    var schefromcrate : Bool!
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -51,15 +57,15 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
         self.commonInit()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender:Any?) {
-        if segue.identifier == "schenewsegue"{
-            let VRT = segue.destination as! GroupCreateViewController
-            VRT.scheduletext = self.text.text
-//            VRT.completions = { group in
-//                self.groupcreates = group
-//            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender:Any?) {
+//        if segue.identifier == "schenewsegue"{
+//            let VRT = segue.destination as! GroupCreateViewController
+//            VRT.scheduletext = self.text.text
+////            VRT.completions = { group in
+////                self.groupcreates = group
+////            }
+//        }
+//    }
     
     func commonInit() {
         self.modalPresentationStyle = .custom
@@ -99,24 +105,45 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
                 alert.addAction(action)
                 self.present(alert, animated: true, completion: nil)
         }else{
-            let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-            Schedule.saveWithEvent(schedule: schedule, callBack: {})
-            
-            let GTS = MiddleGTS.create(Todo: nil, Schedule: schedule, group: groupcreates!)
-            MiddleGTS.saveWithEvent(group: GTS, callBack: {})
-            
-            self.dismiss(animated: true, completion: nil)
-            
-            if schedule.isPublic == true{
+            if shareswitch.isOn == true {
                 
+                //from create
+                if schefromcrate == true {
+                    for element in self.membersArray {
+                        schedule = Schedule.create(title: text.text!, user: element, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+                        Schedule.saveWithEvent(schedule: schedule, callBack: saveGTS)
+                    }
+                }else{
+                    //from existing
+                    for element in self.membersArray{
+                        let schedule = Schedule.create(title: text.text!, user: element, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+                        Schedule.saveWithEvent(schedule: schedule, callBack: {})
+                    }
+                }
+                
+            }else{
+                let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
+                Schedule.saveWithEvent(schedule: schedule, callBack: {})
+                self.dismiss(animated: true, completion: nil)
             }
         }
+    }
+    
+    func saveGTS() {
+        let GTS = MiddleGTS.create(Todo: nil, Schedule: schedule, group: groupcreates!)
+        MiddleGTS.saveWithEvent(group: GTS, callBack: {})
     }
     
     @IBAction func cancel () {
         self.dismiss(animated: true, completion: nil)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "schenewsegue" {
+            let GroupCreateViewCOntrollerTwo = segue.destination as! GroupCreateViewController
+            GroupCreateViewCOntrollerTwo.todotext = sender as? String
+        }
+    }
     
     // ---- UIViewControllerTransitioningDelegate methods
     

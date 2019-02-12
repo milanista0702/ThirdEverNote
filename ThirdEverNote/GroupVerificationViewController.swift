@@ -105,14 +105,19 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
             
         }else{
             let performVS = presentingViewController?.presentingViewController as? ScheduleAddViewController
+            
+            performVS?.groupcreates = groupcreate
+            performVS?.membersArray = memberArray
         }
         
         let addViewController = self.presentingViewController?.presentingViewController as! AddViewController
         addViewController.fromcreate = true
         
+        let scheduleaddViewController = self.presentingViewController?.presentingViewController as! ScheduleAddViewController
+        scheduleaddViewController.schefromcrate = true
         
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-
+        
     }
     
     
