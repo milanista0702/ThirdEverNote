@@ -98,12 +98,12 @@ class ToDoes: NCMBObject, NCMBSubclassing{
         }
     }
     
-    static func saveWithEvent(todo: ToDoes, callBack: @escaping () -> Void) {
+    static func saveWithEvent(todo: ToDoes, callBack: @escaping (ToDoes) -> Void) {
         todo.saveEventually { (error) in
             if error != nil {
                 print(error?.localizedDescription as Any)
             }else{
-                callBack()
+                callBack(todo)
             }
         }
         

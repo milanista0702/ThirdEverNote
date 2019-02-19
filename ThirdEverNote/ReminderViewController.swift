@@ -35,10 +35,10 @@ class ReminderViewController: UIViewController, UITableViewDataSource, UITableVi
       table.register(UINib(nibName: "TodoTableCell", bundle: nil), forCellReuseIdentifier: "TodoTableCell")
       
       
-      let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: Selector(("rowButtonAction:")))
-      longPressRecognizer.allowableMovement = 15
-      longPressRecognizer.minimumPressDuration = 0.6
-      self.table.addGestureRecognizer(longPressRecognizer)
+//      let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: Selector(("rowButtonAction:")))
+//      longPressRecognizer.allowableMovement = 15
+//      longPressRecognizer.minimumPressDuration = 0.6
+//      self.table.addGestureRecognizer(longPressRecognizer)
       
       
       //tableviewのdatasourcemesodはviewcontrollerクラスに書く設定

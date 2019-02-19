@@ -25,8 +25,9 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
     var fromcreate: Bool!
     
     var membersArray = [NCMBUser]() //createの方から
+    var groupcreates: Group! //createの方から
     var exgroupArray = [NCMBUser]() //Searchの方から
-    var groupcreates: Group!
+    var searchgroupname: Group!
     var todo: ToDoes!
     
     let userDefaults = UserDefaults.standard
@@ -120,7 +121,7 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
                 }else{
                     for element in self.membersArray {
                         let todo = ToDoes.create(todo: text.text!, user: element, isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-                        ToDoes.saveWithEvent(todo: todo, callBack: {})
+                        ToDoes.saveWithEvent(todo: todo, callBack: searchsaveGTS)
                     }
                 }
                 
@@ -128,14 +129,24 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
                 self.dismiss(animated: true, completion: nil)
             }else{
                 let todo = ToDoes.create(todo: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
-                ToDoes.saveWithEvent(todo: todo, callBack: {})
+                ToDoes.saveWithEvent(todo: todo, callBack: nillsaveGTS)
                 self.dismiss(animated: true, completion: nil)
             }
         }
     }
     
-    func saveGTS() {
+    func saveGTS(todo: ToDoes) {
         let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: groupcreates!)
+        MiddleGTS.saveWithEvent(group: GTS, callBack: {})
+    }
+    
+    func searchsaveGTS(todo: ToDoes) {
+        let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: searchgroupname!)
+        MiddleGTS.saveWithEvent(group: GTS, callBack: {})
+    }
+    
+    func nillsaveGTS(todo: ToDoes) {
+        let GTS = MiddleGTS.create(Todo: todo, Schedule: nil, group: nil!)
         MiddleGTS.saveWithEvent(group: GTS, callBack: {})
     }
     

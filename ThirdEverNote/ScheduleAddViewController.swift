@@ -141,7 +141,7 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "schenewsegue" {
             let GroupCreateViewCOntrollerTwo = segue.destination as! GroupCreateViewController
-            GroupCreateViewCOntrollerTwo.todotext = sender as? String
+            GroupCreateViewCOntrollerTwo.scheduletext = sender as? String
         }
     }
     

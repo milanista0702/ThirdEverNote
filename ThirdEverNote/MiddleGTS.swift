@@ -43,7 +43,7 @@ class MiddleGTS: NCMBObject, NCMBSubclassing {
         super.init(className: className)
     }
     
-    static func create(Todo: ToDoes?, Schedule: Schedule?, group: Group) -> MiddleGTS{
+    static func create(Todo: ToDoes?, Schedule: Schedule?, group: Group?) -> MiddleGTS{
         let middleGTS = MiddleGTS(className: "MiddleGTS")
         middleGTS?.Todo = Todo
         middleGTS?.Schedule = Schedule

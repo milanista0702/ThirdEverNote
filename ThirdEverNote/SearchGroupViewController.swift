@@ -19,6 +19,8 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     var groups: Group?
     var groupid: String?
     
+    var searchedArray:[String] = [] //SearchResultのところ
+    
     @IBOutlet var groupsearchlabel: UILabel!
     
     let saveData: UserDefaults = UserDefaults.standard
@@ -62,14 +64,15 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
     
     func updateSearchResults(for searchController: UISearchController) {
         groupArray = []
+        searchedArray = []
         let searchBarText = searchController.searchBar.text!.lowercased()
         let query = MiddleGroup.query()
         query?.findObjectsInBackground({objects, error in
             if error != nil {
                 print("Group取得失敗")
+                self.table.reloadData()
             }else{
                 let middleGroups = objects as! [MiddleGroup]
-                var searchedArray:[String] = []
                 for i in 0..<middleGroups.count {
                     let middleGroup = middleGroups[i]
                     let groupNCMBObject = middleGroup.object(forKey: "group") as! NCMBObject
@@ -78,15 +81,17 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
                         groupName = groupName.lowercased()
                         if groupName.contains(searchBarText) {
                             print("一致")
-                            if searchedArray.index(of: groupName) == nil{
-                                searchedArray.append(groupName)
+                            if self.searchedArray.index(of: groupName) == nil {
+                                self.searchedArray.append(groupName)
                                 self.groupArray.append(middleGroup)
-                                self.table.reloadData()
                             }
                         }else{
                             print("不一致")
                         }
-                        }}
+                        self.table.reloadData()
+                        }
+                        
+                    }
                     )
                 }
             }
@@ -134,7 +139,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
                 if error != nil{
                     print("Group取得失敗")
                 }else{
-                     let middleGroup = objects as! [MiddleGroup]
+                    let middleGroup = objects as! [MiddleGroup]
                     for i in 0..<middleGroup.count {
                         let selectedGroup:NCMBObject = self.selectGroup?.object(forKey: "group") as! NCMBObject
                         print(selectedGroup.objectId)
@@ -143,6 +148,7 @@ class SearchGroupViewController: UIViewController, UIViewControllerTransitioning
                         if selectedGroup.objectId == Groups.objectId{
                             print(middleGroup[i])
                             performVA?.membersArray.append(middleGroup[i].user)
+                            performVA?.searchgroupname = self.selectGroup?.group
                         }
                     }
                 }

@@ -100,6 +100,9 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
         let screenback: Bool = def.bool(forKey: "addtrue")
         if screenback == true {
             let performVA = presentingViewController?.presentingViewController as? AddViewController
+            
+            performVA?.fromcreate = true
+            
             performVA?.groupcreates = groupcreate
             performVA?.membersArray = memberArray
             
@@ -110,11 +113,13 @@ class GroupVerificationViewController: UIViewController, UITableViewDataSource, 
             performVS?.membersArray = memberArray
         }
         
-        let addViewController = self.presentingViewController?.presentingViewController as! AddViewController
-        addViewController.fromcreate = true
-        
-        let scheduleaddViewController = self.presentingViewController?.presentingViewController as! ScheduleAddViewController
-        scheduleaddViewController.schefromcrate = true
+        if self.presentingViewController?.presentingViewController is AddViewController {
+            let addViewController = self.presentingViewController?.presentingViewController as! AddViewController
+            addViewController.fromcreate = true
+        }else{
+             let scheduleaddViewController = self.presentingViewController?.presentingViewController as! ScheduleAddViewController
+            scheduleaddViewController.schefromcrate = true
+        }
         
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
         

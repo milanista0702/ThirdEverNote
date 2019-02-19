@@ -119,10 +119,10 @@ class ViewController: UIViewController  {
         self.table.estimatedRowHeight = 90
         self.table.rowHeight = UITableViewAutomaticDimension
         
-        let longPressRecognizer = UILongPressGestureRecognizer(target: nil, action: Selector(("rowButtonAction:")))
-        longPressRecognizer.allowableMovement = 15
-        longPressRecognizer.minimumPressDuration = 0.6
-        self.table.addGestureRecognizer(longPressRecognizer)
+//        let longPressRecognizer = UILongPressGestureRecognizer(target: nil, action: Selector(("rowButtonAction:")))
+//        longPressRecognizer.allowableMovement = 15
+//        longPressRecognizer.minimumPressDuration = 0.6
+//        self.table.addGestureRecognizer(longPressRecognizer)
         
         let screenSize: CGRect = UIScreen.main.bounds
         
