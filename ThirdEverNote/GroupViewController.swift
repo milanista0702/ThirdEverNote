@@ -36,8 +36,15 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             for object in objects {
                 self.userArray.append(object)
             }
+            
+            MiddleGroup.userGetName(objetct: self.userArray[0])
+            
+            
             self.table.reloadData()
         })
+        
+       
+        
         
         Group.getName(id: (groupname?.objectId)!, callback: {objects in
             DispatchQueue.main.async {
@@ -66,7 +73,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            return userArray.count
         } else if section == 1 {
             return todoArray.count
         } else {
@@ -77,7 +84,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as! GroupTableViewCell
         if indexPath.section == 0 {
-            cell.searchlabel.text = userName
+            cell.searchlabel.text = userArray[indexPath.row].user.userName
         } else if indexPath.section == 1 {
             cell.searchlabel.text = todoArray[indexPath.row].Todo?.todo
         }
