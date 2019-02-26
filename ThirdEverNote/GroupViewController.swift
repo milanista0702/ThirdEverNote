@@ -78,7 +78,6 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupTableViewCell") as! GroupTableViewCell
         if indexPath.section == 0 {
             cell.searchlabel.text = userName
-            
         } else if indexPath.section == 1 {
             cell.searchlabel.text = todoArray[indexPath.row].Todo?.todo
         }
