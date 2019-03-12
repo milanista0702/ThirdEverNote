@@ -121,6 +121,8 @@ class ScheduleAddViewController: UIViewController, UIViewControllerTransitioning
                     }
                 }
                 
+                self.dismiss(animated: true, completion: nil)
+                
             }else{
                 let schedule = Schedule.create(title: text.text!, user: NCMBUser.current(), isPublic: shareswitch.isOn, date: date.date as NSDate, done: false)
                 Schedule.saveWithEvent(schedule: schedule, callBack: {})

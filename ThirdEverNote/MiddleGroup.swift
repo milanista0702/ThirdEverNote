@@ -82,31 +82,48 @@ class MiddleGroup: NCMBObject, NCMBSubclassing {
         }
     }
     
-    static func userGetName(objetct: MiddleGroup) -> Void {
+//    static func userGetName(objetct: MiddleGroup) -> Void {
+//
+//        let query = NCMBQuery(className: "user")
+//        //query?.whereKey("objectsId", equalTo: objets.user.objectId)
+//        query?.whereKey("objectId", equalTo: "NF5Zb9HXGKp9Lpwf")
+////        query?.includeKey = "objectId"
+//        query?.findObjectsInBackground({ (objetcs, error) in
+//            let array = objetcs as? NCMBUser
+//            print(array)
+//            print("#########")
+//            let user = objetcs as! NCMBObject
+//            print(user.value(forKey: "userName"))
+//
+//            if error != nil {
+//                print(error?.localizedDescription as Any)
+//            }else{
+//
+////                if(objetcs?.count)! > 0 {
+////
+////                }
+//                print("getuser")
+//            }
+//        })
+//    }
 
-        let query = NCMBQuery(className: "user")
-        //query?.whereKey("objectsId", equalTo: objets.user.objectId)
-        query?.whereKey("objectId", equalTo: "NF5Zb9HXGKp9Lpwf")
-//        query?.includeKey = "objectId"
-        query?.findObjectsInBackground({ (objetcs, error) in
-            let array = objetcs as? NCMBUser
-            print(array)
-            print("#########")
-            let user = objetcs as! NCMBObject
-            print(user.value(forKey: "userName"))
+    static func userGetName(object: MiddleGroup, callback: @escaping([String]) -> Void) {
+        let query = NCMBUser.query()
+        
+        query?.whereKey("objectId", equalTo: object.user.objectId)
+        query?.findObjectsInBackground({(objects, error) in
+            let array = objects as? [NCMBUser]
             
             if error != nil {
                 print(error?.localizedDescription as Any)
             }else{
-                
-//                if(objetcs?.count)! > 0 {
-//
-//                }
-                print("getuser")
+                print(array?[0].value(forKey: "userName"))
+                var returnName = [String]()
+                returnName.append(array?[0].value(forKey: "userName") as! String)
+                callback(returnName)
             }
         })
     }
-
     
     static func saveWithEvent(group: MiddleGroup,
                               callBack: @escaping () -> Void) {

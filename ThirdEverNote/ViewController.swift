@@ -84,24 +84,52 @@ class ViewController: UIViewController  {
         self.table.delegate = self
         self.table.dataSource = self
         
-        let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
-        bg.image = UIImage(named:"アートボード 8.png")
-        bg.layer.zPosition = -1
-        self.view.addSubview(bg)
+//        let bg = UIImageView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+//        bg.image = UIImage(named:"アートボード 8.png")
+//        bg.layer.zPosition = -1
+//        self.view.addSubview(bg)
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Loading...")
         self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         self.table.addSubview(refreshControl)
         
-        self.navigationController?.navigationBar.barTintColor = ColorManager.blue
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
+        let graduationLayer: CAGradientLayer = CAGradientLayer()
+        graduationLayer.frame = (self.navigationController?.navigationBar.bounds)!
+        let color1 = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0).cgColor
+        let color2 = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor
+        graduationLayer.colors = [color1, color2]
         
-        toolbar.barTintColor = ColorManager.gray
+        graduationLayer.startPoint = CGPoint(x: 0, y: 0)
+        graduationLayer.endPoint = CGPoint(x: 1.0, y: 10.0)
+        
+        //self.navigationController?.navigationBar.barTintColor = ColorManager.blue
+        self.navigationController?.navigationBar.layer.insertSublayer(graduationLayer, at: 0)
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.black]
+        
+        let graduationLayer2: CAGradientLayer = CAGradientLayer()
+        graduationLayer2.frame = self.toolbar.bounds
+        let color3 = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0).cgColor
+        let color4 = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor
+        graduationLayer2.colors = [color3, color4]
+        
+        graduationLayer2.startPoint = CGPoint(x: 0, y: 0)
+        graduationLayer2.endPoint = CGPoint(x: 1.0, y: 10.0)
+        
+        toolbar.layer.insertSublayer(graduationLayer2, at: 0)
         toolbar.tintColor = UIColor.white
         
-        undertoolbar.barTintColor = ColorManager.gray
+        let graduationLayer3: CAGradientLayer = CAGradientLayer()
+        graduationLayer3.frame = self.undertoolbar.bounds
+        let color5 = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0).cgColor
+        let color6 = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor
+        graduationLayer3.colors = [color5, color6]
+        
+        graduationLayer3.startPoint = CGPoint(x: 0, y: 0)
+        graduationLayer3.endPoint = CGPoint(x: 0.5, y: 0.5)
+        
+        //undertoolbar.barTintColor = ColorManager.gray
         undertoolbar.tintColor = UIColor.white
         
         //NavigationToolBar

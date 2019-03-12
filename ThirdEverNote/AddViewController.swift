@@ -49,13 +49,47 @@ class AddViewController: UIViewController, UIViewControllerTransitioningDelegate
         
         text.delegate = self
         
-        addlabel.backgroundColor = ColorManager.green
+        let graduationLayer = CAGradientLayer()
+        let graduationLayer2 = CAGradientLayer()
+        let graduationLayer3 = CAGradientLayer()
+        let graduationLayer4 = CAGradientLayer()
+        
+        graduationLayer.frame = self.addlabel.bounds
+        graduationLayer2.frame = self.todolabel.bounds
+        graduationLayer3.frame = self.limitlabel.bounds
+        graduationLayer4.frame = self.sharelabel.bounds
+        
+        let color1 = UIColor(red: 0.05, green: 0.6, blue: 0.5, alpha: 1.0).cgColor
+        let color2 = UIColor(red: 0.6, green: 1.0, blue: 0.5, alpha: 1.0).cgColor
+        
+        graduationLayer.colors = [color1, color2]
+        graduationLayer2.colors = [color1, color2]
+        graduationLayer3.colors = [color1, color2]
+        graduationLayer4.colors = [color1, color2]
+        
+        graduationLayer.startPoint = CGPoint(x: 0, y: 0)
+        graduationLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+    
+        graduationLayer2.startPoint = CGPoint(x: 0, y: 0)
+        graduationLayer2.endPoint = CGPoint(x: 1.0, y: 1.0)
+        
+        graduationLayer3.startPoint = CGPoint(x: 0, y: 0)
+        graduationLayer3.endPoint = CGPoint(x: 1.0, y: 1.0)
+        
+        graduationLayer4.startPoint = CGPoint(x: 0, y: 0)
+        graduationLayer4.endPoint = CGPoint(x: 1.0, y: 1.0)
+        
+        addlabel.layer.insertSublayer(graduationLayer, at: 0)
+        addlabel.text = "ADD TODO"
         addlabel.textColor = UIColor.white
-        todolabel.backgroundColor = ColorManager.green
+        
+        todolabel.layer.insertSublayer(graduationLayer2, at: 0)
         todolabel.textColor = UIColor.white
-        limitlabel.backgroundColor = ColorManager.green
+        
+        limitlabel.layer.insertSublayer(graduationLayer3, at: 0)
         limitlabel.textColor = UIColor.white
-        sharelabel.backgroundColor = ColorManager.green
+        
+        sharelabel.layer.insertSublayer(graduationLayer4, at: 0)
         sharelabel.textColor = UIColor.white
         
         shareswitch.isOn = false
